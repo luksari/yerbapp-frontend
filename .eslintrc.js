@@ -1,12 +1,24 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["airbnb", "eslint:recommended"],
+  extends: ["airbnb", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
   plugins: ["react", "@typescript-eslint", "jsx-a11y", "lodash-fp"],
   env: {
     jest: true,
     browser: true,
     node: true,
     es6: true
+  },
+  parserOptions: {
+    project: "./tsconfig.json",
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
+  settings: {
+    react: {
+      pragma: "React",
+      version: "detect"
+    }
   },
   rules: {
     "react/jsx-filename-extension": "off",
@@ -35,16 +47,4 @@ module.exports = {
     'react/self-closing-comp': 0,
     'react/sort-comp': 0,
   },
-  parserOptions: {
-    project: "./tsconfig.json",
-    ecmaFeatures: {
-      jsx: true
-    }
-  },
-  settings: {
-    react: {
-      pragma: "React",
-      version: "detect"
-    }
-  }
 };

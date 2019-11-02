@@ -381,6 +381,7 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  [require.resolve('babel-plugin-emotion')],
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
