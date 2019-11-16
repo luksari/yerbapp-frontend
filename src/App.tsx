@@ -2,11 +2,10 @@ import React, { FC } from 'react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${darken(0.2, 'palevioletred')};
-  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,14 +13,13 @@ const StyledDiv = styled.div`
 `;
 
 const App: FC = () => {
-  const name = 'YerbApp';
+  const name = 'Yerbapp';
   return (
-    // eslint-disable-next-line jsx-a11y/accessible-emoji
-    <StyledDiv className="App">
-      🌿
+    <Wrapper className="App">
+      <span role="img" aria-label="Yerba Mate">🌿</span>
       {name}
-      🌿
-    </StyledDiv>
+      <span role="img" aria-label="Yerba Mate">🌿</span>
+    </Wrapper>
   );
 };
 
