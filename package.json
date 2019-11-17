@@ -28,6 +28,7 @@
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
+    "emotion-theming": "^10.0.19",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-loader": "3.0.2",
@@ -181,6 +182,9 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.8.3",
+    "@graphql-codegen/typescript": "1.8.3",
+    "@graphql-codegen/typescript-operations": "1.8.3",
+    "@graphql-codegen/typescript-react-apollo": "1.8.3",
     "@types/invariant": "^2.2.30",
     "@types/lodash": "^4.14.148",
     "@types/react-redux": "^7.1.5",
@@ -198,9 +202,6 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-redux-saga": "^1.1.1",
-    "husky": "^3.0.9",
-    "@graphql-codegen/typescript": "1.8.3",
-    "@graphql-codegen/typescript-operations": "1.8.3",
-    "@graphql-codegen/typescript-react-apollo": "1.8.3"
+    "husky": "^3.0.9"
   }
 }
