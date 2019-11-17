@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const App: FC = () => {
   const name = 'Yerbapp';
   return (
-    <Wrapper className="App">
+    <Wrapper>
       <span role="img" aria-label="Yerba Mate">🌿</span>
       {name}
       <span role="img" aria-label="Yerba Mate">🌿</span>
