@@ -9,5 +9,17 @@ export const theme = {
     margin: {
 
     },
+    padding: {
+
+    },
+  },
+  gradients: {
+
+  },
+  animations: {
+
+  },
+  fonts: {
+
   },
 };

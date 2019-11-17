@@ -7,11 +7,12 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import { ThemeProvider } from 'emotion-theming';
 import history from './utils/history';
 import * as serviceWorker from './serviceWorker';
-
 import App from './App';
 import configureStore from './store/configureStore';
+import { theme } from './theme/theme';
 
 /** @todo Pass proper api URI */
 const client = new ApolloClient({
@@ -26,11 +27,13 @@ const MOUNT_NODE = document.getElementById('root');
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ApolloHooksProvider client={client}>
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </Provider>
+      </ThemeProvider>
     </ApolloHooksProvider>
   </ApolloProvider>,
   MOUNT_NODE,
