@@ -3,7 +3,7 @@ import React, { ComponentType } from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
 import getInjectors from './reducerInjectors';
-import { InjectReducerParams } from './types';
+import { InjectReducerParams } from '../store/types';
 
 export default ({ key, reducer }: InjectReducerParams) => (WrappedComponent: ComponentType<object>) => {
   class ReducerInjector extends React.PureComponent {

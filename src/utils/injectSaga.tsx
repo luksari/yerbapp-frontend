@@ -3,7 +3,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ReactReduxContext, ReactReduxContextValue } from 'react-redux';
 
 import getInjectors from './sagaInjectors';
-import { SagaConfig, DescriptorModel } from './types';
+import { SagaConfig, DescriptorModel } from '../store/types';
 
 
 /**
