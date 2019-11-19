@@ -2,8 +2,8 @@
 import invariant from 'invariant';
 import { isEmpty, isFunction, isString } from 'lodash';
 import { Reducer } from 'redux';
-import { AppStore } from './types';
-import createReducer from './reducers';
+import { AppStore } from '../store/types';
+import createReducer from '../store/reducers';
 
 export function injectReducerFactory(store: AppStore) {
   return function injectReducer(key: string, reducer: Reducer<object>) {
