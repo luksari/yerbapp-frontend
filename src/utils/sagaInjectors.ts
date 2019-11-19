@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import {
   isEmpty, isFunction, isString, conformsTo,
 } from 'lodash';
-import { DescriptorModel, SagaMode, AppStore } from './types';
+import { DescriptorModel, SagaMode, AppStore } from '../store/types';
 
 import checkStore from './checkStore';
 
