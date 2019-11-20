@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 /* eslint-disable no-param-reassign */
 
-export interface CurrentUser {
+export interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
 }
 
-const initialState: CurrentUser = {
+const initialState: AuthState = {
   token: '',
   isAuthenticated: false,
 };
