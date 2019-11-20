@@ -2,10 +2,10 @@
 import invariant from 'invariant';
 import { isEmpty, isFunction, isString } from 'lodash';
 import { Reducer } from 'redux';
-import { AppStore } from '../store/types';
+import { LifeStore } from '../store/types';
 import createReducer from '../store/reducers';
 
-export function injectReducerFactory(store: AppStore) {
+export function injectReducerFactory(store: LifeStore) {
   return function injectReducer(key: string, reducer: Reducer<object>) {
     invariant(
       isString(key) && !isEmpty(key) && isFunction(reducer),
@@ -20,7 +20,7 @@ export function injectReducerFactory(store: AppStore) {
   };
 }
 
-export default function getInjectors(store: AppStore) {
+export default function getInjectors(store: LifeStore) {
   return {
     injectReducer: injectReducerFactory(store),
   };

@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import {
   isEmpty, isFunction, isString, conformsTo,
 } from 'lodash';
-import { DescriptorModel, SagaMode, AppStore } from '../store/types';
+import { DescriptorModel, SagaMode, LifeStore } from '../store/types';
 
 import checkStore from './checkStore';
 
@@ -61,7 +61,7 @@ export function injectSagaFactory(store: any, isValid: boolean) {
   };
 }
 
-export function ejectSagaFactory(store: AppStore, isValid: boolean) {
+export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
   return function ejectSaga(key: string) {
     if (!isValid) checkStore(store);
 
