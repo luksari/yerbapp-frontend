@@ -2,7 +2,7 @@ import {
   Action, Store,
 } from 'redux';
 import { RouterState } from 'connected-react-router';
-import { AuthState } from './reducers/auth/slice';
+import { AuthState } from './auth/slice';
 
 export interface LifeStore extends Store<{}> {
   injectedReducers?: any;
@@ -25,8 +25,6 @@ export interface ReduxState {
   global: object;
   [propName: string]: any;
 }
-
-export type State = Map<{}, {}>
 
 export enum SagaMode {
   RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount',

@@ -2,7 +2,7 @@ import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
-import { AppStore } from './types';
+import { LifeStore } from './types';
 import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -13,7 +13,7 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
-export default function configureStore(initialState = {}, history: History): AppStore {
+export default function configureStore(initialState = {}, history: History): LifeStore {
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
   const enhancers = [applyMiddleware(...middlewares)];
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -22,7 +22,7 @@ export default function configureStore(initialState = {}, history: History): App
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
 
-  const store: AppStore = createStore(
+  const store: LifeStore = createStore(
     createReducer(),
     { ...initialState },
     composeEnhancers(...enhancers),
