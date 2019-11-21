@@ -27,6 +27,15 @@ export default function configureStore(initialState = {}, history: History): Lif
     { ...initialState },
     composeEnhancers(...enhancers),
   );
-  store.injectedReducers = {};
+  // Extensions
+  store.runSaga = sagaMiddleware.run;
+  store.injectedReducers = {}; // Reducer registry
+  store.injectedSagas = {}; // Saga registry
+
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      store.replaceReducer(createReducer(store.injectedReducers));
+    });
+  }
   return store;
 }

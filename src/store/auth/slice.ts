@@ -1,27 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 /* eslint-disable no-param-reassign */
 
 export interface AuthState {
+  id?: string;
   token?: string;
-  isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
+  id: '',
   token: '',
-  isAuthenticated: false,
 };
 
 export const { name, actions, reducer } = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuthenticated(state) {
-      state.isAuthenticated = true;
+    /** @TODO pass proper type to payload action from api response */
+    setClient(state, action: PayloadAction<any>) {
+      state.id = 'placeholder id';
       state.token = 'placeholder auth';
     },
-    setUnauthenticated(state) {
-      state.isAuthenticated = false;
+    unsetClient(state) {
       state.token = undefined;
+      state.id = undefined;
     },
   },
 });
