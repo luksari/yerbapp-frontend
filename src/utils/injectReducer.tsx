@@ -13,7 +13,7 @@ import { InjectReducerParams } from '../store';
  * @param {function} reducer A reducer that will be injected
  *
  */
-export default ({ key, reducer }: InjectReducerParams) => (WrappedComponent) => {
+export const injectReducer = ({ key, reducer }: InjectReducerParams) => (WrappedComponent) => {
   class ReducerInjector extends React.Component {
     static WrappedComponent = WrappedComponent;
 

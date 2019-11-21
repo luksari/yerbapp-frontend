@@ -8,12 +8,15 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { ThemeProvider } from 'emotion-theming';
-import history from './utils/history';
+import { history } from './utils/history';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import configureStore from './store/configureStore';
 import { theme } from './theme/theme';
 import { GRAPHQL_URI } from './config/uri';
+
+import 'antd/dist/antd.css';
+
 
 const client = new ApolloClient({
   uri: GRAPHQL_URI,

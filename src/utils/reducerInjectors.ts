@@ -28,7 +28,6 @@ export function injectReducerFactory(store: any, isValid: boolean) {
 }
 
 export default function getInjectors(store: any) {
-  console.warn('getInjectors store', store);
   checkStore(store);
 
   return {

@@ -1,7 +1,7 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["airbnb", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["react", "@typescript-eslint", "jsx-a11y", "lodash-fp"],
+  plugins: ["react", "@typescript-eslint", "jsx-a11y", "lodash-fp", "import"],
   env: {
     jest: true,
     browser: true,
@@ -23,6 +23,20 @@ module.exports = {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      "typescript": {
+        "alwaysTryTypes": true // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
+
+      // use <root>/path/to/folder/tsconfig.json
+      "typescript": {
+        "directory": "./tsconfig.json"
+      },
     }
   },
   rules: {
@@ -55,6 +69,8 @@ module.exports = {
     'max-len': 0,
     'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-non-null-assertion': 0
+    '@typescript-eslint/no-non-null-assertion': 0,
+    "indent": ["warn", 2],
+    "react/jsx-indent": ["warn", 2, { "checkAttributes": true}],
   },
 };
