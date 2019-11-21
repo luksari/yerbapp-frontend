@@ -1,7 +1,7 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["airbnb", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["react", "@typescript-eslint", "jsx-a11y", "lodash-fp", "import"],
+  plugins: ["react", "@typescript-eslint", "lodash-fp", "import"],
   env: {
     jest: true,
     browser: true,
@@ -45,12 +45,6 @@ module.exports = {
     'class-methods-use-this': 0,
     "comma-dangle": [2, "always-multiline"],
     "import/imports-first": 0,
-    "jsx-a11y/anchor-is-valid": 0,
-    "jsx-a11y/aria-props": 2,
-    "jsx-a11y/heading-has-content": 0,
-    "jsx-a11y/label-has-for": 2,
-    "jsx-a11y/mouse-events-have-key-events": 2,
-    "jsx-a11y/role-has-required-aria-props": 2,
     "jsx-a11y/role-supports-aria-props": 2,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
@@ -72,5 +66,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     "indent": ["warn", 2],
     "react/jsx-indent": ["warn", 2, { "checkAttributes": true}],
+    'react/prop-types': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

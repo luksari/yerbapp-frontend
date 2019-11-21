@@ -6,6 +6,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { name, reducer } from './slice';
 import { signUpSaga } from './saga';
+import { SignUpForm } from './components/SignUpForm';
 
 interface Props {
   data?: any;
@@ -19,6 +20,15 @@ const SignUpRaw: FC<Props> = () => {
       This is simple sign up component
       {' '}
       <span role="img" aria-label="Clown">🤡</span>
+      <SignUpForm
+        title="Utwórz konto"
+        initialValues={{
+          login: '', email: '', password: '', repeatPassword: '',
+        }}
+        onSubmit={(values) => console.warn(values)}
+      >
+
+      </SignUpForm>
     </div>
   );
 };
