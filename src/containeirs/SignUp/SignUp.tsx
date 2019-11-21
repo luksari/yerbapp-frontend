@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
-import { injectReducer, injectSaga } from '../../utils';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 import { name, reducer } from './slice';
 import { signUpSaga } from './saga';
 
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const SignUpRaw: FC<Props> = () => {
+  useInjectReducer({ key: name, reducer });
+  useInjectSaga({ key: name, saga: signUpSaga });
   return (
     <div>
       This is simple sign up component
@@ -26,11 +29,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({ key: name, reducer });
-const withSaga = injectSaga({ key: name, saga: signUpSaga });
 
-export const SignUp = compose<FC<Props>>(
-  withReducer,
-  withSaga,
-  withConnect,
-)(SignUpRaw);
+
+export const SignUp = SignUpRaw;

@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { Route, RouteProps, Redirect } from 'react-router-dom';
+import { Route, RouteProps, Redirect } from 'react-router';
 
 
 const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {

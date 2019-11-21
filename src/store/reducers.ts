@@ -1,6 +1,6 @@
 import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
-import { history } from '../utils';
+import { history } from 'utils/history';
 import { reducer as authReducer } from './auth/slice';
 import { FullStoreShape } from './types';
 
