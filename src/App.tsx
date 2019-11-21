@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
+import { SignUp } from './containeirs/SignUp';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -19,6 +20,7 @@ const App: FC = () => {
       <span role="img" aria-label="Yerba Mate">🌿</span>
       {name}
       <span role="img" aria-label="Yerba Mate">🌿</span>
+      <SignUp />
     </Wrapper>
   );
 };

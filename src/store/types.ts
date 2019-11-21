@@ -4,9 +4,10 @@ import {
 import { RouterState } from 'connected-react-router';
 import { AuthState } from './auth/slice';
 
-export interface LifeStore extends Store<{}> {
+export interface LifeStore extends Store<FullStoreShape> {
   injectedReducers?: any;
   injectedSagas?: any;
+  runSaga: any;
 }
 
 export interface FullStoreShape {
