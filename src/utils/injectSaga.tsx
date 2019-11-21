@@ -18,7 +18,7 @@ import { DescriptorModel, SagaConfig } from '../store';
  *   - constants.ONCE_TILL_UNMOUNT — behaves like 'RESTART_ON_REMOUNT' but never runs it again.
  *
  */
-export default ({ key, saga, mode }: SagaConfig) => (WrappedComponent) => {
+export const injectSaga = ({ key, saga, mode }: SagaConfig) => (WrappedComponent) => {
   class InjectSaga extends React.Component {
     static WrappedComponent = WrappedComponent;
 
@@ -50,7 +50,7 @@ export default ({ key, saga, mode }: SagaConfig) => (WrappedComponent) => {
   return hoistNonReactStatics(InjectSaga, WrappedComponent);
 };
 
-const useInjectSaga = ({ key, saga, mode }) => {
+const useInjectSaga = ({ key, saga, mode }: SagaConfig) => {
   const context = React.useContext(ReactReduxContext);
   React.useEffect(() => {
     const injectors = getInjectors(context.store);

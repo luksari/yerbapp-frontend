@@ -18,7 +18,6 @@ const checkDescriptor = (descriptor: DescriptorModel) => {
     saga: isFunction,
     mode: (mode) => isString(mode),
   };
-  console.warn(descriptor);
   invariant(
     conformsTo(descriptor, shape),
     '(app/utils...) injectSaga: Expected a valid saga descriptor',
