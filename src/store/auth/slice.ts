@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 /* eslint-disable no-param-reassign */
 
 export interface AuthState {
-  token: string | null;
+  token?: string;
   isAuthenticated: boolean;
 }
 
@@ -21,7 +21,7 @@ export const { name, actions, reducer } = createSlice({
     },
     setUnauthenticated(state) {
       state.isAuthenticated = false;
-      state.token = null;
+      state.token = undefined;
     },
   },
 });
