@@ -2,12 +2,13 @@ import invariant from 'invariant';
 import {
   isEmpty, isFunction, isString, conformsTo,
 } from 'lodash';
-import { DescriptorModel, SagaMode, LifeStore } from '../store/types';
+import { SagaMode, DescriptorModel } from '../store/types';
+
 
 import checkStore from './checkStore';
 
 
-const checkKey = (key: string) => invariant(
+const checkKey = (key) => invariant(
   isString(key) && !isEmpty(key),
   '(app/utils...) injectSaga: Expected `key` to be a non empty string',
 );
@@ -15,19 +16,20 @@ const checkKey = (key: string) => invariant(
 const checkDescriptor = (descriptor: DescriptorModel) => {
   const shape = {
     saga: isFunction,
-    mode: (mode: SagaMode) => isString(mode) && (mode in SagaMode),
+    mode: (mode) => isString(mode),
   };
+  console.warn(descriptor);
   invariant(
     conformsTo(descriptor, shape),
     '(app/utils...) injectSaga: Expected a valid saga descriptor',
   );
 };
 
-export function injectSagaFactory(store: any, isValid: boolean) {
+export function injectSagaFactory(store, isValid) {
   return function injectSaga(key: string, descriptor: DescriptorModel, ...args: any[]) {
     if (!isValid) checkStore(store);
 
-    const newDescriptor = {
+    const newDescriptor: DescriptorModel = {
       ...descriptor,
       mode: descriptor.mode || SagaMode.DAEMON,
     };
@@ -61,8 +63,8 @@ export function injectSagaFactory(store: any, isValid: boolean) {
   };
 }
 
-export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
-  return function ejectSaga(key: string) {
+export function ejectSagaFactory(store, isValid) {
+  return function ejectSaga(key) {
     if (!isValid) checkStore(store);
 
     checkKey(key);
@@ -81,7 +83,7 @@ export function ejectSagaFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export default function getInjectors(store: any) {
+export default function getInjectors(store) {
   checkStore(store);
 
   return {

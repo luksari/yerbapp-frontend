@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10rem;
+  font-size: 1rem;
 `;
 
 const App: FC = () => {
