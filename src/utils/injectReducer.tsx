@@ -1,35 +1,47 @@
-
-import React, { ComponentType } from 'react';
+/* eslint-disable react/static-property-placement */
+import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { ReactReduxContext } from 'react-redux';
 
 import getInjectors from './reducerInjectors';
-import { InjectReducerParams } from '../store/types';
+import { InjectReducerParams } from '../store';
 
-export default ({ key, reducer }: InjectReducerParams) => (WrappedComponent: ComponentType<object>) => {
-  class ReducerInjector extends React.PureComponent {
+/**
+ * Dynamically injects a reducer
+ *
+ * @param {string} key A key of the reducer
+ * @param {function} reducer A reducer that will be injected
+ *
+ */
+export default ({ key, reducer }: InjectReducerParams) => (WrappedComponent) => {
+  class ReducerInjector extends React.Component {
     static WrappedComponent = WrappedComponent;
 
-    // eslint-disable-next-line react/static-property-placement
-    static contextTypes = {
-      store: Object,
-    };
+    static contextType = ReactReduxContext;
 
-    // eslint-disable-next-line react/static-property-placement
-    static displayName = `withReducer(${(WrappedComponent.displayName || WrappedComponent.name || 'Component')})`;
+    static displayName = `withReducer(${WrappedComponent.displayName
+      || WrappedComponent.name
+      || 'Component'})`;
 
-    // eslint-disable-next-line react/destructuring-assignment
-    injectors = getInjectors(this.context.store);
+    constructor(props, context) {
+      super(props, context);
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillMount() {
-      const { injectReducer } = this.injectors;
-
-      injectReducer(key, reducer);
+      getInjectors(context.store).injectReducer(key, reducer);
     }
 
     render() {
       return <WrappedComponent {...this.props} />;
     }
   }
+
   return hoistNonReactStatics(ReducerInjector, WrappedComponent);
 };
+
+const useInjectReducer = ({ key, reducer }) => {
+  const context = React.useContext(ReactReduxContext);
+  React.useEffect(() => {
+    getInjectors(context.store).injectReducer(key, reducer);
+  }, []);
+};
+
+export { useInjectReducer };

@@ -2,13 +2,11 @@
 import invariant from 'invariant';
 import { isEmpty, isFunction, isString } from 'lodash';
 import { Reducer } from 'redux';
-import { LifeStore } from '../store/types';
 import createReducer from '../store/reducers';
 import checkStore from './checkStore';
 
-export function injectReducerFactory(store: LifeStore, isValid: boolean) {
+export function injectReducerFactory(store: any, isValid: boolean) {
   return function injectReducer(key: string, reducer: Reducer<object>) {
-    console.warn(store);
     if (!isValid) {
       checkStore(store);
     }
@@ -29,8 +27,10 @@ export function injectReducerFactory(store: LifeStore, isValid: boolean) {
   };
 }
 
-export default function getInjectors(store: LifeStore) {
+export default function getInjectors(store: any) {
+  console.warn('getInjectors store', store);
   checkStore(store);
+
   return {
     injectReducer: injectReducerFactory(store, true),
   };

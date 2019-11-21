@@ -1,10 +1,10 @@
-import React, { ComponentType } from 'react';
+/* eslint-disable react/static-property-placement */
+import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ReactReduxContext, ReactReduxContextValue } from 'react-redux';
+import { ReactReduxContext } from 'react-redux';
 
 import getInjectors from './sagaInjectors';
-import { SagaConfig, DescriptorModel } from '../store/types';
-
+import { DescriptorModel, SagaConfig } from '../store';
 
 /**
  * Dynamically injects a saga, passes component's props as saga arguments
@@ -18,22 +18,19 @@ import { SagaConfig, DescriptorModel } from '../store/types';
  *   - constants.ONCE_TILL_UNMOUNT — behaves like 'RESTART_ON_REMOUNT' but never runs it again.
  *
  */
-export default ({ key, saga, mode }: SagaConfig) => (WrappedComponent: ComponentType<object>) => {
+export default ({ key, saga, mode }: SagaConfig) => (WrappedComponent) => {
   class InjectSaga extends React.Component {
     static WrappedComponent = WrappedComponent;
 
-    // eslint-disable-next-line react/static-property-placement
     static contextType = ReactReduxContext;
 
-    // eslint-disable-next-line react/static-property-placement
     static displayName = `withSaga(${WrappedComponent.displayName
       || WrappedComponent.name
       || 'Component'})`;
 
-    injectors: { injectSaga: (key: string, descriptor: DescriptorModel, args: any) => void; ejectSaga: (key: string) => void };
+    injectors: { injectSaga: (key: string, descriptor: DescriptorModel, ...args: any[]) => void; ejectSaga: (key: string) => void };
 
-
-    constructor(props: SagaConfig, context: ReactReduxContextValue) {
+    constructor(props, context) {
       super(props, context);
 
       this.injectors = getInjectors(context.store);
@@ -53,7 +50,7 @@ export default ({ key, saga, mode }: SagaConfig) => (WrappedComponent: Component
   return hoistNonReactStatics(InjectSaga, WrappedComponent);
 };
 
-const useInjectSaga = ({ key, saga, mode }: SagaConfig) => {
+const useInjectSaga = ({ key, saga, mode }) => {
   const context = React.useContext(ReactReduxContext);
   React.useEffect(() => {
     const injectors = getInjectors(context.store);
