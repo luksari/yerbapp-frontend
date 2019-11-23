@@ -3,7 +3,10 @@ import {
   useFormik,
   FormikConfig,
 } from 'formik';
-import { Typography } from 'antd';
+import {
+  Typography, Form, Button, Input,
+} from 'antd';
+import { theme } from 'theme/theme';
 import { StyledForm } from './styled';
 
 interface SignUpFormData {
@@ -31,21 +34,32 @@ export const SignUpForm: FC<OwnFormProps> = ({
       <Typography.Title level={2}>
         {title}
       </Typography.Title>
-      <label htmlFor="email" id="email">Email</label>
-      <input type="email" name="email" onChange={handleChange} value={values.email} />
+      {/** @todo Extract each input to separate component that can be handled by formik
+        * @todo Add error message in this component
+        */}
+      <div>
+        <label htmlFor="email" id="email">Email</label>
+        <Input type="email" name="email" onChange={handleChange} value={values.email} />
+      </div>
 
-      <label htmlFor="login" id="login">Login</label>
-      <input type="text" name="login" onChange={handleChange} value={values.login} />
+      <div>
+        <label htmlFor="login" id="login">Login</label>
+        <Input type="text" name="login" onChange={handleChange} value={values.login} />
+      </div>
 
-      <label htmlFor="password" id="password">Password</label>
-      <input type="password" name="password" onChange={handleChange} value={values.password} />
+      <div>
+        <label htmlFor="password" id="password">Password</label>
+        <Input type="password" name="password" onChange={handleChange} value={values.password} />
+      </div>
 
-      <label htmlFor="password" id="repeatPassword">Repeat Password</label>
-      <input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
+      <div>
+        <label htmlFor="password" id="repeatPassword">Repeat Password</label>
+        <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
+      </div>
 
-      <button type="submit">
+      <Button type="primary">
         Submit
-      </button>
+      </Button>
     </StyledForm>
   );
 };
