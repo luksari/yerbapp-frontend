@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import {
   useFormik,
-  FormikProps,
   FormikConfig,
 } from 'formik';
 import { Typography } from 'antd';
+import { StyledForm } from './styled';
 
 interface SignUpFormData {
   login: string;
@@ -27,7 +27,7 @@ export const SignUpForm: FC<OwnFormProps> = ({
     onSubmit,
   });
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <Typography.Title level={2}>
         {title}
       </Typography.Title>
@@ -46,6 +46,6 @@ export const SignUpForm: FC<OwnFormProps> = ({
       <button type="submit">
         Submit
       </button>
-    </form>
+    </StyledForm>
   );
 };
