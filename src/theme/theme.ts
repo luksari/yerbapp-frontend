@@ -27,11 +27,16 @@ export const theme = {
     margin: {
       s: '5px',
       m: '15px',
-      l: '40px',
-      xl: '45px',
+      l: '20px',
+      xl: '35px',
     },
     padding: {
-
+      s: '5px',
+      xs: '10px',
+      m: '15px',
+      l: '25px',
+      xl: '30px',
+      xxl: '45px',
     },
   },
   gradients: {
