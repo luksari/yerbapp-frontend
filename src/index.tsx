@@ -13,13 +13,13 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import configureStore from './store/configureStore';
 import { theme, Theme } from './theme/theme';
-import { GRAPHQL_URI } from './config/uri';
+import { GRAPHQL_URL } from './config/uri';
 
 import 'antd/dist/antd.css';
 
 
 const client = new ApolloClient({
-  uri: GRAPHQL_URI,
+  uri: GRAPHQL_URL,
 });
 
 // Create redux store with history
