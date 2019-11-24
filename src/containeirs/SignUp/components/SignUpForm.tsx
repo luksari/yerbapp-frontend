@@ -4,16 +4,11 @@ import {
   FormikConfig,
 } from 'formik';
 import {
-  Typography, Form, Button, Input,
+  Typography, Button, Input,
 } from 'antd';
 import { StyledForm } from './styled';
+import { SignUpFormData } from '../types';
 
-interface SignUpFormData {
-  login: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
 interface OwnFormProps extends FormikConfig<SignUpFormData> {
   title: string;
 }
