@@ -6,7 +6,6 @@ import {
 import {
   Typography, Form, Button, Input,
 } from 'antd';
-import { theme } from 'theme/theme';
 import { StyledForm } from './styled';
 
 interface SignUpFormData {
@@ -35,7 +34,8 @@ export const SignUpForm: FC<OwnFormProps> = ({
         {title}
       </Typography.Title>
       {/** @todo Extract each input to separate component that can be handled by formik
-        * @todo Add error message in this component
+        * @todo Add error message in InputField component
+        * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
         */}
       <div>
         <label htmlFor="email" id="email">Email</label>
@@ -57,7 +57,7 @@ export const SignUpForm: FC<OwnFormProps> = ({
         <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
       </div>
 
-      <Button type="primary">
+      <Button type="primary" htmlType="submit">
         Submit
       </Button>
     </StyledForm>

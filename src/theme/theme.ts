@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import styled, { CreateStyled } from '@emotion/styled-base';
+import baseStyled, { CreateStyled } from '@emotion/styled-base';
 
 export const theme = {
   colors: {
@@ -51,4 +51,4 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
-export default styled as CreateStyled<Theme>;
+export const styled = baseStyled as CreateStyled<Theme>;

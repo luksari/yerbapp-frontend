@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
-import styled from '@emotion/styled';
-import { darken } from 'polished';
 import { Switch, Route } from 'react-router';
 import { SignUp } from 'containeirs/SignUp';
+import { styled } from 'theme/theme';
 
-const Wrapper = styled.div`
+const Wrapper = styled('div')`
   width: 100vw;
   height: 100vh;
-  background: ${darken(0.1, 'palevioletred')};
+  background: ${({ theme }) => theme.colors.mainBackground};
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3.5rem;
 `;
 
 const App: FC = () => {
@@ -19,7 +17,7 @@ const App: FC = () => {
     <Wrapper>
       <Switch>
         <Route exact path="/" render={() => <div>Homepage, at least some kind of...</div>} />
-        <Route exact path="/signup" render={() => <SignUp />} />
+        <Route exact path="/signup" component={SignUp} />
       </Switch>
     </Wrapper>
   );

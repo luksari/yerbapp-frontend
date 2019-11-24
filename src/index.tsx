@@ -12,7 +12,7 @@ import { history } from './utils/history';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import configureStore from './store/configureStore';
-import { theme } from './theme/theme';
+import { theme, Theme } from './theme/theme';
 import { GRAPHQL_URI } from './config/uri';
 
 import 'antd/dist/antd.css';
@@ -30,7 +30,7 @@ const MOUNT_NODE = document.getElementById('root');
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ApolloHooksProvider client={client}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider<Theme> theme={theme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
             <App />

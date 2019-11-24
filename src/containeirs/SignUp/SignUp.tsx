@@ -27,7 +27,6 @@ const SignUpRaw: FC<Props> = () => {
         }}
         onSubmit={(values) => console.warn(values)}
       >
-
       </SignUpForm>
     </div>
   );
@@ -41,4 +40,6 @@ const mapDispatchToProps = (dispatch) => ({
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 
-export const SignUp = SignUpRaw;
+export const SignUp = compose(
+  withConnect,
+)(SignUpRaw);
