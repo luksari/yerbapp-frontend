@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { name, reducer } from './slice';
+import { name, reducer, actions } from './slice';
 import { signUpSaga } from './saga';
 import { SignUpForm } from './components/SignUpForm';
+import { SignUpFormData } from './types';
+
 
 interface Props {
   data?: any;
@@ -32,13 +34,14 @@ const SignUpRaw: FC<Props> = () => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({});
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = createStructuredSelector({
 
+});
+const mapDispatchToProps = (dispatch) => ({
+  setSignUpBegin: (payload: SignUpFormData) => dispatch(actions.setSignUpPending(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
 
 export const SignUp = compose(
   withConnect,
