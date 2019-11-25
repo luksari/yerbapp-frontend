@@ -39,7 +39,7 @@ export const RegisterForm: FC<OwnFormProps> = ({
 
       <div>
         <label htmlFor="username" id="username">Nazwa użytkownika:</label>
-        <Input type="text" name="login" onChange={handleChange} value={values.username} />
+        <Input type="text" name="username" onChange={handleChange} value={values.username} />
       </div>
 
       <div>
