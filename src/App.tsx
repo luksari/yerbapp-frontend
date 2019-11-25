@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Switch, Route } from 'react-router';
-import { SignUp } from 'containeirs/SignUp';
-import { styled } from 'theme/theme';
+import { Register } from 'containeirs/Register';
+import { styled } from '@emotion/styled';
+import { Login } from 'containeirs/Login';
 
 const Wrapper = styled('div')`
   width: 100vw;
@@ -17,7 +18,8 @@ const App: FC = () => {
     <Wrapper>
       <Switch>
         <Route exact path="/" render={() => <div>Homepage, at least some kind of...</div>} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </Wrapper>
   );
