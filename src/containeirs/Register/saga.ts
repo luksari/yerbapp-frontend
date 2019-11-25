@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { AuthApi } from 'api/AuthApi';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { RegisterFormData } from './types';
@@ -19,5 +19,5 @@ export function* registerSaga({ payload }: PayloadAction<RegisterFormData>) {
 }
 
 export function* watchRegisterSaga() {
-  yield;
+  yield takeLatest(actions.setRegisterPending, registerSaga);
 }
