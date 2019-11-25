@@ -6,13 +6,13 @@ import {
 import {
   Typography, Button, Input,
 } from 'antd';
-import { StyledForm } from './styled';
-import { SignUpFormData } from '../types';
+import { StyledForm } from 'components/Form/styled';
+import { LoginFormData } from '../types';
 
-interface OwnFormProps extends FormikConfig<SignUpFormData> {
+interface OwnFormProps extends FormikConfig<LoginFormData> {
   title: string;
 }
-export const SignUpForm: FC<OwnFormProps> = ({
+export const LoginForm: FC<OwnFormProps> = ({
   title,
   validate,
   onSubmit,
@@ -33,27 +33,27 @@ export const SignUpForm: FC<OwnFormProps> = ({
         * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
         */}
       <div>
-        <label htmlFor="email" id="email">Email</label>
+        <label htmlFor="email" id="email">Adres email:</label>
         <Input type="email" name="email" onChange={handleChange} value={values.email} />
       </div>
 
       <div>
-        <label htmlFor="login" id="login">Login</label>
+        <label htmlFor="login" id="login">Login:</label>
         <Input type="text" name="login" onChange={handleChange} value={values.login} />
       </div>
 
       <div>
-        <label htmlFor="password" id="password">Password</label>
+        <label htmlFor="password" id="password">Hasło:</label>
         <Input type="password" name="password" onChange={handleChange} value={values.password} />
       </div>
 
       <div>
-        <label htmlFor="password" id="repeatPassword">Repeat Password</label>
+        <label htmlFor="password" id="repeatPassword">Powtórz hasło:</label>
         <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
       </div>
 
       <Button type="primary" htmlType="submit">
-        Submit
+        Zarejestruj się
       </Button>
     </StyledForm>
   );

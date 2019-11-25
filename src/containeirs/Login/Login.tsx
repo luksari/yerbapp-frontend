@@ -5,31 +5,32 @@ import { compose } from '@reduxjs/toolkit';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { name, reducer, actions } from './slice';
-import { signUpSaga } from './saga';
-import { SignUpForm } from './components/SignUpForm';
-import { SignUpFormData } from './types';
+import { watchLoginSaga } from './saga';
+import { LoginForm } from './components/LoginForm';
+import { LoginFormData } from './types';
 
 
 interface Props {
-  data?: any;
+  setLoginBegin: (values: LoginFormData) => void;
 }
 
-const SignUpRaw: FC<Props> = () => {
+const RegisterRaw: FC<Props> = ({
+  setLoginBegin,
+}) => {
   useInjectReducer({ key: name, reducer });
-  useInjectSaga({ key: name, saga: signUpSaga });
+  useInjectSaga({ key: name, saga: watchLoginSaga });
   return (
     <div>
-      This is simple sign up component
+      This is simple login component
       {' '}
       <span role="img" aria-label="Clown">🤡</span>
-      <SignUpForm
-        title="Utwórz konto"
+      <LoginForm
+        title="Zaloguj się"
         initialValues={{
-          login: '', email: '', password: '', repeatPassword: '',
+          login: '', password: '',
         }}
-        onSubmit={(values) => console.warn(values)}
-      >
-      </SignUpForm>
+        onSubmit={(values) => setLoginBegin(values)}
+      />
     </div>
   );
 };
@@ -38,11 +39,11 @@ const mapStateToProps = createStructuredSelector({
 
 });
 const mapDispatchToProps = (dispatch) => ({
-  setSignUpBegin: (payload: SignUpFormData) => dispatch(actions.setSignUpPending(payload)),
+  setSignUpBegin: (payload: LoginFormData) => dispatch(actions.setLoginBegin(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export const SignUp = compose(
+export const RegisterContainer = compose(
   withConnect,
-)(SignUpRaw);
+)(RegisterRaw);
