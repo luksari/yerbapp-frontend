@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserModel } from 'models/user';
-import { AsyncStatus, DatedMessage } from 'utils/types';
+import { AsyncStatus } from 'utils/types';
 /* eslint-disable no-param-reassign */
 
 export interface AuthState {
   userId: string;
   token: string;
-  loginStatus: AsyncStatus;
+  authStatus: AsyncStatus;
   error: string;
   expirationDate: Date;
 }
@@ -14,7 +13,7 @@ export interface AuthState {
 const initialState: AuthState = {
   userId: '',
   token: '',
-  loginStatus: AsyncStatus.Unset,
+  authStatus: AsyncStatus.Unset,
   error: '',
   expirationDate: null,
 };
@@ -25,20 +24,20 @@ export const { name, actions, reducer } = createSlice({
   reducers: {
     /** @todo Auth payload with login and password? */
     setAuthBegin(state, action: PayloadAction<any>) {
-      state.loginStatus = AsyncStatus.Pending;
+      state.authStatus = AsyncStatus.Pending;
     },
     /** @todo AuthResponse with userId and token */
     setAuthSuccess(state, action: PayloadAction<any>) {
-      state.loginStatus = AsyncStatus.Success;
+      state.authStatus = AsyncStatus.Success;
     },
     setAuthError(state, action: PayloadAction<string>) {
-      state.loginStatus = AsyncStatus.Error;
+      state.authStatus = AsyncStatus.Error;
       state.error = action.payload;
     },
     setAuthLogout(state) {
-      state.userId = null;
-      state.loginStatus = AsyncStatus.Unset;
+      state.authStatus = AsyncStatus.Unset;
       state.token = null;
+      state.userId = null;
     },
     /** @todo Payload with expiration date */
     checkAuthTimeout(state, action: PayloadAction<any>) {
