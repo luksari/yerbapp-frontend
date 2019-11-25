@@ -1,5 +1,4 @@
-import { styled } from '@emotion/styled';
-import { css } from '@emotion/core';
+import styled, { css } from 'styled-components';
 /** @see Example usage of styled component styling */
 export const StyledForm = styled.form`
   ${({ theme }) => css`

@@ -27,7 +27,7 @@ const RegisterRaw: FC<Props> = ({
       <LoginForm
         title="Zaloguj się"
         initialValues={{
-          login: '', password: '',
+          username: '', password: '',
         }}
         onSubmit={(values) => setLoginBegin(values)}
       />
@@ -39,7 +39,7 @@ const mapStateToProps = createStructuredSelector({
 
 });
 const mapDispatchToProps = (dispatch) => ({
-  setSignUpBegin: (payload: LoginFormData) => dispatch(actions.setLoginBegin(payload)),
+  setLoginBegin: (payload: LoginFormData) => dispatch(actions.setLoginPending(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

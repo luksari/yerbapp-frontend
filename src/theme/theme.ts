@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import baseStyled, { CreateStyled } from '@emotion/styled-base';
 
 export const theme = {
   colors: {
@@ -50,4 +48,4 @@ export const theme = {
   },
 };
 
-export type Theme = typeof theme;
+export type ThemeInterface = typeof theme

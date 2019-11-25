@@ -33,13 +33,8 @@ export const LoginForm: FC<OwnFormProps> = ({
         * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
         */}
       <div>
-        <label htmlFor="email" id="email">Adres email:</label>
-        <Input type="email" name="email" onChange={handleChange} value={values.email} />
-      </div>
-
-      <div>
-        <label htmlFor="login" id="login">Login:</label>
-        <Input type="text" name="login" onChange={handleChange} value={values.login} />
+        <label htmlFor="email" id="email">Nazwa użytkownika:</label>
+        <Input type="email" name="email" onChange={handleChange} value={values.username} />
       </div>
 
       <div>
@@ -47,13 +42,8 @@ export const LoginForm: FC<OwnFormProps> = ({
         <Input type="password" name="password" onChange={handleChange} value={values.password} />
       </div>
 
-      <div>
-        <label htmlFor="password" id="repeatPassword">Powtórz hasło:</label>
-        <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
-      </div>
-
       <Button type="primary" htmlType="submit">
-        Zarejestruj się
+        Zaloguj się
       </Button>
     </StyledForm>
   );

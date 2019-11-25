@@ -27,7 +27,7 @@ const RegisterRaw: FC<Props> = ({
       <RegisterForm
         title="Utwórz konto"
         initialValues={{
-          login: '', email: '', password: '', repeatPassword: '',
+          username: '', email: '', password: '', repeatPassword: '',
         }}
         onSubmit={(values) => setSignUpBegin(values)}
       >
@@ -40,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
 
 });
 const mapDispatchToProps = (dispatch) => ({
-  setSignUpBegin: (payload: RegisterFormData) => dispatch(actions.setSignUpPending(payload)),
+  setSignUpBegin: (payload: RegisterFormData) => dispatch(actions.setRegisterPending(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
