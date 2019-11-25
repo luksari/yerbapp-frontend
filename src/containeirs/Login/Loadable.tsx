@@ -1,6 +1,6 @@
 import React from 'react';
 import loadable from 'utils/Loadable';
 
-export const SignUp = loadable(() => import('./index'), {
+export const Login = loadable(() => import('./Login'), {
   fallback: <div>loading...</div>,
 });

@@ -1,9 +1,9 @@
-import { styled } from 'theme/theme';
+import { styled } from '@emotion/styled';
 import { css } from '@emotion/core';
 /** @see Example usage of styled component styling */
-export const StyledForm = styled('form')`
+export const StyledForm = styled.form`
   ${({ theme }) => css`
-    margin: 0;
+      margin: 0;
       width: 560px;
       background: ${theme.colors.mainBackground};
       padding: ${theme.metrics.padding.xl};
