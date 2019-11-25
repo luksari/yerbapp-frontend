@@ -1,9 +1,20 @@
+import { call, put } from 'redux-saga/effects';
+import { AuthApi } from 'api/AuthApi';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { RegisterFormData } from './types';
+import { actions } from './slice';
 
-export function* registerSaga() {
+export function* registerSaga({ payload }: PayloadAction<RegisterFormData>) {
   try {
-    yield;
-  } catch {
-    yield;
+    yield call(AuthApi.register, {
+      username: payload.username,
+      password: payload.password,
+      email: payload.email,
+    });
+    yield put(actions.setRegisterSuccess());
+  } catch (error) {
+    console.error(error);
+    yield put(actions.setRegisterFailed(error));
   }
 }
 

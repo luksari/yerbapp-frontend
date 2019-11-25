@@ -1,5 +1,5 @@
 export interface RegisterFormData {
-  login: string;
+  username: string;
   email: string;
   password: string;
   repeatPassword: string;
