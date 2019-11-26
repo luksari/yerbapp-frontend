@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ExplorePage extends Component {
-    render() {
-        return <div>The Explore Page</div>
-    }
+const ExplorePage = () => {
+    return (
+        <div className="container">
+        <p>The Explore Page</p>
+        </div>
+    )
 }
 
 export default ExplorePage;
+
+  /*button dodawania yerby*/
