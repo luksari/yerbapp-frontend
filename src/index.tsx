@@ -14,9 +14,7 @@ import App from './App';
 import configureStore from './store/configureStore';
 import { theme, Theme } from './theme/theme';
 import { GRAPHQL_URL } from './config/uri';
-
 import 'antd/dist/antd.css';
-
 
 const client = new ApolloClient({
   uri: GRAPHQL_URL,
