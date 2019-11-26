@@ -1,11 +1,11 @@
 import React from 'react';
 
-const TutorialPage = () => {
+const AboutPage = () => {
     return (
         <div className="container">
-        <p>The Tutorial Page</p>
+        <p>The About Page</p>
         </div>
     )
 }
 
-export default TutorialPage;
+export default AboutPage;

@@ -1,36 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import './Navbar.css';
 
-function Navbar ({navLinks, background, hoverBackground, linkColor, logo}) {
-    const [ hoverIndex, setHoverIndex ] = useState(-1)
-    const [ navOpen, setNavOpen ] = useState(false)
-
+const Navbar = () => {
     return (
-    <nav 
-        className="responsive-toolbar"
-        style={{ background: background }}>
-        <ul 
-            style={{ background: background }}
-            className={ navOpen ? 'active' : '' }
-        >
-            <figure onClick={ () => setNavOpen(!navOpen) }>
-                <img src={ logo } height="40px" alt="logo-nav-toggler"/>
-            </figure>
-            {navLinks.map((link, index) =>
-            <li
-                key={ index }
-                onMouseEnter={ () => setHoverIndex(index) }
-                onMouseLeave={ () => setHoverIndex(-1) }
-                style={{ background: hoverIndex === index ? ( hoverBackground || '#999' ) : '' }}
-            
-            >
-                <Link to={ link.path } style={{ color: linkColor }}>
-                    { link.text }
-                    <i className={ link.icon } />
-                </Link>
-            </li>    
-            )}
-        </ul>
+    <nav className="nav-wrapper">
+        <div className="container">
+            <ul className="nav-links">
+                <li><Link to='/'>Home</Link></li>
+                <li><Link to='/tutorial'>Tutorial</Link></li>
+                <li><Link to='/explore'>Explore</Link></li>
+                <li><Link to='/signup'>Signup</Link></li>
+                <li><Link to='/signin'>Login</Link></li>
+            </ul>
+        </div>
     </nav>
     )
 }
