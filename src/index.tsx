@@ -8,6 +8,7 @@ import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { ThemeProvider } from 'styled-components';
+import { Notifications, NotificationGlobalStyles } from 'components/Notification';
 import { history } from './utils/history';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
@@ -16,6 +17,7 @@ import { theme } from './theme/theme';
 import { GRAPHQL_URL } from './config/uri';
 
 import 'antd/dist/antd.css';
+import 'react-notifications-component/dist/theme.css';
 
 
 const client = new ApolloClient({
@@ -33,6 +35,8 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
+            <NotificationGlobalStyles />
+            <Notifications />
             <App />
           </ConnectedRouter>
         </Provider>
