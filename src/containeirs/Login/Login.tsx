@@ -21,9 +21,6 @@ const RegisterRaw: FC<Props> = ({
   useInjectSaga({ key: name, saga: watchLoginSaga });
   return (
     <div>
-      This is simple login component
-      {' '}
-      <span role="img" aria-label="Clown">🤡</span>
       <LoginForm
         title="Zaloguj się"
         initialValues={{
@@ -44,6 +41,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export const RegisterContainer = compose(
+export default compose(
   withConnect,
 )(RegisterRaw);

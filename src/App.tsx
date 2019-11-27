@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Switch, Route } from 'react-router';
-import { RegisterContainer } from 'containeirs/Register/Register';
+import { Register } from 'containeirs/Register';
 import styled from 'styled-components';
 import { Login } from 'containeirs/Login';
 
@@ -18,7 +18,7 @@ const App: FC = () => {
     <Wrapper>
       <Switch>
         <Route exact path="/" render={() => <div>Homepage, at least some kind of...</div>} />
-        <Route exact path="/register" component={RegisterContainer} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </Switch>
     </Wrapper>
