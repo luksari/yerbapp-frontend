@@ -7,6 +7,7 @@ import {
   Typography, Button, Input,
 } from 'antd';
 import { StyledForm } from 'components/Form/styled';
+import { Link } from 'react-router-dom';
 import { LoginFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<LoginFormData> {
@@ -33,8 +34,8 @@ export const LoginForm: FC<OwnFormProps> = ({
         * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
         */}
       <div>
-        <label htmlFor="email" id="email">Nazwa użytkownika:</label>
-        <Input type="email" name="email" onChange={handleChange} value={values.username} />
+        <label htmlFor="username" id="username">Nazwa użytkownika:</label>
+        <Input type="username" name="username" onChange={handleChange} value={values.username} />
       </div>
 
       <div>
@@ -44,6 +45,9 @@ export const LoginForm: FC<OwnFormProps> = ({
 
       <Button type="primary" htmlType="submit">
         Zaloguj się
+      </Button>
+      <Button type="link" htmlType="button">
+        <Link to="/register">Nie masz konta? Zarejestruj się!</Link>
       </Button>
     </StyledForm>
   );
