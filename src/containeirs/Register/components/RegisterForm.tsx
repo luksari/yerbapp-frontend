@@ -7,6 +7,7 @@ import {
   Typography, Button, Input,
 } from 'antd';
 import { StyledForm } from 'components/Form/styled';
+import { Link } from 'react-router-dom';
 import { RegisterFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<RegisterFormData> {
@@ -44,16 +45,19 @@ export const RegisterForm: FC<OwnFormProps> = ({
 
       <div>
         <label htmlFor="password" id="password">Hasło:</label>
-        <Input type="password" name="password" onChange={handleChange} value={values.password} />
+        <Input type="password" name="password" autoComplete="new-password" onChange={handleChange} value={values.password} />
       </div>
 
       <div>
         <label htmlFor="password" id="repeatPassword">Powtórz hasło:</label>
-        <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
+        <Input type="password" name="repeatPassword" autoComplete="new-password" onChange={handleChange} value={values.repeatPassword} />
       </div>
 
       <Button type="primary" htmlType="submit">
         Zarejestruj się
+      </Button>
+      <Button type="link" htmlType="button">
+        <Link to="/login">Masz już konto? Zaloguj się!</Link>
       </Button>
     </StyledForm>
   );
