@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AuthApi } from 'api/AuthApi';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { store } from 'react-notifications-component';
 import { RegisterFormData } from './types';
 import { actions } from './slice';
 
