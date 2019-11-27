@@ -18,7 +18,6 @@ const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
         />
       )}
     />
-
   );
 };
 
