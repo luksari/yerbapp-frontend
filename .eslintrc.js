@@ -1,7 +1,7 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["airbnb", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["react", "@typescript-eslint", "jsx-a11y", "lodash-fp"],
+  plugins: ["react", "@typescript-eslint", "lodash-fp", "import"],
   env: {
     jest: true,
     browser: true,
@@ -23,20 +23,28 @@ module.exports = {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      "typescript": {
+        "alwaysTryTypes": true // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
+
+      // use <root>/path/to/folder/tsconfig.json
+      "typescript": {
+        "directory": "./tsconfig.json"
+      },
     }
   },
   rules: {
     "react/jsx-filename-extension": "off",
-    'arrow-body-style': [2, 'as-needed'],
+    'arrow-body-style': 0,
     'class-methods-use-this': 0,
     "comma-dangle": [2, "always-multiline"],
     "import/imports-first": 0,
-    "jsx-a11y/anchor-is-valid": 0,
-    "jsx-a11y/aria-props": 2,
-    "jsx-a11y/heading-has-content": 0,
-    "jsx-a11y/label-has-for": 2,
-    "jsx-a11y/mouse-events-have-key-events": 2,
-    "jsx-a11y/role-has-required-aria-props": 2,
     "jsx-a11y/role-supports-aria-props": 2,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
@@ -55,6 +63,12 @@ module.exports = {
     'max-len': 0,
     'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
+    "indent": ["warn", 2],
+    "react/jsx-indent": ["warn", 2, { "checkAttributes": true}],
+    'react/prop-types': 0,
+    'jsx-a11y/label-has-associated-control': 0,
+    'no-console': 0,
     'linebreak-style': 0,
   },
 };
