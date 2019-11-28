@@ -7,7 +7,7 @@ const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props: RouteProps) => localStorage.getItem('authToken') ? (
+      render={(props: RouteProps) => localStorage.getItem('token') ? (
         <Component {...props} />
       ) : (
         <Redirect
