@@ -14,11 +14,9 @@ declare module 'react-notifications-component' {
     dismiss?: {
       duration: number;
       waitForAnimation?: boolean;
-      // @TODO more types
     };
     slidingEnter?: Transition;
     slidingExit?: Transition;
-    // @TOODtouchRevert, touchSlidingExit
   }
 
   interface AddNotificationPayloadWithContent extends AddNotificationPayloadCommon {
