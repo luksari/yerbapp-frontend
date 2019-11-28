@@ -6,21 +6,21 @@ const AuthenticatedRoute = ({
   layout: Layout,
   component: Component,
   props: childProps,
-  canActivate,
+  canBeGuest,
   ...rest
 }) => (
   <Route
     {...rest}
     render={(props) => {
-      if (!childProps.authenticated || !canActivate) {
-        return <Redirect to="/sign_in" />;
+      let content = <Component {...props} {...childProps} authorized={!canBeGuest} />;
+      if (!canBeGuest && !localStorage.getItem('token')) {
+        return <Redirect to="/login" />;
       }
 
-      let content = <Component {...props} {...childProps} />;
       if (Layout) {
         content = (
           <Layout>
-            <Component {...props} {...childProps} />
+            <Component {...props} {...childProps} authorized={!canBeGuest} />
           </Layout>
         );
       }
