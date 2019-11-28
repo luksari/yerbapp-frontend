@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router';
 import { Register } from 'containeirs/Register';
 import styled from 'styled-components';
 import { Login } from 'containeirs/Login';
+import { Layout } from 'containeirs/Layout';
+import { UserRole } from 'models/user';
 
 const Wrapper = styled('div')`
   width: 100vw;

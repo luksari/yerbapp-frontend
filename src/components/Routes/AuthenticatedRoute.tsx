@@ -1,24 +1,33 @@
-import React, { ComponentType } from 'react';
-import { Route, RouteProps, Redirect } from 'react-router';
+import React from 'react';
+import { Route, Redirect } from 'react-router';
 
 
-const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
-  const Component: ComponentType<any> = component!;
-  return (
-    <Route
-      {...rest}
-      render={(props: RouteProps) => localStorage.getItem('token') ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: props.location },
-          }}
-        />
-      )}
-    />
-  );
-};
+const AuthenticatedRoute = ({
+  layout: Layout,
+  component: Component,
+  props: childProps,
+  canActivate,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      if (!childProps.authenticated || !canActivate) {
+        return <Redirect to="/sign_in" />;
+      }
+
+      let content = <Component {...props} {...childProps} />;
+      if (Layout) {
+        content = (
+          <Layout>
+            <Component {...props} {...childProps} />
+          </Layout>
+        );
+      }
+
+      return content;
+    }}
+  />
+);
 
 export default AuthenticatedRoute;
