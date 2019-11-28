@@ -1,10 +1,17 @@
 import {
-  Store, Action, AnyAction, Reducer,
+  Action, Store,
 } from 'redux';
 import { RouterState } from 'connected-react-router';
 
-export interface AppStore extends Store<{}> {
-  injectedReducers: Record<string, Reducer<any, AnyAction>>;
+export interface LifeStore extends Store<FullStoreShape> {
+  injectedReducers?: any;
+  injectedSagas?: any;
+  runSaga: any;
+}
+
+export interface FullStoreShape {
+  router: RouterState;
+  [key: string]: any;
 }
 
 export interface InjectReducerParams {
@@ -16,4 +23,21 @@ export interface ReduxState {
   route: RouterState;
   global: object;
   [propName: string]: any;
+}
+
+export enum SagaMode {
+  RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount',
+  DAEMON = '@@saga-injector/daemon',
+  ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount',
+}
+
+export interface SagaConfig {
+  key: string;
+  saga: Function;
+  mode?: SagaMode;
+}
+
+export interface DescriptorModel {
+  saga: Function;
+  mode?: SagaMode;
 }
