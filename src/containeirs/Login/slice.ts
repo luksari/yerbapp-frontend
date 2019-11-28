@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AsyncStatus } from 'utils/types';
+import { LoginResponse } from 'api/AuthApi';
 import { LoginFormData } from './types';
 /* eslint-disable no-param-reassign */
 
@@ -7,6 +8,8 @@ export interface LoginSliceState {
   status: AsyncStatus;
   error: string;
   data: LoginFormData;
+  token?: string;
+  userId?: string;
 }
 
 export const initialState: LoginSliceState = {
@@ -23,8 +26,10 @@ export const { name, actions, reducer } = createSlice({
       state.status = AsyncStatus.Pending;
       state.data = action.payload;
     },
-    setLoginSuccess(state) {
+    setLoginSuccess(state, action: PayloadAction<LoginResponse>) {
       state.status = AsyncStatus.Success;
+      state.token = action.payload.access_token;
+      state.userId = action.payload.user_id;
     },
     setLoginFailed(state, action: PayloadAction<string>) {
       state.status = AsyncStatus.Error;

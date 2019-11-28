@@ -1,22 +1,21 @@
 import { postRequest } from './requests';
 
-interface LoginResponse {
-  token: string;
-  userId: string;
-  expDate: string;
+export interface LoginResponse {
+  access_token: string;
+  user_id: string;
 }
 
-interface RegisterResponse {
-  expDate: string;
+export interface RegisterResponse {
+  exp_date: string;
 }
 
-interface RegisterBody {
+export interface RegisterBody {
   username: string;
   password: string;
   email: string;
 }
 
-interface LoginBody {
+export interface LoginBody {
   username: string;
   password: string;
 }
