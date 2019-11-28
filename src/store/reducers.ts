@@ -1,10 +1,11 @@
 import { connectRouter } from 'connected-react-router';
-import { combineReducers, AnyAction, Reducer } from 'redux';
-import { history } from '../utils';
+import { combineReducers } from 'redux';
+import { history } from 'utils/history';
+import { FullStoreShape } from './types';
 
 
-export default function createReducer(injectedReducers?: Record<string, Reducer<any, AnyAction>>) {
-  return combineReducers({
+export default function createReducer(injectedReducers = {}) {
+  return combineReducers<FullStoreShape>({
     router: connectRouter(history),
     ...injectedReducers,
   });
