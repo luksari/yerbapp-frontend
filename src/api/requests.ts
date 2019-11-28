@@ -38,8 +38,6 @@ const parseResponse = async <T>(response: Response): Promise<null | T> => {
 const apiRequest = async <T>(path: string, fetchOptions?: RequestInit): Promise<T | null> => {
   const normalizedPath = path.replace(/^\//, '');
   const url = `${SERVER_URL}/${normalizedPath}`;
-  console.warn(SERVER_URL);
-
   const fetchResponse = await fetch(url, {
     ...fetchOptions,
     headers: {
