@@ -68,6 +68,7 @@ module.exports = {
     "react/jsx-indent": ["warn", 2, { "checkAttributes": true}],
     'react/prop-types': 0,
     'jsx-a11y/label-has-associated-control': 0,
-    'no-console': 0
+    'no-console': 0,
+    'linebreak-style': 0,
   },
 };
