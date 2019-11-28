@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AuthApi } from 'api/AuthApi';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { notificationError } from 'components/Notification';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { RegisterFormData } from './types';
 import { actions } from './slice';
 
@@ -13,7 +13,7 @@ export function* registerSaga({ payload }: PayloadAction<RegisterFormData>) {
       email: payload.email,
     });
     yield put(actions.setRegisterSuccess());
-    yield call(notificationError, {
+    yield call(notificationSuccess, {
       title: 'Sukces',
       message: 'Pomyślnie utworzono konto!',
     });
