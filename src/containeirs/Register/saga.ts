@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AuthApi } from 'api/AuthApi';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { store } from 'react-notifications-component';
+import { notificationError } from 'components/Notification';
 import { RegisterFormData } from './types';
 import { actions } from './slice';
 
@@ -13,9 +13,17 @@ export function* registerSaga({ payload }: PayloadAction<RegisterFormData>) {
       email: payload.email,
     });
     yield put(actions.setRegisterSuccess());
+    yield call(notificationError, {
+      title: 'Sukces',
+      message: 'Pomyślnie utworzono konto!',
+    });
   } catch (error) {
     console.error(error);
     yield put(actions.setRegisterFailed(error));
+    yield call(notificationError, {
+      title: 'Wystąpił błąd',
+      message: 'Nie udało się zarejestrować!',
+    });
   }
 }
 
