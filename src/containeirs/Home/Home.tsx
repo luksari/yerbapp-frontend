@@ -1,17 +1,11 @@
-import React from 'react';
-import { styled } from 'theme/theme';
+import React, { FC } from 'react';
 
-const Wrapper = styled('div')`
-  width: 80%;
-  float:right;
-`;
+const Home: FC = () => {
+  return (
+    <div>
+        Homepage
+    </div>
+  );
+};
 
-const HomePage = () => {
-    return (
-        <Wrapper>
-            <p>The Home Page</p>
-        </Wrapper>
-    )
-}
-
-export default HomePage;
+export default Home;

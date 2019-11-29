@@ -6,13 +6,14 @@ import {
 import {
   Typography, Button, Input,
 } from 'antd';
-import { StyledForm } from './styled';
-import { SignUpFormData } from '../types';
+import { StyledForm } from 'components/Form/styled';
+import { Link } from 'react-router-dom';
+import { LoginFormData } from '../types';
 
-interface OwnFormProps extends FormikConfig<SignUpFormData> {
+interface OwnFormProps extends FormikConfig<LoginFormData> {
   title: string;
 }
-export const SignUpForm: FC<OwnFormProps> = ({
+export const LoginForm: FC<OwnFormProps> = ({
   title,
   validate,
   onSubmit,
@@ -33,27 +34,20 @@ export const SignUpForm: FC<OwnFormProps> = ({
         * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
         */}
       <div>
-        <label htmlFor="email" id="email">Email</label>
-        <Input type="email" name="email" onChange={handleChange} value={values.email} />
+        <label htmlFor="username" id="username">Nazwa użytkownika:</label>
+        <Input type="username" name="username" onChange={handleChange} value={values.username} />
       </div>
 
       <div>
-        <label htmlFor="login" id="login">Login</label>
-        <Input type="text" name="login" onChange={handleChange} value={values.login} />
-      </div>
-
-      <div>
-        <label htmlFor="password" id="password">Password</label>
+        <label htmlFor="password" id="password">Hasło:</label>
         <Input type="password" name="password" onChange={handleChange} value={values.password} />
       </div>
 
-      <div>
-        <label htmlFor="password" id="repeatPassword">Repeat Password</label>
-        <Input type="password" name="repeatPassword" onChange={handleChange} value={values.repeatPassword} />
-      </div>
-
       <Button type="primary" htmlType="submit">
-        Submit
+        Zaloguj się
+      </Button>
+      <Button type="link" htmlType="button">
+        <Link to="/register">Nie masz konta? Zarejestruj się!</Link>
       </Button>
     </StyledForm>
   );

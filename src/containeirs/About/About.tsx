@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { styled } from 'theme/theme';
+import styled from 'styled-components';
 
-const Wrapper = styled('div')`
+const Wrapper = styled.div`
   width: 80%;
   float:right;
   height: 100vh;
@@ -24,7 +24,7 @@ const About: FC = () => {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae repudiandae repellat illo magni eligendi cupiditate voluptates eius nam voluptate. Incidunt nihil ullam quae quia officia quaerat, deserunt eligendi explicabo totam?</p>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default About
+export default About;

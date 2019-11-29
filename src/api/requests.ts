@@ -1,4 +1,4 @@
-import { API_URL } from 'config/uri';
+import { SERVER_URL } from 'config/uri';
 
 export class HttpError extends Error {
   constructor(
@@ -37,8 +37,7 @@ const parseResponse = async <T>(response: Response): Promise<null | T> => {
 
 const apiRequest = async <T>(path: string, fetchOptions?: RequestInit): Promise<T | null> => {
   const normalizedPath = path.replace(/^\//, '');
-  const url = `${API_URL}/${normalizedPath}`;
-
+  const url = `${SERVER_URL}/${normalizedPath}`;
   const fetchResponse = await fetch(url, {
     ...fetchOptions,
     headers: {

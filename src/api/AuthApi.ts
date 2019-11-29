@@ -1,17 +1,26 @@
-import { getRequest } from './requests';
+import { postRequest } from './requests';
 
-interface LoginResponse {
-  token: string;
-  userId: string;
-  expDate: string;
+export interface LoginResponse {
+  access_token: string;
+  user_id: string;
 }
 
-interface RegisterResponse {
-  expDate: string;
+export interface RegisterResponse {
+  exp_date: string;
+}
+
+export interface RegisterBody {
+  username: string;
+  password: string;
+  email: string;
+}
+
+export interface LoginBody {
+  username: string;
+  password: string;
 }
 
 export const AuthApi = {
-  /** @todo Pass proper URL endpoint */
-  login: () => getRequest<LoginResponse>('/'),
-  register: () => getRequest<RegisterResponse>('/'),
+  login: (paylaod: LoginBody) => postRequest<LoginResponse>('/auth/login', paylaod),
+  register: (payload: RegisterBody) => postRequest<RegisterResponse>('/auth/register', payload),
 };

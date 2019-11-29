@@ -1,39 +1,86 @@
 import styled from 'styled-components';
-import { theme } from 'theme/theme';
+import { Link } from 'react-router-dom';
 
-export const NavSection = styled('nav')`
+export const NavSection = styled.nav`
         margin: 0;
-        box-shadow: 0 10px 10px 0px ${theme.colors.decorators};
         display: grid;
-    `
+    `;
 
-export const Sidebar = styled('div')`
-        width: 250px;
-        height: 100%;
-        background: ${theme.colors.primary};
-        position: fixed;
-        justify-items: center;
-        text-align: center;
-    `
+export const Sidebar = styled.div`
+        width: 270px;
+        background: ${({ theme }) => theme.colors.primary};
+        border-right-style: solid;
+        border-width: 1px;
+        border-color: ${({ theme }) => theme.colors.mainText};
 
-export const Sidebar_h2 = styled('h2')`
-        color: ${theme.colors.labelText};
-        padding-top: ${theme.metrics.padding.m};
-        font-size: ${theme.metrics.fontSize.xl};
-        text-transform: uppercase;
-    `
+        @media (max-width: 1400px)
+        {
+          width: 230px;
+        }
+        @media (max-width: 700px)
+        {
+          width: 150px;
+        }
+        @media (max-width: 400px)
+        {
+          width: 80px;
+        }
+    `;
 
-export const Sidebar_ul = styled('ul')`
+export const SidebarTitle = styled.h2`
         margin: 0;
+        color: ${({ theme }) => theme.colors.mainText};
+        padding-top: ${({ theme }) => theme.metrics.padding.l};
+        padding-bottom: ${({ theme }) => theme.metrics.padding.l};
+        font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+
+        @media (max-width: 1400px)
+        {
+          font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+        }
+        @media (max-width: 700px)
+        {
+          font-size: ${({ theme }) => theme.metrics.fontSize.l};
+        }
+        @media (max-width: 400px)
+        {
+          font-size: ${({ theme }) => theme.metrics.fontSize.m};
+        }
+    `;
+
+export const SidebarList = styled.ul`
         padding: 0;
-    `
+    `;
 
-export const Sidebar_li = styled('li')`
+export const SidebarItem = styled.li`
+        line-height: 1;
+    `;
+
+export const SidebarLink = styled(Link)`
+        font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+        color: ${({ theme }) => theme.colors.mainText};
         display: block;
-        padding: 15px;
-    `
+        padding: ${({ theme }) => theme.metrics.padding.xs};
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
 
-export const Sidebar_a = styled('a')`
-        font-size: ${theme.metrics.fontSize.l};
-        color: ${theme.colors.alternative};
-    `
+        &:hover {
+          color: ${({ theme }) => theme.colors.labelText};
+        }
+    `;
+
+export const SidebarText = styled.p`
+        padding-top: ${({ theme }) => theme.metrics.padding.xs};
+        font-size: ${({ theme }) => theme.metrics.fontSize.l};
+
+        @media (max-width: 700px)
+        {
+            font-size: ${({ theme }) => theme.metrics.fontSize.m};
+        }
+        @media (max-width: 400px)
+        {
+            font-size:0;
+        }
+    `;
