@@ -6,6 +6,7 @@ import { Login } from 'containeirs/Login';
 import { Layout } from 'containeirs/Layout';
 import { UserRole } from 'models/user';
 import About from 'containeirs/About/About';
+import Tutorial from 'containeirs/Tutorial/Tutorial';
 
 
 const Wrapper = styled('div')`
@@ -25,6 +26,7 @@ const App: FC = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/tutorial" component={Tutorial} />
       </Switch>
     </Wrapper>
   );
