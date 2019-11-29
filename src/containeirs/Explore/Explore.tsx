@@ -1,17 +1,16 @@
 import React from 'react';
-import { styled } from 'theme/theme';
+import styled from 'styled-components';
 
 const Wrapper = styled('div')`
-  width: 80%;
-  float:right;
+
 `;
 
-const ExplorePage = () => {
-    return (
-        <Wrapper>
-            <p>The Explore Page</p>
-        </Wrapper>
-    )
-}
+const Explore = () => {
+  return (
+    <Wrapper>
+      <p>The Explore Page</p>
+    </Wrapper>
+  );
+};
 
-export default ExplorePage;
+export default Explore;
