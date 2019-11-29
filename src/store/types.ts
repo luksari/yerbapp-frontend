@@ -2,7 +2,6 @@ import {
   Action, Store,
 } from 'redux';
 import { RouterState } from 'connected-react-router';
-import { AuthState } from './auth/slice';
 
 export interface LifeStore extends Store<FullStoreShape> {
   injectedReducers?: any;
@@ -12,7 +11,6 @@ export interface LifeStore extends Store<FullStoreShape> {
 
 export interface FullStoreShape {
   router: RouterState;
-  auth: AuthState;
   [key: string]: any;
 }
 

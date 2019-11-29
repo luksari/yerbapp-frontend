@@ -1,47 +1,73 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Sidebar_ul, Sidebar_li, Sidebar_a } from 'components/Navigation/styled';
+import {
+  SidebarList, SidebarItem, SidebarLink, SidebarText,
+} from 'components/Navigation/styled';
+import { Icon } from 'antd';
 
 const Navlinks = () => {
-    return (
-    <Sidebar_ul>
-        <Sidebar_li >
-            <Link to='/'>
-                <Sidebar_a>Strona główna</Sidebar_a>
-            </Link>
-        </Sidebar_li>
-    
-        <Sidebar_li >
-            <Link to='/tutorial'>
-                <Sidebar_a>Poradnik</Sidebar_a>
-            </Link>
-        </Sidebar_li>
+  return (
+    <SidebarList>
+      <SidebarItem>
+        <SidebarLink to="/">
+          <Icon type="home" />
+          <br />
+          <SidebarText>
+            Strona główna
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
 
-        <Sidebar_li>
-            <Link to='/explore'>
-                <Sidebar_a>Przeglądaj</Sidebar_a>
-            </Link>
-        </Sidebar_li>
+      <SidebarItem>
+        <SidebarLink to="/tutorial">
+          <Icon type="book" />
+          <br />
+          <SidebarText>
+            Poradnik
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
 
-        <Sidebar_li>
-            <Link to='/about'>
-                <Sidebar_a>O nas</Sidebar_a>
-            </Link>
-        </Sidebar_li>
+      <SidebarItem>
+        <SidebarLink to="/explore">
+          <Icon type="search" />
+          <br />
+          <SidebarText>
+            Przeglądaj
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
 
-        <Sidebar_li>
-            <Link to='/profile'>
-                <Sidebar_a>Profil</Sidebar_a>
-            </Link>
-        </Sidebar_li>
+      <SidebarItem>
+        <SidebarLink to="/about">
+          <Icon type="star" />
+          <br />
+          <SidebarText>
+            O nas
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
 
-        <Sidebar_li>
-            <Link to='/contact'>
-                <Sidebar_a>Kontakt</Sidebar_a>
-            </Link>
-        </Sidebar_li>
-    </Sidebar_ul>
-    )
-}
+      <SidebarItem>
+        <SidebarLink to="/profile">
+          <Icon type="profile" />
+          <br />
+          <SidebarText>
+            Profil
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
+
+      <SidebarItem>
+        <SidebarLink to="/contact">
+          <Icon type="phone" />
+          <br />
+          <SidebarText>
+            Kontakt
+          </SidebarText>
+        </SidebarLink>
+      </SidebarItem>
+    </SidebarList>
+  );
+};
 
 export default Navlinks;

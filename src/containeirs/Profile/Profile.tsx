@@ -1,17 +1,16 @@
 import React from 'react';
-import { styled } from 'theme/theme';
+import styled from 'styled-components';
 
 const Wrapper = styled('div')`
-  width: 80%;
-  float:right;
+
 `;
 
-const ProfilePage = () => {
-    return (
-        <Wrapper>
-            <p>The Profile Page</p>
-        </Wrapper>
-    )
-}
+const Profile = () => {
+  return (
+    <Wrapper>
+      <p>The Profile Page</p>
+    </Wrapper>
+  );
+};
 
-export default ProfilePage;
+export default Profile;
