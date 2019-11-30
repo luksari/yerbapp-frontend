@@ -69,6 +69,7 @@
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
+    "react-hot-loader": "^4.5.3",
     "react-icons": "^3.8.0",
     "react-inlinesvg": "^1.2.0",
     "react-notifications-component": "^2.2.3",
