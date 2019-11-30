@@ -62,7 +62,9 @@ const iconPositionMap = {
 
 const IconPositionMixin = (iconPosition: IconPosition) => iconPositionMap[iconPosition];
 
-export const IconImage = styled(Icon)``;
+export const IconImage = styled(Icon)`
+  background: red
+`;
 
 export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonType; iconPosition: IconPosition; className?: string }>`
   border-radius: 4px;
@@ -76,6 +78,7 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonT
   padding: 0 15px;
   display: flex;
   justify-content: center;
+  border: none;
   /**
    * All buttons on design are 220px.
    * If you want to change this, make sure you check all views if they are OK

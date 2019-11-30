@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import {
-  useField, Field, FieldConfig,
+  useField, FieldConfig,
 } from 'formik';
-import { Input } from 'components/Input';
 import { InputWrapper, InputLabel, AdditionalText } from './styled';
 
 
@@ -14,7 +13,7 @@ type CustomFormFieldProps<T> = T extends FC<infer R> ? {
 
 type WrappedFormFieldProps<T> = CustomFormFieldProps<T> & FieldConfig;
 
-export function WrappedFormField<T extends FC<any>>({
+export function FormField<T extends FC<any>>({
   component: Component, props, label, ...rest
 }: WrappedFormFieldProps<T>) {
   const [field, meta] = useField(rest);
@@ -35,24 +34,5 @@ export function WrappedFormField<T extends FC<any>>({
           </AdditionalText>
         )}
     </InputWrapper>
-  );
-}
-
-type FormFieldProps<T> = CustomFormFieldProps<T> & Omit<FieldConfig, 'component'>;
-
-export function FormField<T>({
-  props, component, label, ...rest
-}: FormFieldProps<T>) {
-  return (
-    <Field
-      {...rest}
-      component={WrappedFormField}
-      label={label}
-      props={{
-        props,
-        component,
-        label,
-      }}
-    />
   );
 }

@@ -6,7 +6,6 @@ export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.colors.mainBackground};
-    border: 1px solid ${({ theme }) => theme.colors.decorators}
 `;
 
 export const StyledForm = styled.form`
