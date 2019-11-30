@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import {
   useField, Field, FieldConfig,
 } from 'formik';
+import { Input } from 'components/Input';
 import { InputWrapper, InputLabel, AdditionalText } from './styled';
 
 
@@ -22,6 +23,7 @@ export function WrappedFormField<T extends FC<any>>({
       <InputLabel htmlFor={field.name}>{label}</InputLabel>
 
       <Component
+        {...rest}
         {...props}
         {...field}
         {...meta}
@@ -45,7 +47,12 @@ export function FormField<T>({
     <Field
       {...rest}
       component={WrappedFormField}
-
-    ></Field>
+      label={label}
+      props={{
+        props,
+        component,
+        label,
+      }}
+    />
   );
 }

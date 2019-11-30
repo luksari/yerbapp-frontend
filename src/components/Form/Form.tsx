@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import { Button, ButtonType } from 'components/Button';
 import { Helmet } from 'react-helmet';
 import { Icon } from 'antd';
-import { FormikConfig, useFormik } from 'formik';
+import {
+  FormikConfig, useFormik, withFormik, WithFormikConfig,
+} from 'formik';
 import {
   FormContainer, StyledForm, FormTitle, FormActionsWrapper, ButtonsWrapper,
 } from './styled';
 
-interface CustomFormProps<T extends Record<string, any> = any> {
-  /** Title of form to show in component */
+interface CustomFormProps<Values extends Record<string, any> = any> {
   subTitle: string;
   /** Title to show in html title and in Topbar */
   title: string;
@@ -21,13 +22,9 @@ interface CustomFormProps<T extends Record<string, any> = any> {
   /** Close handler */
   handleClose: VoidFunction;
   /** Initial Values */
-  initialValues: T;
-  /** onSubmit custom method */
-  onSubmit: (values: T) => void;
+  initialValues: Values;
   /** Values of the form */
-  formData?: T;
-  /** Custom validate function */
-  handleValidate?: (values: T) => Record<keyof T, string | null>;
+  formData?: Values;
   /** Props to show indicator */
   isLoading: boolean;
   isSaving: boolean;
@@ -35,16 +32,16 @@ interface CustomFormProps<T extends Record<string, any> = any> {
   isEdit?: boolean;
 }
 
-type GenericFormProps<T = any> = CustomFormProps<T> & FormikConfig<T>
+type FormProps<Values> = CustomFormProps<Values> & FormikConfig<Values>
 
-const GenericForm: FC<GenericFormProps> = ({
+export const Form: FC<FormProps<any>> = ({
   title,
   children,
   handleClose,
   subTitle,
   initialValues,
   onSubmit,
-  handleValidate,
+  validate,
   isSaving,
   ...rest
 }) => {
@@ -53,7 +50,7 @@ const GenericForm: FC<GenericFormProps> = ({
     isValid,
     isSubmitting,
     values,
-  } = useFormik({ initialValues, onSubmit, validate: handleValidate });
+  } = useFormik({ initialValues, onSubmit, validate });
   const isDisabled = !isValid || isSubmitting || isSaving;
   return (
     <FormContainer>
@@ -94,19 +91,3 @@ const GenericForm: FC<GenericFormProps> = ({
     </FormContainer>
   );
 };
-
-
-export const FormikForm = compose<FC<CustomFormProps>>(
-)(GenericForm);
-
-export function Form<T extends Record<string, any>>({ handleValidate, ...rest }: CustomFormProps<T>) {
-  return (
-    <FormikForm
-      {...rest}
-      onSubmit={rest.onSubmit}
-      handleValidate={handleValidate}
-    >
-      {rest.children}
-    </FormikForm>
-  );
-}
