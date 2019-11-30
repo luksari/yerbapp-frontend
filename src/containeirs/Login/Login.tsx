@@ -20,16 +20,14 @@ const RegisterRaw: FC<Props> = ({
   useInjectReducer({ key: name, reducer });
   useInjectSaga({ key: name, saga: watchLoginSaga });
   return (
-    <div>
-      <LoginForm
-        title="Zaloguj się"
-        initialValues={{
-          username: '', password: '',
-        }}
-        onSubmit={(values) => setLoginBegin(values)}
-        handleClose={() => console.warn('close')}
-      />
-    </div>
+    <LoginForm
+      title="Zaloguj się"
+      initialValues={{
+        username: '', password: '',
+      }}
+      onSubmit={(values) => setLoginBegin(values)}
+      handleClose={() => console.warn('close')}
+    />
   );
 };
 

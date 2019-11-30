@@ -5,6 +5,7 @@ import { Footer } from 'components/Footer';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { TitleBar } from 'components/TitleBar';
 import { StyledLayout, ComponentWrapper } from './styled';
 
 interface Props {
@@ -20,7 +21,7 @@ const LayoutRaw: FC<Props> = ({
 }) => {
   return (
     <StyledLayout>
-      <Topbar handleLogout={logout} title={title} isLoggedIn={isLoggedIn} />
+      <Topbar handleLogout={logout} isLoggedIn={isLoggedIn} />
       <ComponentWrapper>
         {children}
       </ComponentWrapper>
