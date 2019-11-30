@@ -1,13 +1,7 @@
 import React, { FC } from 'react';
 import {
-  useFormik,
   FormikConfig,
 } from 'formik';
-import {
-  Typography, Button,
-} from 'antd';
-import { StyledForm } from 'components/Form/styled';
-import { Link } from 'react-router-dom';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { Form } from 'components/Form';
@@ -39,6 +33,15 @@ export const LoginForm: FC<OwnFormProps> = ({
         label="Nazwa użytkownika:"
         name="username"
         component={Input}
+        props={{
+          placeholder: 'Twoja nazwa użytkownika',
+        }}
+      />
+      <FormField
+        label="Hasło:"
+        name="password"
+        component={Input}
+        type="password"
         props={{
           placeholder: 'Twoja nazwa użytkownika',
         }}

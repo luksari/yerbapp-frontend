@@ -11,6 +11,7 @@ interface ButtonProps {
   icon?: ReactElement;
   iconPosition?: IconPosition;
   className?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 type AllButtonProps = ButtonProps & React.HTMLProps<HTMLButtonElement>
 
@@ -22,6 +23,7 @@ export const Button: FC<AllButtonProps> = ({
   iconPosition = IconPosition.Left,
   children,
   className,
+  type,
 }) => (
   <ButtonBox
     themeType={themeType}
@@ -29,6 +31,7 @@ export const Button: FC<AllButtonProps> = ({
     disabled={disabled}
     iconPosition={iconPosition}
     className={className}
+    type={type}
   >
     {icon}
     {children}

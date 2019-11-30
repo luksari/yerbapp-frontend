@@ -1,14 +1,13 @@
 import React, {
   FC, Children, cloneElement, ReactElement,
 } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { Button, ButtonType } from 'components/Button';
 import { Helmet } from 'react-helmet';
 import { Icon } from 'antd';
 import {
-  FormikConfig, useFormik, withFormik, WithFormikConfig,
+  FormikConfig, Formik,
 } from 'formik';
+import { Title } from 'components/TitleBar';
 import {
   FormContainer, StyledForm, FormTitle, FormActionsWrapper, ButtonsWrapper,
 } from './styled';
@@ -43,51 +42,55 @@ export const Form: FC<FormProps<any>> = ({
   onSubmit,
   validate,
   isSaving,
-  ...rest
 }) => {
-  const {
-    handleSubmit,
-    isValid,
-    isSubmitting,
-    values,
-  } = useFormik({ initialValues, onSubmit, validate });
-  const isDisabled = !isValid || isSubmitting || isSaving;
   return (
-    <FormContainer>
-      <Helmet
-        title={title}
-      />
-      <h2>{title}</h2>
-      <StyledForm
-        onSubmit={handleSubmit}
-      >
-        <FormTitle>
-          {subTitle}
-        </FormTitle>
-        {
-          Children.map(children,
-            (child: ReactElement) => cloneElement(child))
-        }
-      </StyledForm>
-      <FormActionsWrapper>
-        <ButtonsWrapper>
-          <Button
-            icon={<Icon type="save" />}
-            disabled={isDisabled}
-            type="submit"
-            themeType={ButtonType.Primary}
-            onClick={() => handleSubmit(values)}
-          >
-            Zapisz
-          </Button>
-          <Button
-            themeType={ButtonType.Link}
-            onClick={handleClose}
-          >
-            Zamknij
-          </Button>
-        </ButtonsWrapper>
-      </FormActionsWrapper>
-    </FormContainer>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validate={validate}
+    >
+      {
+        ({
+          handleSubmit, isValid, isSubmitting, values,
+        }) => (
+          <FormContainer>
+            <Helmet
+              title={title}
+            />
+            <Title>{title}</Title>
+            <StyledForm
+              onSubmit={handleSubmit}
+            >
+              <FormTitle>
+                {subTitle}
+              </FormTitle>
+              {
+                Children.map(children,
+                  (child: ReactElement) => cloneElement(child))
+              }
+            </StyledForm>
+            <FormActionsWrapper>
+              <ButtonsWrapper>
+                <Button
+                  icon={<Icon type="save" />}
+                  disabled={isSaving || isSubmitting || !isValid}
+                  type="submit"
+                  themeType={ButtonType.Primary}
+                  onClick={() => handleSubmit(values)}
+                >
+              Zapisz
+                </Button>
+                <Button
+                  themeType={ButtonType.Link}
+                  onClick={handleClose}
+                >
+              Zamknij
+                </Button>
+              </ButtonsWrapper>
+            </FormActionsWrapper>
+          </FormContainer>
+        )
+      }
+    </Formik>
   );
 };
