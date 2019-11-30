@@ -27,6 +27,7 @@ const RegisterRaw: FC<Props> = ({
           username: '', password: '',
         }}
         onSubmit={(values) => setLoginBegin(values)}
+        handleClose={() => console.warn('close')}
       />
     </div>
   );
