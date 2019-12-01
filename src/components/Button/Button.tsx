@@ -4,7 +4,7 @@ import { ButtonType, IconPosition } from './types';
 
 
 interface ButtonProps {
-  onClick: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent) => void;
   text?: string;
   themeType?: ButtonType;
   disabled?: boolean;

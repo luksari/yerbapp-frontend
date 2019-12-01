@@ -1,51 +1,61 @@
 import React, { FC } from 'react';
 import {
-  FormikConfig,
+  FormikConfig, Formik,
 } from 'formik';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
-import { Form } from 'components/Form';
+import { StyledForm, FormCard } from 'components/Form/styled';
+import { Button, ButtonType } from 'components/Button';
+import { Link } from 'react-router-dom';
 import { LoginFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<LoginFormData> {
   title: string;
-  handleClose: VoidFunction;
 }
 export const LoginForm: FC<OwnFormProps> = ({
-  title,
   onSubmit,
   initialValues,
-  validate,
-  handleClose,
 }) => {
   return (
-    <Form
-      title={title}
-      subTitle=""
-      initialValues={initialValues}
-      handleClose={handleClose}
-      validate={validate}
+    <Formik
       onSubmit={onSubmit}
-      isLoading={false}
-      isSaving={false}
+      initialValues={initialValues}
     >
-      <FormField
-        label="Nazwa użytkownika:"
-        name="username"
-        component={Input}
-        props={{
-          placeholder: 'Twoja nazwa użytkownika',
-        }}
-      />
-      <FormField
-        label="Hasło:"
-        name="password"
-        component={Input}
-        type="password"
-        props={{
-          placeholder: 'Twoja nazwa użytkownika',
-        }}
-      />
-    </Form>
+      {({ handleChange, handleSubmit, values }) => (
+        <FormCard
+          onSubmit={handleSubmit}
+        >
+          <FormField
+            label="Nazwa użytkownika:"
+            name="username"
+            component={Input}
+            value={values.username}
+            fullWidth
+            props={{
+              placeholder: 'Twoja nazwa użytkownika',
+              onChange: handleChange,
+            }}
+          />
+          <FormField
+            label="Hasło:"
+            name="password"
+            component={Input}
+            value={values.password}
+            type="password"
+            fullWidth
+            props={{
+              placeholder: 'Twoja nazwa użytkownika',
+              onChange: handleChange,
+            }}
+          />
+          <Button themeType={ButtonType.Primary} type="submit">
+        Zaloguj się
+          </Button>
+          <Button themeType={ButtonType.Link} type="button">
+            <Link to="/register">Nie masz konta? Zarejestruj się!</Link>
+          </Button>
+        </FormCard>
+      )}
+    </Formik>
   );
 };
