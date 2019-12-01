@@ -15,7 +15,7 @@ const pulse = keyframes`
      transform: scale(1);
     }
     50% {
-     transform: scale(0.8);
+     transform: scale(1.1);
     }
     100% {
     transform: scale(1);
@@ -29,7 +29,7 @@ const pulseFade = keyframes`
     }
     50% {
       opacity: 0;
-      transform: scale(1.2);
+      transform: scale(1.45);
     }
     100% {
       opacity: 0;
@@ -41,7 +41,7 @@ export const StyledLoader = styled(Logo)`
   width: 80px;
   height: 80px;
   position: absolute;
-  animation: ${pulse} 3s infinite;
+  animation: ${pulse} 2s infinite;
   z-index: 1;
 `;
 
@@ -49,6 +49,6 @@ export const StyledAltLoader = styled(Logo)`
   width: 80px;
   height: 80px;
   position: absolute;
-  animation: ${pulseFade} 3s infinite;
+  animation: ${pulseFade} 2s infinite;
   z-index: 0;
 `;
