@@ -1,4 +1,4 @@
-export interface TutorialStep {
+export interface TutorialStepModel {
   id: number;
   imageUrl: string;
   description: string;
