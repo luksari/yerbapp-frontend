@@ -36,6 +36,7 @@ export const LoginForm: FC<OwnFormProps> = ({
             props={{
               placeholder: 'Twoja nazwa użytkownika',
               onChange: handleChange,
+              autoComplete: 'username',
             }}
           />
           <FormField
@@ -48,6 +49,7 @@ export const LoginForm: FC<OwnFormProps> = ({
             props={{
               placeholder: 'Twoja nazwa użytkownika',
               onChange: handleChange,
+              autoComplete: 'password',
             }}
           />
           <Button themeType={ButtonType.Primary} type="submit">

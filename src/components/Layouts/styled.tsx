@@ -13,7 +13,7 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: url('./images/yapp_bg.png');
+  background: url('./assets/yapp_bg.png');
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
