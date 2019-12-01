@@ -4,10 +4,10 @@ import { IconPosition, ButtonType } from './types';
 
 const THEME = {
   [ButtonType.Primary]: css`
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.info};
     color: ${({ theme }) => theme.colors.alternativeText};
     &:hover {
-      background: ${({ theme }) => theme.colors.primaryHover};
+      background: ${({ theme }) => theme.colors.infoHover};
     }
     &:active {
       box-shadow: none;

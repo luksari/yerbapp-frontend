@@ -41,7 +41,7 @@ export const AdditionalText = styled.span<InputMessageProps>`
 export const baseInputStyles = css`
   background: ${({ theme }) => theme.colors.mainBackground};
   border-radius: 4px;
-  box-shadow: 0 2px 10px -5px ${({ theme }) => theme.colors.decorators};
+  box-shadow: 0 2px 10px -5px ${({ theme }) => theme.colors.shadow};
   min-height: 35px;
   font-size: 13px;
   line-height: 16px;
