@@ -10,13 +10,12 @@ export const InputWrapper = styled.div<WrapperProps>`
   flex-direction: column;
   justify-content: flex-start;
   flex: 0 0 auto;
-  margin-bottom: 19px;
 `;
 
 export const InputLabel = styled.label`
   font-size: 11px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.mainBackground};
+  color: ${({ theme }) => theme.colors.labelText};
   margin-bottom: 9px;
 `;
 
