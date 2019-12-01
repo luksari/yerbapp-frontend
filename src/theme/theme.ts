@@ -11,6 +11,7 @@ export const theme = {
     warning: '#FF9F1C',
     warningHover: '#FFB044',
     decorators: '#E8E9F3 ',
+    shadow: '#B9BDC8 ',
     primary: '#9BC53D',
     primaryHover: '#A8CE54',
     alternative: '#2E933C',

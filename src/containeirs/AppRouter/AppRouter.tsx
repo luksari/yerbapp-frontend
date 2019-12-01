@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch } from 'react-router';
 import { Login } from 'containeirs/Login';
 import Register from 'containeirs/Register/Register';
-import AuthenticatedRoute from 'components/Routes/AuthenticatedRoute';
-import { Layout } from 'containeirs/Layout';
+import { AppLayout } from 'components/Layouts';
 import { HomeTest } from 'containeirs/Home/Home';
+import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { AuthenticatedRoute, LayoutRoute } from 'components/Routes';
 
 export const AppRouter: FC = () => {
   return (
     <Switch>
-      <AuthenticatedRoute exact path="/" component={HomeTest} layout={Layout} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
+      <AuthenticatedRoute exact path="/" component={HomeTest} layout={AppLayout} />
+      <LayoutRoute exact path="/login" component={Login} layout={AuthLayout} />
+      <LayoutRoute exact path="/register" component={Register} layout={AuthLayout} />
     </Switch>
   );
 };

@@ -14,33 +14,41 @@ export const StyledForm = styled.form`
     background: ${({ theme }) => theme.colors.mainBackground};
     grid-row-gap: ${({ theme }) => theme.metrics.margin.m};
     padding: ${({ theme }) => theme.metrics.padding.xl};
-
     grid-auto-rows: max-content;
 `;
 
 export const FormCard = styled(StyledForm)`
-  ${({ theme }) => css`
-      margin: 0;
+      margin-top: ${({ theme }) => theme.metrics.margin.xl};
       min-width: 460px;
       min-height: 460px;
-      font-size: ${theme.metrics.fontSize.s};
-      box-shadow: 0 10px 10px 0px ${theme.colors.decorators};
       border-radius: 4px;
+       ${({ theme }) => css`
+        font-size: ${theme.metrics.fontSize.m};
+        box-shadow: 0 10px 10px -5px ${theme.colors.shadow};
+
   `}
 `;
 
 export const FormTitle = styled.h2`
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.metrics.fontSize.l};
     background: ${({ theme }) => theme.colors.mainBackground};
     color: ${({ theme }) => theme.colors.primaryText};
-    margin-bottom: 36px;
+    margin-bottom: ${({ theme }) => theme.metrics.margin.m};
     font-weight: 500;
+    &::after {
+      margin-top: ${({ theme }) => theme.metrics.margin.m};
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: ${({ theme }) => theme.colors.decorators};
+    }
 `;
 
 export const FormActionsWrapper = styled.div`
     background: ${({ theme }) => theme.colors.mainBackground};
     width: 100%;
-    padding: 27px;
+    padding: ${({ theme }) => theme.metrics.padding.l};
     display: flex;
     flex: 0.5 0 auto;
     justify-content: center;
@@ -51,6 +59,6 @@ export const FormActionsWrapper = styled.div`
 export const ButtonsWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 9px;
+    grid-gap: ${({ theme }) => theme.metrics.margin.m};
     justify-items: center;
 `;
