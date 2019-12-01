@@ -4,7 +4,7 @@ import { Notification } from 'components/Notification/Notification';
 
 const getDismissTime = (type: NotificationType) => {
   switch (type) {
-  case NotificationType.Error: return 400000;
+  case NotificationType.Error: return 5000;
   case NotificationType.Success: return 2500;
   case NotificationType.Info: return 3500;
   case NotificationType.Warning: return 5000;

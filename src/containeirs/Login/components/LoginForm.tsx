@@ -4,7 +4,7 @@ import {
 } from 'formik';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
-import { StyledForm, FormCard } from 'components/Form/styled';
+import { FormCard, FormTitle } from 'components/Form/styled';
 import { Button, ButtonType } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { LoginFormData } from '../types';
@@ -15,6 +15,7 @@ interface OwnFormProps extends FormikConfig<LoginFormData> {
 export const LoginForm: FC<OwnFormProps> = ({
   onSubmit,
   initialValues,
+  title,
 }) => {
   return (
     <Formik
@@ -25,6 +26,7 @@ export const LoginForm: FC<OwnFormProps> = ({
         <FormCard
           onSubmit={handleSubmit}
         >
+          <FormTitle>{title}</FormTitle>
           <FormField
             label="Nazwa użytkownika:"
             name="username"
