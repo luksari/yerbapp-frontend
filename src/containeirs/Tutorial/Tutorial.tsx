@@ -1,34 +1,60 @@
-import React, { FC } from 'react';
-import {
-  HeaderStyled, TutorialContainer, TextMain, ListContainer, ListItem,
-} from './styled';
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+import React, { useState } from 'react';
+import { Button } from 'antd';
+import { TutorialStep } from './types';
+import { TutorialWrapper } from './components/styled';
 
+const tutorialData: TutorialStep[] = [
+  {
+    id: 1,
+    imageUrl: 'url1',
+    description: 'New step description',
+  },
+  {
+    id: 2,
+    imageUrl: 'url2',
+    description: 'New step2 description',
+  },
+  {
+    id: 3,
+    imageUrl: 'url3',
+    description: 'New step3 description',
+  },
+  {
+    id: 4,
+    imageUrl: 'url4',
+    description: 'New step4 description',
+  },
+  {
+    id: 5,
+    imageUrl: 'url5',
+    description: 'New step5 description',
+  },
+  {
+    id: 6,
+    imageUrl: 'url6',
+    description: 'New step6 description',
+  },
+];
 
-const Tutorial: FC = () => {
+const Tutorial = () => {
+  const [index, setIndex] = useState(0);
+  const [step, setStep] = useState(tutorialData[index]);
+  const handleNextStep = () => {
+    if (index < tutorialData.length) {
+      setIndex((prevIndex) => prevIndex += 1);
+      setStep(tutorialData[index]);
+    } else {
+      setIndex(index);
+    }
+  };
   return (
-    <TutorialContainer>
-      <HeaderStyled>
-        Jak przygotować Yerba Mate?
-      </HeaderStyled>
-      <TextMain>
-        Początki czasami bywają trudne. Bez specjalistycznej wiedzy, bombilli za 150 zł i specjalnego nabieraka mógłbyś np. upuścić Yerbę na podłogę lub rozlać wodę (oczywiście w temperaturze nie wyższej niż 90 stopni). Z naszym tutorialem nie zbłaźnisz się przed kolegą z Ameryki Południowej, a kto wie może, nawet zaipomujesz swojej latynoamerykańskiej sympatii ( ͡° ͜ʖ ͡°)
-      </TextMain>
-      <ListContainer>
-        <ListItem>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, iste iusto quas eligendi corporis id eius corrupti temporibus velit? Molestias harum voluptatibus veritatis explicabo ut velit deserunt, saepe sit commodi?
-        </ListItem>
-        <ListItem>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, iste iusto quas eligendi corporis id eius corrupti temporibus velit? Molestias harum voluptatibus veritatis explicabo ut velit deserunt, saepe sit commodi?
-        </ListItem>
-        <ListItem>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, iste iusto quas eligendi corporis id eius corrupti temporibus velit? Molestias harum voluptatibus veritatis explicabo ut velit deserunt, saepe sit commodi?
-        </ListItem>
-        <ListItem>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, iste iusto quas eligendi corporis id eius corrupti temporibus velit? Molestias harum voluptatibus veritatis explicabo ut velit deserunt, saepe sit commodi?
-        </ListItem>
-      </ListContainer>
-    </TutorialContainer>
+    <TutorialWrapper>
+      {JSON.stringify(step, null, 2)}
+      <Button onClick={handleNextStep}>Krok dalej</Button>
+      <Button onClick={() => console.warn('koniec')}>Zakończ</Button>
+    </TutorialWrapper>
   );
 };
-
 export default Tutorial;
