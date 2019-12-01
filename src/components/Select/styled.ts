@@ -43,7 +43,7 @@ export const customSelectStyles: StylesConfig = {
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
     cursor: 'pointer',
   }),
-  multiValueRemove: (provided, state) => ({
+  multiValueRemove: (provided) => ({
     ...provided,
     cursor: 'pointer',
     '&:hover': {
@@ -51,12 +51,12 @@ export const customSelectStyles: StylesConfig = {
       backgroundColor: theme.colors.danger,
     },
   }),
-  multiValueLabel: (provided, state) => ({
+  multiValueLabel: (provided) => ({
     ...provided,
     color: theme.colors.primaryText,
     fontWeight: 500,
   }),
-  multiValue: (provided, state) => ({
+  multiValue: (provided) => ({
     ...provided,
     backgroundColor: theme.colors.primary,
     color: theme.colors.alternativeText,
@@ -87,7 +87,7 @@ export const customSelectStyles: StylesConfig = {
       cursor: 'pointer',
     },
   }),
-  placeholder: (provided, state) => ({
+  placeholder: (provided) => ({
     ...provided,
     fontSize: '13px',
     color: theme.colors.decorators,

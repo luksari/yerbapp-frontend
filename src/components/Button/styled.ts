@@ -79,11 +79,6 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonT
   display: flex;
   justify-content: center;
   border: none;
-  /**
-   * All buttons on design are 220px.
-   * If you want to change this, make sure you check all views if they are OK
-   */
-  width: 220px;
   ${({ iconPosition }) => IconPositionMixin(iconPosition)};
 
   ${IconImage} {

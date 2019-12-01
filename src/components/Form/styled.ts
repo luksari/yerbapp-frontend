@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const FormContainer = styled.div`
     width: 100%;
@@ -10,12 +10,23 @@ export const FormContainer = styled.div`
 
 export const StyledForm = styled.form`
     width: 100%;
-    flex: 1 1 auto;
     display: grid;
     background: ${({ theme }) => theme.colors.mainBackground};
-    grid-gap: 19px;
+    grid-row-gap: ${({ theme }) => theme.metrics.margin.m};
+    padding: ${({ theme }) => theme.metrics.padding.xl};
+
     grid-auto-rows: max-content;
-    padding: 42px;
+`;
+
+export const FormCard = styled(StyledForm)`
+  ${({ theme }) => css`
+      margin: 0;
+      min-width: 460px;
+      min-height: 460px;
+      font-size: ${theme.metrics.fontSize.s};
+      box-shadow: 0 10px 10px 0px ${theme.colors.decorators};
+      border-radius: 4px;
+  `}
 `;
 
 export const FormTitle = styled.h2`

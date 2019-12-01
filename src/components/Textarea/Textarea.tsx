@@ -1,5 +1,5 @@
 import React, {
- FC, TextareaHTMLAttributes, ChangeEvent, ChangeEventHandler, FocusEventHandler,
+  FC, TextareaHTMLAttributes, ChangeEvent, ChangeEventHandler, FocusEventHandler,
 } from 'react';
 import { StyledTextArea } from './styled';
 
@@ -24,7 +24,7 @@ const DEFAULT_AUTOSIZE = {
   maxRows: 10,
 };
 export const Textarea: FC<Props> = ({
- autosize, value, onChange, touched, error, warning, onBlur, ...rest
+  autosize, value, onChange, touched, error, warning, onBlur, ...rest
 }) => {
   const match = (value && `${value}`.match(/\n/g)) || [];
   const meta = { touched, error, warning };
