@@ -2,10 +2,12 @@
 /* eslint-disable no-return-assign */
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import { TutorialStep } from './types';
+import { TutorialStepModel } from './types';
 import { TutorialWrapper } from './components/styled';
+import { TutorialStep } from './components/TutorialStep';
 
-const tutorialData: TutorialStep[] = [
+
+const tutorialData: TutorialStepModel[] = [
   {
     id: 1,
     imageUrl: 'url1',
@@ -51,7 +53,7 @@ const Tutorial = () => {
   };
   return (
     <TutorialWrapper>
-      {JSON.stringify(step, null, 2)}
+      <TutorialStep {...step} />
       <Button onClick={handleNextStep}>Krok dalej</Button>
       <Button onClick={() => console.warn('koniec')}>Zakończ</Button>
     </TutorialWrapper>
