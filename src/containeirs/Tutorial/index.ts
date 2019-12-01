@@ -1,1 +1,1 @@
-export * from './Tutorial';
+export * from './Loadable';
