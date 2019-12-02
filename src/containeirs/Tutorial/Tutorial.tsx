@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import { TutorialStepModel } from './types';
-import { TutorialWrapper } from './components/styled';
+import { TutorialWrapper, ButtonsContainer } from './components/styled';
 import { TutorialStep } from './components/TutorialStep';
 
 
@@ -11,27 +11,27 @@ const tutorialData: TutorialStepModel[] = [
   {
     id: 1,
     imageUrl: 'url1',
-    description: 'New step description',
+    description: 'Przygotuj wszystkie niezbędne rzeczy. Potrzebne będą: matero, bombilla oraz oczywiście yerba mate.',
   },
   {
     id: 2,
     imageUrl: 'url2',
-    description: 'New step2 description',
+    description: 'Przesyp yerba mate do matera. Ilość suszu wpływa na moc napoju, dlatego początkującym polecamy zacząć od zasypania połowy objętości naczynia. Z biegiem czasu z pewnością sam poznasz jaka ilość yerby najbardziej odpowiada twoim preferencjom.',
   },
   {
     id: 3,
     imageUrl: 'url3',
-    description: 'New step3 description',
+    description: 'Przykryj naczynie dłonią lub spodeczkiem, a następnie potrząśnij kilka razy w górę i w dół trzymając je do góry nogami',
   },
   {
     id: 4,
     imageUrl: 'url4',
-    description: 'New step4 description',
+    description: 'Przechyl naczynie w taki sposób, aby susz ułożył się po jednej stronie',
   },
   {
     id: 5,
     imageUrl: 'url5',
-    description: 'New step5 description',
+    description: 'Przygotuj wodę w temperaturze około 70-80 stopni',
   },
   {
     id: 6,
@@ -44,9 +44,17 @@ const Tutorial = () => {
   const [index, setIndex] = useState(0);
   const [step, setStep] = useState(tutorialData[index]);
   const handleNextStep = () => {
-    if (index < tutorialData.length) {
+    if (index < tutorialData.length - 1) {
       setIndex((prevIndex) => prevIndex += 1);
-      setStep(tutorialData[index]);
+      setStep(tutorialData[index + 1]);
+    } else {
+      setIndex(index);
+    }
+  };
+  const handlePreviousStep = () => {
+    if (index > 0) {
+      setIndex((prevIndex) => prevIndex -= 1);
+      setStep(tutorialData[index - 1]);
     } else {
       setIndex(index);
     }
@@ -54,8 +62,11 @@ const Tutorial = () => {
   return (
     <TutorialWrapper>
       <TutorialStep {...step} />
-      <Button onClick={handleNextStep}>Krok dalej</Button>
-      <Button onClick={() => console.warn('koniec')}>Zakończ</Button>
+      <ButtonsContainer>
+        <Button onClick={handlePreviousStep}>Wstecz</Button>
+        <Button onClick={handleNextStep}>Dalej</Button>
+        <Button onClick={() => console.warn('koniec')}>Zakończ</Button>
+      </ButtonsContainer>
     </TutorialWrapper>
   );
 };
