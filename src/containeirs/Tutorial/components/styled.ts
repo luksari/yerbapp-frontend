@@ -9,8 +9,20 @@ export const TutorialWrapper = styled.section`
   `}
 `;
 export const ButtonsContainer = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
       display: flex;
-      flex-flow: row wrap;
+      align-self: center;
+      justify-content:space-evenly;
+      margin-top: ${theme.metrics.margin.l};
+  `}
+`;
+export const DescriptionArea = styled.section`
+  ${({ theme }) => css`
+      background: ${theme.colors.mainBackground};
+      padding: ${theme.metrics.padding.m};
+      font-size: ${theme.metrics.fontSize.m};
+      display: grid;
+      width: 750px;
+      align-items: center;
   `}
 `;
