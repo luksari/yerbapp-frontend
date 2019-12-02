@@ -8,3 +8,9 @@ export const TutorialWrapper = styled.section`
       display: grid;
   `}
 `;
+export const ButtonsContainer = styled.div`
+  ${() => css`
+      display: flex;
+      flex-flow: row wrap;
+  `}
+`;
