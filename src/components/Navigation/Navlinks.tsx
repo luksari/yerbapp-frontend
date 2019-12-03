@@ -1,73 +1,55 @@
 import React from 'react';
 import {
-  SidebarList, SidebarItem, SidebarLink, SidebarText,
+  NavList, NavLink, NavItem, NavIcon, NavText,
 } from 'components/Navigation/styled';
-import { Icon } from 'antd';
 
-const Navlinks = () => {
+
+const NavNavLinks = () => {
   return (
-    <SidebarList>
-      <SidebarItem>
-        <SidebarLink to="/">
-          <Icon type="home" />
-          <br />
-          <SidebarText>
-            Strona główna
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
+    <NavList>
+      <NavItem>
+        <NavLink to="/">
+          <NavIcon type="home" />
+          <NavText>Strona główna</NavText>
+        </NavLink>
+      </NavItem>
 
-      <SidebarItem>
-        <SidebarLink to="/tutorial">
-          <Icon type="book" />
-          <br />
-          <SidebarText>
-            Poradnik
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
+      <NavItem>
+        <NavLink to="/tutorial">
+          <NavIcon type="book" />
+          <NavText>Poradnik</NavText>
+        </NavLink>
+      </NavItem>
 
-      <SidebarItem>
-        <SidebarLink to="/explore">
-          <Icon type="search" />
-          <br />
-          <SidebarText>
-            Przeglądaj
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
+      <NavItem>
+        <NavLink to="/explore">
+          <NavIcon type="search" />
+          <NavText>Przeglądaj</NavText>
+        </NavLink>
+      </NavItem>
 
-      <SidebarItem>
-        <SidebarLink to="/about">
-          <Icon type="star" />
-          <br />
-          <SidebarText>
-            O nas
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
+      <NavItem>
+        <NavLink to="/about">
+          <NavIcon type="star" />
+          <NavText>Autorzy</NavText>
+        </NavLink>
+      </NavItem>
 
-      <SidebarItem>
-        <SidebarLink to="/profile">
-          <Icon type="profile" />
-          <br />
-          <SidebarText>
-            Profil
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
+      <NavItem>
+        <NavLink to="/profile">
+          <NavIcon type="profile" />
+          <NavText>Profil</NavText>
+        </NavLink>
+      </NavItem>
 
-      <SidebarItem>
-        <SidebarLink to="/contact">
-          <Icon type="phone" />
-          <br />
-          <SidebarText>
-            Kontakt
-          </SidebarText>
-        </SidebarLink>
-      </SidebarItem>
-    </SidebarList>
+      <NavItem>
+        <NavLink to="/contact">
+          <NavIcon type="phone" />
+          <NavText>Kontakt</NavText>
+        </NavLink>
+      </NavItem>
+    </NavList>
   );
 };
 
-export default Navlinks;
+export default NavNavLinks;

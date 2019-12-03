@@ -1,86 +1,67 @@
 import styled from 'styled-components';
+import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 export const NavSection = styled.nav`
-        margin: 0;
-        display: grid;
+    display: block;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-color: #202020;
+    cursor:pointer;
+    transition:width .3s ease;
+
+    &:hover {
+      width:220px;
+    }
+    @media screen and (min-width: 600px) {
+      width: 80px;
+    }
     `;
 
-export const Sidebar = styled.div`
-        width: 270px;
-        background: ${({ theme }) => theme.colors.primary};
-        border-right-style: solid;
-        border-width: 1px;
-        border-color: ${({ theme }) => theme.colors.mainText};
-
-        @media (max-width: 1400px)
-        {
-          width: 230px;
-        }
-        @media (max-width: 700px)
-        {
-          width: 150px;
-        }
-        @media (max-width: 400px)
-        {
-          width: 80px;
-        }
+export const NavLink = styled(Link)`
     `;
 
-export const SidebarTitle = styled.h2`
-        margin: 0;
-        color: ${({ theme }) => theme.colors.mainText};
-        padding-top: ${({ theme }) => theme.metrics.padding.l};
-        padding-bottom: ${({ theme }) => theme.metrics.padding.l};
-        font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-        font-family: 'Montserrat', sans-serif;
-        text-align: center;
-
-        @media (max-width: 1400px)
-        {
-          font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-        }
-        @media (max-width: 700px)
-        {
-          font-size: ${({ theme }) => theme.metrics.fontSize.l};
-        }
-        @media (max-width: 400px)
-        {
-          font-size: ${({ theme }) => theme.metrics.fontSize.m};
-        }
+export const NavList = styled.ul`
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+    display:block;
     `;
 
-export const SidebarList = styled.ul`
-        padding: 0;
+export const NavItem = styled.li`
+    font-family: 'Montserrat', sans-serif;
+    white-space: pre;
+
+    a{
+      padding 20px;
+      position: relative;
+      display:inline-block;
+      color:white;
+      width: 100%;
+
+      &:hover{
+        background-color: #718090;
+        color: white;
+      }
+    }
     `;
 
-export const SidebarItem = styled.li`
-        line-height: 1;
+export const NavIcon = styled(Icon)`
+      font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+      width:30px;
+      height:30px;
+      cursor:pointer;
+      @media screen and(min-width:600px) {
+        width:32px;
     `;
 
-export const SidebarLink = styled(Link)`
-        font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-        color: ${({ theme }) => theme.colors.mainText};
-        display: block;
-        padding: ${({ theme }) => theme.metrics.padding.xs};
-        text-align: center;
-        font-family: 'Montserrat', sans-serif;
+export const NavText = styled.a`
+      display:block;
+      margin-left:20px;
+      height:100%;
+      font-size: ${({ theme }) => theme.metrics.fontSize.m};
 
-        &:hover {
-          color: ${({ theme }) => theme.colors.labelText};
-        }
-    `;
-
-export const SidebarText = styled.p`
-        padding-top: ${({ theme }) => theme.metrics.padding.xs};
-        font-size: ${({ theme }) => theme.metrics.fontSize.l};
-
-        @media (max-width: 700px)
-        {
-            font-size: ${({ theme }) => theme.metrics.fontSize.m};
-        }
-        @media (max-width: 400px)
-        {
-            font-size:0;
-        }
     `;
