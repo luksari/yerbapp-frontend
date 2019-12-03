@@ -19,7 +19,7 @@ export const AuthenticatedRoute: FC<Props> = ({
   <Route
     {...rest}
     render={(props) => {
-      let content: any = <Component {...props} authorized={!canBeGuest} />;
+      let content: any = <Component {...props} />;
       if (!canBeGuest && !localStorage.getItem('token')) {
         return <Redirect to="/login" />;
       }
