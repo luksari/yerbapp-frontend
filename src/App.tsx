@@ -14,7 +14,7 @@ const App: FC = () => {
   return (
     <Wrapper>
       <Navbar />
-      {/* <AppRouter /> */}
+      <AppRouter />
     </Wrapper>
   );
 };
