@@ -14,7 +14,11 @@ export const AppLayout: FC<Props> = ({
     <>
       <Navbar />
       <StyledAppLayout>
-        <Topbar />
+        <Topbar
+          handleLogout={() => {
+            localStorage.removeItem('token');
+          }}
+        />
         <ComponentWrapper>
           {children}
         </ComponentWrapper>
