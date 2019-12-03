@@ -7,11 +7,11 @@ const Wrapper = styled('div')`
 `;
 
 const NoMatchPage = () => {
-    return (
-        <Wrapper>
-            <p>No Match</p>
-        </Wrapper>
-    )
-}
+  return (
+    <Wrapper>
+      <p>No Match</p>
+    </Wrapper>
+  );
+};
 
 export default NoMatchPage;
