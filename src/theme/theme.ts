@@ -2,6 +2,7 @@
 export const theme = {
   colors: {
     primaryText: '#0F1A20',
+    primaryTextDarken: '#0A141A',
     alternativeText: '#FFFFFF',
     labelText: '#424B54',
     disabledText: '#93A8AC',

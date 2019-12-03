@@ -15,7 +15,6 @@ import App from './App';
 import configureStore from './store/configureStore';
 import { theme } from './theme/theme';
 import { GRAPHQL_URL } from './config/uri';
-
 import 'antd/dist/antd.css';
 import 'react-notifications-component/dist/theme.css';
 
