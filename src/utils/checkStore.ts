@@ -14,7 +14,6 @@ export default function checkStore(store: any) {
     runSaga: isFunction,
     subscribe: isFunction,
   };
-  console.warn('Store schema', store);
   invariant(
     conformsTo(store, shape),
     '(app/utils...) injectors: Expected a valid redux store',
