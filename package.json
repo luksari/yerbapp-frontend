@@ -31,7 +31,7 @@
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
     "emotion-theming": "^10.0.19",
-    "eslint": "6.x",
+    "eslint": "^6.7.1",
     "eslint-config-react-app": "^5.0.2",
     "eslint-loader": "3.0.2",
     "eslint-plugin-flowtype": "3.x",
@@ -102,14 +102,14 @@
     "test": "node scripts/test.js",
     "lint": "npm run lint:js",
     "lint:css": "stylelint './app/**/*.js'",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "lint-staged": {
     "*.(js|ts|tsx)": [
-      "npm run lint:eslint:fix",
+      "npm run lint:fix",
       "git add --force"
     ],
     "*.json": [
