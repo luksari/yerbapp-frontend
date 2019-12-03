@@ -6,6 +6,7 @@ export const StyledAppLayout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  margin-left: 235px;
 `;
 
 export const StyledAuthLayout = styled(StyledAppLayout)`
