@@ -1,25 +1,23 @@
 import styled, { css } from 'styled-components';
-/** @see Example usage of styled component styling */
+import { Button } from 'components/Button';
+
 export const TutorialWrapper = styled.section`
   ${({ theme }) => css`
-      background: ${theme.colors.mainBackground};
       padding: ${theme.metrics.padding.m};
       font-size: ${theme.metrics.fontSize.m};
-      display: grid;
-      border: solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       height: 750px;
   `}
 `;
+
+export const StyledButton = styled(Button)`
+  margin: 10px;
+`;
 export const ButtonsContainer = styled.div`
   ${() => css`
-      width: 400px;
       display: flex;
-      flex-direction: row;
-      align-itself: center;
-      justify-content: space-evenly;
-      margin: auto;
-      position: absolute:
-      height: 90px;
       bottom: 0;
   `}
 `;
@@ -30,7 +28,7 @@ export const DescriptionArea = styled.div`
       font-size: ${theme.metrics.fontSize.m};
       display: grid;
       width: 750px;
-      height: 200px;
+      height: 150px;
       margin-bottom: ${theme.metrics.margin.s};
       margin-top: ${theme.metrics.margin.s};
   `}
