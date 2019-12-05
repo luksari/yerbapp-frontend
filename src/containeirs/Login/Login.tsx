@@ -14,7 +14,7 @@ interface Props {
   setLoginBegin: (values: LoginFormData) => void;
 }
 
-const RegisterRaw: FC<Props> = ({
+const LoginRaw: FC<Props> = ({
   setLoginBegin,
 }) => {
   useInjectReducer({ key: name, reducer });
@@ -43,4 +43,4 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,
-)(RegisterRaw);
+)(LoginRaw);

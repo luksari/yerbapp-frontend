@@ -1,21 +1,26 @@
 import React, { FC } from 'react';
-import { Button } from 'antd';
+import { TitleBar } from 'components/TitleBar';
+import { Button, ButtonType } from 'components/Button';
+import { Link } from 'react-router-dom';
 import { StyledTopbar } from './styled';
 
 interface TopbarProps {
   handleLogout: VoidFunction;
-  title: string;
-  isLoggedIn: boolean;
+  isAuthenticated?: boolean;
 }
 
 export const Topbar: FC<TopbarProps> = ({
-  title,
   handleLogout,
+  isAuthenticated,
 }) => {
   return (
     <StyledTopbar>
-      {title}
-      <Button onClick={handleLogout} />
+      <TitleBar />
+      {
+        isAuthenticated
+          ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
+          : <Button themeType={ButtonType.Link}><Link to="/login">Zaloguj się</Link></Button>
+      }
     </StyledTopbar>
   );
 };

@@ -1,10 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
-import React, { useState } from 'react';
-import { Button } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { ButtonType } from 'components/Button';
 import { TutorialStepModel } from './types';
-import { TutorialWrapper, ButtonsContainer } from './components/styled';
+import { TutorialWrapper, ButtonsContainer, StyledButton } from './styled';
 import { TutorialStep } from './components/TutorialStep';
 
 
@@ -47,7 +46,6 @@ const Tutorial = () => {
   const handleNextStep = () => {
     if (index < tutorialData.length - 1) {
       setIndex((prevIndex) => prevIndex += 1);
-      setStep(tutorialData[index + 1]);
     } else {
       setIndex(index);
     }
@@ -55,21 +53,21 @@ const Tutorial = () => {
   const handlePreviousStep = () => {
     if (index > 0) {
       setIndex((prevIndex) => prevIndex -= 1);
-      setStep(tutorialData[index - 1]);
     } else {
       setIndex(index);
     }
   };
 
+  useEffect(() => {
+    setStep(tutorialData[index]);
+  }, [index]);
+
   return (
     <TutorialWrapper>
       <TutorialStep {...step} />
       <ButtonsContainer>
-        <Button onClick={handlePreviousStep}>Wstecz</Button>
-        <Button onClick={handleNextStep}>Dalej</Button>
-        <Button>
-          <Link to="/">Zakończ</Link>
-        </Button>
+        <StyledButton themeType={ButtonType.Primary} onClick={handlePreviousStep}>Wstecz</StyledButton>
+        <StyledButton themeType={ButtonType.Primary} onClick={handleNextStep}>Dalej</StyledButton>
       </ButtonsContainer>
     </TutorialWrapper>
   );

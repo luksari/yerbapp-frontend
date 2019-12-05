@@ -1,16 +1,24 @@
 
 export const theme = {
   colors: {
-    mainText: '#0F1A20',
+    primaryText: '#0F1A20',
+    primaryTextDarken: '#0A141A',
     alternativeText: '#FFFFFF',
     labelText: '#424B54',
     disabledText: '#93A8AC',
     disabledBackground: '#EDF4ED',
     danger: '#F42C04',
+    dangerHover: '#F84927',
     warning: '#FF9F1C',
+    warningHover: '#FFB044',
     decorators: '#E8E9F3 ',
+    shadow: '#B9BDC8 ',
     primary: '#9BC53D',
+    primaryHover: '#A8CE54',
     alternative: '#2E933C',
+    alternativeHover: '#479F53',
+    info: '#257FE6',
+    infoHover: '#458DDF',
     mainBackground: '#FFFFFF',
   },
   metrics: {

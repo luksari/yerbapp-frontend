@@ -1,15 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 
-const Wrapper = styled('div')`
-
-`;
-
-const Explore = () => {
+const Explore: FC = () => {
   return (
-    <Wrapper>
-      <p>The Explore Page</p>
-    </Wrapper>
+    <div>
+        Lets explore Yerba Mate!
+    </div>
   );
 };
 
