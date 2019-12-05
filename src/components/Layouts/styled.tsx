@@ -11,10 +11,6 @@ export const StyledAppLayout = styled.div`
 
 export const StyledAuthLayout = styled(StyledAppLayout)`
   margin: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
   background: url('./assets/yapp_bg.png');
   background-position: 50% 50%;
   background-repeat: no-repeat;
