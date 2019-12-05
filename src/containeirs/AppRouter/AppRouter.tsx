@@ -14,7 +14,7 @@ export const AppRouter: FC = () => {
   return (
     <Switch>
       <AuthenticatedRoute exact path="/" component={Home} layout={AppLayout} canBeGuest />
-      <AuthenticatedRoute exact path="/tutorial" component={Tutorial} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute exact path="/tutorial" component={Tutorial} layout={AppLayout} />
       <AuthenticatedRoute exact path="/about" component={About} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute exact path="/explore" component={Explore} layout={AppLayout} canBeGuest />
       <LayoutRoute exact path="/login" component={Login} layout={AuthLayout} />
