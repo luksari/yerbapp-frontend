@@ -1,17 +1,24 @@
 import React, { FC } from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch } from 'react-router';
 import { Login } from 'containeirs/Login';
-import Register from 'containeirs/Register/Register';
-import AuthenticatedRoute from 'components/Routes/AuthenticatedRoute';
-import { Layout } from 'containeirs/Layout';
-import Home from 'containeirs/Home/Home';
+import { Register } from 'containeirs/Register';
+import { AppLayout } from 'components/Layouts';
+import { AuthLayout } from 'components/Layouts/AuthLayout';
+import { AuthenticatedRoute, LayoutRoute } from 'components/Routes';
+import { Tutorial } from 'containeirs/Tutorial';
+import { About } from 'containeirs/About';
+import { Home } from 'containeirs/Home';
+import { Explore } from 'containeirs/Explore';
 
 export const AppRouter: FC = () => {
   return (
     <Switch>
-      <AuthenticatedRoute exact path="/" component={Home} layout={Layout} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
+      <AuthenticatedRoute exact path="/" component={Home} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute exact path="/tutorial" component={Tutorial} layout={AppLayout} />
+      <AuthenticatedRoute exact path="/about" component={About} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute exact path="/explore" component={Explore} layout={AppLayout} canBeGuest />
+      <LayoutRoute exact path="/login" component={Login} layout={AuthLayout} />
+      <LayoutRoute exact path="/register" component={Register} layout={AuthLayout} />
     </Switch>
   );
 };

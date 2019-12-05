@@ -87,7 +87,7 @@ export const Wrapper = styled.div<{ notificationType: NotificationType }>`
   width: 100%;
   position: relative;
   background: ${({ theme }) => theme.colors.mainBackground};
-  color: ${({ theme }) => theme.colors.mainText};
+  color: ${({ theme }) => theme.colors.primaryText};
   font-size: 13px;
   padding: 1em 48px 1em 1.5em;
   border-radius: 4px;

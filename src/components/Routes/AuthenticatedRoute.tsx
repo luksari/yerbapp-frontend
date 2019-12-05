@@ -2,6 +2,7 @@ import React, {
   FC, ReactType, ComponentType,
 } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router';
+import { LayoutRoute } from './LayoutRoute';
 
 interface Props extends RouteProps {
   layout?: ReactType;
@@ -9,7 +10,7 @@ interface Props extends RouteProps {
   component: ComponentType<any>;
 }
 
-const AuthenticatedRoute: FC<Props> = ({
+export const AuthenticatedRoute: FC<Props> = ({
   layout: Layout,
   component: Component,
   canBeGuest,
@@ -18,16 +19,14 @@ const AuthenticatedRoute: FC<Props> = ({
   <Route
     {...rest}
     render={(props) => {
-      let content: any = <Component {...props} authorized={!canBeGuest} />;
+      let content: any = <Component {...props} />;
       if (!canBeGuest && !localStorage.getItem('token')) {
         return <Redirect to="/login" />;
       }
 
       if (Layout) {
         content = (
-          <Layout>
-            <Component {...props} authorized={!canBeGuest} />
-          </Layout>
+          <LayoutRoute component={Component} layout={Layout} />
         );
       }
 
@@ -35,5 +34,3 @@ const AuthenticatedRoute: FC<Props> = ({
     }}
   />
 );
-
-export default AuthenticatedRoute;

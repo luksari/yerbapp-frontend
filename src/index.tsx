@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
+import React, { ReactType } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ApolloClient from 'apollo-boost';
@@ -27,24 +27,34 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('root');
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ApolloHooksProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <NotificationGlobalStyles />
-            <Notifications />
-            <App />
-          </ConnectedRouter>
-        </Provider>
-      </ThemeProvider>
-    </ApolloHooksProvider>
-  </ApolloProvider>,
-  MOUNT_NODE,
-);
+const render = (RootComponent: ReactType) => {
+  // eslint-disable-next-line react/no-render-return-value
+  return ReactDOM.render(
+    <ApolloProvider client={client}>
+      <ApolloHooksProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <ConnectedRouter history={history}>
+              <NotificationGlobalStyles />
+              <Notifications />
+              <RootComponent />
+            </ConnectedRouter>
+          </Provider>
+        </ThemeProvider>
+      </ApolloHooksProvider>
+    </ApolloProvider>,
+    MOUNT_NODE,
+  );
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+render(App);
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    // eslint-disable-next-line global-require
+    const NextApp = require('./App').default;
+    render(NextApp);
+  });
+}
+
 serviceWorker.unregister();
