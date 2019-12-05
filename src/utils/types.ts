@@ -10,3 +10,8 @@ export interface DatedMessage {
   body: string;
   time: Date;
 }
+
+export interface SelectableItem {
+  value: string | number;
+  label: string;
+}

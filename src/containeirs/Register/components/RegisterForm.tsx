@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import {
-  useFormik,
   FormikConfig,
+  Formik,
 } from 'formik';
-import {
-  Typography, Button, Input,
-} from 'antd';
-import { StyledForm } from 'components/Form/styled';
+import { FormCard, FormTitle } from 'components/Form/styled';
 import { Link } from 'react-router-dom';
+import { FormField } from 'components/Form/components/FormField';
+import { Button, ButtonType } from 'components/Button';
+import { Input } from 'components/Input';
 import { RegisterFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<RegisterFormData> {
@@ -15,50 +15,78 @@ interface OwnFormProps extends FormikConfig<RegisterFormData> {
 }
 export const RegisterForm: FC<OwnFormProps> = ({
   title,
-  validate,
   onSubmit,
   initialValues,
 }) => {
-  const { handleChange, values, handleSubmit } = useFormik({
-    validate,
-    initialValues,
-    onSubmit,
-  });
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <Typography.Title level={2}>
-        {title}
-      </Typography.Title>
-      {/** @todo Extract each input to separate component that can be handled by formik
-        * @todo Add error message in InputField component
-        * @todo Prepare FormField to be reusable with every type of input, Select, Textarea, Checkbox, Radiogroup, TextInpuy
-        */}
-      <div>
-        <label htmlFor="email" id="email">Adres email:</label>
-        <Input type="email" name="email" onChange={handleChange} value={values.email} />
-      </div>
-
-      <div>
-        <label htmlFor="username" id="username">Nazwa użytkownika:</label>
-        <Input type="text" name="username" onChange={handleChange} value={values.username} />
-      </div>
-
-      <div>
-        <label htmlFor="password" id="password">Hasło:</label>
-        <Input type="password" name="password" autoComplete="new-password" onChange={handleChange} value={values.password} />
-      </div>
-
-      <div>
-        <label htmlFor="password" id="repeatPassword">Powtórz hasło:</label>
-        <Input type="password" name="repeatPassword" autoComplete="new-password" onChange={handleChange} value={values.repeatPassword} />
-      </div>
-
-      <Button type="primary" htmlType="submit">
-        Zarejestruj się
-      </Button>
-      <Button type="link" htmlType="button">
-        <Link to="/login">Masz już konto? Zaloguj się!</Link>
-      </Button>
-    </StyledForm>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+    >
+      {({ handleChange, handleSubmit, values }) => (
+        <FormCard
+          onSubmit={handleSubmit}
+        >
+          <FormTitle>{title}</FormTitle>
+          <FormField
+            label="Adres email"
+            name="email"
+            component={Input}
+            value={values.email}
+            fullWidth
+            type="email"
+            props={{
+              placeholder: 'np. jan@dwa.pl',
+              onChange: handleChange,
+              autoComplete: 'new-email',
+            }}
+          />
+          <FormField
+            label="Nazwa użytkownika:"
+            name="username"
+            component={Input}
+            value={values.username}
+            fullWidth
+            props={{
+              placeholder: 'Twoja nazwa użytkownika',
+              onChange: handleChange,
+              autoComplete: 'new-login',
+            }}
+          />
+          <FormField
+            label="Hasło:"
+            name="password"
+            component={Input}
+            value={values.password}
+            type="password"
+            fullWidth
+            props={{
+              placeholder: 'Wpisz hasło...',
+              onChange: handleChange,
+              autoComplete: 'new-password',
+            }}
+          />
+          <FormField
+            label="Powtórz hasło:"
+            name="repeatPassword"
+            component={Input}
+            value={values.repeatPassword}
+            type="password"
+            fullWidth
+            props={{
+              placeholder: 'Powtórz swoje hasło...',
+              onChange: handleChange,
+              autoComplete: 'new-password',
+            }}
+          />
+          <Button themeType={ButtonType.Primary} type="submit">
+      Zaloguj się
+          </Button>
+          <Button themeType={ButtonType.Link} type="button">
+            <Link to="/login">Masz już konto? Zaloguj się!</Link>
+          </Button>
+        </FormCard>
+      )}
+    </Formik>
   );
 };

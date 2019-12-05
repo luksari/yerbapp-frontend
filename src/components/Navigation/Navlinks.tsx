@@ -1,55 +1,49 @@
 import React from 'react';
 import {
-  NavList, NavLink, NavItem, NavIcon, NavText,
+  NavList, NavLink, NavItem, NavIcon, NavText, StyledLogo, LogoLink, AppTitle,
 } from 'components/Navigation/styled';
 
 
-const NavNavLinks = () => {
+export const NavLinks = () => {
   return (
-    <NavList>
-      <NavItem>
-        <NavLink to="/">
-          <NavIcon type="home" />
-          <NavText>Strona główna</NavText>
-        </NavLink>
-      </NavItem>
+    <>
+      <LogoLink to="/">
+        <StyledLogo />
+        <AppTitle>
+Yerb
+          <span>App</span>
+        </AppTitle>
+      </LogoLink>
+      <NavList>
+        <NavItem>
+          <NavLink to="/">
+            <NavIcon type="home" />
+            <NavText>Strona główna</NavText>
+          </NavLink>
+        </NavItem>
 
-      <NavItem>
-        <NavLink to="/tutorial">
-          <NavIcon type="book" />
-          <NavText>Poradnik</NavText>
-        </NavLink>
-      </NavItem>
+        <NavItem>
+          <NavLink to="/tutorial">
+            <NavIcon type="book" />
+            <NavText>Poradnik</NavText>
+          </NavLink>
+        </NavItem>
 
-      <NavItem>
-        <NavLink to="/explore">
-          <NavIcon type="search" />
-          <NavText>Przeglądaj</NavText>
-        </NavLink>
-      </NavItem>
+        <NavItem>
+          <NavLink to="/explore">
+            <NavIcon type="search" />
+            <NavText>Przeglądaj</NavText>
+          </NavLink>
+        </NavItem>
 
-      <NavItem>
-        <NavLink to="/about">
-          <NavIcon type="star" />
-          <NavText>Autorzy</NavText>
-        </NavLink>
-      </NavItem>
+        <NavItem>
+          <NavLink to="/about">
+            <NavIcon type="star" />
+            <NavText>Autorzy</NavText>
+          </NavLink>
+        </NavItem>
+      </NavList>
+    </>
 
-      <NavItem>
-        <NavLink to="/profile">
-          <NavIcon type="profile" />
-          <NavText>Profil</NavText>
-        </NavLink>
-      </NavItem>
-
-      <NavItem>
-        <NavLink to="/contact">
-          <NavIcon type="phone" />
-          <NavText>Kontakt</NavText>
-        </NavLink>
-      </NavItem>
-    </NavList>
   );
 };
-
-export default NavNavLinks;

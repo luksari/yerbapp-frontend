@@ -1,67 +1,100 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from 'assets/logo.svg';
 
 export const NavSection = styled.nav`
-    display: block;
-    height: 100%;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    background-color: #202020;
-    cursor:pointer;
-    transition:width .3s ease;
+  max-width: 235px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  z-index: 1;
+  background-color:  ${({ theme }) => theme.colors.primaryText} ;
+  align-items: center;
+  box-shadow: 10px 0px 10px -5px ${({ theme }) => theme.colors.shadow};
+  position: fixed;
+`;
 
-    &:hover {
-      width:220px;
-    }
-    @media screen and (min-width: 600px) {
-      width: 80px;
-    }
-    `;
+export const StyledLogo = styled(Logo)`
+  width: 50%;
+  height: auto;
+`;
 
-export const NavLink = styled(Link)`
-    `;
+export const LogoLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: ${({ theme }) => theme.metrics.padding.xl};
+  background: ${({ theme }) => theme.colors.primaryTextDarken};
+  & span {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
 
+export const AppTitle = styled.h1`
+  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+  margin: 0;
+  color: ${({ theme }) => theme.colors.alternativeText};
+  font-weight: 700;
+`;
+
+
+export const StyledAppTitle = styled.h1`
+  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+  color: ${({ theme }) => theme.colors.alternativeText};
+`;
 export const NavList = styled.ul`
-    padding: 0;
-    list-style-type: none;
-    text-decoration: none;
-    display:block;
-    `;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  display:block;
+`;
 
 export const NavItem = styled.li`
-    font-family: 'Montserrat', sans-serif;
-    white-space: pre;
-
-    a{
-      padding 20px;
-      position: relative;
-      display:inline-block;
-      color:white;
-      width: 100%;
-
-      &:hover{
-        background-color: #718090;
-        color: white;
-      }
-    }
-    `;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  &::after{
+    width: 80%;
+    content: '';
+    display: block;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primaryTextDarken};
+  }
+`;
 
 export const NavIcon = styled(Icon)`
-      font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-      width:30px;
-      height:30px;
-      cursor:pointer;
-      @media screen and(min-width:600px) {
-        width:32px;
-    `;
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  width: 100%;
+`;
 
-export const NavText = styled.a`
-      display:block;
-      margin-left:20px;
-      height:100%;
-      font-size: ${({ theme }) => theme.metrics.fontSize.m};
+export const NavText = styled.p`
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
+  color: ${({ theme }) => theme.colors.alternativeText};
+  font-weight: 500;
+  margin: ${({ theme }) => theme.metrics.margin.m};
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+`;
 
-    `;
+export const NavLink = styled(Link)`
+  width: 100%;
+  height: 150px;
+  color: ${({ theme }) => theme.colors.alternativeText};
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  ${({ theme }) => css`
+    padding: ${theme.metrics.padding.xxl} ${theme.metrics.padding.xl};
+    &:hover {
+      background: ${theme.colors.primaryTextDarken}
+      color: ${theme.colors.info}
+      ${NavText} {
+        color: ${theme.colors.info}
+      }
+    }
+  `}`;
