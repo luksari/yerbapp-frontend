@@ -1,23 +1,21 @@
 import React, { FC } from 'react';
 import { ButtonType, Button } from 'components/Button';
 import { Link } from 'react-router-dom';
-import Logo from 'components/Logo/Logo';
+import { Logo } from 'components/Logo/Logo';
 import {
-  Wrapper, LeftSide, RightSide, NoMatchAltLoader, NoMatchLoader, NoMatchAppTitle, LogoNameContainer, Text404, TextMessage,
+  Wrapper, LeftSide, RightSide, NoMatchAltLoader, NoMatchLoader, NoMatchAppTitle, LogoLink, Text404, TextMessage,
 } from './styled';
 
 const NoMatch: FC = () => {
   return (
     <Wrapper>
       <LeftSide>
-        <Link to="/">
-          <LogoNameContainer>
-            <Logo />
-            <NoMatchAppTitle>
+        <LogoLink to="/">
+          <Logo />
+          <NoMatchAppTitle>
               YerbApp
-            </NoMatchAppTitle>
-          </LogoNameContainer>
-        </Link>
+          </NoMatchAppTitle>
+        </LogoLink>
         <Text404>
             404
         </Text404>
