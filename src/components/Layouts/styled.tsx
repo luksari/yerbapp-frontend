@@ -44,3 +44,10 @@ export const ComponentWrapper = styled.div`
 export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
 `;
+
+export const HomepageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
