@@ -1,33 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
-import { ReactComponent as Logo } from 'assets/logo.svg';
-import { Button } from 'components/Button';
-
-const pulse = keyframes`
-    0% {
-     transform: scale(1);
-    }
-    50% {
-     transform: scale(1.1);
-    }
-    100% {
-    transform: scale(1);
-    }
-`;
-
-const pulseFade = keyframes`
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0;
-      transform: scale(1.45);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(3);
-    }
-`;
+import styled, { css } from 'styled-components';
+import { StyledLoader, StyledAltLoader } from 'components/Loader/styled';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -44,6 +16,8 @@ export const LeftSide = styled.div`
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+    align-items: center;
+    justify-content: center;
   `}
 `;
 
@@ -59,57 +33,57 @@ export const RightSide = styled.div`
   `}
 `;
 
-export const NoMatchLoader = styled(Logo)`
+export const NoMatchLoader = styled(StyledLoader)`
   width: 350px;
   height: 350px;
-  position: absolute;
-  animation: ${pulse} 2s infinite;
-  z-index: 1;
 `;
 
-export const NoMatchAltLoader = styled(Logo)`
+export const NoMatchAltLoader = styled(StyledAltLoader)`
   width: 350px;
   height: 350px;
-  position: absolute;
-  animation: ${pulseFade} 2s infinite;
-  z-index: 0;
-`;
-
-export const NoMatchLogo = styled(Logo)`
-  width: 60px;
-  height: 60px;
-  align-self: center;
 `;
 
 export const NoMatchAppTitle = styled.h1`
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
-  color: ${({ theme }) => theme.colors.alternative};
+  color: ${({ theme }) => theme.colors.primaryText};
   font-weight: 700;
-  text-align: center;
-
+  padding: ${({ theme }) => theme.metrics.padding.s};
+  margin: 0;
 `;
 
-export const NoMatchText = styled.h1`
-  font-size: ${({ theme }) => theme.metrics.fontSize.xxl};
+export const Text404 = styled.h1`
+  font-size: ${({ theme }) => theme.metrics.fontSize.xxxl};
   color: ${({ theme }) => theme.colors.alternative};
-  font-weight: 700;
+  font-weight: 750;
   text-align: center;
-  margin-top: 200px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 0;
+  margin-bottom:0;
+  padding-left: ${({ theme }) => theme.metrics.padding.xxl};
+`;
+
+export const TextMessage = styled.h2`
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  color: ${({ theme }) => theme.colors.primaryText};
+  font-weight: 550;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin-bottom: ${({ theme }) => theme.metrics.margin.xl};
+  padding-right: ${({ theme }) => theme.metrics.padding.xxl};
 `;
 
 export const LogoNameContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  position: flex-start;
-  width: 150px;
-  height: 150px;
+  flex-direction: row;
+  align-self: flex-start;
+  justify-self: start;
+  width: 180px;
+  height: 50px;
   justify-content: center;
   align-items: center;
   margin: ${({ theme }) => theme.metrics.margin.s};
-`;
-
-export const RedirectButton = styled(Button)`
-  margin: ${({ theme }) => theme.metrics.margin.xl};
-  align-self: center;
-  background: ${({ theme }) => theme.colors.primaryText};
 `;

@@ -44,11 +44,3 @@ export const ComponentWrapper = styled.div`
 export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
 `;
-
-export const StyledNoMatchLayout = styled.div`
-  margin: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
