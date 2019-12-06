@@ -1,12 +1,28 @@
 import React, { FC } from 'react';
-import { Image, ImageSection, ImageText } from './styled';
+import { Link } from 'react-router-dom';
+import { ButtonType } from 'components/Button';
+import {
+  Wrapper, Main, Image, ImageText, HomeFooter, SubMain, ExploreButton, HomeTopbar,
+} from './styled';
 
 const Home: FC = () => {
   return (
-    <ImageSection>
-      <Image src="img/background/HomeBG.jpg" alt="Test" />
-      <ImageText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae repudiandae repellat illo magni eligendi cupiditate voluptates eius nam voluptate. Incidunt nihil ullam quae quia officia quaerat, deserunt eligendi explicabo totam?</ImageText>
-    </ImageSection>
+    <Wrapper>
+      <HomeTopbar
+        handleLogout={() => {
+          localStorage.removeItem('token');
+        }}
+      />
+      <Main>
+        <Image src="img/background/HomeBG.jpg" alt="Background Yerba image" />
+        <SubMain>
+          <ImageText>A czy Ty znalazłeś </ImageText>
+          <ImageText> już swoją yerbę? </ImageText>
+          <Link to="/explore"><ExploreButton themeType={ButtonType.Secondary}>Eksploruj!</ExploreButton></Link>
+        </SubMain>
+      </Main>
+      <HomeFooter />
+    </Wrapper>
   );
 };
 
