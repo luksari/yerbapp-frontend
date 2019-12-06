@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { StyledLoader, StyledAltLoader } from 'components/Loader/styled';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -10,15 +11,15 @@ export const Wrapper = styled.div`
 `;
 
 export const LeftSide = styled.div`
-  ${({ theme }) => css`
-    background: ${theme.colors.mainBackground};
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
+    flex-wrap: wrap;
     flex: 1;
-    align-items: center;
     justify-content: center;
-  `}
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 `;
 
 export const RightSide = styled.div`
@@ -30,6 +31,8 @@ export const RightSide = styled.div`
     background: ${theme.colors.primary};
     align-items: center;
     justify-content: center;
+    height: 100%;
+
   `}
 `;
 
@@ -47,6 +50,8 @@ export const NoMatchAppTitle = styled.h1`
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
   color: ${({ theme }) => theme.colors.primaryText};
   font-weight: 700;
+  align-self: center;
+  justify-self: center;
   padding: ${({ theme }) => theme.metrics.padding.s};
   margin: 0;
 `;
@@ -55,13 +60,9 @@ export const Text404 = styled.h1`
   font-size: ${({ theme }) => theme.metrics.fontSize.xxxl};
   color: ${({ theme }) => theme.colors.alternative};
   font-weight: 750;
+  line-height: ${({ theme }) => theme.metrics.fontSize.xxxl};
   text-align: center;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  margin: 0;
   margin-bottom:0;
-  padding-left: ${({ theme }) => theme.metrics.padding.xxl};
 `;
 
 export const TextMessage = styled.h2`
@@ -71,19 +72,16 @@ export const TextMessage = styled.h2`
   text-align: center;
   justify-content: center;
   align-items: center;
-  align-self: center;
   margin-bottom: ${({ theme }) => theme.metrics.margin.xl};
-  padding-right: ${({ theme }) => theme.metrics.padding.xxl};
+
 `;
 
-export const LogoNameContainer = styled.div`
+export const LogoLink = styled(Link)`
   display: flex;
   flex-direction: row;
-  align-self: flex-start;
-  justify-self: start;
-  width: 180px;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
   margin: ${({ theme }) => theme.metrics.margin.s};
+  padding: ${({ theme }) => theme.metrics.padding.xxl};
+  left: 0;
+  top: 0;
 `;

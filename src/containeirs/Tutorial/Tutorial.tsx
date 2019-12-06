@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import React, { useState, useEffect } from 'react';
-import { ButtonType } from 'components/Button';
-import { Link, Redirect } from 'react-router-dom';
 import { TutorialStepModel } from './types';
 import { TutorialWrapper, ButtonsContainer, StyledButton } from './styled';
 import { TutorialStep } from './components/TutorialStep';
