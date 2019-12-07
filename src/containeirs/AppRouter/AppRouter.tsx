@@ -9,6 +9,7 @@ import { Tutorial } from 'containeirs/Tutorial';
 import { About } from 'containeirs/About';
 import { Home } from 'containeirs/Home';
 import { Explore } from 'containeirs/Explore';
+import { NoMatch } from 'containeirs/NoMatch';
 
 export const AppRouter: FC = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute exact path="/explore" component={Explore} layout={AppLayout} canBeGuest />
       <LayoutRoute exact path="/login" component={Login} layout={AuthLayout} />
       <LayoutRoute exact path="/register" component={Register} layout={AuthLayout} />
+      <LayoutRoute component={NoMatch} layout={AuthLayout} />
     </Switch>
   );
 };
