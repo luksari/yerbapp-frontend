@@ -45,9 +45,10 @@ export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
 `;
 
-export const HomepageWrapper = styled.div`
+export const HomepageWrapper = styled(ComponentWrapper)`
   width: 100%;
   height: 100%;
-  display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 `;
