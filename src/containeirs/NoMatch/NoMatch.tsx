@@ -1,17 +1,39 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
+import { ButtonType, Button } from 'components/Button';
+import { Link } from 'react-router-dom';
+import { Logo } from 'components/Logo/Logo';
+import {
+  Wrapper, LeftSide, RightSide, NoMatchAltLoader, NoMatchLoader, NoMatchAppTitle, LogoLink, Text404, TextMessage,
+} from './styled';
 
-const Wrapper = styled('div')`
-  width: 80%;
-  float:right;
-`;
-
-const NoMatchPage = () => {
+const NoMatch: FC = () => {
   return (
     <Wrapper>
-      <p>No Match</p>
+      <LeftSide>
+        <LogoLink to="/">
+          <Logo />
+          <NoMatchAppTitle>
+              YerbApp
+          </NoMatchAppTitle>
+        </LogoLink>
+        <Text404>
+            404
+        </Text404>
+        <TextMessage>
+          No nie! Twoja strona nie została znaleziona :(
+        </TextMessage>
+        <Link to="/">
+          <Button themeType={ButtonType.Secondary} type="button">
+              Powrót do strony głównej
+          </Button>
+        </Link>
+      </LeftSide>
+      <RightSide>
+        <NoMatchLoader />
+        <NoMatchAltLoader />
+      </RightSide>
     </Wrapper>
   );
 };
 
-export default NoMatchPage;
+export default NoMatch;
