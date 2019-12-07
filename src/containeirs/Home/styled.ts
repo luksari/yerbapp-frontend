@@ -12,18 +12,17 @@ export const Main = styled.div`
   display: flex;
   justify-content: left;
   position: relative;
+  bottom: ${({ theme }) => theme.metrics.margin.xl};
 `;
+
 export const SubMain = styled.div`
   display: flex;
-  margin-left: ${({ theme }) => theme.metrics.margin.xl};
-  margin-top: ${({ theme }) => theme.metrics.margin.xl};
+  left: ${({ theme }) => theme.metrics.margin.xl};
+  top: ${({ theme }) => theme.metrics.margin.xxl};
   flex-direction: column;
-  align-items: center;
-  background: rgb(255, 255, 255, 0.8);
-  padding: ${({ theme }) => theme.metrics.padding.l};
-  border-radius: 30px;
+  padding: ${({ theme }) => theme.metrics.padding.m};
   position: absolute;
-
+  align-items: center;
 `;
 
 export const Image = styled.img`
@@ -31,17 +30,14 @@ export const Image = styled.img`
   height: auto;
   max-height: 700px;
   margin: 0;
+  background-size: cover;
 `;
 
-export const ImageText = styled.h2`
-  margin-left: ${({ theme }) => theme.metrics.margin.xl};
-  margin-bottom: 0;
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  color: ${({ theme }) => theme.colors.primary};
-  margin: 0;
-
+export const Slogan = styled.h2`
+  font-size: ${({ theme }) => theme.metrics.fontSize.xxl};
+  font-weight: 750;
+  color: ${({ theme }) => theme.colors.alternativeText};
+  width: 900px;
   @media screen and (max-width: 500px){
     font-size: ${({ theme }) => theme.metrics.fontSize.m};
   }
@@ -50,20 +46,12 @@ export const ImageText = styled.h2`
 export const ExploreButton = styled(Button)`
   width:280px;
   height:90px;
-  margin-top: ${({ theme }) => theme.metrics.margin.l};
-  color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  align-items: center;
+  margin: ${({ theme }) => theme.metrics.margin.l};
 
   @media screen and (max-width: 500px){
     width:190px;
     height:45px;
     font-size: ${({ theme }) => theme.metrics.fontSize.l};
   }
-`;
-
-export const NavButton = styled(Button)`
-  display: flex;
-  border: solid;
-  border-color: red;
 `;
