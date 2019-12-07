@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { TitleBar } from 'components/TitleBar';
 import { Button, ButtonType } from 'components/Button';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ interface TopbarProps {
   isAuthenticated?: boolean;
 }
 
-export const Topbar: FC<TopbarProps> = ({
+export const Topbar: FC<TopbarProps> = memo(({
   handleLogout,
   isAuthenticated,
 }) => {
@@ -23,4 +23,4 @@ export const Topbar: FC<TopbarProps> = ({
       }
     </StyledTopbar>
   );
-};
+});

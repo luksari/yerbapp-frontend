@@ -5,7 +5,7 @@ import { actions } from './slice';
 
 export function* setUserSaga(action: PayloadAction<LoginResponse>) {
   yield localStorage.setItem('token', action.payload.access_token);
-  yield localStorage.setItem('userId', action.payload.user_id);
+  yield localStorage.setItem('userId', `${action.payload.user_id}`);
 }
 
 export function* unsetUserSaga() {
