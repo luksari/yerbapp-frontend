@@ -102,7 +102,10 @@
     "lint:fix": "eslint ./src/**/*.{ts,tsx}",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "apollo:download": "yarn run apollo schema:download --endpoint=http://157.230.108.68:3000/graphql graphql-schema.json",
+    "apollo:gen": "yarn run apollo codegen:generate  --endpoint=http://157.230.108.68:3000/graphql --header=\"Authorization:\" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJhZG1pbjEyNCIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNTc1NzMyNzg2LCJleHAiOjE1NzU3NzU5ODZ9.qxqYj5zU1YhtEX8MyV8WCaFQWEjzN-vKg21rllVjxDI --localSchemaFile=graphql-schema.json --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --outputFlat=src/generated",
+    "generate": "graphql-codegen --config codegen.js",
+    "generate:watch": "yarn run generate --watch"
   },
   "lint-staged": {
     "*.(js|ts|tsx)": [
@@ -184,10 +187,13 @@
     ]
   },
   "devDependencies": {
+    "@divyenduz/ts-graphql-plugin": "^0.1.0",
     "@graphql-codegen/cli": "^1.9.1",
-    "@graphql-codegen/typescript": "0.1.0",
-    "@graphql-codegen/typescript-operations": "0.1.0",
-    "@graphql-codegen/typescript-react-apollo": "0.1.0",
+    "@graphql-codegen/introspection": "^1.9.1",
+    "@graphql-codegen/typescript": "^1.9.1",
+    "@graphql-codegen/typescript-operations": "^1.9.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.9.1",
+    "@playlyfe/gql": "^2.6.2",
     "@types/antd": "^1.0.0",
     "@types/invariant": "^2.2.30",
     "@types/jest": "24.0.21",
@@ -216,6 +222,7 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "1.x",
     "eslint-plugin-redux-saga": "^1.1.1",
+    "graphql-config": "^2.2.1",
     "husky": "^3.1.0"
   }
 }
