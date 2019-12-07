@@ -8,14 +8,18 @@ export const HomeContainer = styled.div`
   overflow: hidden;
 `;
 
-export const Main = styled.div`
+export const MainContainer = styled.div`
   display: flex;
-  justify-content: left;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
   position: relative;
-  bottom: ${({ theme }) => theme.metrics.margin.xl};
+  background: url('./assets/bg2.png');
+  background-size: 100% 100%;
+  background-position: center;
 `;
 
-export const SubMain = styled.div`
+export const SloganButtonContainer = styled.div`
   display: flex;
   left: ${({ theme }) => theme.metrics.margin.xl};
   top: ${({ theme }) => theme.metrics.margin.xxl};
@@ -23,14 +27,7 @@ export const SubMain = styled.div`
   padding: ${({ theme }) => theme.metrics.padding.m};
   position: absolute;
   align-items: center;
-`;
-
-export const Image = styled.img`
-  width: 100%;
-  height: auto;
-  max-height: 700px;
-  margin: 0;
-  background-size: cover;
+  justify-content: center;
 `;
 
 export const Slogan = styled.h2`
@@ -38,20 +35,12 @@ export const Slogan = styled.h2`
   font-weight: 750;
   color: ${({ theme }) => theme.colors.alternativeText};
   width: 900px;
-  @media screen and (max-width: 500px){
-    font-size: ${({ theme }) => theme.metrics.fontSize.m};
-  }
 `;
 
 export const ExploreButton = styled(Button)`
-  width:280px;
-  height:90px;
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  margin: ${({ theme }) => theme.metrics.margin.l};
-
-  @media screen and (max-width: 500px){
-    width:190px;
-    height:45px;
-    font-size: ${({ theme }) => theme.metrics.fontSize.l};
-  }
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  padding: 0 ${({ theme }) => theme.metrics.padding.xl};
+  margin: ${({ theme }) => theme.metrics.margin.xl};
+  display: flex;
+  justify-content: center;
 `;
