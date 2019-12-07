@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { watchAuthSaga } from 'store/auth/saga';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_USER_DETAILS } from 'queries/UserQueries';
+import { GET_USER } from 'queries/UserQueries';
 import { StyledAppLayout, ComponentWrapper } from './styled';
 
 interface Props {
@@ -26,7 +26,7 @@ export const AppLayoutRaw: FC<Props> = ({
   userId,
 }) => {
   useInjectSaga({ key: 'auth', saga: watchAuthSaga });
-  const { loading, error, data } = useQuery(GET_USER_DETAILS, { variables: { userId } });
+  const { loading, error, data } = useQuery(GET_USER, { variables: { userId } });
 
   const handleLogout = useCallback(
     () => {
