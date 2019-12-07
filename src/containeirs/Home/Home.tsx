@@ -1,18 +1,22 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonType } from 'components/Button';
+import { Topbar } from 'components/Topbar';
+import { Footer } from 'components/Footer';
 import {
-  Wrapper, Main, Image, ImageText, HomeFooter, SubMain, ExploreButton, HomeTopbar,
+  Main, Image, ImageText, SubMain, ExploreButton, TopbarWrapper, Container, FooterWrapper,
 } from './styled';
 
 const Home: FC = () => {
   return (
-    <Wrapper>
-      <HomeTopbar
-        handleLogout={() => {
-          localStorage.removeItem('token');
-        }}
-      />
+    <Container>
+      <TopbarWrapper>
+        <Topbar
+          handleLogout={() => {
+            localStorage.removeItem('token');
+          }}
+        />
+      </TopbarWrapper>
       <Main>
         <Image src="img/background/HomeBG.jpg" alt="Background Yerba image" />
         <SubMain>
@@ -21,8 +25,10 @@ const Home: FC = () => {
           <Link to="/explore"><ExploreButton themeType={ButtonType.Secondary}>Eksploruj!</ExploreButton></Link>
         </SubMain>
       </Main>
-      <HomeFooter />
-    </Wrapper>
+      <FooterWrapper>
+        <Footer />
+      </FooterWrapper>
+    </Container>
   );
 };
 
