@@ -1,41 +1,40 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button } from 'components/Button';
-import { Footer } from 'components/Footer';
-import { Topbar } from 'components/Topbar';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 `;
 
-export const HomeTopbar = styled(Topbar)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: ${({ theme }) => theme.metrics.padding.l};
-  border: solid;
-  border-color: blue;
+export const TopbarWrapper = styled.div`
 
 `;
 
 export const Main = styled.div`
   display: flex;
-  flex: 6;
+  flex: 7;
   justify-content: left;
+  max-width:100%;
+  max-height:80%;
 `;
 export const SubMain = styled.div`
-  margin-left: ${({ theme }) => theme.metrics.margin.xxl};
-  margin-top: ${({ theme }) => theme.metrics.margin.xxxl};
+  display: flex;
+  margin-left: ${({ theme }) => theme.metrics.margin.xl};
+  margin-top: ${({ theme }) => theme.metrics.margin.xl};
   display: flex;
   flex-direction: column;
-  position: absolute;
   align-items: center;
+  background: rgb(255, 255, 255, 0.8);
+  padding: ${({ theme }) => theme.metrics.padding.l};
+  border-radius: 30px;
+  position: absolute;
+
 `;
 
 export const Image = styled.img`
-  flex: 1;
+  flex:1;
 `;
 
 export const ImageText = styled.h2`
@@ -52,11 +51,12 @@ export const ExploreButton = styled(Button)`
   width:280px;
   height:90px;
   margin-top: ${({ theme }) => theme.metrics.margin.l};
-  color: ${({ theme }) => theme.colors.primary}
+  color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+  align-items: center;
 `;
 
-export const HomeFooter = styled(Footer)`
+export const FooterWrapper = styled.div`
   display: flex;
   flex: 1;
   border: solid;
