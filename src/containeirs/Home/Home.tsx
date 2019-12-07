@@ -1,22 +1,13 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonType } from 'components/Button';
-import { Topbar } from 'components/Topbar';
-import { Footer } from 'components/Footer';
 import {
-  Main, Image, ImageText, SubMain, ExploreButton, TopbarWrapper, Container, FooterWrapper,
+  Main, Image, ImageText, SubMain, ExploreButton, HomeContainer,
 } from './styled';
 
 const Home: FC = () => {
   return (
-    <Container>
-      <TopbarWrapper>
-        <Topbar
-          handleLogout={() => {
-            localStorage.removeItem('token');
-          }}
-        />
-      </TopbarWrapper>
+    <HomeContainer>
       <Main>
         <Image src="img/background/HomeBG.jpg" alt="Background Yerba image" />
         <SubMain>
@@ -25,10 +16,7 @@ const Home: FC = () => {
           <Link to="/explore"><ExploreButton themeType={ButtonType.Secondary}>Eksploruj!</ExploreButton></Link>
         </SubMain>
       </Main>
-      <FooterWrapper>
-        <Footer />
-      </FooterWrapper>
-    </Container>
+    </HomeContainer>
   );
 };
 

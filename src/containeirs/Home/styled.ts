@@ -1,29 +1,22 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Button } from 'components/Button';
 
-export const Container = styled.div`
-  height: 100%;
+export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-`;
-
-export const TopbarWrapper = styled.div`
-
+  overflow: hidden;
 `;
 
 export const Main = styled.div`
   display: flex;
-  flex: 7;
   justify-content: left;
-  max-width:100%;
-  max-height:80%;
+  position: relative;
 `;
 export const SubMain = styled.div`
   display: flex;
   margin-left: ${({ theme }) => theme.metrics.margin.xl};
   margin-top: ${({ theme }) => theme.metrics.margin.xl};
-  display: flex;
   flex-direction: column;
   align-items: center;
   background: rgb(255, 255, 255, 0.8);
@@ -34,7 +27,10 @@ export const SubMain = styled.div`
 `;
 
 export const Image = styled.img`
-  flex:1;
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  margin: 0;
 `;
 
 export const ImageText = styled.h2`
@@ -45,6 +41,10 @@ export const ImageText = styled.h2`
   font-family: 'Montserrat', sans-serif;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
+
+  @media screen and (max-width: 500px){
+    font-size: ${({ theme }) => theme.metrics.fontSize.m};
+  }
 `;
 
 export const ExploreButton = styled(Button)`
@@ -54,15 +54,12 @@ export const ExploreButton = styled(Button)`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.metrics.fontSize.xl};
   align-items: center;
-`;
 
-export const FooterWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  border: solid;
-  border-color: red;
-  justify-content: center;
-  text-align: center;
+  @media screen and (max-width: 500px){
+    width:190px;
+    height:45px;
+    font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  }
 `;
 
 export const NavButton = styled(Button)`
