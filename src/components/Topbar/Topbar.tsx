@@ -2,9 +2,6 @@ import React, { FC } from 'react';
 import { TitleBar } from 'components/TitleBar';
 import { Button, ButtonType } from 'components/Button';
 import { Link } from 'react-router-dom';
-import { makeSelectIsAuthenticated } from 'store/auth/slice';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 import { StyledTopbar } from './styled';
 
 interface TopbarProps {
@@ -12,7 +9,7 @@ interface TopbarProps {
   isAuthenticated?: boolean;
 }
 
-const TopbarRaw: FC<TopbarProps> = ({
+export const Topbar: FC<TopbarProps> = ({
   handleLogout,
   isAuthenticated,
 }) => {
@@ -27,9 +24,3 @@ const TopbarRaw: FC<TopbarProps> = ({
     </StyledTopbar>
   );
 };
-
-const mapStateToProps = createStructuredSelector({
-  isAuthenticated: makeSelectIsAuthenticated(),
-});
-
-export const Topbar = connect(mapStateToProps, null)(TopbarRaw);
