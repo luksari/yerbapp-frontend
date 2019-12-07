@@ -4,7 +4,7 @@ import { LoginResponse } from 'api/AuthApi';
 
 interface AuthSliceState {
   token?: string;
-  userId?: string;
+  userId?: number;
 }
 
 const initialState: AuthSliceState = {
@@ -32,4 +32,9 @@ const selectAuthDomain = (state) => state[name] as AuthSliceState || {};
 export const makeSelectIsAuthenticated = () => createSelector(
   selectAuthDomain,
   (substate) => substate.userId || substate.token || localStorage.getItem('token') !== null,
+);
+
+export const makeSelectUserId = () => createSelector(
+  selectAuthDomain,
+  (substate) => substate.userId || localStorage.getItem('userId'),
 );

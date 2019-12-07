@@ -2,7 +2,7 @@ import { postRequest } from './requests';
 
 export interface LoginResponse {
   access_token: string;
-  user_id: string;
+  user_id: number;
 }
 
 export interface RegisterResponse {

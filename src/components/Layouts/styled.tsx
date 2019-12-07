@@ -31,8 +31,8 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
 `;
 
 export const ComponentWrapper = styled.div`
-  min-height: 80vh;
   display: flex;
+  flex: 1 0 auto;
   justify-content: center;
   align-items: center;
 `;
