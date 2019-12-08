@@ -10,6 +10,8 @@ export const StyledAppLayout = styled.div`
 `;
 
 export const StyledAuthLayout = styled(StyledAppLayout)`
+  width: 100%;
+  height: 100vh;
   margin: 0;
   background: url('./assets/yapp_bg.png');
   background-position: 50% 50%;
@@ -40,4 +42,5 @@ export const ComponentWrapper = styled.div`
 
 export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
+  align-items: center;
 `;

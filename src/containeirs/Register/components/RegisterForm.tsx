@@ -80,7 +80,7 @@ export const RegisterForm: FC<OwnFormProps> = ({
             }}
           />
           <Button themeType={ButtonType.Primary} type="submit">
-      Zaloguj się
+            Zarejestruj się
           </Button>
           <Button themeType={ButtonType.Link} type="button">
             <Link to="/login">Masz już konto? Zaloguj się!</Link>
