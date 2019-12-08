@@ -1,48 +1,28 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-  background-color:  ${({ theme }) => theme.colors.mainBackground} ;
-`;
-
-
-export const FooterMiddle = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0;
-  justify-content: center;
+  flex-wrap: wrap;
 `;
 
-export const Row = styled.div`
+export const FooterBottom = styled.section`
+  padding: ${({ theme }) => theme.metrics.padding.l};
   display: flex;
-  flex-direction: row;
-  margin: 0;
-`;
-
-export const Column1 = styled.div`
   flex: 1;
-  margin: 0;
-  ul{
-      margin: 0;
-      list-style-type: none;
-      text-decoration: none;}
-`;
+  width: 100%;
+  background:  ${({ theme }) => theme.colors.primaryTextDarken};
+  justify-content: center;
+  p {
+    display: inline;
+    margin: ${({ theme }) => theme.metrics.margin.s};
+    font-family: 'Montserrat', sans-serif;
+    font-size: ${({ theme }) => theme.metrics.fontSize.m};
+    color: ${({ theme }) => theme.colors.mainBackground};
+    font-weight: 500;
 
-export const Column2 = styled.div`
-flex:1;
-margin: 0;
-ul{
-  margin: 0;
-      list-style-type: none;
-      text-decoration: none;}
-`;
-
-export const Column3 = styled.div`
-  margin: 0;
-flex:1;
-ul{
-      list-style-type: none;
-      text-decoration: none;}
-`;
-
-export const Bottom = styled.section`
+    a{
+      color: ${({ theme }) => theme.colors.primary};
+    }
+  }
 `;
