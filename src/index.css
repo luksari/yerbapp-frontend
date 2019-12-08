@@ -10,3 +10,16 @@ body {
   background-color: #95e8f3;
   min-height: 100%;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+*{
+  box-sizing: border-box;
+}
