@@ -29,6 +29,7 @@ export const Input: FC<Props> = ({
       value={value}
       onChange={onChange}
       onBlur={onBlur}
+      disabled={rest.disabled}
       {...rest}
       {...meta}
     />

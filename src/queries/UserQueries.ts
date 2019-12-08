@@ -1,14 +1,5 @@
 import { gql } from 'apollo-boost';
 
-export const GET_USER = gql`
-  query getUser($userId:  ID!) {
-    user(userId: $userId) {
-      username,
-      email,
-    }
-  }
-`;
-
 export const GET_ME = gql`
   query getMe {
     whoAmI{
@@ -20,9 +11,18 @@ export const GET_ME = gql`
 
 export const GET_ME_DETAILS = gql`
   query getMeDetails {
-    whoAmI{
+    whoAmI {
       username,
-      email
+      email,
+      role,
+      profile {
+        aromaImportance,
+        tasteImportance,
+        bitternessImportance,
+        priceImportance,
+        energyImportance,
+        overallImportance
+      }
     }
   }
 `;
