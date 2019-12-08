@@ -8,6 +8,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { ThemeProvider } from 'styled-components';
 import { Notifications, NotificationGlobalStyles } from 'components/Notification';
 import { client } from 'utils/configureApollo';
+import { Helmet } from 'react-helmet';
 import { history } from './utils/history';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
@@ -28,6 +29,9 @@ const render = (RootComponent: ReactType) => {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
+            <Helmet titleTemplate="%s - YerbApp" defaultTitle="YerbApp">
+              <meta name="description" content="Find your Yerba Mate" />
+            </Helmet>
             <NotificationGlobalStyles />
             <Notifications />
             <RootComponent />
