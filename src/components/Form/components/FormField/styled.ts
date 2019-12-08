@@ -8,8 +8,6 @@ export const InputWrapper = styled.div<WrapperProps>`
   display: flex;
   max-width: ${({ fullWidth }) => fullWidth ? '100%' : '40%'};
   flex-direction: column;
-  justify-content: flex-start;
-  flex: 0 0 auto;
 `;
 
 export const InputLabel = styled.label`
@@ -43,11 +41,10 @@ export const baseInputStyles = css`
   border-radius: 4px;
   box-shadow: 0 2px 10px -5px ${({ theme }) => theme.colors.shadow};
   min-height: 35px;
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
   line-height: 16px;
   padding: 10px;
   font-weight: 400;
-  width: 100%;
   color: ${({ theme }) => theme.colors.primaryText};
   border: 1px solid transparent;
   outline: 0;
