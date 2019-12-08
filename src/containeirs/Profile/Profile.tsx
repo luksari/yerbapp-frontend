@@ -1,21 +1,33 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useGetMeDetailsQuery } from 'generated/graphql';
-import { ProfileForm } from './components/ProfileForm';
-
-const Wrapper = styled('div')`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  display: flex;
-`;
+import { useGetMeDetailsQuery, useEditUserMutation } from 'generated/graphql';
+import { notificationSuccess, notificationError } from 'components/Notification';
+import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
 const Profile = () => {
-  const { data, loading, error } = useGetMeDetailsQuery();
+  const { data, loading, error: getError } = useGetMeDetailsQuery();
+  const [editUser, { loading: saving }] = useEditUserMutation();
+  console.warn(data);
+  const handleSubmit = async (user: ProfileFormData) => {
+    const userData = {
+      ...user.profile,
+    };
+    try {
+      const { data: editResponse } = await editUser({
+        variables: {
+          user: userData,
+          userId: data.whoAmI.id,
+        },
+      });
+      notificationSuccess({ title: 'Sukces', message: 'Pomyślnie zaktualizowano dane' });
+    } catch {
+      notificationError({ title: 'Wystąpił bład', message: 'Nie udało się zaktualizować danych' });
+    }
+  };
+
   return (
-    <Wrapper>
-      {data && <ProfileForm data={data} loading={loading} /> }
-    </Wrapper>
+    <>
+      {data && <ProfileForm data={data} isLoading={loading} isSaving={saving} onSubmit={handleSubmit} /> }
+    </>
   );
 };
 
