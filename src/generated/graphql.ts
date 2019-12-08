@@ -379,7 +379,7 @@ export type EditUserMutation = (
   { __typename?: 'Mutation' }
   & { editUser: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email'>
+    & Pick<User, 'id' | 'username' | 'email' | 'role'>
     & { profile: (
       { __typename?: 'Profile' }
       & Pick<Profile, 'tasteImportance' | 'aromaImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
@@ -468,6 +468,9 @@ export const EditUserDocument = gql`
     mutation editUser($user: EditUserInput!, $userId: ID!) {
   editUser(user: $user, userId: $userId) {
     id
+    username
+    email
+    role
     profile {
       tasteImportance
       aromaImportance
@@ -476,8 +479,6 @@ export const EditUserDocument = gql`
       energyImportance
       overallImportance
     }
-    username
-    email
   }
 }
     `;
