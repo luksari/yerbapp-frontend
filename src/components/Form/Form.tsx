@@ -16,8 +16,6 @@ interface CustomFormProps<Values extends Record<string, any> = any> {
   subTitle: string;
   /** Title to show in html title and in Topbar */
   title: string;
-  /** Fields and other content included in Form */
-  children: ReactElement[] | ReactElement;
   /** Close handler */
   handleClose: VoidFunction;
   /** Initial Values */
@@ -61,9 +59,6 @@ export const Form: FC<FormProps<any>> = ({
             <StyledForm
               onSubmit={handleSubmit}
             >
-              <FormTitle>
-                {subTitle}
-              </FormTitle>
               {
                 Children.map(children,
                   (child: ReactElement) => cloneElement(child))
