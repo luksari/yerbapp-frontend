@@ -5,15 +5,17 @@ import { StyledAvatar, StyledInitial, AvatarWrapper } from './styled';
 
 interface Props {
   username: string;
+  className?: string;
 }
 
 export const UserAvatar: FC<Props> = ({
   username,
+  className,
 }) => {
   const { firstLetter, secondLetter } = getInitials(username);
   const initialsCode = getInitialsCode(firstLetter, secondLetter);
   return (
-    <AvatarWrapper>
+    <AvatarWrapper className={className}>
       <StyledAvatar role="img" aria-label={`Awatar użytkownika ${username}`} code={initialsCode}>
         <StyledInitial>
           {firstLetter}

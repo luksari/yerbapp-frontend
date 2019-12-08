@@ -2,6 +2,8 @@
 /* eslint-disable no-return-assign */
 import React, { useState, useEffect, useMemo } from 'react';
 import { ButtonType } from 'components/Button';
+import { Title } from 'components/TitleBar';
+import { Helmet } from 'react-helmet';
 import { TutorialStepModel } from './types';
 import { TutorialWrapper, ButtonsContainer, StyledButton } from './styled';
 import { TutorialStep } from './components/TutorialStep';
@@ -67,6 +69,8 @@ const Tutorial = () => {
 
   return (
     <TutorialWrapper>
+      <Helmet title="Poradnik" />
+      <Title>Poradnik</Title>
       <TutorialStep {...step} />
       <ButtonsContainer>
         <StyledButton disabled={isBackDisabled} themeType={ButtonType.Primary} onClick={handlePreviousStep}>Wstecz</StyledButton>

@@ -13,8 +13,8 @@ export const InputWrapper = styled.div<WrapperProps>`
 `;
 
 export const InputLabel = styled.label`
-  font-size: 11px;
-  font-weight: 500;
+  font-size: ${({ theme }) => theme.metrics.fontSize.xs};
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.labelText};
   margin-bottom: 9px;
 `;
@@ -39,7 +39,7 @@ export const AdditionalText = styled.span<InputMessageProps>`
 `;
 
 export const baseInputStyles = css`
-  background: ${({ theme }) => theme.colors.mainBackground};
+  background: ${({ theme }) => theme.colors.disabledBackground};
   border-radius: 4px;
   box-shadow: 0 2px 10px -5px ${({ theme }) => theme.colors.shadow};
   min-height: 35px;
