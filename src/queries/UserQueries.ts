@@ -32,6 +32,9 @@ export const UPDATE_USER = gql`
    mutation editUser($user: EditUserInput!, $userId: ID!) {
     editUser(user: $user, userId: $userId) {
       id,
+      username,
+      email,
+      role,
       profile {
         tasteImportance,
         aromaImportance,
@@ -40,8 +43,6 @@ export const UPDATE_USER = gql`
         energyImportance,
         overallImportance
       },
-      username,
-      email
     }
   }
 `;

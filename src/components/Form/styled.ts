@@ -15,6 +15,7 @@ export const StyledForm = styled.form`
 `;
 
 export const FormCard = styled(StyledForm)`
+    background: ${({ theme }) => theme.colors.mainBackground};
     margin-top: ${({ theme }) => theme.metrics.margin.xl};
     min-width: 460px;
     min-height: 460px;

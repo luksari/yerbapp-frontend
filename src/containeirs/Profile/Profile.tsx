@@ -5,8 +5,10 @@ import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
 const Profile = () => {
   const { data, loading, error: getError } = useGetMeDetailsQuery();
-  const [editUser, { loading: saving }] = useEditUserMutation();
-  console.warn(data);
+  console.warn(loading);
+  const [editUser, { loading: saving }] = useEditUserMutation({
+    optimisticResponse: null,
+  });
   const handleSubmit = async (user: ProfileFormData) => {
     const userData = {
       ...user.profile,

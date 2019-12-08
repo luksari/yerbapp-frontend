@@ -76,6 +76,7 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonT
   justify-content: center;
   align-items: center;
   border: none;
+  min-width: 220px;
   ${({ iconPosition }) => IconPositionMixin(iconPosition)};
 
   svg {

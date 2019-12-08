@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { UserAvatar } from 'components/UserAvatar';
+import { LeftLogo, RightLogo } from 'components/UserAvatar/styled';
 
 export const BigUserAvatar = styled(UserAvatar)`
   margin: ${({ theme }) => theme.metrics.margin.xl} 0;
@@ -7,11 +8,11 @@ export const BigUserAvatar = styled(UserAvatar)`
   width: 200px;
   height: 200px;
   font-size: 110px;
-  &::before{
+  ${LeftLogo}{
     left: -60px;
     top: -60px;
   }
-  &::after{
+  ${RightLogo}{
     right: -60px;
     bottom: -60px;
   }

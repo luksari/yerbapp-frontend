@@ -22,7 +22,7 @@ export const UserTitle = styled.p`
   ${({ theme }) => css`
     font-size: ${theme.metrics.fontSize.s};
     color: ${theme.colors.labelText};
-    margin: 0 ${theme.metrics.margin.xl};
+    margin: 0;
     font-weight: 700;
   `}
 `;
