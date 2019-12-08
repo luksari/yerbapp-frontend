@@ -352,7 +352,29 @@ export type GetUserQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'username'>
+    & Pick<User, 'username' | 'email'>
+  ) }
+);
+
+export type GetMeQueryVariables = {};
+
+
+export type GetMeQuery = (
+  { __typename?: 'Query' }
+  & { whoAmI: (
+    { __typename?: 'User' }
+    & Pick<User, 'username' | 'email'>
+  ) }
+);
+
+export type GetMeDetailsQueryVariables = {};
+
+
+export type GetMeDetailsQuery = (
+  { __typename?: 'Query' }
+  & { whoAmI: (
+    { __typename?: 'User' }
+    & Pick<User, 'username' | 'email'>
   ) }
 );
 
@@ -360,7 +382,8 @@ export type GetUserQuery = (
 export const GetUserDocument = gql`
     query getUser($userId: ID!) {
   user(userId: $userId) {
-    username,
+    username
+    email
   }
 }
     `;
@@ -369,7 +392,7 @@ export const GetUserDocument = gql`
  * __useGetUserQuery__
  *
  * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -390,3 +413,69 @@ export function useGetUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
+export const GetMeDocument = gql`
+    query getMe {
+  whoAmI {
+    username
+    email
+  }
+}
+    `;
+
+/**
+ * __useGetMeQuery__
+ *
+ * To run a query within a React component, call `useGetMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMeQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMeQuery, GetMeQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, baseOptions);
+      }
+export function useGetMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMeQuery, GetMeQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMeQuery, GetMeQueryVariables>(GetMeDocument, baseOptions);
+        }
+export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
+export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
+export type GetMeQueryResult = ApolloReactCommon.QueryResult<GetMeQuery, GetMeQueryVariables>;
+export const GetMeDetailsDocument = gql`
+    query getMeDetails {
+  whoAmI {
+    username
+    email
+  }
+}
+    `;
+
+/**
+ * __useGetMeDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetMeDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMeDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMeDetailsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMeDetailsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMeDetailsQuery, GetMeDetailsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMeDetailsQuery, GetMeDetailsQueryVariables>(GetMeDetailsDocument, baseOptions);
+      }
+export function useGetMeDetailsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMeDetailsQuery, GetMeDetailsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMeDetailsQuery, GetMeDetailsQueryVariables>(GetMeDetailsDocument, baseOptions);
+        }
+export type GetMeDetailsQueryHookResult = ReturnType<typeof useGetMeDetailsQuery>;
+export type GetMeDetailsLazyQueryHookResult = ReturnType<typeof useGetMeDetailsLazyQuery>;
+export type GetMeDetailsQueryResult = ApolloReactCommon.QueryResult<GetMeDetailsQuery, GetMeDetailsQueryVariables>;
