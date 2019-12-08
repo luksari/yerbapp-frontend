@@ -361,10 +361,28 @@ export type GetMeDetailsQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email' | 'role'>
+    & Pick<User, 'id' | 'username' | 'email' | 'role'>
     & { profile: (
       { __typename?: 'Profile' }
       & Pick<Profile, 'aromaImportance' | 'tasteImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
+    ) }
+  ) }
+);
+
+export type EditUserMutationVariables = {
+  user: EditUserInput,
+  userId: Scalars['ID']
+};
+
+
+export type EditUserMutation = (
+  { __typename?: 'Mutation' }
+  & { editUser: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'email'>
+    & { profile: (
+      { __typename?: 'Profile' }
+      & Pick<Profile, 'tasteImportance' | 'aromaImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
     ) }
   ) }
 );
@@ -406,6 +424,7 @@ export type GetMeQueryResult = ApolloReactCommon.QueryResult<GetMeQuery, GetMeQu
 export const GetMeDetailsDocument = gql`
     query getMeDetails {
   whoAmI {
+    id
     username
     email
     role
@@ -445,3 +464,46 @@ export function useGetMeDetailsLazyQuery(baseOptions?: ApolloReactHooks.LazyQuer
 export type GetMeDetailsQueryHookResult = ReturnType<typeof useGetMeDetailsQuery>;
 export type GetMeDetailsLazyQueryHookResult = ReturnType<typeof useGetMeDetailsLazyQuery>;
 export type GetMeDetailsQueryResult = ApolloReactCommon.QueryResult<GetMeDetailsQuery, GetMeDetailsQueryVariables>;
+export const EditUserDocument = gql`
+    mutation editUser($user: EditUserInput!, $userId: ID!) {
+  editUser(user: $user, userId: $userId) {
+    id
+    profile {
+      tasteImportance
+      aromaImportance
+      bitternessImportance
+      priceImportance
+      energyImportance
+      overallImportance
+    }
+    username
+    email
+  }
+}
+    `;
+export type EditUserMutationFn = ApolloReactCommon.MutationFunction<EditUserMutation, EditUserMutationVariables>;
+
+/**
+ * __useEditUserMutation__
+ *
+ * To run a mutation, you first call `useEditUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editUserMutation, { data, loading, error }] = useEditUserMutation({
+ *   variables: {
+ *      user: // value for 'user'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useEditUserMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<EditUserMutation, EditUserMutationVariables>) {
+        return ApolloReactHooks.useMutation<EditUserMutation, EditUserMutationVariables>(EditUserDocument, baseOptions);
+      }
+export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
+export type EditUserMutationResult = ApolloReactCommon.MutationResult<EditUserMutation>;
+export type EditUserMutationOptions = ApolloReactCommon.BaseMutationOptions<EditUserMutation, EditUserMutationVariables>;

@@ -12,7 +12,6 @@ export const StyledForm = styled.form`
     display: grid;
     grid-row-gap: ${({ theme }) => theme.metrics.margin.m};
     padding: ${({ theme }) => theme.metrics.padding.xl};
-    grid-auto-rows: max-content;
 `;
 
 export const FormCard = styled(StyledForm)`

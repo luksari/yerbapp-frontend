@@ -4,9 +4,19 @@ import { AppRouter } from 'containeirs/AppRouter';
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   font-family: 'Montserrat', sans-serif;
+  * {
+    box-sizing: border-box;
+    &::after, &::before {
+      box-sizing: inherit;
+    }
+  }
+  ul {
+
+  }
 `;
 
 const App: FC = () => {

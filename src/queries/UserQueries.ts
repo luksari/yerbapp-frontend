@@ -12,6 +12,7 @@ export const GET_ME = gql`
 export const GET_ME_DETAILS = gql`
   query getMeDetails {
     whoAmI {
+      id,
       username,
       email,
       role,
@@ -23,6 +24,24 @@ export const GET_ME_DETAILS = gql`
         energyImportance,
         overallImportance
       }
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+   mutation editUser($user: EditUserInput!, $userId: ID!) {
+    editUser(user: $user, userId: $userId) {
+      id,
+      profile {
+        tasteImportance,
+        aromaImportance,
+        bitternessImportance,
+        priceImportance,
+        energyImportance,
+        overallImportance
+      },
+      username,
+      email
     }
   }
 `;
