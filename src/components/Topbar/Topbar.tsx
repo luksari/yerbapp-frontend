@@ -11,7 +11,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_USER } from 'queries/UserQueries';
 import { GetUserQueryVariables, GetUserQuery } from 'generated/graphql';
 import { UserAvatar } from 'components/UserAvatar';
-import { Loader } from 'components/Loader';
 import { StyledTopbar } from './styled';
 
 interface TopbarProps {
@@ -25,14 +24,19 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   isAuthenticated,
   userId,
 }) => {
-  const { data } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER, { variables: { userId: userId || '2' }, skip: false });
+  const shouldFetch = !userId;
+  const { data } = useQuery<GetUserQuery, GetUserQueryVariables>(GET_USER, { variables: { userId }, skip: shouldFetch });
   const handleLogout = useCallback(() => { logout(); }, [logout]);
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
 
   return (
     <StyledTopbar>
       <TitleBar />
-      { data && <UserAvatar username={data.user.username} /> }
+      { data && (
+        <Link to="/profile">
+          <UserAvatar username={data.user.username} />
+        </Link>
+      ) }
       {
         isAuthenticatedMemo
           ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
