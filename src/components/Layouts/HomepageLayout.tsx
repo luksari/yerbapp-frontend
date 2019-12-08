@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
-import { Topbar } from 'components/Topbar';
 import { Footer } from 'components/Footer';
+import { HomeTopbar } from 'components/HomeTopbar';
 import { HomepageWrapper } from './styled';
 
 interface Props {
@@ -12,11 +12,7 @@ export const HomepageLayout: FC<Props> = ({
 }) => {
   return (
     <HomepageWrapper>
-      <Topbar
-        handleLogout={() => {
-          localStorage.removeItem('token');
-        }}
-      />
+      <HomeTopbar />
       {children}
       <Footer />
     </HomepageWrapper>
