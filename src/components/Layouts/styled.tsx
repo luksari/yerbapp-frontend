@@ -31,10 +31,7 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
 `;
 
 export const ComponentWrapper = styled.div`
-  display: flex;
-  flex: 1 0 auto;
-  justify-content: center;
-  align-items: center;
+  overflow: scroll;
 `;
 
 export const AuthWrapper = styled(ComponentWrapper)`

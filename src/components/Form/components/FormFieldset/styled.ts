@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
-export const StyledFieldset = styled.fieldset<{ fullWidth?: boolean }>`
-  border: 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.decorators};
-  width: auto;
-  margin: 0;
-  padding: 0;
+export const StyledLegend = styled.h3`
+  width: 100%;
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
+  font-weight: 700;
+  margin: ${({ theme }) => theme.metrics.margin.l} 0;
 `;
 
-export const StyledLegend = styled.h3`
-  margin-top: 19px;
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 30px;
+export const StyledFieldset = styled.div<{ fullWidth?: boolean; columns: number }>`
+  border-top: 1px solid ${({ theme }) => theme.colors.decorators};
+  display: grid;
+  grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
+  justify-content: center;
+  grid-gap: ${({ theme }) => theme.metrics.margin.l};
+  ${StyledLegend} {
+    grid-column-end: ${({ columns }) => `span ${columns}`};
+  }
 `;
