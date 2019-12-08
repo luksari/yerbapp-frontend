@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Form } from 'components/Form';
-import { GetMeDetailsQuery } from 'generated/graphql';
+import { GetMeDetailsQuery, Profile } from 'generated/graphql';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormFieldset } from 'components/Form/components/FormFieldset/FormFieldset';
@@ -8,22 +8,34 @@ import { BigUserAvatar } from './styled';
 
 interface Props {
   data: GetMeDetailsQuery;
-  loading: boolean;
+  isLoading: boolean;
+  onSubmit: (user: ProfileFormData) => void;
+  isSaving: boolean;
 }
 
-export const ProfileForm: React.FC<Props> = ({
+export interface ProfileFormData {
+  id?: string;
+  name?: string;
+  description?: string;
+  role?: string;
+  profile: Partial<Profile>;
+}
+
+export const ProfileForm: FC<Props> = ({
   data,
-  loading,
+  isLoading,
+  onSubmit,
+  isSaving,
 }) => {
   return (
-    <Form
+    <Form<ProfileFormData>
       title="Twój profil"
       subTitle="Edytuj swoje dane"
       initialValues={data.whoAmI}
-      isLoading={loading}
-      isSaving={false}
+      isLoading={isLoading}
+      isSaving={isSaving}
       handleClose={console.warn}
-      onSubmit={console.warn}
+      onSubmit={onSubmit}
     >
       <BigUserAvatar username={data.whoAmI.username} />
       <FormFieldset
@@ -34,6 +46,7 @@ export const ProfileForm: React.FC<Props> = ({
           component={Input}
           label="Email"
           props={{
+            disabled: true,
             placeholder: 'np. jacek@placek.com',
           }}
         />
@@ -42,6 +55,7 @@ export const ProfileForm: React.FC<Props> = ({
           component={Input}
           label="Nazwa użytkownika"
           props={{
+            disabled: true,
             placeholder: 'Twoja nazwa użytkownika...',
           }}
         />
@@ -57,7 +71,7 @@ export const ProfileForm: React.FC<Props> = ({
       </FormFieldset>
       <FormFieldset
         legendTitle="Twoje preferencje"
-        columns={2}
+        columns={3}
         fullWidth
       >
         <FormField
@@ -103,6 +117,15 @@ export const ProfileForm: React.FC<Props> = ({
           type="number"
           props={{
             placeholder: 'Aromat',
+          }}
+        />
+        <FormField
+          name="profile.overallImportance"
+          component={Input}
+          label="Ogólna ocena"
+          type="number"
+          props={{
+            placeholder: 'Ogólna ocena',
           }}
         />
       </FormFieldset>

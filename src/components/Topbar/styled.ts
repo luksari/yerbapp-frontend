@@ -9,6 +9,7 @@ export const StyledTopbar = styled.section`
   justify-content: flex-end;
   align-items: center;
   padding: ${({ theme }) => theme.metrics.padding.xl};
+  max-height: 115px;
 `;
 
 export const UserProfileLink = styled(Link)`

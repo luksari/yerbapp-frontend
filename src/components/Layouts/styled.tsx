@@ -3,7 +3,7 @@ import { transparentize } from 'polished';
 
 export const StyledAppLayout = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   margin-left: 235px;
@@ -31,7 +31,11 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
 `;
 
 export const ComponentWrapper = styled.div`
-  overflow: scroll;
+  overflow-y: scroll;
+  max-height: calc(100vh - 115px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 export const AuthWrapper = styled(ComponentWrapper)`
