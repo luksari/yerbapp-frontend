@@ -1,5 +1,5 @@
 import React, {
-  FC, Children, cloneElement, ReactElement,
+  Children, cloneElement, ReactElement,
 } from 'react';
 import { Button, ButtonType } from 'components/Button';
 import { Helmet } from 'react-helmet';
@@ -48,7 +48,7 @@ export function Form<Values>({
     >
       {
         ({
-          handleSubmit, isValid, isSubmitting, values,
+          handleSubmit, isValid, isSubmitting,
         }) => (
           <FormContainer>
             <Helmet
@@ -68,6 +68,7 @@ export function Form<Values>({
                     icon={<Icon type="save" />}
                     disabled={isSaving || isSubmitting || !isValid}
                     themeType={ButtonType.Primary}
+                    type="submit"
                   >
               Zapisz
                   </Button>

@@ -1,29 +1,30 @@
 import React from 'react';
-import { useGetMeDetailsQuery, useEditUserMutation } from 'generated/graphql';
-import { notificationSuccess, notificationError } from 'components/Notification';
+import {
+  useGetMeDetailsQuery, useEditUserMutation,
+} from 'generated/graphql';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
 const Profile = () => {
-  const { data, loading, error: getError } = useGetMeDetailsQuery();
-  console.warn(loading);
-  const [editUser, { loading: saving }] = useEditUserMutation({
-    optimisticResponse: null,
+  const { data, loading } = useGetMeDetailsQuery({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać danych profilu użytkownika.' }),
   });
+
+  const [editUser, { loading: saving }] = useEditUserMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się zapisć danych profilu użytkownika.' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie zapisano profil użytkownika!' }),
+  });
+
   const handleSubmit = async (user: ProfileFormData) => {
     const userData = {
       ...user.profile,
     };
-    try {
-      const { data: editResponse } = await editUser({
-        variables: {
-          user: userData,
-          userId: data.whoAmI.id,
-        },
-      });
-      notificationSuccess({ title: 'Sukces', message: 'Pomyślnie zaktualizowano dane' });
-    } catch {
-      notificationError({ title: 'Wystąpił bład', message: 'Nie udało się zaktualizować danych' });
-    }
+    await editUser({
+      variables: {
+        user: userData,
+        userId: data.whoAmI.id,
+      },
+    });
   };
 
   return (

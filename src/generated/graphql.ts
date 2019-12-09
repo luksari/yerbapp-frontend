@@ -248,6 +248,8 @@ export type ProductType = {
 export type Profile = {
    __typename?: 'Profile',
   id: Scalars['ID'],
+  rank: Rank,
+  experiencePoints: Scalars['Int'],
   aromaImportance: Scalars['Int'],
   tasteImportance: Scalars['Int'],
   bitternessImportance: Scalars['Int'],
@@ -281,8 +283,20 @@ export type QueryUserArgs = {
 };
 
 
+export type QueryUsersArgs = {
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
 export type QueryReviewArgs = {
   reviewId: Scalars['ID']
+};
+
+
+export type QueryReviewsArgs = {
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
 };
 
 
@@ -291,8 +305,20 @@ export type QueryTypeArgs = {
 };
 
 
+export type QueryProductsArgs = {
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
 export type QueryProductArgs = {
   productId: Scalars['ID']
+};
+
+
+export type QueryManufacturersArgs = {
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
 };
 
 
@@ -336,7 +362,7 @@ export type User = {
   profile: Profile,
   username: Scalars['String'],
   email: Scalars['String'],
-  country: Scalars['String'],
+  country?: Maybe<Scalars['String']>,
   avatarUrl: Scalars['String'],
   role: Scalars['String'],
   reviews?: Maybe<Array<Review>>,
