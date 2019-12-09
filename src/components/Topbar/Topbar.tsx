@@ -2,7 +2,7 @@ import React, {
   FC, memo, useCallback, useMemo,
 } from 'react';
 import { TitleBar } from 'components/TitleBar';
-import { Button, ButtonType } from 'components/Button';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
@@ -41,8 +41,8 @@ const TopbarRaw: FC<TopbarProps> = memo(({
       ) }
       {
         isAuthenticatedMemo
-          ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
-          : <Button themeType={ButtonType.Link}><Link to="/login">Zaloguj się</Link></Button>
+          ? <Button themeType={ButtonType.Link} variant={ButtonVariant.Narrow} onClick={handleLogout}>Wyloguj się</Button>
+          : <Button themeType={ButtonType.Link} variant={ButtonVariant.Narrow}><Link to="/login">Zaloguj się</Link></Button>
       }
     </StyledTopbar>
   );
