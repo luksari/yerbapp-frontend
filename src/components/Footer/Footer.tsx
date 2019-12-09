@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import {
-  FooterContainer, FooterBottom,
+  FooterContainer, FooterMain,
 } from './styled';
 
 
 export const Footer: FC = () => {
   return (
     <FooterContainer>
-      <FooterBottom>
+      <FooterMain>
         <p>
           <a href="https://github.com/luksari/yerbapp-frontend">
             YerbApp
@@ -15,7 +15,7 @@ export const Footer: FC = () => {
           {' '}
       - Copyright ® All rights reserved
         </p>
-      </FooterBottom>
+      </FooterMain>
     </FooterContainer>
   );
 };

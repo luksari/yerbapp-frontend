@@ -52,3 +52,22 @@ export const HomepageWrapper = styled(ComponentWrapper)`
   justify-content: flex-start;
   align-items: stretch;
 `;
+
+export const HomeMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: ${({ theme }) => theme.metrics.margin.l};
+`;
+
+export const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background: url('./assets/bg2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+`;
