@@ -1,7 +1,7 @@
 module.exports = {
   "schema": [
       {
-          "http://157.230.108.68:3000/graphql": {
+          "http://157.230.108.68:4000/graphql": {
               "headers": {
                   "Authorization": "Bearer " + process.env.AUTH_TOKEN
               }

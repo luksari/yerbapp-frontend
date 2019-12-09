@@ -11,3 +11,9 @@ export enum IconPosition {
     Left = 'left',
     Right = 'right'
 }
+
+export enum ButtonVariant {
+  Wide = 'wide',
+  Narrow = 'narrow',
+  Normal = 'normal',
+}
