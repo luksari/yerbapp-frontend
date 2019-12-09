@@ -6,8 +6,8 @@ export const FooterContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const FooterBottom = styled.section`
-  padding: ${({ theme }) => theme.metrics.padding.l};
+export const FooterMain = styled.section`
+  padding: ${({ theme }) => theme.metrics.padding.m};
   display: flex;
   flex: 1;
   width: 100%;
@@ -16,11 +16,9 @@ export const FooterBottom = styled.section`
   p {
     display: inline;
     margin: ${({ theme }) => theme.metrics.margin.s};
-    font-family: 'Montserrat', sans-serif;
-    font-size: ${({ theme }) => theme.metrics.fontSize.m};
+    font-size: ${({ theme }) => theme.metrics.fontSize.s};
     color: ${({ theme }) => theme.colors.mainBackground};
-    font-weight: 500;
-
+    font-weight: 400;
     a{
       color: ${({ theme }) => theme.colors.primary};
     }
