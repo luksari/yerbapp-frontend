@@ -18,7 +18,7 @@ export interface SelectableItem {
 
 export interface ErrorMessage<T> {
   children: any[];
-  constraints: string;
+  constraints: Record<string, any>;
   property: string;
   target: T;
   value: string;

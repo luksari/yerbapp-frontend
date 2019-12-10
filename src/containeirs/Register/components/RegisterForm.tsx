@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { FormField } from 'components/Form/components/FormField';
 import { Button, ButtonType } from 'components/Button';
 import { Input } from 'components/Input';
+import { isEmpty } from 'lodash';
 import { RegisterFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<RegisterFormData> {
@@ -15,17 +16,15 @@ interface OwnFormProps extends FormikConfig<RegisterFormData> {
 }
 export const RegisterForm: FC<OwnFormProps> = ({
   title,
-  onSubmit,
-  initialValues,
+  ...rest
 }) => {
   return (
     <Formik
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-
+      {...rest}
+      validateOnMount
     >
       {({
-        handleChange, handleSubmit, values,
+        handleChange, handleSubmit, values, errors,
       }) => (
         <FormCard
           onSubmit={handleSubmit}
@@ -82,7 +81,7 @@ export const RegisterForm: FC<OwnFormProps> = ({
               autoComplete: 'new-password',
             }}
           />
-          <Button themeType={ButtonType.Primary} type="submit">
+          <Button disabled={!isEmpty(errors)} themeType={ButtonType.Primary} type="submit">
             Zarejestruj się
           </Button>
           <Button themeType={ButtonType.Link} type="button">
