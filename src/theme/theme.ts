@@ -36,6 +36,8 @@ export const theme = {
       m: '15px',
       l: '20px',
       xl: '35px',
+      xxl: '70px',
+      xxxl: '120px',
     },
     padding: {
       s: '5px',
