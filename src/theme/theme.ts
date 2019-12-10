@@ -29,6 +29,7 @@ export const theme = {
       l: '1.8rem',
       xl: '2.7rem',
       xxl: '4rem',
+      xxxl: '15rem',
     },
     margin: {
       s: '5px',
