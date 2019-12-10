@@ -4,6 +4,7 @@ import { GetMeDetailsQuery, Profile } from 'generated/graphql';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormFieldset } from 'components/Form/components/FormFieldset/FormFieldset';
+import { Rating } from 'components/Rating';
 import { BigUserAvatar } from './styled';
 
 interface Props {
@@ -37,6 +38,7 @@ export const ProfileForm: FC<Props> = ({
       handleClose={console.warn}
       onSubmit={onSubmit}
     >
+      {(values) => console.warn(values)}
       <BigUserAvatar username={data.whoAmI.username} />
       <FormFieldset
         legendTitle="Twoje dane"
@@ -74,59 +76,29 @@ export const ProfileForm: FC<Props> = ({
         columns={3}
         fullWidth
       >
-        <FormField
-          name="profile.aromaImportance"
-          component={Input}
+        <Rating
           label="Aromat"
-          type="number"
-          props={{
-            placeholder: 'Aromat...',
-          }}
+          name="profile.aromaImportance"
         />
-        <FormField
-          name="profile.bitternessImportance"
-          component={Input}
+        <Rating
           label="Gorycz"
-          type="number"
-          props={{
-            placeholder: 'Aromat',
-          }}
+          name="profile.bitternessImportance"
         />
-        <FormField
-          name="profile.energyImportance"
-          component={Input}
+        <Rating
           label="Pobudzenie"
-          type="number"
-          props={{
-            placeholder: 'Aromat',
-          }}
+          name="profile.energyImportance"
         />
-        <FormField
-          name="profile.priceImportance"
-          component={Input}
+        <Rating
           label="Cena"
-          type="number"
-          props={{
-            placeholder: 'Aromat',
-          }}
+          name="profile.priceImportance"
         />
-        <FormField
-          name="profile.tasteImportance"
-          component={Input}
+        <Rating
           label="Smak"
-          type="number"
-          props={{
-            placeholder: 'Aromat',
-          }}
+          name="profile.tasteImportance"
         />
-        <FormField
-          name="profile.overallImportance"
-          component={Input}
+        <Rating
           label="Ogólna ocena"
-          type="number"
-          props={{
-            placeholder: 'Ogólna ocena',
-          }}
+          name="profile.overallImportance"
         />
       </FormFieldset>
     </Form>
