@@ -2,6 +2,10 @@ import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import {
   AsyncStatus, ErrorModel,
 } from 'utils/types';
+import {
+  chain, pick,
+} from 'lodash';
+import { ErrorMap } from 'utils/errors';
 import { RegisterFormData } from './types';
 /* eslint-disable no-param-reassign */
 
@@ -45,8 +49,13 @@ export const makeSelectError = () => createSelector(
 
 export const makeSelectMappedErrors = () => createSelector(
   makeSelectError(),
-  (errorResponse) => errorResponse && errorResponse.response.message && errorResponse.response.message.map((msg) => {
-    console.warn(msg);
-    return msg;
-  }),
+  (errorResponse) => {
+    if (errorResponse && errorResponse.response.message) {
+      return chain(errorResponse.response.message)
+        .keyBy('property')
+        .mapValues((property) => pick(ErrorMap, Object.keys(property.constraints)))
+        .value();
+    }
+    return null;
+  },
 );
