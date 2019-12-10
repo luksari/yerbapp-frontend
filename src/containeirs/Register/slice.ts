@@ -1,17 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AsyncStatus } from 'utils/types';
+import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
+import {
+  AsyncStatus, ErrorModel,
+} from 'utils/types';
 import { RegisterFormData } from './types';
 /* eslint-disable no-param-reassign */
 
 export interface RegisterSliceState {
   status: AsyncStatus;
-  error: string;
+  errorResponse: ErrorModel<RegisterFormData>;
   data: RegisterFormData;
 }
 
 export const initialState: RegisterSliceState = {
   status: AsyncStatus.Unset,
-  error: '',
+  errorResponse: undefined,
   data: null,
 };
 
@@ -26,9 +28,25 @@ export const { name, actions, reducer } = createSlice({
     setRegisterSuccess(state) {
       state.status = AsyncStatus.Success;
     },
-    setRegisterFailed(state, action: PayloadAction<string>) {
+    setRegisterFailed(state, action: PayloadAction<ErrorModel<RegisterFormData>>) {
       state.status = AsyncStatus.Error;
-      state.error = action.payload;
+      state.errorResponse = action.payload;
     },
   },
 });
+
+const makeSelectDomain = (state) => state[name] as RegisterSliceState;
+
+export const makeSelectError = () => createSelector(
+  makeSelectDomain,
+  (substate) => substate.errorResponse,
+);
+
+
+export const makeSelectMappedErrors = () => createSelector(
+  makeSelectError(),
+  (errorResponse) => errorResponse && errorResponse.response.message && errorResponse.response.message.map((msg) => {
+    console.warn(msg);
+    return msg;
+  }),
+);
