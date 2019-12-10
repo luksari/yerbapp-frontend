@@ -15,3 +15,22 @@ export interface SelectableItem {
   value: string | number;
   label: string;
 }
+
+export interface ErrorMessage<T> {
+  children: any[];
+  constraints: string;
+  property: string;
+  target: T;
+  value: string;
+}
+export interface ErrorResponse<T> {
+  statusCode: number;
+  error: string;
+  message: ErrorMessage<T>[];
+}
+
+export interface ErrorModel<T> {
+  statusText: string;
+  response: ErrorResponse<T>;
+  status: number;
+}

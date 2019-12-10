@@ -22,8 +22,11 @@ export const RegisterForm: FC<OwnFormProps> = ({
     <Formik
       onSubmit={onSubmit}
       initialValues={initialValues}
+
     >
-      {({ handleChange, handleSubmit, values }) => (
+      {({
+        handleChange, handleSubmit, values,
+      }) => (
         <FormCard
           onSubmit={handleSubmit}
         >
