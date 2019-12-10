@@ -20,6 +20,10 @@ export const { name, actions, reducer } = createSlice({
       state.token = action.payload.access_token;
       state.userId = action.payload.user_id;
     },
+    unsetUser(state) {
+      state.token = undefined;
+      state.userId = undefined;
+    },
   },
 });
 
@@ -27,5 +31,5 @@ const selectAuthDomain = (state) => state[name] as AuthSliceState || {};
 
 export const makeSelectIsAuthenticated = () => createSelector(
   selectAuthDomain,
-  (substate) => substate.userId && substate.token && localStorage.getItem('token') !== undefined,
+  (substate) => substate.userId || substate.token || localStorage.getItem('token') !== null,
 );
