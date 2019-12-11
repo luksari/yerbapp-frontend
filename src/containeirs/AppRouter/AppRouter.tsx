@@ -15,7 +15,7 @@ import { Card } from 'components/Card/Card';
 export const AppRouter: FC = () => {
   return (
     <Switch>
-      <AuthenticatedRoute exact path="/card" component={Card} canBeGuest />
+      <AuthenticatedRoute exact path="/card" component={Card} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute exact path="/" component={Home} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute exact path="/tutorial" component={Tutorial} layout={AppLayout} />
       <AuthenticatedRoute exact path="/about" component={About} layout={AppLayout} canBeGuest />
