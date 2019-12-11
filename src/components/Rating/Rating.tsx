@@ -25,7 +25,7 @@ export const Rating: FC<Props> = ({ name, label }) => {
   return (
     <InputWrapper>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <StyledRating onChange={handleValueChange} onClick={handleValueChange} initialRating={value} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} />
+      <StyledRating onChange={handleValueChange} onClick={handleValueChange} initialRating={value} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>
   );
 };

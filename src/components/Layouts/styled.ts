@@ -6,7 +6,7 @@ export const StyledAppLayout = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 235px;
+  margin-left: ${({ theme }) => theme.metrics.width.sidebarWidth};
 `;
 
 export const StyledAuthLayout = styled(StyledAppLayout)`
