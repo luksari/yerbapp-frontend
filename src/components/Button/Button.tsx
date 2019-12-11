@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, MouseEvent } from 'react';
 import { ButtonBox } from './styled';
-import { ButtonType, IconPosition } from './types';
+import { ButtonType, IconPosition, ButtonVariant } from './types';
 
 
 interface ButtonProps {
@@ -12,6 +12,7 @@ interface ButtonProps {
   iconPosition?: IconPosition;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  variant?: ButtonVariant;
 }
 type AllButtonProps = ButtonProps & React.HTMLProps<HTMLButtonElement>
 
@@ -24,6 +25,7 @@ export const Button: FC<AllButtonProps> = ({
   children,
   className,
   type,
+  variant = ButtonVariant.Normal,
 }) => (
   <ButtonBox
     themeType={themeType}
@@ -32,6 +34,7 @@ export const Button: FC<AllButtonProps> = ({
     iconPosition={iconPosition}
     className={className}
     type={type}
+    variant={variant}
   >
     {icon}
     {children}

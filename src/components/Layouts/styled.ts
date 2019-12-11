@@ -3,13 +3,15 @@ import { transparentize } from 'polished';
 
 export const StyledAppLayout = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 235px;
+  margin-left: ${({ theme }) => theme.metrics.width.sidebarWidth};
 `;
 
 export const StyledAuthLayout = styled(StyledAppLayout)`
+  width: 100%;
+  height: 100vh;
   margin: 0;
   background: url('./assets/yapp_bg.png');
   background-position: 50% 50%;
@@ -31,19 +33,22 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
 `;
 
 export const ComponentWrapper = styled.div`
-  min-height: 80vh;
+  overflow-y: scroll;
+  max-height: calc(100vh - 115px);
   display: flex;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
 `;
 
 export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
+  align-items: center;
 `;
 
-export const HomepageWrapper = styled(ComponentWrapper)`
+export const HomepageWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
@@ -52,7 +57,6 @@ export const HomepageWrapper = styled(ComponentWrapper)`
 export const HomeMain = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: ${({ theme }) => theme.metrics.margin.l};
 `;
 
 export const HomeContainer = styled.div`

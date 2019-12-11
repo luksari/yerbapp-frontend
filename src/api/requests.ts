@@ -1,4 +1,4 @@
-import { SERVER_URL } from 'config/uri';
+import { SERVER_URL } from 'config/url';
 
 export class HttpError extends Error {
   constructor(

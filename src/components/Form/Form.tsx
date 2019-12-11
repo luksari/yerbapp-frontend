@@ -1,5 +1,5 @@
 import React, {
-  FC, Children, cloneElement, ReactElement,
+  Children, cloneElement, ReactElement,
 } from 'react';
 import { Button, ButtonType } from 'components/Button';
 import { Helmet } from 'react-helmet';
@@ -9,15 +9,13 @@ import {
 } from 'formik';
 import { Title } from 'components/TitleBar';
 import {
-  FormContainer, StyledForm, FormTitle, FormActionsWrapper, ButtonsWrapper,
+  FormContainer, StyledForm, FormActionsWrapper, ButtonsWrapper,
 } from './styled';
 
 interface CustomFormProps<Values extends Record<string, any> = any> {
   subTitle: string;
   /** Title to show in html title and in Topbar */
   title: string;
-  /** Fields and other content included in Form */
-  children: ReactElement[] | ReactElement;
   /** Close handler */
   handleClose: VoidFunction;
   /** Initial Values */
@@ -33,16 +31,15 @@ interface CustomFormProps<Values extends Record<string, any> = any> {
 
 type FormProps<Values> = CustomFormProps<Values> & FormikConfig<Values>
 
-export const Form: FC<FormProps<any>> = ({
+export function Form<Values>({
   title,
   children,
   handleClose,
-  subTitle,
   initialValues,
   onSubmit,
   validate,
   isSaving,
-}) => {
+}: FormProps<Values>) {
   return (
     <Formik
       initialValues={initialValues}
@@ -51,7 +48,7 @@ export const Form: FC<FormProps<any>> = ({
     >
       {
         ({
-          handleSubmit, isValid, isSubmitting, values,
+          handleSubmit, isValid, isSubmitting,
         }) => (
           <FormContainer>
             <Helmet
@@ -61,36 +58,33 @@ export const Form: FC<FormProps<any>> = ({
             <StyledForm
               onSubmit={handleSubmit}
             >
-              <FormTitle>
-                {subTitle}
-              </FormTitle>
               {
                 Children.map(children,
                   (child: ReactElement) => cloneElement(child))
               }
-            </StyledForm>
-            <FormActionsWrapper>
-              <ButtonsWrapper>
-                <Button
-                  icon={<Icon type="save" />}
-                  disabled={isSaving || isSubmitting || !isValid}
-                  type="submit"
-                  themeType={ButtonType.Primary}
-                  onClick={() => handleSubmit(values)}
-                >
+              <FormActionsWrapper>
+                <ButtonsWrapper>
+                  <Button
+                    icon={<Icon type="save" />}
+                    disabled={isSaving || isSubmitting || !isValid}
+                    themeType={ButtonType.Primary}
+                    type="submit"
+                  >
               Zapisz
-                </Button>
-                <Button
-                  themeType={ButtonType.Link}
-                  onClick={handleClose}
-                >
+                  </Button>
+                  <Button
+                    themeType={ButtonType.Link}
+                    onClick={handleClose}
+                    type="button"
+                  >
               Zamknij
-                </Button>
-              </ButtonsWrapper>
-            </FormActionsWrapper>
+                  </Button>
+                </ButtonsWrapper>
+              </FormActionsWrapper>
+            </StyledForm>
           </FormContainer>
         )
       }
     </Formik>
   );
-};
+}

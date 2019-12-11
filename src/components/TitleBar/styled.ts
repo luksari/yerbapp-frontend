@@ -2,13 +2,10 @@ import styled from 'styled-components';
 
 export const TitleBarWrapper = styled.div`
   font-size: 1rem;
-  background: ${({ theme }) => theme.colors.mainBackground};
-  color: ${({ theme }) => theme.colors.primaryText};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primaryText};
-
   display: grid;
-  grid-template-columns: 1.5fr 3fr 1.5fr;
   align-items: center;
+  justify-self: flex-start;
+  margin-right: auto;
 `;
 
 export const TitleBarTitle = styled.h1`
@@ -16,6 +13,7 @@ export const TitleBarTitle = styled.h1`
   grid-column-end: 3;
   text-align: center;
   margin: 0;
-  font-weight: 500;
-  font-size: 21px;
+  font-weight: 700;
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  color: ${({ theme }) => theme.colors.labelText};
 `;

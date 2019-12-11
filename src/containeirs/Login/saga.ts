@@ -19,7 +19,7 @@ export function* loginSaga({ payload }: PayloadAction<LoginFormData>) {
       title: 'Sukces',
       message: 'Zalogowano pomyślnie!',
     });
-    yield put(push('/'));
+    yield put(push('/explore'));
   } catch (error) {
     console.error(error);
     yield put(actions.setLoginFailed(error));
@@ -32,7 +32,7 @@ export function* loginSaga({ payload }: PayloadAction<LoginFormData>) {
 
 function* setTokenSaga(action: PayloadAction<LoginResponse>) {
   yield localStorage.setItem('token', action.payload.access_token);
-  yield localStorage.setItem('userId', action.payload.user_id);
+  yield localStorage.setItem('userId', `${action.payload.user_id}`);
 }
 
 export function* watchLoginSaga() {
