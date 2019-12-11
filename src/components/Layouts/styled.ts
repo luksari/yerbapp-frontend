@@ -44,3 +44,30 @@ export const AuthWrapper = styled(ComponentWrapper)`
   min-height: 100%;
   align-items: center;
 `;
+
+export const HomepageWrapper = styled(ComponentWrapper)`
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+`;
+
+export const HomeMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: ${({ theme }) => theme.metrics.margin.l};
+`;
+
+export const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background: url('./assets/bg2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+`;

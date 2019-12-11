@@ -29,12 +29,15 @@ export const theme = {
       l: '1.8rem',
       xl: '2.7rem',
       xxl: '4rem',
+      xxxl: '15rem',
     },
     margin: {
       s: '5px',
       m: '15px',
       l: '20px',
       xl: '35px',
+      xxl: '70px',
+      xxxl: '120px',
     },
     padding: {
       s: '5px',
