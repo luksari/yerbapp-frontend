@@ -1,14 +1,22 @@
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
-import { Title } from 'components/TitleBar';
+import { Link } from 'react-router-dom';
+import { ButtonType } from 'components/Button';
+import {
+  Slogan, HomeContainer, ExploreButton,
+} from './styled';
 
 const Home: FC = () => {
   return (
-    <div>
-      <Helmet title="Strona główna" />
-      <Title>Strona główna</Title>
-        Homepage
-    </div>
+    <HomeContainer>
+      <Slogan>
+       Świat yerba mate stoi przed Tobą otworem
+      </Slogan>
+      <Link to="/explore">
+        <ExploreButton themeType={ButtonType.Secondary}>
+          Zobacz!
+        </ExploreButton>
+      </Link>
+    </HomeContainer>
   );
 };
 
