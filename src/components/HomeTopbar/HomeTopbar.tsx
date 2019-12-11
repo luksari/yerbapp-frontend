@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import { Button, ButtonType } from 'components/Button';
-import { Link } from 'react-router-dom';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Logo } from 'components/Logo';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
 import { connect } from 'react-redux';
 import { StyledLink } from 'containeirs/Home/styled';
 import {
-  StyledHomeTopbar, HomeAppTitle, LogoTitleContainer,
+  StyledHomeTopbar, HomeAppTitle, LogoTitleContainer, ActionWrapper,
 } from './styled';
 
 interface Props {
@@ -30,16 +29,28 @@ export const HomeTopbarRaw: FC<Props> = ({
           </span>
         </HomeAppTitle>
       </LogoTitleContainer>
-      <StyledLink to="/login">
-        <Button themeType={ButtonType.Primary}>
+      {
+        isAuthenticated ? (
+          <>
+            <Button themeType={ButtonType.Primary} onClick={() => logout()}>
+          Wyloguj się
+            </Button>
+          </>
+        ) : (
+          <ActionWrapper>
+            <StyledLink to="/login">
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>
           Zaloguj się
-        </Button>
-      </StyledLink>
-      <StyledLink to="/register">
-        <Button themeType={ButtonType.Primary}>
+              </Button>
+            </StyledLink>
+            <StyledLink to="/register">
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>
           Zarejestruj się
-        </Button>
-      </StyledLink>
+              </Button>
+            </StyledLink>
+          </ActionWrapper>
+        )
+      }
     </StyledHomeTopbar>
   );
 };
