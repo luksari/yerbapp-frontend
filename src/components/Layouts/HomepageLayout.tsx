@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Footer } from 'components/Footer';
 import { HomeTopbar } from 'components/HomeTopbar';
-import { HomepageWrapper, HomeMain, HomeContainer } from './styled';
+import { HomepageWrapper, HomeContainer } from './styled';
 
 interface Props {
   children: ReactNode;
@@ -14,9 +14,7 @@ export const HomepageLayout: FC<Props> = ({
     <HomepageWrapper>
       <HomeContainer>
         <HomeTopbar />
-        <HomeMain>
-          {children}
-        </HomeMain>
+        {children}
       </HomeContainer>
       <Footer />
     </HomepageWrapper>
