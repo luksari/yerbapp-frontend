@@ -7,6 +7,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "plugins": [
+      {
+        "name": "@divyenduz/ts-graphql-plugin"
+      }
+    ],
     "noImplicitAny": false,
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,5 +27,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["src/generated/graphql-global-types.ts", "node_modules"]
 }

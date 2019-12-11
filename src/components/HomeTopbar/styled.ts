@@ -4,7 +4,7 @@ export const StyledHomeTopbar = styled.section`
   background: transparent;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: ${({ theme }) => theme.metrics.padding.m};
 `;
@@ -19,12 +19,11 @@ export const HomeAppTitle = styled.h1`
   margin: 0;
   display: flex;
   flex-direction: row;
-`;
-
-export const HomeAppTitleGreen = styled(HomeAppTitle)`
-  color: ${({ theme }) => theme.colors.primary};
-  padding: 0;
-  margin: 0;
+  span {
+    color: ${({ theme }) => theme.colors.primary};
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 export const LogoTitleContainer = styled.div`
@@ -32,5 +31,13 @@ export const LogoTitleContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  align-self: flex-start;
+  margin-right: auto;
   padding: ${({ theme }) => theme.metrics.padding.s};
+`;
+
+export const ActionWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
 `;

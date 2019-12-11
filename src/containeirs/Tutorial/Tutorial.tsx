@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ButtonType } from 'components/Button';
+import { Title } from 'components/TitleBar';
+import { Helmet } from 'react-helmet';
 import { TutorialStepModel } from './types';
 import { TutorialWrapper, ButtonsContainer, StyledButton } from './styled';
 import { TutorialStep } from './components/TutorialStep';
@@ -62,12 +64,17 @@ const Tutorial = () => {
     setStep(tutorialData[index]);
   }, [index]);
 
+  const isBackDisabled = useMemo(() => index === 0, [index]);
+  const isNextDisabled = useMemo(() => index === tutorialData.length - 1, [index]);
+
   return (
     <TutorialWrapper>
+      <Helmet title="Poradnik" />
+      <Title>Poradnik</Title>
       <TutorialStep {...step} />
       <ButtonsContainer>
-        <StyledButton themeType={ButtonType.Primary} onClick={handlePreviousStep}>Wstecz</StyledButton>
-        <StyledButton themeType={ButtonType.Primary} onClick={handleNextStep}>Dalej</StyledButton>
+        <StyledButton disabled={isBackDisabled} themeType={ButtonType.Primary} onClick={handlePreviousStep}>Wstecz</StyledButton>
+        <StyledButton disabled={isNextDisabled} themeType={ButtonType.Primary} onClick={handleNextStep}>Dalej</StyledButton>
       </ButtonsContainer>
     </TutorialWrapper>
   );
