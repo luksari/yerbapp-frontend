@@ -19,12 +19,11 @@ export const HomeAppTitle = styled.h1`
   margin: 0;
   display: flex;
   flex-direction: row;
-`;
-
-export const HomeAppTitleGreen = styled(HomeAppTitle)`
-  color: ${({ theme }) => theme.colors.primary};
-  padding: 0;
-  margin: 0;
+  span {
+    color: ${({ theme }) => theme.colors.primary};
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 export const LogoTitleContainer = styled.div`
