@@ -1,27 +1,29 @@
-import React, { HTMLAttributes, FC } from 'react';
+import React, {
+  HTMLAttributes, FC, Children, cloneElement, ReactElement,
+} from 'react';
 
 import { StyledFieldset, StyledLegend } from './styled';
 
 interface CustomFormFiedlsetProps {
   legendTitle?: string;
   fullWidth?: boolean;
+  className?: string;
+  columns?: number;
 }
 
-type Props = CustomFormFiedlsetProps & HTMLAttributes<HTMLFieldSetElement>;
+type Props = CustomFormFiedlsetProps & HTMLAttributes<HTMLDivElement>;
 
 export const FormFieldset: FC<Props> = ({
   legendTitle,
   children,
   fullWidth,
-  ...rest
+  columns = 1,
 }) => (
   <StyledFieldset
-    {...rest}
     fullWidth={fullWidth}
+    columns={columns}
   >
-    <>
-      {legendTitle && <StyledLegend>{legendTitle}</StyledLegend>}
-    </>
-    {children}
+    {legendTitle && <StyledLegend>{legendTitle}</StyledLegend>}
+    {Children.map(children, (child: ReactElement) => cloneElement(child, { fullWidth }))}
   </StyledFieldset>
 );

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icon } from 'antd';
-import { IconPosition, ButtonType } from './types';
+import { IconPosition, ButtonType, ButtonVariant } from './types';
 
 const THEME = {
   [ButtonType.Primary]: css`
@@ -60,16 +59,24 @@ const iconPositionMap = {
   `,
 };
 
+const ButtonVariantMap = {
+  [ButtonVariant.Normal]: css`
+    min-width: 220px;
+  `,
+  [ButtonVariant.Wide]: css`
+    min-width: 360px;
+  `,
+  [ButtonVariant.Narrow]: css`
+    min-width: 50px;
+`,
+};
+
 const IconPositionMixin = (iconPosition: IconPosition) => iconPositionMap[iconPosition];
 
-export const IconImage = styled(Icon)`
-  background: red
-`;
-
-export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonType; iconPosition: IconPosition; className?: string }>`
+export const ButtonBox = styled.button<{ disabled?: boolean; themeType: ButtonType; iconPosition: IconPosition; variant: ButtonVariant }>`
   border-radius: 4px;
   height: 35px;
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 700;
   line-height: 35px;
   text-align: center;
@@ -78,25 +85,27 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType?: ButtonT
   padding: 0 15px;
   display: flex;
   justify-content: center;
+  align-items: center;
   border: none;
+  min-width: 220px;
   ${({ iconPosition }) => IconPositionMixin(iconPosition)};
 
-  ${IconImage} {
-    font-size: 18px;
+  svg {
     height: 100%;
-    margin: 0 10px;
-    line-height: 35px;
-    margin-right: '5px';
+    margin-right: 10px;;
   }
 
-  ${({ disabled, themeType }) => {
+  ${({ disabled, themeType, theme }) => {
     if (disabled) {
       return css`
-        background-color: ${({ theme }) => theme.colors.disabledBackground};
-        color: ${({ theme }) => theme.colors.disabledText};
+        background-color: ${theme.colors.disabledBackground};
+        color: ${theme.colors.disabledText};
         cursor: not-allowed;
       `;
     }
-    return THEME[themeType || ButtonType.Primary];
+    return THEME[themeType];
+  }}
+  ${({ variant }) => {
+    return ButtonVariantMap[variant];
   }}
   `;

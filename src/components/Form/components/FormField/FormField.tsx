@@ -25,7 +25,6 @@ export function FormField<T extends FC<any>>({
   return (
     <InputWrapper fullWidth={fullWidth}>
       <InputLabel htmlFor={field.name}>{label}</InputLabel>
-
       <Component
         {...rest}
         {...props}
