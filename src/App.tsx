@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     }
   }
   ul {
-
+    list-style: none;
   }
 `;
 

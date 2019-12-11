@@ -20,9 +20,9 @@ export const StyledRating = styled(Rating)`
   span {
     max-width: 40px;
     max-height: 40px;
-    transition: all 0.1s linear;
+    transition: transform 0.1s linear;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
   }
 

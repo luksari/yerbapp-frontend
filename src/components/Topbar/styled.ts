@@ -8,7 +8,7 @@ export const StyledTopbar = styled.section`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: ${({ theme }) => theme.metrics.padding.xl};
+  padding: ${({ theme }) => theme.metrics.padding.l};
   max-height: 115px;
 `;
 

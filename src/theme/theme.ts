@@ -44,6 +44,9 @@ export const theme = {
       xl: '30px',
       xxl: '45px',
     },
+    width: {
+      sidebarWidth: '180px',
+    },
   },
   gradients: {
 
