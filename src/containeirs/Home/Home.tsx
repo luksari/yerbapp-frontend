@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { ButtonType } from 'components/Button';
 import {
-  Slogan, HomeContainer, ExploreButton,
+  Slogan, HomeContainer, ExploreButton, StyledLink,
 } from './styled';
 
 const Home: FC = () => {
@@ -11,11 +10,11 @@ const Home: FC = () => {
       <Slogan>
        Świat yerba mate stoi przed Tobą otworem
       </Slogan>
-      <Link to="/explore">
+      <StyledLink to="/explore">
         <ExploreButton themeType={ButtonType.Secondary}>
           Zobacz!
         </ExploreButton>
-      </Link>
+      </StyledLink>
     </HomeContainer>
   );
 };
