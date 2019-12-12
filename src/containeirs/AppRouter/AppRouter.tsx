@@ -10,7 +10,7 @@ import { About } from 'containeirs/About';
 import { Home } from 'containeirs/Home';
 import { Explore } from 'containeirs/Explore';
 import { NoMatch } from 'containeirs/NoMatch';
-import { Card } from 'components/Card/Card';
+import { Card } from 'components/Card';
 
 export const AppRouter: FC = () => {
   return (
