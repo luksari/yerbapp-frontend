@@ -7,11 +7,11 @@ import {
   Wrapper, LeftSide, RightSide, NoMatchAltLoader, NoMatchLoader, NoMatchAppTitle, LogoLink, Text404, TextMessage,
 } from './styled';
 
-const NoMatch: FC = () => {
+const NotAllowed: FC = () => {
   return (
     <Wrapper>
+      <Helmet title="405 - Not allowed" />
       <LeftSide>
-        <Helmet title="404 - Not found" />
         <LogoLink to="/">
           <Logo />
           <NoMatchAppTitle>
@@ -19,16 +19,14 @@ const NoMatch: FC = () => {
           </NoMatchAppTitle>
         </LogoLink>
         <Text404>
-            404
+            405
         </Text404>
         <TextMessage>
-          Coś jest nie tak! Chciałeś się znaleźć w
-          {' '}
-          <pre>null | undefined</pre>
+          Hej ty! Chyba nie powinno Cię tu być!
         </TextMessage>
         <Link to="/">
           <Button themeType={ButtonType.Secondary} type="button">
-              Powrót do strony głównej
+              Powrót do katalogu Yerba Mate
           </Button>
         </Link>
       </LeftSide>
@@ -40,4 +38,4 @@ const NoMatch: FC = () => {
   );
 };
 
-export default NoMatch;
+export default NotAllowed;
