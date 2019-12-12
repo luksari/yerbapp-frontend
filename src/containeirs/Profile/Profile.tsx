@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   useGetMeDetailsQuery, useEditUserMutation,
 } from 'generated/graphql';
 import { notificationError, notificationSuccess } from 'components/Notification';
+import { goBack } from 'connected-react-router';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
-const Profile = () => {
+interface Props {
+  handleBack: VoidFunction;
+}
+
+const ProfileRaw: FC<Props> = ({ handleBack }) => {
   const { data, loading } = useGetMeDetailsQuery({
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać danych profilu użytkownika.' }),
   });
@@ -29,9 +36,13 @@ const Profile = () => {
 
   return (
     <>
-      {data && <ProfileForm data={data} isLoading={loading} isSaving={saving} onSubmit={handleSubmit} /> }
+      {data && <ProfileForm data={data} isLoading={loading} isSaving={saving} onSubmit={handleSubmit} handleBack={handleBack} /> }
     </>
   );
 };
 
-export default Profile;
+const mapDispatchToProps = (dispatch) => ({
+  handleBack: () => dispatch(push('/explore')),
+});
+
+export default connect(null, mapDispatchToProps)(ProfileRaw);
