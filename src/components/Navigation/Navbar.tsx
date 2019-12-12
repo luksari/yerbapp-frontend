@@ -1,42 +1,41 @@
-import React, { FC, memo } from 'react';
-import { NavSection } from 'components/Navigation/styled';
+import React, {
+  FC, memo, useMemo, useCallback,
+} from 'react';
+import {
+  NavSection, LogoLink, StyledLogo, AppTitle,
+} from 'components/Navigation/styled';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { injectReducer } from 'utils/injectReducer';
 import { injectSaga } from 'utils/injectSaga';
-import { NavLinks, NavProps } from './Navlinks';
+import { NavLinks } from './Navlinks';
 import {
-  actions, makeSelectNavItems, name, reducer,
+  name, reducer,
 } from './slice';
 import { navWatchSaga } from './saga';
 
-const NavbarRaw: FC<NavProps> = ({
-  navItems,
-  setSelected,
-}) => {
+const NavbarRaw: FC = () => {
+  console.log('render');
   return (
     <NavSection>
-      <NavLinks navItems={navItems} setSelected={setSelected} />
+      <LogoLink to="/">
+        <StyledLogo />
+        <AppTitle>
+          Yerb
+          <span>App</span>
+        </AppTitle>
+      </LogoLink>
+      <NavLinks />
     </NavSection>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  navItems: makeSelectNavItems(),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setSelected: (itemId) => dispatch(actions.setItemSelected(itemId)),
-});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: name, reducer });
 const withSaga = injectSaga({ key: name, saga: navWatchSaga });
 
 export const Navbar = compose(
   withSaga,
   withReducer,
-  withConnect,
   memo,
 )(NavbarRaw);
