@@ -19,13 +19,14 @@ export const AppRouter: FC = () => {
   return (
     <Switch>
       <AuthenticatedRoute exact path="/" component={Home} layout={HomepageLayout} canBeGuest />
-      <AuthenticatedRoute exact path="/tutorial" component={Tutorial} layout={AppLayout} canBeGuest />
-      <AuthenticatedRoute exact path="/about" component={About} layout={AppLayout} canBeGuest />
-      <AuthenticatedRoute exact path="/explore" component={Explore} layout={AppLayout} canBeGuest />
-      <AuthenticatedRoute exact path="/profile" component={Profile} layout={AppLayout} />
-      <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
-      <LayoutRoute exact path="/login" component={Login} layout={AuthLayout} />
-      <LayoutRoute exact path="/register" component={Register} layout={AuthLayout} />
+      <AuthenticatedRoute path="/tutorial" component={Tutorial} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute path="/about" component={About} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute path="/explore" component={Explore} layout={AppLayout} canBeGuest />
+      <AuthenticatedRoute path="/profile" component={Profile} layout={AppLayout} />
+      <AuthenticatedRoute path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
+
+      <LayoutRoute path="/login" component={Login} layout={AuthLayout} />
+      <LayoutRoute path="/register" component={Register} layout={AuthLayout} />
 
       {/** Do not place custom routes below, it is for redirect logic */}
       <LayoutRoute path="/405" component={NotAllowed} layout={AuthLayout} />
