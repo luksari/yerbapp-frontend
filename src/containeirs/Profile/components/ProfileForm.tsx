@@ -38,7 +38,6 @@ export const ProfileForm: FC<Props> = ({
       handleClose={console.warn}
       onSubmit={onSubmit}
     >
-      {(values) => console.warn(values)}
       <BigUserAvatar username={data.whoAmI.username} />
       <FormFieldset
         legendTitle="Twoje dane"

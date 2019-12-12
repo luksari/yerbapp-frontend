@@ -4,6 +4,7 @@ import { History } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { LifeStore } from './types';
 import createReducer from './reducers';
+import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -28,6 +29,7 @@ export default function configureStore(initialState = {}, history: History): Lif
     composeEnhancers(...enhancers),
   );
   // Extensions
+  sagaMiddleware.run(rootSaga);
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
