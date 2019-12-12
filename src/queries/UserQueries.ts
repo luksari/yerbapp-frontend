@@ -9,6 +9,15 @@ export const GET_ME = gql`
   }
 `;
 
+
+export const GET_ME_ROLE = gql`
+  query getMeRole {
+    whoAmI{
+      role
+    }
+  }
+`;
+
 export const GET_ME_DETAILS = gql`
   query getMeDetails {
     whoAmI {
