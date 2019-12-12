@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { LoaderWrapper, StyledLoader, StyledAltLoader } from './styled';
 
 
@@ -7,11 +7,11 @@ interface Props {
   fullscreen?: boolean;
 }
 
-export const Loader: React.FC<Props> = () => {
+export const Loader: React.FC<Props> = memo(() => {
   return (
     <LoaderWrapper>
       <StyledLoader />
       <StyledAltLoader />
     </LoaderWrapper>
   );
-};
+});
