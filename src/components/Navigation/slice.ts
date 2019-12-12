@@ -9,11 +9,11 @@ export type NavSliceState = {
 const initialState: NavSliceState = {
   navItems: [
     {
-      to: '/',
+      to: '/explore',
       selected: undefined,
-      title: 'Strona główna',
+      title: 'Przeglądaj',
       visible: true,
-      icon: 'home',
+      icon: 'search',
     },
     {
       to: '/tutorial',
@@ -23,18 +23,18 @@ const initialState: NavSliceState = {
       icon: 'book',
     },
     {
-      to: '/explore',
-      selected: undefined,
-      title: 'Przeglądaj',
-      visible: true,
-      icon: 'search',
-    },
-    {
       to: '/admin',
       selected: undefined,
       title: 'Panel administratora',
       visible: false,
       icon: 'appstore',
+    },
+    {
+      to: '/',
+      selected: undefined,
+      title: 'Strona główna',
+      visible: true,
+      icon: 'home',
     },
   ],
 };

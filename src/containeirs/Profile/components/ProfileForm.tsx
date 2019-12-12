@@ -11,6 +11,7 @@ interface Props {
   data: GetMeDetailsQuery;
   isLoading: boolean;
   onSubmit: (user: ProfileFormData) => void;
+  handleBack: VoidFunction;
   isSaving: boolean;
 }
 
@@ -27,6 +28,7 @@ export const ProfileForm: FC<Props> = ({
   isLoading,
   onSubmit,
   isSaving,
+  handleBack,
 }) => {
   return (
     <Form<ProfileFormData>
@@ -35,7 +37,7 @@ export const ProfileForm: FC<Props> = ({
       initialValues={data.whoAmI}
       isLoading={isLoading}
       isSaving={isSaving}
-      handleClose={console.warn}
+      handleClose={handleBack}
       onSubmit={onSubmit}
     >
       <BigUserAvatar username={data.whoAmI.username} />
