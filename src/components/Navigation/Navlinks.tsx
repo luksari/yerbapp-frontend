@@ -1,7 +1,10 @@
 import React, { FC, memo } from 'react';
 import {
-  NavList, NavLink, NavItem, NavIcon, NavText, StyledLogo, LogoLink, AppTitle,
+  NavList, NavLink, NavItem, NavIcon, NavText,
 } from 'components/Navigation/styled';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { makeSelectNavItems, actions } from './slice';
 
 export interface NavProps {
   navItems: NavigationItem[];
@@ -9,16 +12,9 @@ export interface NavProps {
 }
 
 
-export const NavLinks: FC<NavProps> = memo(({ navItems, setSelected }) => {
+const NavLinksRaw: FC<NavProps> = memo(({ navItems, setSelected }) => {
   return (
     <>
-      <LogoLink to="/">
-        <StyledLogo />
-        <AppTitle>
-          Yerb
-          <span>App</span>
-        </AppTitle>
-      </LogoLink>
       <NavList>
         {navItems.map((elem) => (
           <NavItem key={elem.to} selected={elem.selected} visible={elem.visible} onClick={() => setSelected(elem.to)}>
@@ -33,3 +29,13 @@ export const NavLinks: FC<NavProps> = memo(({ navItems, setSelected }) => {
 
   );
 });
+
+const mapStateToProps = createStructuredSelector({
+  navItems: makeSelectNavItems(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setSelected: (itemId) => dispatch(actions.setItemSelected(itemId)),
+});
+
+export const NavLinks = connect(mapStateToProps, mapDispatchToProps)(NavLinksRaw);
