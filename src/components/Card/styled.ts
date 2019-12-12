@@ -2,38 +2,36 @@ import styled from 'styled-components';
 import { Button } from 'components/Button';
 
 export const CardContainer = styled.div`
-  height: 720px;
-  width: 1080px;
+  height: 420px;
+  width: 640px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  color: ${({ theme }) => theme.colors.alternativeText};
-  box-shadow: 10px 0px 10px -5px ${({ theme }) => theme.colors.shadow};
-  background: ${({ theme }) => theme.colors.primaryText};
+  padding: 0;
+  color: ${({ theme }) => theme.colors.primaryTextDarken};
+  box-shadow: 0 10px 10px -5px ${({ theme }) => theme.colors.shadow};
+  background: ${({ theme }) => theme.colors.alternativeText};
+  border-radius: 4px;
 `;
 
 export const YerbaTitle = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) => theme.metrics.padding.m};
-  margin: 0;
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  font-weight: 700;
-`;
-
-export const CardMain = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  margin: 0;
-  padding: ${({ theme }) => theme.metrics.padding.m};
+  padding: ${({ theme }) => theme.metrics.padding.s};
+  margin: ${({ theme }) => theme.metrics.margin.m};
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  font-weight: 750;
 `;
 
 export const LeftSide = styled.div`
   display: flex;
-  margin: ${({ theme }) => theme.metrics.margin.m};
+  flex-direction: column;
   flex: 1;
+  margin: ${({ theme }) => theme.metrics.margin.m};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Image = styled.img`
@@ -46,38 +44,32 @@ export const Image = styled.img`
 export const RightSide = styled.div`
   display: flex;
   flex-direction: column;
-  margin: ${({ theme }) => theme.metrics.margin.l};
   flex: 1;
+  margin: ${({ theme }) => theme.metrics.margin.m};
 `;
 
-export const Description = styled.div`
-  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+export const Description = styled.text`
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
   padding: ${({ theme }) => theme.metrics.padding.l};
-  margin: ${({ theme }) => theme.metrics.margin.l};
   display: flex;
+  overflow: hidden;
+  max-width: 100ch;
 `;
 
 export const Details = styled.ul`
-  list-style-type: none;
-  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
   padding: ${({ theme }) => theme.metrics.padding.m};
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Rating = styled.ul`
-  list-style-type: none;
-  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
   padding: ${({ theme }) => theme.metrics.padding.m};
+  display: flex;
+  flex-direction: column;
 `;
-
-export const CardFooter = styled.div`
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  margin: ${({ theme }) => theme.metrics.margin.l};
-`;
-
 
 export const CardButton = styled(Button)`
-  height: auto;
-  font-size: ${({ theme }) => theme.metrics.fontSize.m};
+  margin: ${({ theme }) => theme.metrics.margin.l};
 `;
