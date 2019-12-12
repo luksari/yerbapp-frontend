@@ -55,11 +55,11 @@ export const HomeTopbarRaw: FC<Props> = ({
   );
 };
 
-export const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
   isAuthenticated: makeSelectIsAuthenticated(),
 });
 
-export const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(actions.unsetUser()),
 });
 

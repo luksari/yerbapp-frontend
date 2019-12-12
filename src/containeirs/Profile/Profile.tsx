@@ -3,7 +3,6 @@ import {
   useGetMeDetailsQuery, useEditUserMutation,
 } from 'generated/graphql';
 import { notificationError, notificationSuccess } from 'components/Notification';
-import { goBack } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { ProfileForm, ProfileFormData } from './components/ProfileForm';

@@ -1,11 +1,9 @@
 import React, {
-  FC, memo, useMemo, useCallback,
+  FC, memo,
 } from 'react';
 import {
   NavSection, LogoLink, StyledLogo, AppTitle,
 } from 'components/Navigation/styled';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { injectReducer } from 'utils/injectReducer';
 import { injectSaga } from 'utils/injectSaga';
@@ -16,7 +14,6 @@ import {
 import { navWatchSaga } from './saga';
 
 const NavbarRaw: FC = () => {
-  console.log('render');
   return (
     <NavSection>
       <LogoLink to="/">
