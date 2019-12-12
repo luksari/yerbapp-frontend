@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import {
   NavList, NavLink, NavItem, NavIcon, NavText, StyledLogo, LogoLink, AppTitle,
 } from 'components/Navigation/styled';
@@ -9,7 +9,7 @@ export interface NavProps {
 }
 
 
-export const NavLinks: FC<NavProps> = ({ navItems, setSelected }) => {
+export const NavLinks: FC<NavProps> = memo(({ navItems, setSelected }) => {
   return (
     <>
       <LogoLink to="/">
@@ -32,4 +32,4 @@ export const NavLinks: FC<NavProps> = ({ navItems, setSelected }) => {
     </>
 
   );
-};
+});

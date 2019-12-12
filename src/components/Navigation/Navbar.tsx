@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { NavSection } from 'components/Navigation/styled';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -38,4 +38,5 @@ export const Navbar = compose(
   withSaga,
   withReducer,
   withConnect,
+  memo,
 )(NavbarRaw);
