@@ -27,7 +27,7 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   const { data } = useQuery<GetMeQuery, GetMeQueryVariables>(GET_ME);
   const handleLogout = useCallback(() => { logout(); }, [logout]);
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
-
+  console.log('Topbar render');
   return (
     <StyledTopbar>
       <TitleBar />
