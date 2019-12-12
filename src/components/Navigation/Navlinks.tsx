@@ -4,13 +4,20 @@ import {
 } from 'components/Navigation/styled';
 
 
+const Links = {
+  home: {
+    id: 'home',
+    to: '/',
+  },
+};
+
 export const NavLinks = () => {
   return (
     <>
       <LogoLink to="/">
         <StyledLogo />
         <AppTitle>
-Yerb
+          Yerb
           <span>App</span>
         </AppTitle>
       </LogoLink>
