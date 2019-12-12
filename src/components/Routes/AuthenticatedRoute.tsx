@@ -2,6 +2,10 @@ import React, {
   FC, ReactType, ComponentType,
 } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router';
+import { useGetMeQuery, useGetMeRoleQuery } from 'generated/graphql';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import { LayoutRoute } from './LayoutRoute';
 
 interface Props extends RouteProps {
@@ -10,27 +14,47 @@ interface Props extends RouteProps {
   component: ComponentType<any>;
 }
 
-export const AuthenticatedRoute: FC<Props> = ({
+const AuthenticatedRouteRaw: FC<Props> = ({
   layout: Layout,
   component: Component,
   canBeGuest,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      let content: any = <Component {...props} />;
-      if (!canBeGuest && !localStorage.getItem('token')) {
-        return <Redirect to="/login" />;
-      }
+}) => {
+  const { data } = useGetMeRoleQuery();
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!canBeGuest && !localStorage.getItem('token')) {
+          return <Redirect to="/login" />;
+        }
 
-      if (Layout) {
-        content = (
-          <LayoutRoute component={Component} layout={Layout} />
-        );
-      }
+        let content: any = <Component {...props} />;
 
-      return content;
-    }}
-  />
-);
+        if (Layout) {
+          content = (
+            <LayoutRoute component={Component} layout={Layout} />
+          );
+        }
+
+        return content;
+      }}
+    />
+  );
+};
+
+const mapStateToProps = createStructuredSelector({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export const AuthenticatedRoute = compose(
+  withConnect,
+
+)(AuthenticatedRouteRaw);
