@@ -1,5 +1,5 @@
 export interface TutorialStepModel {
   id: number;
-  imageUrl: string;
+  imageUrl: any;
   description: string;
 }

@@ -1,10 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { LoginResponse } from 'api/AuthApi';
+import { UserRoles } from 'utils/types';
 
 interface AuthSliceState {
   token?: string;
   userId?: number;
+  userRole?: UserRoles;
+  expireDate?: Date;
 }
 
 const initialState: AuthSliceState = {

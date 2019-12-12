@@ -2,6 +2,7 @@ import { takeLatest } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { LoginResponse } from 'api/AuthApi';
 import jwtDecode from 'jwt-decode';
+import { GetMeRoleQueryHookResult } from 'generated/graphql';
 import { actions } from './slice';
 
 export function* setUserSaga(action: PayloadAction<LoginResponse>) {
@@ -15,6 +16,11 @@ export function* unsetUserSaga() {
   yield localStorage.removeItem('userId');
   yield localStorage.removeItem('user');
   window.location.reload();
+}
+
+
+export function* enableAdminItemsSaga(action: PayloadAction<GetMeRoleQueryHookResult>) {
+  yield;
 }
 
 export function* watchAuthSaga() {

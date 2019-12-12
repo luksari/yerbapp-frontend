@@ -6,43 +6,82 @@ export type NavSliceState = {
   navItems: NavigationItem[];
 }
 
+const commonNavItems: NavigationItem[] = [
+  {
+    to: '/explore',
+    selected: undefined,
+    title: 'Przeglądaj',
+    visible: true,
+    icon: 'search',
+  },
+  {
+    to: '/tutorial',
+    selected: undefined,
+    title: 'Poradnik',
+    visible: true,
+    icon: 'book',
+  },
+  {
+    to: '/admin',
+    selected: undefined,
+    title: 'Panel administratora',
+    visible: true,
+    icon: 'appstore',
+  },
+  {
+    to: '/',
+    selected: undefined,
+    title: 'Strona główna',
+    visible: true,
+    icon: 'home',
+  },
+];
+
+const adminNavItems: NavigationItem[] = [
+  {
+    to: '/explore',
+    selected: undefined,
+    title: 'Przeglądaj Yerba Mate',
+    visible: true,
+    icon: 'search',
+  },
+  {
+    to: '/manufacturers',
+    selected: undefined,
+    title: 'Lista producentów',
+    visible: true,
+    icon: 'global',
+  },
+  {
+    to: '/types',
+    selected: undefined,
+    title: 'Typy Yerba Mate',
+    visible: true,
+    icon: 'coffee',
+  },
+  {
+    to: '/users',
+    selected: undefined,
+    title: 'Użytkownicy',
+    visible: true,
+    icon: 'smile',
+  },
+];
+
 const initialState: NavSliceState = {
-  navItems: [
-    {
-      to: '/explore',
-      selected: undefined,
-      title: 'Przeglądaj',
-      visible: true,
-      icon: 'search',
-    },
-    {
-      to: '/tutorial',
-      selected: undefined,
-      title: 'Poradnik',
-      visible: true,
-      icon: 'book',
-    },
-    {
-      to: '/admin',
-      selected: undefined,
-      title: 'Panel administratora',
-      visible: false,
-      icon: 'appstore',
-    },
-    {
-      to: '/',
-      selected: undefined,
-      title: 'Strona główna',
-      visible: true,
-      icon: 'home',
-    },
-  ],
+  navItems: commonNavItems,
 };
 
 export const { name, actions, reducer } = createSlice({
   name: 'navBar',
   initialState,
   reducers: {
+    setAdminNavItems(state) {
+      state.navItems = adminNavItems;
+    },
+    setCommonNavItems(state) {
+      state.navItems = commonNavItems;
+    },
     setNavItems(state, action: PayloadAction<NavigationItem[]>) {
       state.navItems = action.payload;
     },

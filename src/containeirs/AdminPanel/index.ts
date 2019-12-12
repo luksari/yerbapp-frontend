@@ -1,1 +1,1 @@
-export * from './AdminPanel';
+export * from './Loadable';

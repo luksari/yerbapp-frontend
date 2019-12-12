@@ -3,9 +3,6 @@ import React, {
 } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router';
 import { useGetMeRoleQuery } from 'generated/graphql';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 import { UserRoles } from 'utils/types';
 import { LayoutRoute } from './LayoutRoute';
 
@@ -14,9 +11,10 @@ interface Props extends RouteProps {
   canBeGuest?: boolean;
   mustBeAdmin?: boolean;
   component: ComponentType<any>;
+
 }
 
-const AuthenticatedRouteRaw: FC<Props> = ({
+export const AuthenticatedRoute: FC<Props> = ({
   layout: Layout,
   component: Component,
   canBeGuest,
@@ -50,19 +48,3 @@ const AuthenticatedRouteRaw: FC<Props> = ({
     />
   );
 };
-
-const mapStateToProps = createStructuredSelector({
-
-});
-
-const mapDispatchToProps = (dispatch) => ({
-
-});
-
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export const AuthenticatedRoute = compose(
-  withConnect,
-
-)(AuthenticatedRouteRaw);
