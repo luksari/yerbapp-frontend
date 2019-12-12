@@ -380,6 +380,17 @@ export type GetMeQuery = (
   ) }
 );
 
+export type GetMeRoleQueryVariables = {};
+
+
+export type GetMeRoleQuery = (
+  { __typename?: 'Query' }
+  & { whoAmI: (
+    { __typename?: 'User' }
+    & Pick<User, 'role'>
+  ) }
+);
+
 export type GetMeDetailsQueryVariables = {};
 
 
@@ -447,6 +458,38 @@ export function useGetMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
 export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
 export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
 export type GetMeQueryResult = ApolloReactCommon.QueryResult<GetMeQuery, GetMeQueryVariables>;
+export const GetMeRoleDocument = gql`
+    query getMeRole {
+  whoAmI {
+    role
+  }
+}
+    `;
+
+/**
+ * __useGetMeRoleQuery__
+ *
+ * To run a query within a React component, call `useGetMeRoleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMeRoleQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMeRoleQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMeRoleQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMeRoleQuery, GetMeRoleQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMeRoleQuery, GetMeRoleQueryVariables>(GetMeRoleDocument, baseOptions);
+      }
+export function useGetMeRoleLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMeRoleQuery, GetMeRoleQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMeRoleQuery, GetMeRoleQueryVariables>(GetMeRoleDocument, baseOptions);
+        }
+export type GetMeRoleQueryHookResult = ReturnType<typeof useGetMeRoleQuery>;
+export type GetMeRoleLazyQueryHookResult = ReturnType<typeof useGetMeRoleLazyQuery>;
+export type GetMeRoleQueryResult = ApolloReactCommon.QueryResult<GetMeRoleQuery, GetMeRoleQueryVariables>;
 export const GetMeDetailsDocument = gql`
     query getMeDetails {
   whoAmI {

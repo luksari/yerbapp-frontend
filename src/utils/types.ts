@@ -34,3 +34,8 @@ export interface ErrorModel<T> {
   response: ErrorResponse<T>;
   status: number;
 }
+
+export enum UserRoles {
+  ADMIN = 'admin',
+  USER = 'user'
+}
