@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   NavList, NavLink, NavItem, NavIcon, NavText, StyledLogo, LogoLink, AppTitle,
 } from 'components/Navigation/styled';
 
+export interface NavProps {
+  navItems: NavigationItem[];
+  setSelected: (key: string) => void;
+}
 
-const Links = {
-  home: {
-    id: 'home',
-    to: '/',
-  },
-};
 
-export const NavLinks = () => {
+export const NavLinks: FC<NavProps> = ({ navItems, setSelected }) => {
   return (
     <>
       <LogoLink to="/">
@@ -22,33 +20,14 @@ export const NavLinks = () => {
         </AppTitle>
       </LogoLink>
       <NavList>
-        <NavItem>
-          <NavLink to="/">
-            <NavIcon type="home" />
-            <NavText>Strona główna</NavText>
-          </NavLink>
-        </NavItem>
-
-        <NavItem>
-          <NavLink to="/tutorial">
-            <NavIcon type="book" />
-            <NavText>Poradnik</NavText>
-          </NavLink>
-        </NavItem>
-
-        <NavItem>
-          <NavLink to="/explore">
-            <NavIcon type="search" />
-            <NavText>Przeglądaj</NavText>
-          </NavLink>
-        </NavItem>
-
-        <NavItem>
-          <NavLink to="/about">
-            <NavIcon type="star" />
-            <NavText>Autorzy</NavText>
-          </NavLink>
-        </NavItem>
+        {navItems.map((elem) => (
+          <NavItem key={elem.to} selected={elem.selected} visible={elem.visible} onClick={() => setSelected(elem.to)}>
+            <NavLink to={elem.to}>
+              <NavIcon type={elem.icon} />
+              <NavText>{elem.title}</NavText>
+            </NavLink>
+          </NavItem>
+        ))}
       </NavList>
     </>
 
