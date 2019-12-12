@@ -100,7 +100,7 @@ export const NavItem = styled.li<{selected: boolean; visible: boolean}>`
   }
   ${({ selected, theme }) => selected && css`
     background: ${theme.colors.primaryTextDarken};
-    border-left: 5px solid ${theme.colors.info}
+    border-left: 5px solid ${theme.colors.info};
       color: ${theme.colors.info};
       ${NavText}, ${NavIcon}{
         color: ${theme.colors.info}
