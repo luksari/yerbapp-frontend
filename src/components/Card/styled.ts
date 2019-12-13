@@ -30,7 +30,6 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   }
   padding: ${({ theme }) => theme.metrics.padding.m} 0;
   ${({ primary, theme }) => primary && css`
-    background: ${theme.colors.disabledBackground};
     box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
     justify-content: space-between;
 
@@ -49,7 +48,7 @@ export const Image = styled.img`
 export const Description = styled.p`
   margin: 0;
   margin-top: ${({ theme }) => theme.metrics.margin.m};
-  color: ${({ theme }) => theme.colors.primaryText};
+  color: ${({ theme }) => theme.colors.labelText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
 `;
