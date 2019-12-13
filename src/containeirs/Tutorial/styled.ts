@@ -8,7 +8,6 @@ export const TutorialWrapper = styled.section`
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 750px;
   `}
 `;
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 
 export const NavSection = styled.nav`
-  max-width: 235px;
+  max-width: ${({ theme }) => theme.metrics.width.sidebarWidth};
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -33,7 +33,7 @@ export const LogoLink = styled(Link)`
 `;
 
 export const AppTitle = styled.h1`
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
   margin: 0;
   color: ${({ theme }) => theme.colors.alternativeText};
   font-weight: 700;

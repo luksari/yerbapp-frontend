@@ -36,6 +36,8 @@ export const theme = {
       m: '15px',
       l: '20px',
       xl: '35px',
+      xxl: '70px',
+      xxxl: '120px',
     },
     padding: {
       s: '5px',
@@ -44,6 +46,9 @@ export const theme = {
       l: '25px',
       xl: '30px',
       xxl: '45px',
+    },
+    width: {
+      sidebarWidth: '180px',
     },
   },
   gradients: {
