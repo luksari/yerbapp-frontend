@@ -1,10 +1,21 @@
 import React, { FC } from 'react';
+import { ButtonType } from 'components/Button';
+import {
+  Slogan, HomeContainer, ExploreButton, StyledLink,
+} from './styled';
 
 const Home: FC = () => {
   return (
-    <div>
-        Homepage
-    </div>
+    <HomeContainer>
+      <Slogan>
+       Świat yerba mate stoi przed Tobą otworem
+      </Slogan>
+      <StyledLink to="/explore">
+        <ExploreButton themeType={ButtonType.Secondary}>
+          Zobacz!
+        </ExploreButton>
+      </StyledLink>
+    </HomeContainer>
   );
 };
 
