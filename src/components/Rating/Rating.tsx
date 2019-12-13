@@ -2,30 +2,44 @@ import React, { FC } from 'react';
 import { RatingComponentProps } from 'react-rating';
 import { useFormikContext } from 'formik';
 import { get } from 'lodash';
-import { InputWrapper, InputLabel } from 'components/Form/components/FormField/styled';
-import { EmptySymbol, FullSymbol, StyledRating } from './styled';
-
-export enum RatingType {
-  Percentage = 'percentage',
-  Integer = 'integer'
-}
-
+import {
+  EmptySymbol, FullSymbol, StyledRating, InputWrapper, InputLabel,
+} from './styled';
+import { SizeType } from './types';
 
 type Props = {
-  name: string;
+  name?: string;
   label?: string;
+  vertical?: boolean;
+  size?: SizeType;
 } & RatingComponentProps;
 
-export const Rating: FC<Props> = ({ name, label }) => {
-  const { values, setFieldValue } = useFormikContext<any>();
-  const handleValueChange = (value: number) => {
-    setFieldValue(name, value, false);
-  };
-  const value = get(values, name);
+export const Rating: FC<Props> = ({
+  name,
+  label,
+  initialRating,
+  onChange,
+  size = SizeType.Normal,
+  vertical = false,
+  ...rest
+}) => {
+  let value;
+  let handleChange;
+
+  const context = useFormikContext<any>();
+
+  if (context) {
+    value = get(context.values, name);
+    handleChange = context.setFieldValue(name, value, false);
+  } else {
+    value = initialRating;
+    handleChange = onChange;
+  }
+
   return (
-    <InputWrapper>
+    <InputWrapper size={size} vertical={vertical}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <StyledRating onChange={handleValueChange} onClick={handleValueChange} initialRating={value} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
+      <StyledRating {...rest} onChange={handleChange} onClick={handleChange} initialRating={value} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>
   );
 };

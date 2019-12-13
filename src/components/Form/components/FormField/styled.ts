@@ -4,6 +4,7 @@ interface WrapperProps {
   fullWidth?: boolean;
 }
 
+
 export const InputWrapper = styled.div<WrapperProps>`
   display: flex;
   max-width: ${({ fullWidth }) => fullWidth ? '100%' : '40%'};
