@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ButtonType } from 'components/Button';
 import { Link } from 'react-router-dom';
 import {
-  CardContainer, YerbaTitle, LeftSide, RightSide, Image, CardButton, Description, DataContainer,
+  CardContainer, YerbaTitle, LeftSide, RightSide, Image, CardButton, Description, DataContainer, StyledLabel, StyledSpan,
 } from './styled';
 
 interface CardProps {
@@ -33,9 +33,9 @@ const exampleData: CardProps[] = [
     photoUrl: 'https://etnobazar.pl/pol_pl_YERBA-MATE-PAJARITO-ELABORADA-250G-BIO-18821_3.jpg',
     addedAt: '09.11.2001 21:37:42',
     aromaScore: 3.3,
-    tasteScore: 4.1,
+    tasteScore: 3.9,
     bitternessScore: 3.6,
-    energyScore: 3.9,
+    energyScore: 4.1,
     priceScore: 4.5,
     overallScore: 4.3,
   },
@@ -56,70 +56,70 @@ export const Card: FC<CardProps> = () => {
       </LeftSide>
       <RightSide>
         <DataContainer>
-          <label>
+          <StyledLabel>
             Producent:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].manufacturer}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Typ:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].type}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Kraj pochodzenia:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].country}
-            </span>
-          </label>
+            </StyledSpan>
+          </StyledLabel>
           <p />
-          <label>
+          <StyledLabel>
             Aromat:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].aromaScore}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Smak:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].tasteScore}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Gorycz:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].bitternessScore}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Moc:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].energyScore}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Cena:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].priceScore}
-            </span>
-          </label>
-          <label>
+            </StyledSpan>
+          </StyledLabel>
+          <StyledLabel>
             Ocena ogólna:
             {' '}
-            <span>
+            <StyledSpan>
               {exampleData[0].overallScore}
-            </span>
-          </label>
+            </StyledSpan>
+          </StyledLabel>
         </DataContainer>
         <Description>
           {exampleData[0].details}
