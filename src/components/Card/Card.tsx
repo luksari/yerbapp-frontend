@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { ButtonType } from 'components/Button';
-import { Link } from 'react-router-dom';
 import {
-  CardContainer, YerbaTitle, LeftSide, RightSide, Image, CardButton, Description, DataContainer, StyledLabel, StyledSpan,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description,
 } from './styled';
+import { CardValue } from './CardValue';
 
 interface CardProps {
   id: number;
@@ -40,91 +40,49 @@ const exampleData: CardProps[] = [
     overallScore: 4.3,
   },
 ];
-export const Card: FC<CardProps> = () => {
+
+export const Card: FC<CardProps> = ({
+  name,
+  photoUrl,
+  manufacturer,
+  type,
+  country,
+  aromaScore,
+  tasteScore,
+  bitternessScore,
+  energyScore,
+  priceScore,
+  overallScore,
+  details,
+}) => {
+  const data = exampleData[0];
   return (
     <CardContainer>
-      <LeftSide>
+      <DataWrapper primary>
         <YerbaTitle>
-          {exampleData[0].name}
+          {data.name}
         </YerbaTitle>
-        <Image src={exampleData[0].photoUrl} alt={exampleData[0].name} />
-        <Link to="/explore">
-          <CardButton themeType={ButtonType.Primary}>
-              Zobacz więcej
-          </CardButton>
-        </Link>
-      </LeftSide>
-      <RightSide>
-        <DataContainer>
-          <StyledLabel>
-            Producent:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].manufacturer}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Typ:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].type}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Kraj pochodzenia:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].country}
-            </StyledSpan>
-          </StyledLabel>
-          <p />
-          <StyledLabel>
-            Aromat:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].aromaScore}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Smak:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].tasteScore}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Gorycz:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].bitternessScore}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Moc:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].energyScore}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Cena:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].priceScore}
-            </StyledSpan>
-          </StyledLabel>
-          <StyledLabel>
-            Ocena ogólna:
-            {' '}
-            <StyledSpan>
-              {exampleData[0].overallScore}
-            </StyledSpan>
-          </StyledLabel>
-        </DataContainer>
+        <Image src={data.photoUrl} alt={data.name} />
+        <CardButton
+          themeType={ButtonType.Primary}
+        >
+            Zobacz więcej
+        </CardButton>
+      </DataWrapper>
+      <DataWrapper>
+        <CardValue label="Producent:" value={data.manufacturer} />
+        <CardValue label="Typ:" value={data.type} />
+        <CardValue label="Kraj pochodzenia:" value={data.country} />
+        <CardValue label="Aromat:" value={data.aromaScore} />
+        <CardValue label="Smak:" value={data.tasteScore} />
+        <CardValue label="Gorycz:" value={data.bitternessScore} />
+        <CardValue label="Moc:" value={data.energyScore} />
+        <CardValue label="Cena:" value={data.priceScore} />
+        <CardValue label="Ocena ogólna:" value={data.overallScore} />
         <Description>
-          {exampleData[0].details}
+          {data.details}
         </Description>
-      </RightSide>
+      </DataWrapper>
     </CardContainer>
   );
 };

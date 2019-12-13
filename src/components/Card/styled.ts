@@ -1,86 +1,83 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button } from 'components/Button';
-import { FormCard } from 'components/Form/styled';
 
-export const CardContainer = styled(FormCard)`
+export const CardContainer = styled.div`
   height: 480px;
   width: 620px;
-  display: flex;
-  flex-direction: row;
-  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: ${({ theme }) => theme.metrics.margin.m};
+  box-shadow: 0 10px 10px -5px ${({ theme }) => theme.colors.shadow};
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
-export const YerbaTitle = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: ${({ theme }) => theme.metrics.padding.s};
-  margin: ${({ theme }) => theme.metrics.margin.s};
-  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+export const YerbaTitle = styled.h4`
+  color: ${({ theme }) => theme.colors.primaryText};
+  padding: 0 15px;
+  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
   font-weight: 750;
 `;
 
-export const LeftSide = styled.div`
+export const DataWrapper = styled.div<{primary?: boolean}>`
   display: flex;
   flex-direction: column;
-  flex: 1;
-  margin: ${({ theme }) => theme.metrics.margin.s};
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  * {
+    z-index: 1;
+  }
+  padding: ${({ theme }) => theme.metrics.padding.m} 0;
+  ${({ primary, theme }) => primary && css`
+    background: ${theme.colors.disabledBackground};
+    box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
+    justify-content: space-between;
+
+  `};
 `;
 
 export const Image = styled.img`
+  position: absolute;
   max-width:100%;
-  max-height:100%;
-  width: 100%;
+  z-index: 0;
+  top: 100px;
   height: auto;
 `;
 
-export const RightSide = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin: ${({ theme }) => theme.metrics.margin.m};
-  overflow: auto;
-`;
 
 export const Description = styled.p`
+  margin: 0;
+  margin-top: ${({ theme }) => theme.metrics.margin.m};
+  color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
-  padding: ${({ theme }) => theme.metrics.padding.s};
-  padding-right: ${({ theme }) => theme.metrics.padding.m};
-  text-align: justify;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 4;
-  font-weight: 450;
-  margin: ${({ theme }) => theme.metrics.margin.s};
+  font-weight: 500;
 `;
 
-export const DataContainer = styled.div`
-  font-size: ${({ theme }) => theme.metrics.fontSize.m};
-  padding: ${({ theme }) => theme.metrics.padding.s};
+export const ValueWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: ${({ theme }) => theme.metrics.padding.s} 0;
+
 `;
 
 export const StyledLabel = styled.label`
-  font-size: ${({ theme }) => theme.metrics.fontSize.m};
-  padding: ${({ theme }) => theme.metrics.padding.s};
-  padding-right: ${({ theme }) => theme.metrics.padding.m};
+  color: ${({ theme }) => theme.colors.labelText};
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 700;
 `;
 
-export const StyledSpan = styled.span`
-  font-size: ${({ theme }) => theme.metrics.fontSize.m};
-  padding: ${({ theme }) => theme.metrics.padding.s};
-  padding-right: ${({ theme }) => theme.metrics.padding.m};
-  font-weight: 550;
+
+export const StyledValue = styled.p`
+  margin: 0;
+  color: ${({ theme }) => theme.colors.primaryText};
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
+  margin-left: 3px;
+  font-weight: 500;
 `;
 
 export const CardButton = styled(Button)`
   margin: ${({ theme }) => theme.metrics.margin.l};
+  justify-self: flex-end;
 `;
