@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 import { ButtonType } from 'components/Button';
+import { Rating } from 'components/Rating';
+import { SizeType } from 'components/Rating/types';
+import { truncate } from 'lodash';
 import {
   CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description,
 } from './styled';
@@ -56,6 +59,7 @@ export const Card: FC<CardProps> = ({
   details,
 }) => {
   const data = exampleData[0];
+  const shortDescription = truncate(data.details, { length: 150, separator: '.' });
   return (
     <CardContainer>
       <DataWrapper primary>
@@ -73,14 +77,14 @@ export const Card: FC<CardProps> = ({
         <CardValue label="Producent:" value={data.manufacturer} />
         <CardValue label="Typ:" value={data.type} />
         <CardValue label="Kraj pochodzenia:" value={data.country} />
-        <CardValue label="Aromat:" value={data.aromaScore} />
-        <CardValue label="Smak:" value={data.tasteScore} />
-        <CardValue label="Gorycz:" value={data.bitternessScore} />
-        <CardValue label="Moc:" value={data.energyScore} />
-        <CardValue label="Cena:" value={data.priceScore} />
-        <CardValue label="Ocena ogólna:" value={data.overallScore} />
+        <Rating size={SizeType.Small} label="Aromat:" initialRating={data.aromaScore} />
+        <Rating size={SizeType.Small} label="Smak:" initialRating={data.tasteScore} />
+        <Rating size={SizeType.Small} label="Gorycz:" initialRating={data.bitternessScore} />
+        <Rating size={SizeType.Small} label="Moc:" initialRating={data.energyScore} />
+        <Rating size={SizeType.Small} label="Cena:" initialRating={data.priceScore} />
+        <Rating size={SizeType.Small} label="Ocena ogólna:" initialRating={data.overallScore} />
         <Description>
-          {data.details}
+          {shortDescription}
         </Description>
       </DataWrapper>
     </CardContainer>
