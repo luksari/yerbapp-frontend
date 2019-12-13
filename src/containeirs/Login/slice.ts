@@ -9,7 +9,7 @@ export interface LoginSliceState {
   error: string;
   data: LoginFormData;
   token?: string;
-  userId?: string;
+  userId?: number;
 }
 
 export const initialState: LoginSliceState = {
