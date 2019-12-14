@@ -6,7 +6,6 @@ export const tableSidePadding = '30px';
 const cellStyled = () => css`
   padding: 12px 0;
   white-space: nowrap;
-  font-weight: 500;
 
   &:first-child {
     padding-left: ${tableSidePadding};
@@ -26,18 +25,27 @@ export const Cell = styled.td<{ alignText: string }>`
 `;
 
 export const HeadCell = styled.th<{ alignText: string }>`
-  ${cellStyled()}
   user-select: none;
   text-align: ${({ alignText }) => alignText};
-  color: ${({ theme }) => theme.colors.alternativeText};
-  background: ${({ theme }) => theme.colors.infoHover};
-  font-weight: 500;
+  color: ${({ theme }) => theme.colors.info};
+  background: ${({ theme }) => theme.colors.mainBackground};
+  font-weight: 600;
+  padding: 20px 0;
+
+  &:first-child {
+    padding-left: ${tableSidePadding};
+  }
+
+  &:last-child {
+    padding-right: ${tableSidePadding};
+  }
 `;
 
 export const HeadRow = styled.tr`
-  background: ${({ theme }) => theme.colors.infoHover};
-  font-weight: 500;
+  background: ${({ theme }) => theme.colors.primaryText};
   font-size: 0.85em;
+  box-shadow: 0 10px 10px -5px ${({ theme }) => theme.colors.shadow};
+
 `;
 
 // Row uses .is-nested class to avaoid circular dependency between Row and NestedRow components.
@@ -76,8 +84,8 @@ export const SortingIcon = styled(Icon).attrs({
   type: 'arrow-up',
 }) <{ sortedDesc?: boolean }>`
   vertical-align: middle;
-  font-size: 16px;
   margin-left: 4px;
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
   transition: transform 0.2s;
 
   ${({ sortedDesc }) => css`
