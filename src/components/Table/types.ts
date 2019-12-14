@@ -11,7 +11,9 @@ export enum SortOrder {
  * React-table interfaces are expanded by plugins, and react-table doesn't extend types by himself.
  */
 declare module 'react-table' {
-  interface Row<D> extends UseExpandedRowProps<D> { }
+  interface Row<D extends object = {}> extends UseTableRowProps<D> {
+    values: Record<keyof D, CellValue>;
+  }
   interface Column<D extends object = {}> extends UseSortByColumnOptions<D> {
     align?: string;
   }
@@ -20,8 +22,10 @@ declare module 'react-table' {
   interface TableState<D extends object = {}> extends UseExpandedState<D> { }
   interface TableInstance<D extends object = {}> {
     // at the time of writing that, dispatch is not provided in typings
+    values: Record<keyof D, CellValue>;
     dispatch: (opts: { type: string } & Record<string, any>) => void;
   }
+
   export interface UseTableColumnOptions<D extends object> {
     /**
      * You can access row reference here,

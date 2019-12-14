@@ -2,10 +2,11 @@ import React from 'react';
 import { Pagination } from 'components/Pagination';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { GetManufacturersQueryHookResult } from 'generated/graphql';
 import { ManufacturerModel } from '../types';
 
 interface Props {
-  data: ManufacturerModel[];
+  data: GetManufacturersQueryHookResult[];
 }
 
 export const ManuFacturersTable = ({
@@ -32,7 +33,6 @@ export const ManuFacturersTable = ({
           id: 'edit',
           Cell: ({ row }) => (
             <div>
-              {row.values.x}
               <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>Edytuj</Button>
             </div>
           ),
@@ -41,7 +41,6 @@ export const ManuFacturersTable = ({
           id: 'remove',
           Cell: ({ row }) => (
             <div>
-              {row.values.x}
               <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow}>Usuń</Button>
             </div>
           ),
