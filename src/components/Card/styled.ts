@@ -49,32 +49,40 @@ export const Image = styled.img`
 
 export const Description = styled.p`
   margin: 0;
-  margin-top: ${({ theme }) => theme.metrics.margin.m};
+  margin-top: ${({ theme }) => theme.metrics.margin.s};
   color: ${({ theme }) => theme.colors.labelText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
 `;
 
 export const ValueWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
   padding-bottom: ${({ theme }) => theme.metrics.padding.s};
 `;
 
 export const StyledLabel = styled.label`
   color: ${({ theme }) => theme.colors.labelText};
-  font-size: ${({ theme }) => theme.metrics.fontSize.s};
+  font-size: ${({ theme }) => theme.metrics.fontSize.xs};
   font-weight: 700;
 `;
 
 
 export const StyledValue = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  color: ${({ theme }) => theme.colors.primaryText};
-  font-size: ${({ theme }) => theme.metrics.fontSize.s};
+  color: ${({ theme }) => theme.colors.alternativeText};
+  font-size: ${({ theme }) => theme.metrics.fontSize.xs};
   margin-left: 3px;
-  font-weight: 500;
+  font-weight: 600;
+  padding: ${({ theme }) => theme.metrics.padding.xs};
+  background: ${({ theme }) => theme.gradients.primaryToAlt};
+  box-shadow: 0 5px 5px -4px ${({ theme }) => theme.colors.shadow};
+  border-right: 18px solid ${({ theme }) => theme.colors.mainBackground}7e;
+  max-width: 145px;
+  border-radius: 4px;
 `;
 
 export const CardButton = styled(Button)`
@@ -83,8 +91,6 @@ export const CardButton = styled(Button)`
 `;
 
 export const StyledRating = styled(Rating)`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  padding-right: ${({ theme }) => theme.metrics.padding.s};
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
 `;
