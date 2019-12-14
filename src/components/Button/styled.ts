@@ -24,7 +24,7 @@ const THEME = {
   `,
   [ButtonType.Danger]: css`
     background-color: ${({ theme }) => theme.colors.danger};
-    color: ${({ theme }) => theme.colors.primaryText};
+    color: ${({ theme }) => theme.colors.alternativeText};
     &:hover {
       background: ${({ theme }) => theme.colors.dangerHover};
     }
@@ -68,6 +68,7 @@ const ButtonVariantMap = {
   `,
   [ButtonVariant.Narrow]: css`
     min-width: 50px;
+    font-size: 0.8rem;
 `,
 };
 
