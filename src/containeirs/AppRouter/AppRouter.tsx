@@ -13,7 +13,8 @@ import { Profile } from 'containeirs/Profile';
 import { HomepageLayout } from 'components/Layouts/HomepageLayout';
 import { NoMatch } from 'containeirs/NoMatch';
 import { AdminPanel } from 'containeirs/AdminPanel';
-import NotAllowed from 'containeirs/NotAllowed/NotAllowed';
+import { NotAllowed } from 'containeirs/NotAllowed';
+import { Manufacturers } from 'containeirs/Manufacturers';
 
 export const AppRouter: FC = () => {
   return (
@@ -23,7 +24,8 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute path="/about" component={About} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/explore" component={Explore} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/profile" component={Profile} layout={AppLayout} />
-      <AuthenticatedRoute path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />
 
       <LayoutRoute path="/login" component={Login} layout={AuthLayout} />
       <LayoutRoute path="/register" component={Register} layout={AuthLayout} />
