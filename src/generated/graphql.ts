@@ -369,6 +369,17 @@ export type User = {
   createdAt: Scalars['String'],
 };
 
+export type GetManufacturersQueryVariables = {};
+
+
+export type GetManufacturersQuery = (
+  { __typename?: 'Query' }
+  & { manufacturers: Array<(
+    { __typename?: 'Manufacturer' }
+    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'addedAt'>
+  )> }
+);
+
 export type GetMeQueryVariables = {};
 
 
@@ -425,6 +436,43 @@ export type EditUserMutation = (
 );
 
 
+export const GetManufacturersDocument = gql`
+    query getManufacturers {
+  manufacturers {
+    id
+    name
+    country
+    photoUrl
+    editedAt
+    addedAt
+  }
+}
+    `;
+
+/**
+ * __useGetManufacturersQuery__
+ *
+ * To run a query within a React component, call `useGetManufacturersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetManufacturersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetManufacturersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetManufacturersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetManufacturersQuery, GetManufacturersQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetManufacturersQuery, GetManufacturersQueryVariables>(GetManufacturersDocument, baseOptions);
+      }
+export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetManufacturersQuery, GetManufacturersQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetManufacturersQuery, GetManufacturersQueryVariables>(GetManufacturersDocument, baseOptions);
+        }
+export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
+export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
+export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
 export const GetMeDocument = gql`
     query getMe {
   whoAmI {
