@@ -14,7 +14,6 @@ type Props = {
   label?: string;
   vertical?: boolean;
   size?: SizeType;
-  onSubmit?: (value: number) => void;
 } & RatingComponentProps;
 
 export const Rating: FC<Props> = ({
@@ -24,6 +23,7 @@ export const Rating: FC<Props> = ({
   size = SizeType.Normal,
   vertical = false,
   onChange,
+  className,
   ...rest
 }) => {
   const context = useFormikContext<any>();
@@ -31,9 +31,8 @@ export const Rating: FC<Props> = ({
   const [rating, setRating] = useState(value);
   const handleClick = (val) => setRating(val);
   const handleChange = useCallback((val: number) => context ? context.setFieldValue(name, val, false) : onChange(val), [rating]);
-
   return useMemo(() => (
-    <InputWrapper size={size} vertical={vertical}>
+    <InputWrapper size={size} vertical={vertical} className={className}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <StyledRating {...rest} onChange={handleChange} onClick={handleClick} initialRating={rating} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>

@@ -44,45 +44,60 @@ const exampleData: CardProps[] = [
   },
 ];
 
-export const Card: FC<CardProps> = ({
-  name,
-  photoUrl,
-  manufacturer,
-  type,
-  country,
-  aromaScore,
-  tasteScore,
-  bitternessScore,
-  energyScore,
-  priceScore,
-  overallScore,
-  details,
-}) => {
-  const data = exampleData[0];
-  const shortDescription = truncate(data.details, { length: 150, separator: '.' });
+export const Card: FC<CardProps> = (
+  // {
+  //   name,
+  //   photoUrl,
+  //   manufacturer,
+  //   type,
+  //   country,
+  //   aromaScore,
+  //   tasteScore,
+  //   bitternessScore,
+  //   energyScore,
+  //   priceScore,
+  //   overallScore,
+  //   details,
+  // },
+) => {
+  const {
+    name,
+    photoUrl,
+    manufacturer,
+    type,
+    country,
+    aromaScore,
+    tasteScore,
+    bitternessScore,
+    energyScore,
+    priceScore,
+    overallScore,
+    details,
+  } = exampleData[0];
+  const shortDescription = truncate(details, { length: 150, separator: '.' });
   return (
     <CardContainer>
       <DataWrapper primary>
         <YerbaTitle>
-          {data.name}
+          {name}
         </YerbaTitle>
-        <Image src={data.photoUrl} alt={data.name} />
+        <Image src={photoUrl} alt={name} />
         <CardButton
-          themeType={ButtonType.Primary}
+          themeType={ButtonType.Secondary}
         >
             Zobacz więcej
         </CardButton>
       </DataWrapper>
       <DataWrapper>
-        <CardValue label="Producent: " value={data.manufacturer} />
-        <CardValue label="Typ: " value={data.type} />
-        <CardValue label="Kraj pochodzenia: " value={data.country} />
-        <StyledRating size={SizeType.Small} label="Aromat: " initialRating={data.aromaScore} />
-        <StyledRating size={SizeType.Small} label="Smak: " initialRating={data.tasteScore} />
-        <StyledRating size={SizeType.Small} label="Gorycz: " initialRating={data.bitternessScore} />
-        <StyledRating size={SizeType.Small} label="Moc: " initialRating={data.energyScore} />
-        <StyledRating size={SizeType.Small} label="Cena: " initialRating={data.priceScore} />
-        <StyledRating size={SizeType.Small} label="Ocena ogólna: " initialRating={data.overallScore} />
+        <CardValue label="Producent: " value={manufacturer} />
+        <CardValue label="Typ: " value={type} />
+        <CardValue label="Kraj pochodzenia: " value={country} />
+        <StyledRating size={SizeType.Small} label="Aromat: " initialRating={aromaScore} readonly />
+        <StyledRating size={SizeType.Small} label="Smak: " initialRating={tasteScore} readonly />
+        <StyledRating size={SizeType.Small} label="Gorycz: " initialRating={bitternessScore} readonly />
+        <StyledRating size={SizeType.Small} label="Moc: " initialRating={energyScore} readonly />
+        <StyledRating size={SizeType.Small} label="Cena: " initialRating={priceScore} readonly />
+        <StyledRating size={SizeType.Small} label="Ocena ogólna: " initialRating={overallScore} readonly />
         <Description>
           {shortDescription}
         </Description>
