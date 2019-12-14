@@ -31,7 +31,6 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   }
   return (
     <StyledTopbar>
-      <TitleBar />
       { data && (
         <>
           <UserProfileLink to="/profile">

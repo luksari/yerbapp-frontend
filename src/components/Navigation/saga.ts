@@ -1,5 +1,5 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
-import { LocationChangeAction, push } from 'connected-react-router';
+import { LocationChangeAction } from 'connected-react-router';
 import { actions } from './slice';
 
 function* setSelectedNavItemSaga(action: LocationChangeAction) {

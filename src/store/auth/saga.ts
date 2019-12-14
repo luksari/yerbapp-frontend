@@ -18,11 +18,6 @@ export function* unsetUserSaga() {
   window.location.reload();
 }
 
-
-export function* enableAdminItemsSaga(action: PayloadAction<GetMeRoleQueryHookResult>) {
-  yield;
-}
-
 export function* watchAuthSaga() {
   yield takeLatest(actions.unsetUser, unsetUserSaga);
   yield takeLatest(actions.setUser, setUserSaga);
