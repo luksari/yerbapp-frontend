@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -20,15 +20,6 @@ export const AdminPanelRaw: React.FC<Props> = () => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-});
-
-const mapDispatchToProps = (dispatch) => ({
-
-});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
 export default compose(
-  withConnect,
+  memo,
 )(AdminPanelRaw);
