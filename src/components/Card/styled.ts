@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Button } from 'components/Button';
+import { Rating } from 'components/Rating';
 
 export const CardContainer = styled.div`
   height: 480px;
@@ -15,8 +16,10 @@ export const CardContainer = styled.div`
 export const YerbaTitle = styled.h4`
   color: ${({ theme }) => theme.colors.primaryText};
   padding: 0 15px;
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  font-weight: 750;
+  margin-top: ${({ theme }) => theme.metrics.margin.m};
+  font-size: ${({ theme }) => theme.metrics.fontSize.l};
+  font-weight: 700;
+  line-height: 35px;
 `;
 
 export const DataWrapper = styled.div<{primary?: boolean}>`
@@ -28,7 +31,7 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   * {
     z-index: 1;
   }
-  padding: ${({ theme }) => theme.metrics.padding.m} 0;
+  padding: ${({ theme }) => theme.metrics.padding.l} ${({ theme }) => theme.metrics.padding.s};
   ${({ primary, theme }) => primary && css`
     box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
     justify-content: space-between;
@@ -37,7 +40,6 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
 `;
 
 export const Image = styled.img`
-  position: absolute;
   max-width:100%;
   z-index: 0;
   top: 100px;
@@ -57,8 +59,7 @@ export const ValueWrapper = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  padding: ${({ theme }) => theme.metrics.padding.s} 0;
-
+  padding-bottom: ${({ theme }) => theme.metrics.padding.s};
 `;
 
 export const StyledLabel = styled.label`
@@ -79,4 +80,11 @@ export const StyledValue = styled.p`
 export const CardButton = styled(Button)`
   margin: ${({ theme }) => theme.metrics.margin.l};
   justify-self: flex-end;
+`;
+
+export const StyledRating = styled(Rating)`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: ${({ theme }) => theme.metrics.padding.s};
 `;
