@@ -1,39 +1,30 @@
-import React from 'react';
-import { Pagination } from 'components/Pagination';
+import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
-import { GetManufacturersQueryHookResult } from 'generated/graphql';
-import { ManufacturerModel } from '../types';
+import { Manufacturer } from 'generated/graphql';
 
 interface Props {
-  data: GetManufacturersQueryHookResult[];
+  data: Manufacturer[];
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-export const ManuFacturersTable = ({
+export const ManuFacturersTable: FC<Props> = ({
   data,
+  onEdit,
+  onDelete,
 }) => (
   <>
-    <Pagination
-      itemCount={11}
-      perPage={5}
-      currentPage={0 /** component not controlled */}
-      onPageChange={console.log}
-    />
-    <Table<ManufacturerModel>
+    <Table<Manufacturer>
       columns={[
-        {
-          Header: 'ID',
-          accessor: 'id',
-          Cell: ({ cell: { value }, row: { values } }) => values.id + value, // lastName + firstName
-          disableSortBy: false,
-        },
+        { Header: 'Id', accessor: 'id', disableSortBy: false },
         { Header: 'Nazwa producenta', accessor: 'name', disableSortBy: false },
         { Header: 'Kraj producenta', accessor: 'country', disableSortBy: false },
         {
           id: 'edit',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>Edytuj</Button>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
             </div>
           ),
         },
@@ -41,7 +32,7 @@ export const ManuFacturersTable = ({
           id: 'remove',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow}>Usuń</Button>
+              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} onClick={() => onDelete(row.values.id)}>Usuń</Button>
             </div>
           ),
         },

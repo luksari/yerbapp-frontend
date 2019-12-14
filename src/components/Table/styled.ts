@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
-import { Icon } from 'antd';
+import { Logo } from 'components/Logo';
+import { StyledLogo } from 'components/Logo/styled';
 
 export const tableSidePadding = '30px';
 
@@ -31,6 +32,7 @@ export const HeadCell = styled.th<{ alignText: string }>`
   background: ${({ theme }) => theme.colors.mainBackground};
   font-weight: 600;
   padding: 20px 0;
+  cursor: pointer;
 
   &:first-child {
     padding-left: ${tableSidePadding};
@@ -80,17 +82,21 @@ export const NestedRow = styled.tr`
 `;
 
 // sorted: true false or undefined
-export const SortingIcon = styled(Icon).attrs({
-  type: 'arrow-up',
-}) <{ sortedDesc?: boolean }>`
-  vertical-align: middle;
-  margin-left: 4px;
-  font-size: ${({ theme }) => theme.metrics.fontSize.m};
-  transition: transform 0.2s;
+export const SortingIcon = styled(Logo)<{ sortedDesc?: boolean }>`
+  margin-left: 6px;
+  width: fit-content;
+  display: inline-block;
+  ${StyledLogo} {
+    transition: transform 0.2s;
+    height: 20px;
+  }
 
-  ${({ sortedDesc }) => css`
-    ${sortedDesc === undefined && 'display: none;'}
-    ${sortedDesc === true && 'transform: rotate(180deg);'}
+  ${({ sortedDesc }) => sortedDesc && css`
+
+    ${StyledLogo} {
+      transform: rotate(180deg);
+    }
+
   `}
 `;
 

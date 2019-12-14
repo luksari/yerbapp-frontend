@@ -39,7 +39,7 @@ export const renderRows = <T extends object>({
               </Cell>
             ))}
           </Row>
-          {(row.isExpanded && renderSubRow) ? (
+          {(row.subRows && renderSubRow) ? (
             <NestedRow className="is-nested">
               <Cell colSpan={flatColumns.length} alignText="left">
                 {renderSubRow(row.original)}

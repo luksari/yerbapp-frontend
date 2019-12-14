@@ -369,7 +369,10 @@ export type User = {
   createdAt: Scalars['String'],
 };
 
-export type GetManufacturersQueryVariables = {};
+export type GetManufacturersQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>
+};
 
 
 export type GetManufacturersQuery = (
@@ -437,8 +440,8 @@ export type EditUserMutation = (
 
 
 export const GetManufacturersDocument = gql`
-    query getManufacturers {
-  manufacturers {
+    query getManufacturers($offset: Int, $perPage: Int) {
+  manufacturers(offset: $offset, perPage: $perPage) {
     id
     name
     country
@@ -461,6 +464,8 @@ export const GetManufacturersDocument = gql`
  * @example
  * const { data, loading, error } = useGetManufacturersQuery({
  *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
  *   },
  * });
  */
