@@ -17,10 +17,6 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać danych profilu użytkownika.' }),
   });
 
-  if (loading) {
-    return <Loader fullscreen />;
-  }
-
   const [editUser, { loading: saving }] = useEditUserMutation({
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się zapisć danych profilu użytkownika.' }),
     onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie zapisano profil użytkownika!' }),
@@ -38,6 +34,9 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
     });
   };
 
+  if (loading) {
+    return <Loader fullscreen />;
+  }
 
   return (
     <>
