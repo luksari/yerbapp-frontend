@@ -2,8 +2,8 @@ import React, { memo, FC } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { TableExample } from 'components/Table';
 import { Wrapper } from './styled';
+import { ManuFacturersTable } from './components/ManufacturersTable';
 
 interface Props {
   props: any;
@@ -15,7 +15,7 @@ export const ManufacturesRaw: FC<Props> = () => {
     <Wrapper>
       <Helmet title="Producenci" />
       <Title>Producenci</Title>
-      <TableExample />
+      <ManuFacturersTable data={[]} />
     </Wrapper>
   );
 };

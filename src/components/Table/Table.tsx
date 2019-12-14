@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { ReactNode, useMemo, useLayoutEffect } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import {
   TableContainer, HeadCell, HeadRow, SortingIcon,
 } from 'components/Table/styled';
@@ -9,7 +9,7 @@ import { renderRows, renderEmptyRows } from 'components/Table/body/rows';
 import {
   useTable, useSortBy, useExpanded, Column, ColumnInstance,
 } from 'react-table';
-import { SortOrder } from './types.d';
+import { SortOrder } from './types';
 
 interface Props<T extends object> {
   /**
@@ -20,9 +20,7 @@ interface Props<T extends object> {
   data: T[];
 
   onSort?: (columnId: string, order: SortOrder) => void;
-  /** performs in-memory sorting on current data */
   autoSort?: boolean;
-
   isLoading?: boolean;
 
   /**
@@ -49,7 +47,7 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     flatColumns,
-    dispatch,
+    ...rest
   } = useTable<T>({
     columns: parseColumns(columns),
     data,
@@ -58,6 +56,7 @@ export function Table<T extends object>({
 
   const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length }), [flatColumns]);
 
+  console.log(rest);
   let tableBody: ReactNode;
   if (data.length === 0) {
     tableBody = isLoading
@@ -70,7 +69,7 @@ export function Table<T extends object>({
   }
 
   // For data change, reset expanded state. Useful e.g. when pagination page is changed
-  useLayoutEffect(() => dispatch({ type: 'resetExpanded' }), [data]);
+  // useLayoutEffect(() => dispatch({ type: 'resetExpanded' }), [data]);
 
   if (isLoading) {
     return <Loader />;
@@ -91,7 +90,7 @@ export function Table<T extends object>({
                 alignText={column.align || 'left'}
               >
                 {column.render('Header')}
-                <SortingIcon sortedDesc={column.isSortedDesc} type="arrow-up" />
+                {!column.disableSortBy && <SortingIcon sortedDesc={column.isSortedDesc} type="arrow-up" />}
               </HeadCell>
             ))}
           </HeadRow>

@@ -1,7 +1,6 @@
 import React, {
   FC, memo, useCallback, useMemo,
 } from 'react';
-import { TitleBar } from 'components/TitleBar';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
