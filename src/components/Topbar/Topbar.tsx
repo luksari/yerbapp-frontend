@@ -7,12 +7,11 @@ import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
 import { connect } from 'react-redux';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_ME } from 'queries/UserQueries';
 import {
-  GetMeQuery, GetMeQueryVariables,
+  useGetMeQuery,
 } from 'generated/graphql';
 import { UserAvatar } from 'components/UserAvatar';
+import { Loader } from 'components/Loader';
 import { StyledTopbar, UserProfileLink, UserTitle } from './styled';
 
 interface TopbarProps {
@@ -24,10 +23,12 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   logout,
   isAuthenticated,
 }) => {
-  const { data } = useQuery<GetMeQuery, GetMeQueryVariables>(GET_ME);
+  const { data, loading } = useGetMeQuery();
   const handleLogout = useCallback(() => { logout(); }, [logout]);
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
-  console.log('Topbar render');
+  if (loading) {
+    return <Loader fullscreen />;
+  }
   return (
     <StyledTopbar>
       <TitleBar />

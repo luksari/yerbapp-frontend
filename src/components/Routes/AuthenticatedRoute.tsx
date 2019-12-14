@@ -4,6 +4,7 @@ import React, {
 import { Route, Redirect, RouteProps } from 'react-router';
 import { useGetMeRoleQuery } from 'generated/graphql';
 import { UserRoles } from 'utils/types';
+import { Loader } from 'components/Loader';
 import { LayoutRoute } from './LayoutRoute';
 
 interface Props extends RouteProps {
@@ -21,7 +22,10 @@ export const AuthenticatedRoute: FC<Props> = ({
   mustBeAdmin,
   ...rest
 }) => {
-  const { data } = useGetMeRoleQuery({ skip: !mustBeAdmin });
+  const { data, loading } = useGetMeRoleQuery({ skip: !mustBeAdmin });
+  if (loading) {
+    return <Loader fullscreen />;
+  }
 
   return (
     <Route
