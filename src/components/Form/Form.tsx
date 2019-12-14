@@ -8,6 +8,7 @@ import {
   FormikConfig, Formik,
 } from 'formik';
 import { Title } from 'components/TitleBar';
+import { Loader } from 'components/Loader';
 import {
   FormContainer, StyledForm, FormActionsWrapper, ButtonsWrapper,
 } from './styled';
@@ -39,7 +40,11 @@ export function Form<Values>({
   onSubmit,
   validate,
   isSaving,
+  isLoading,
 }: FormProps<Values>) {
+  if (isLoading) {
+    return <Loader fullscreen />;
+  }
   return (
     <Formik
       initialValues={initialValues}
