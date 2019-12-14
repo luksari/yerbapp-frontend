@@ -41,9 +41,9 @@ const adminNavItems: NavigationItem[] = [
   {
     to: '/explore',
     selected: undefined,
-    title: 'Przeglądaj Yerba Mate',
+    title: 'Wróć do aplikacji',
     visible: true,
-    icon: 'search',
+    icon: 'arrow-left',
   },
   {
     to: '/manufacturers',
