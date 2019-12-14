@@ -4,7 +4,7 @@ import { Rating } from 'components/Rating';
 import { SizeType } from 'components/Rating/types';
 import { truncate } from 'lodash';
 import {
-  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating,
 } from './styled';
 import { CardValue } from './CardValue';
 
@@ -74,15 +74,15 @@ export const Card: FC<CardProps> = ({
         </CardButton>
       </DataWrapper>
       <DataWrapper>
-        <CardValue label="Producent:" value={data.manufacturer} />
-        <CardValue label="Typ:" value={data.type} />
-        <CardValue label="Kraj pochodzenia:" value={data.country} />
-        <Rating size={SizeType.Small} label="Aromat:" initialRating={data.aromaScore} />
-        <Rating size={SizeType.Small} label="Smak:" initialRating={data.tasteScore} />
-        <Rating size={SizeType.Small} label="Gorycz:" initialRating={data.bitternessScore} />
-        <Rating size={SizeType.Small} label="Moc:" initialRating={data.energyScore} />
-        <Rating size={SizeType.Small} label="Cena:" initialRating={data.priceScore} />
-        <Rating size={SizeType.Small} label="Ocena ogólna:" initialRating={data.overallScore} />
+        <CardValue label="Producent: " value={data.manufacturer} />
+        <CardValue label="Typ: " value={data.type} />
+        <CardValue label="Kraj pochodzenia: " value={data.country} />
+        <StyledRating size={SizeType.Small} label="Aromat: " initialRating={data.aromaScore} />
+        <StyledRating size={SizeType.Small} label="Smak: " initialRating={data.tasteScore} />
+        <StyledRating size={SizeType.Small} label="Gorycz: " initialRating={data.bitternessScore} />
+        <StyledRating size={SizeType.Small} label="Moc: " initialRating={data.energyScore} />
+        <StyledRating size={SizeType.Small} label="Cena: " initialRating={data.priceScore} />
+        <StyledRating size={SizeType.Small} label="Ocena ogólna: " initialRating={data.overallScore} />
         <Description>
           {shortDescription}
         </Description>

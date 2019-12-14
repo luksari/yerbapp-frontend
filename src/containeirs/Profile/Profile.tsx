@@ -3,6 +3,7 @@ import {
   useGetMeDetailsQuery, useEditUserMutation,
 } from 'generated/graphql';
 import { notificationError, notificationSuccess } from 'components/Notification';
+import { Loader } from 'components/Loader';
 import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
 const Profile = () => {
@@ -26,6 +27,10 @@ const Profile = () => {
       },
     });
   };
+
+  if (loading) {
+    return <Loader fullscreen />;
+  }
 
   return (
     <>
