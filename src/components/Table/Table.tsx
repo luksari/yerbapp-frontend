@@ -47,7 +47,6 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     flatColumns,
-    ...rest
   } = useTable<T>({
     columns: parseColumns(columns),
     data,
@@ -56,7 +55,6 @@ export function Table<T extends object>({
 
   const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length }), [flatColumns]);
 
-  console.log(rest);
   let tableBody: ReactNode;
   if (data.length === 0) {
     tableBody = isLoading
@@ -67,9 +65,6 @@ export function Table<T extends object>({
       rows, flatColumns, prepareRow, renderSubRow,
     });
   }
-
-  // For data change, reset expanded state. Useful e.g. when pagination page is changed
-  // useLayoutEffect(() => dispatch({ type: 'resetExpanded' }), [data]);
 
   if (isLoading) {
     return <Loader />;
@@ -90,7 +85,7 @@ export function Table<T extends object>({
                 alignText={column.align || 'left'}
               >
                 {column.render('Header')}
-                {!column.disableSortBy && <SortingIcon sortedDesc={column.isSortedDesc} type="arrow-up" />}
+                {!column.disableSortBy && <SortingIcon sortedDesc={column.isSortedDesc} />}
               </HeadCell>
             ))}
           </HeadRow>

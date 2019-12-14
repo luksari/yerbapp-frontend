@@ -7,7 +7,7 @@ function* setSelectedNavItemSaga(action: LocationChangeAction) {
 }
 
 function* setAdminItemsNavbarSaga(action: LocationChangeAction) {
-  if (action.payload.location.pathname === '/admin') {
+  if (action.payload.location.pathname.includes('/admin')) {
     yield put(actions.setAdminNavItems());
   }
 }
