@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { AsyncStatus } from 'utils/types';
 import { LoginResponse } from 'api/AuthApi';
 import { LoginFormData } from './types';
@@ -37,3 +37,10 @@ export const { name, actions, reducer } = createSlice({
     },
   },
 });
+
+const loginDomain = (state) => state[name] as LoginSliceState;
+
+export const makeSelectIsPending = () => createSelector(
+  loginDomain,
+  (substate) => substate.status === AsyncStatus.Pending,
+);

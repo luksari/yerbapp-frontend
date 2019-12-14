@@ -5,6 +5,7 @@ import {
 import { notificationError, notificationSuccess } from 'components/Notification';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { Loader } from 'components/Loader';
 import { ProfileForm, ProfileFormData } from './components/ProfileForm';
 
 interface Props {
@@ -15,6 +16,10 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
   const { data, loading } = useGetMeDetailsQuery({
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać danych profilu użytkownika.' }),
   });
+
+  if (loading) {
+    return <Loader fullscreen />;
+  }
 
   const [editUser, { loading: saving }] = useEditUserMutation({
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się zapisć danych profilu użytkownika.' }),
@@ -32,6 +37,7 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
       },
     });
   };
+
 
   return (
     <>
