@@ -1,5 +1,5 @@
 import React, {
-  createRef, memo, ReactNode, FC, useState,
+  createRef, memo, ReactNode, FC,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { TitleBarWrapper, TitleBarTitle } from './styled';
