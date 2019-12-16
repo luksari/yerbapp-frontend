@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useMemo, useCallback, useState,
+  FC, useMemo, useCallback, useState,
 } from 'react';
 import { RatingComponentProps } from 'react-rating';
 import { useFormikContext } from 'formik';
