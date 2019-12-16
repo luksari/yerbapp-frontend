@@ -3,7 +3,7 @@ import { Button } from 'components/Button';
 import { Rating } from 'components/Rating';
 
 export const CardContainer = styled.div`
-  height: 480px;
+  height: 490px;
   width: 620px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -20,6 +20,8 @@ export const YerbaTitle = styled.h4`
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
   font-weight: 700;
   line-height: 35px;
+  text-transform: uppercase;
+  text-align: center;
 `;
 
 export const DataWrapper = styled.div<{primary?: boolean}>`
@@ -35,7 +37,6 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   ${({ primary, theme }) => primary && css`
     box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
     justify-content: space-between;
-
   `};
 `;
 
@@ -49,7 +50,7 @@ export const Image = styled.img`
 
 export const Description = styled.p`
   margin: 0;
-  margin-top: ${({ theme }) => theme.metrics.margin.s};
+  margin-top: ${({ theme }) => theme.metrics.margin.m};
   color: ${({ theme }) => theme.colors.labelText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
@@ -59,6 +60,9 @@ export const ValueWrapper = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   padding-bottom: ${({ theme }) => theme.metrics.padding.s};
+  &:nth-child(3) {
+    margin-bottom: ${({ theme }) => theme.metrics.margin.m};
+  }
 `;
 
 export const StyledLabel = styled.label`
