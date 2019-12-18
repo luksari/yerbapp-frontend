@@ -40,8 +40,8 @@ export const theme = {
       xxxl: '120px',
     },
     padding: {
-      s: '5px',
-      xs: '10px',
+      xs: '5px',
+      s: '10px',
       m: '15px',
       l: '25px',
       xl: '30px',
@@ -52,7 +52,7 @@ export const theme = {
     },
   },
   gradients: {
-
+    primaryToAlt: 'linear-gradient(129deg, rgba(155,197,61,1) 0%, rgba(71,159,83,1) 100%)',
   },
   animations: {
 
