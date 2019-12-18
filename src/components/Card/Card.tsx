@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import { ButtonType } from 'components/Button';
+import { SizeType } from 'components/Rating/types';
+import { truncate } from 'lodash';
 import {
-  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating,
 } from './styled';
 import { CardValue } from './CardValue';
 
@@ -22,65 +24,46 @@ interface CardProps {
   overallScore: number;
 }
 
-const exampleData: CardProps[] = [
+export const Card: FC<CardProps> = (
   {
-    id: 1,
-    manufacturer: 'Pajarito',
-    type: 'Elaborada',
-    name: 'Pajarito Elaborada',
-    details: 'Pajarito w swojej podstawowej wersji (Elaborada) to produkt bardzo solidny, herbatka brawurowo wręcz pobudza, jest wydajna oraz relatywnie tania. Jej atutem jest również powszechna dostępność. Bardzo dobry wybór dla osób rozpoczynających swoją przygodę z yerba mate.',
-    country: 'Paragwaj',
-    photoUrl: 'https://etnobazar.pl/pol_pl_YERBA-MATE-PAJARITO-ELABORADA-250G-BIO-18821_3.jpg',
-    addedAt: '09.11.2001 21:37:42',
-    aromaScore: 3.3,
-    tasteScore: 3.9,
-    bitternessScore: 3.6,
-    energyScore: 4.1,
-    priceScore: 4.5,
-    overallScore: 4.3,
+    name,
+    photoUrl,
+    manufacturer,
+    type,
+    country,
+    aromaScore,
+    tasteScore,
+    bitternessScore,
+    energyScore,
+    priceScore,
+    overallScore,
+    details,
   },
-];
-
-export const Card: FC<CardProps> = ({
-  name,
-  photoUrl,
-  manufacturer,
-  type,
-  country,
-  aromaScore,
-  tasteScore,
-  bitternessScore,
-  energyScore,
-  priceScore,
-  overallScore,
-  details,
-}) => {
-  const data = exampleData[0];
+) => {
+  const shortDescription = truncate(details, { length: 150, separator: '.' });
   return (
     <CardContainer>
       <DataWrapper primary>
         <YerbaTitle>
-          {data.name}
+          {name}
         </YerbaTitle>
-        <Image src={data.photoUrl} alt={data.name} />
-        <CardButton
-          themeType={ButtonType.Primary}
-        >
-            Zobacz więcej
+        <Image src={photoUrl} alt={name} />
+        <CardButton themeType={ButtonType.Secondary}>
+          Zobacz więcej
         </CardButton>
       </DataWrapper>
       <DataWrapper>
-        <CardValue label="Producent:" value={data.manufacturer} />
-        <CardValue label="Typ:" value={data.type} />
-        <CardValue label="Kraj pochodzenia:" value={data.country} />
-        <CardValue label="Aromat:" value={data.aromaScore} />
-        <CardValue label="Smak:" value={data.tasteScore} />
-        <CardValue label="Gorycz:" value={data.bitternessScore} />
-        <CardValue label="Moc:" value={data.energyScore} />
-        <CardValue label="Cena:" value={data.priceScore} />
-        <CardValue label="Ocena ogólna:" value={data.overallScore} />
+        <CardValue label="Producent: " value={manufacturer} />
+        <CardValue label="Typ: " value={type} />
+        <CardValue label="Kraj pochodzenia: " value={country} />
+        <StyledRating size={SizeType.Small} label="Aromat: " initialRating={aromaScore} readonly />
+        <StyledRating size={SizeType.Small} label="Smak: " initialRating={tasteScore} readonly />
+        <StyledRating size={SizeType.Small} label="Gorycz: " initialRating={bitternessScore} readonly />
+        <StyledRating size={SizeType.Small} label="Moc: " initialRating={energyScore} readonly />
+        <StyledRating size={SizeType.Small} label="Cena: " initialRating={priceScore} readonly />
+        <StyledRating size={SizeType.Small} label="Ocena ogólna: " initialRating={overallScore} readonly />
         <Description>
-          {data.details}
+          {shortDescription}
         </Description>
       </DataWrapper>
     </CardContainer>
