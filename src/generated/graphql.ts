@@ -383,6 +383,20 @@ export type GetManufacturersQuery = (
   )> }
 );
 
+export type GetUsersQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>
+};
+
+
+export type GetUsersQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'profile' | 'username' | 'email' | 'country' | 'avatarUrl' | 'role' | 'reviews' | 'createdAt'>
+  )> }
+);
+
 export type GetMeQueryVariables = {};
 
 
@@ -452,11 +466,27 @@ export const GetManufacturersDocument = gql`
 }
     `;
 
+export const GetUsersDocument = gql`
+    query getUsers($offset: Int, $perPage: Int) {
+  users(offset: $offset, perPage: $perPage) {
+    id
+    profile
+    username
+    email
+    country
+    avatarUrl
+    role
+    reviews
+    createdAt
+  }
+}
+`;
+
 /**
  * __useGetManufacturersQuery__
  *
  * To run a query within a React component, call `useGetManufacturersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetManufacturersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useGetManufacturersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -478,6 +508,19 @@ export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
+
+
+export function useGetUsersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+  return ApolloReactHooks.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
+}
+export function useGetUsersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+    return ApolloReactHooks.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
+  }
+export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
+export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
+export type GetUsersQueryResult = ApolloReactCommon.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
+
+
 export const GetMeDocument = gql`
     query getMe {
   whoAmI {
@@ -491,7 +534,7 @@ export const GetMeDocument = gql`
  * __useGetMeQuery__
  *
  * To run a query within a React component, call `useGetMeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useGetMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -523,7 +566,7 @@ export const GetMeRoleDocument = gql`
  * __useGetMeRoleQuery__
  *
  * To run a query within a React component, call `useGetMeRoleQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMeRoleQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useGetMeRoleQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -566,7 +609,7 @@ export const GetMeDetailsDocument = gql`
  * __useGetMeDetailsQuery__
  *
  * To run a query within a React component, call `useGetMeDetailsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMeDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useGetMeDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
