@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
-import { User } from 'generated/graphql';
+import { UserData } from '../types';
 
 interface Props {
-  data: User[];
+  data: UserData[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
@@ -15,12 +15,11 @@ export const UsersTable: FC<Props> = ({
   onDelete,
 }) => (
   <>
-    <Table<User>
+    <Table<UserData>
       columns={[
         { Header: 'Id', accessor: 'id', disableSortBy: false },
         { Header: 'Adres e-mail', accessor: 'email', disableSortBy: false },
         { Header: 'Nazwa użytkownika', accessor: 'username', disableSortBy: false },
-        { Header: 'Kraj pochodzenia', accessor: 'country', disableSortBy: false },
         { Header: 'Rola', accessor: 'role', disableSortBy: false },
         {
           id: 'edit',
