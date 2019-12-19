@@ -62,29 +62,7 @@ export const GET_USERS = gql`
       id,
       username,
       email,
-      country,
-      avatarUrl,
       role,
-      profile {
-        tasteImportance,
-        aromaImportance,
-        bitternessImportance,
-        priceImportance,
-        energyImportance,
-        overallImportance,
-        id,
-        rank {
-          id,
-          name,
-          lowerRange,
-          upperRange,
-          addedAt,
-        },
-        experiencePoints,
-        editedAt,
-        createdAt,
-      },
-      createdAt,
   }
 }
 `;

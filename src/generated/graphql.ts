@@ -383,6 +383,20 @@ export type GetManufacturersQuery = (
   )> }
 );
 
+export type GetTypesQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>
+};
+
+
+export type GetTypesQuery = (
+  { __typename?: 'Query' }
+  & { manufacturers: Array<(
+    { __typename?: 'Manufacturer' }
+    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'addedAt'>
+  )> }
+);
+
 export type GetMeQueryVariables = {};
 
 
@@ -448,15 +462,7 @@ export type GetUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'country' | 'avatarUrl' | 'role' | 'createdAt'>
-    & { profile: (
-      { __typename?: 'Profile' }
-      & Pick<Profile, 'tasteImportance' | 'aromaImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance' | 'id' | 'experiencePoints' | 'editedAt' | 'createdAt'>
-      & { rank: (
-        { __typename?: 'Rank' }
-        & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange' | 'addedAt'>
-      ) }
-    ) }
+    & Pick<User, 'id' | 'username' | 'email' | 'role'>
   )> }
 );
 
@@ -500,6 +506,45 @@ export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
+export const GetTypesDocument = gql`
+    query getTypes($offset: Int, $perPage: Int) {
+  manufacturers(offset: $offset, perPage: $perPage) {
+    id
+    name
+    country
+    photoUrl
+    editedAt
+    addedAt
+  }
+}
+    `;
+
+/**
+ * __useGetTypesQuery__
+ *
+ * To run a query within a React component, call `useGetTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTypesQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *   },
+ * });
+ */
+export function useGetTypesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetTypesQuery, GetTypesQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetTypesQuery, GetTypesQueryVariables>(GetTypesDocument, baseOptions);
+      }
+export function useGetTypesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetTypesQuery, GetTypesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetTypesQuery, GetTypesQueryVariables>(GetTypesDocument, baseOptions);
+        }
+export type GetTypesQueryHookResult = ReturnType<typeof useGetTypesQuery>;
+export type GetTypesLazyQueryHookResult = ReturnType<typeof useGetTypesLazyQuery>;
+export type GetTypesQueryResult = ApolloReactCommon.QueryResult<GetTypesQuery, GetTypesQueryVariables>;
 export const GetMeDocument = gql`
     query getMe {
   whoAmI {
@@ -658,29 +703,7 @@ export const GetUsersDocument = gql`
     id
     username
     email
-    country
-    avatarUrl
     role
-    profile {
-      tasteImportance
-      aromaImportance
-      bitternessImportance
-      priceImportance
-      energyImportance
-      overallImportance
-      id
-      rank {
-        id
-        name
-        lowerRange
-        upperRange
-        addedAt
-      }
-      experiencePoints
-      editedAt
-      createdAt
-    }
-    createdAt
   }
 }
     `;

@@ -32,17 +32,26 @@ export const UsersRaw: FC = () => {
   if (loading) {
     return <Loader fullscreen />;
   }
+  if (data) {
+    console.log(data);
+  } else console.log('pusto');
   return (
     <Wrapper>
       <Helmet title="Użytkownicy" />
       <Title>Użytkownicy</Title>
-      <Pagination
-        itemCount={data.users.length}
-        perPage={perPage}
-        currentPage={1}
-        onPageChange={(value) => setPage(value)}
-      />
-      <UsersTable data={data.users} onEdit={handleEdit} onDelete={handleDelete} />
+      {
+        data && (
+          <>
+            <Pagination
+              itemCount={data.users.length}
+              perPage={perPage}
+              currentPage={1}
+              onPageChange={(value) => setPage(value)}
+            />
+            <UsersTable data={data.users} onEdit={handleEdit} onDelete={handleDelete} />
+          </>
+        )
+      }
     </Wrapper>
   );
 };
