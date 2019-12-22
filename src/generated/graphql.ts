@@ -383,17 +383,25 @@ export type GetManufacturersQuery = (
   )> }
 );
 
-export type GetTypesQueryVariables = {
-  offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>
-};
+export type GetRanksQueryVariables = {};
+
+
+export type GetRanksQuery = (
+  { __typename?: 'Query' }
+  & { ranks: Array<(
+    { __typename?: 'Rank' }
+    & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
+  )> }
+);
+
+export type GetTypesQueryVariables = {};
 
 
 export type GetTypesQuery = (
   { __typename?: 'Query' }
-  & { manufacturers: Array<(
-    { __typename?: 'Manufacturer' }
-    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'addedAt'>
+  & { types: Array<(
+    { __typename?: 'ProductType' }
+    & Pick<ProductType, 'id' | 'name'>
   )> }
 );
 
@@ -506,15 +514,46 @@ export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
-export const GetTypesDocument = gql`
-    query getTypes($offset: Int, $perPage: Int) {
-  manufacturers(offset: $offset, perPage: $perPage) {
+export const GetRanksDocument = gql`
+    query getRanks {
+  ranks {
     id
     name
-    country
-    photoUrl
-    editedAt
-    addedAt
+    lowerRange
+    upperRange
+  }
+}
+    `;
+
+/**
+ * __useGetRanksQuery__
+ *
+ * To run a query within a React component, call `useGetRanksQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRanksQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRanksQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetRanksQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetRanksQuery, GetRanksQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetRanksQuery, GetRanksQueryVariables>(GetRanksDocument, baseOptions);
+      }
+export function useGetRanksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetRanksQuery, GetRanksQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetRanksQuery, GetRanksQueryVariables>(GetRanksDocument, baseOptions);
+        }
+export type GetRanksQueryHookResult = ReturnType<typeof useGetRanksQuery>;
+export type GetRanksLazyQueryHookResult = ReturnType<typeof useGetRanksLazyQuery>;
+export type GetRanksQueryResult = ApolloReactCommon.QueryResult<GetRanksQuery, GetRanksQueryVariables>;
+export const GetTypesDocument = gql`
+    query getTypes {
+  types {
+    id
+    name
   }
 }
     `;
@@ -531,8 +570,6 @@ export const GetTypesDocument = gql`
  * @example
  * const { data, loading, error } = useGetTypesQuery({
  *   variables: {
- *      offset: // value for 'offset'
- *      perPage: // value for 'perPage'
  *   },
  * });
  */
