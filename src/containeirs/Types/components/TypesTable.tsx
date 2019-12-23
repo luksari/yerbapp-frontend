@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
-import { TypeData } from '../TypesData';
+import { TypeModel } from '../TypesData';
 
 interface Props {
-  data: TypeData[];
+  data: TypeModel[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
@@ -15,7 +15,7 @@ export const TypesTable: FC<Props> = ({
   onDelete,
 }) => (
   <>
-    <Table<TypeData>
+    <Table<TypeModel>
       columns={[
         { Header: 'Id', accessor: 'id', disableSortBy: false },
         { Header: 'Nazwa typu', accessor: 'name', disableSortBy: false },
