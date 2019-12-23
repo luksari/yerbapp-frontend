@@ -99,7 +99,13 @@ export type Manufacturer = {
   photoUrl?: Maybe<Scalars['String']>,
   products?: Maybe<Array<Product>>,
   editedAt: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ManufacturersResponse = {
+   __typename?: 'ManufacturersResponse',
+  items: Array<Manufacturer>,
+  total: Scalars['Int'],
 };
 
 export type Mutation = {
@@ -235,14 +241,20 @@ export type Product = {
   name: Scalars['String'],
   details: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ProductsResponse = {
+   __typename?: 'ProductsResponse',
+  items: Array<Product>,
+  total: Scalars['Int'],
 };
 
 export type ProductType = {
    __typename?: 'ProductType',
   id: Scalars['ID'],
   name: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
 };
 
 export type Profile = {
@@ -264,16 +276,16 @@ export type Query = {
    __typename?: 'Query',
   user: User,
   whoAmI: User,
-  users: Array<User>,
+  users: UsersResponse,
   review: Review,
-  reviews: Array<Review>,
-  types: Array<ProductType>,
+  reviews: ReviewsResponse,
+  types: TypesResponse,
   type: ProductType,
-  products: Array<Product>,
+  products: ProductsResponse,
   product: Product,
-  manufacturers: Array<Manufacturer>,
+  manufacturers: ManufacturersResponse,
   manufacturer: Manufacturer,
-  ranks: Array<Rank>,
+  ranks: RanksResponse,
   rank: Rank,
 };
 
@@ -284,6 +296,8 @@ export type QueryUserArgs = {
 
 
 export type QueryUsersArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -295,6 +309,16 @@ export type QueryReviewArgs = {
 
 
 export type QueryReviewsArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryTypesArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -306,6 +330,8 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -317,6 +343,8 @@ export type QueryProductArgs = {
 
 
 export type QueryManufacturersArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -324,6 +352,14 @@ export type QueryManufacturersArgs = {
 
 export type QueryManufacturerArgs = {
   manufacturerId: Scalars['ID']
+};
+
+
+export type QueryRanksArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
 };
 
 
@@ -337,7 +373,13 @@ export type Rank = {
   name: Scalars['String'],
   lowerRange: Scalars['Int'],
   upperRange: Scalars['Int'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type RanksResponse = {
+   __typename?: 'RanksResponse',
+  items: Array<Rank>,
+  total: Scalars['Int'],
 };
 
 export type Review = {
@@ -353,7 +395,19 @@ export type Review = {
   product: Product,
   author: User,
   editedAt: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ReviewsResponse = {
+   __typename?: 'ReviewsResponse',
+  items: Array<Review>,
+  total: Scalars['Int'],
+};
+
+export type TypesResponse = {
+   __typename?: 'TypesResponse',
+  items: Array<ProductType>,
+  total: Scalars['Int'],
 };
 
 export type User = {
@@ -369,6 +423,12 @@ export type User = {
   createdAt: Scalars['String'],
 };
 
+export type UsersResponse = {
+   __typename?: 'UsersResponse',
+  items: Array<User>,
+  total: Scalars['Int'],
+};
+
 export type GetManufacturersQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>
@@ -377,10 +437,14 @@ export type GetManufacturersQueryVariables = {
 
 export type GetManufacturersQuery = (
   { __typename?: 'Query' }
-  & { manufacturers: Array<(
-    { __typename?: 'Manufacturer' }
-    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'addedAt'>
-  )> }
+  & { manufacturers: (
+    { __typename?: 'ManufacturersResponse' }
+    & Pick<ManufacturersResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'createdAt'>
+    )> }
+  ) }
 );
 
 export type GetRanksQueryVariables = {};
@@ -388,10 +452,14 @@ export type GetRanksQueryVariables = {};
 
 export type GetRanksQuery = (
   { __typename?: 'Query' }
-  & { ranks: Array<(
-    { __typename?: 'Rank' }
-    & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
-  )> }
+  & { ranks: (
+    { __typename?: 'RanksResponse' }
+    & Pick<RanksResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Rank' }
+      & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
+    )> }
+  ) }
 );
 
 export type GetTypesQueryVariables = {};
@@ -399,10 +467,14 @@ export type GetTypesQueryVariables = {};
 
 export type GetTypesQuery = (
   { __typename?: 'Query' }
-  & { types: Array<(
-    { __typename?: 'ProductType' }
-    & Pick<ProductType, 'id' | 'name'>
-  )> }
+  & { types: (
+    { __typename?: 'TypesResponse' }
+    & Pick<TypesResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'id' | 'name'>
+    )> }
+  ) }
 );
 
 export type GetMeQueryVariables = {};
@@ -468,22 +540,29 @@ export type GetUsersQueryVariables = {
 
 export type GetUsersQuery = (
   { __typename?: 'Query' }
-  & { users: Array<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'role'>
-  )> }
+  & { users: (
+    { __typename?: 'UsersResponse' }
+    & Pick<UsersResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email' | 'role'>
+    )> }
+  ) }
 );
 
 
 export const GetManufacturersDocument = gql`
     query getManufacturers($offset: Int, $perPage: Int) {
   manufacturers(offset: $offset, perPage: $perPage) {
-    id
-    name
-    country
-    photoUrl
-    editedAt
-    addedAt
+    items {
+      id
+      name
+      country
+      photoUrl
+      editedAt
+      createdAt
+    }
+    total
   }
 }
     `;
@@ -517,10 +596,13 @@ export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManuf
 export const GetRanksDocument = gql`
     query getRanks {
   ranks {
-    id
-    name
-    lowerRange
-    upperRange
+    items {
+      id
+      name
+      lowerRange
+      upperRange
+    }
+    total
   }
 }
     `;
@@ -552,8 +634,11 @@ export type GetRanksQueryResult = ApolloReactCommon.QueryResult<GetRanksQuery, G
 export const GetTypesDocument = gql`
     query getTypes {
   types {
-    id
-    name
+    items {
+      id
+      name
+    }
+    total
   }
 }
     `;
@@ -737,10 +822,13 @@ export type EditUserMutationOptions = ApolloReactCommon.BaseMutationOptions<Edit
 export const GetUsersDocument = gql`
     query getUsers($offset: Int, $perPage: Int) {
   users(offset: $offset, perPage: $perPage) {
-    id
-    username
-    email
-    role
+    items {
+      id
+      username
+      email
+      role
+    }
+    total
   }
 }
     `;

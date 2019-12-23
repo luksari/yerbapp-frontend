@@ -1,5 +1,5 @@
 import React, {
-  memo, FC, useState, useEffect,
+  memo, FC,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
@@ -7,17 +7,12 @@ import { Title } from 'components/TitleBar';
 import { useGetManufacturersQuery } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
+import { usePagination } from 'hooks/usePagination';
 import { Wrapper } from './styled';
 import { ManuFacturersTable } from './components/ManufacturersTable';
 
 export const ManufacturesRaw: FC = () => {
-  const perPage = 5;
-  const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    setOffset((prevOffset) => (page * perPage) + prevOffset);
-  }, [page]);
+  const { offset, perPage, setPage } = usePagination(5, 1);
 
   const { data, loading } = useGetManufacturersQuery({ variables: { offset, perPage } });
 
@@ -37,12 +32,12 @@ export const ManufacturesRaw: FC = () => {
       <Helmet title="Producenci" />
       <Title>Producenci</Title>
       <Pagination
-        itemCount={data.manufacturers.length}
+        itemCount={data.manufacturers.total}
         perPage={perPage}
         currentPage={1}
         onPageChange={(value) => setPage(value)}
       />
-      <ManuFacturersTable data={data.manufacturers} onEdit={handleEdit} onDelete={handleDelete} />
+      <ManuFacturersTable data={data.manufacturers.items} onEdit={handleEdit} onDelete={handleDelete} />
     </Wrapper>
   );
 };

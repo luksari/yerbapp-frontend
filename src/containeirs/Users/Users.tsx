@@ -1,5 +1,5 @@
 import React, {
-  memo, FC, useState, useEffect,
+  memo, FC,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
@@ -7,17 +7,12 @@ import { Title } from 'components/TitleBar';
 import { useGetUsersQuery } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
+import { usePagination } from 'hooks/usePagination';
 import { Wrapper } from './styled';
 import { UsersTable } from './components/UsersTable';
 
 export const UsersRaw: FC = () => {
-  const perPage = 5;
-  const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    setOffset((prevOffset) => (page * perPage) + prevOffset);
-  }, [page]);
+  const { offset, perPage, setPage } = usePagination(5, 1);
 
   const { data, loading } = useGetUsersQuery({ variables: { offset, perPage } });
 
@@ -43,12 +38,12 @@ export const UsersRaw: FC = () => {
         data && (
           <>
             <Pagination
-              itemCount={data.users.length}
+              itemCount={data.users.total}
               perPage={perPage}
               currentPage={1}
               onPageChange={(value) => setPage(value)}
             />
-            <UsersTable data={data.users} onEdit={handleEdit} onDelete={handleDelete} />
+            <UsersTable data={data.users.items} onEdit={handleEdit} onDelete={handleDelete} />
           </>
         )
       }

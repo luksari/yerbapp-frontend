@@ -59,10 +59,13 @@ export const UPDATE_USER = gql`
 export const GET_USERS = gql`
   query getUsers($offset: Int, $perPage: Int) {
     users(offset: $offset, perPage: $perPage) {
-      id,
-      username,
-      email,
-      role,
+      items {
+        id,
+        username,
+        email,
+        role,
+      }
+      total
   }
 }
 `;
