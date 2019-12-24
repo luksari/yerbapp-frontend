@@ -66,10 +66,6 @@ export function Table<T extends object>({
     });
   }
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <TableContainer {...getTableProps()} className={className}>
       <thead>

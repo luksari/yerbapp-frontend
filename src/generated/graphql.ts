@@ -534,7 +534,9 @@ export type EditUserMutation = (
 
 export type GetUsersQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
 };
 
 
@@ -820,8 +822,8 @@ export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
 export type EditUserMutationResult = ApolloReactCommon.MutationResult<EditUserMutation>;
 export type EditUserMutationOptions = ApolloReactCommon.BaseMutationOptions<EditUserMutation, EditUserMutationVariables>;
 export const GetUsersDocument = gql`
-    query getUsers($offset: Int, $perPage: Int) {
-  users(offset: $offset, perPage: $perPage) {
+    query getUsers($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  users(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
     items {
       id
       username
@@ -847,6 +849,8 @@ export const GetUsersDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

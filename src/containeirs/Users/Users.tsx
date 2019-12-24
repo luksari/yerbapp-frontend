@@ -4,17 +4,27 @@ import React, {
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { useGetUsersQuery } from 'generated/graphql';
+import { GetUsersDocument } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
 import { usePagination } from 'hooks/usePagination';
+import { useSort } from 'hooks/useSort';
+import { useCachedQuery } from 'hooks/useCachedQuery';
 import { Wrapper } from './styled';
 import { UsersTable } from './components/UsersTable';
 
 export const UsersRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
+  const { order, orderBy, handleSort } = useSort();
 
-  const { data, loading } = useGetUsersQuery({ variables: { offset, perPage } });
+  const { data } = useCachedQuery(
+    GetUsersDocument,
+    {
+      variables: {
+        offset, perPage, order, orderBy,
+      },
+    },
+  );
 
   const handleEdit = (id: number) => {
     console.warn(`Redirect to edit form for users ${id}`);
@@ -24,29 +34,27 @@ export const UsersRaw: FC = () => {
     console.warn(`Delete  user ${id}`);
   };
 
-  if (loading) {
+  if (!data) {
     return <Loader fullscreen />;
   }
-  if (data) {
-    console.log(data);
-  } else console.log('pusto');
+
   return (
     <Wrapper>
       <Helmet title="Użytkownicy" />
       <Title>Użytkownicy</Title>
-      {
-        data && (
-          <>
-            <Pagination
-              itemCount={data.users.total}
-              perPage={perPage}
-              currentPage={1}
-              onPageChange={(value) => setPage(value)}
-            />
-            <UsersTable data={data.users.items} onEdit={handleEdit} onDelete={handleDelete} />
-          </>
-        )
-      }
+      <Pagination
+        itemCount={data?.users?.total}
+        perPage={perPage}
+        currentPage={1}
+        onPageChange={setPage}
+      />
+      <UsersTable
+        data={data?.users?.items}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        handleSort={handleSort}
+      />
+
     </Wrapper>
   );
 };
