@@ -4,8 +4,9 @@ import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { TableProps } from 'utils/types';
 import { UserData } from '../types';
 
-export const UsersTable: FC<TableProps<UserData>> = ({
+export const UsersTable: FC<TableProps<UserData> & { onChangeRole: (id: number) => void }> = ({
   data,
+  onChangeRole,
   onEdit,
   onDelete,
   handleSort,
@@ -18,6 +19,14 @@ export const UsersTable: FC<TableProps<UserData>> = ({
         { Header: 'Adres e-mail', accessor: 'email', disableSortBy: false },
         { Header: 'Nazwa użytkownika', accessor: 'username', disableSortBy: false },
         { Header: 'Rola', accessor: 'role', disableSortBy: false },
+        {
+          id: 'roleChange',
+          Cell: ({ row }) => (
+            <div>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onChangeRole(row.values.id)}>Zmień rolę</Button>
+            </div>
+          ),
+        },
         {
           id: 'edit',
           Cell: ({ row }) => (
