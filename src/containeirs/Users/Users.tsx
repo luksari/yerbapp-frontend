@@ -26,6 +26,10 @@ export const UsersRaw: FC = () => {
     },
   );
 
+  const handleChangeRole = (id: number) => {
+    console.warn(`Change role for user ${id}`);
+  };
+
   const handleEdit = (id: number) => {
     console.warn(`Redirect to edit form for users ${id}`);
   };
@@ -53,6 +57,7 @@ export const UsersRaw: FC = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
+        onChangeRole={handleChangeRole}
       />
 
     </Wrapper>
