@@ -1,18 +1,15 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { TableProps } from 'utils/types';
 import { RankData } from '../types';
 
-interface Props {
-  data: RankData[];
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-}
-
-export const RanksTable: FC<Props> = ({
+export const RanksTable: FC<TableProps<RankData>> = ({
   data,
   onEdit,
   onDelete,
+  handleSort,
+  isLoading,
 }) => (
   <>
     <Table<RankData>
@@ -39,7 +36,8 @@ export const RanksTable: FC<Props> = ({
         },
       ]}
       data={data}
-      onSort={console.log}
+      isLoading={isLoading}
+      onSort={handleSort}
     />
   </>
 );

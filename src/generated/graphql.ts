@@ -431,7 +431,9 @@ export type UsersResponse = {
 
 export type GetManufacturersQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
 };
 
 
@@ -447,7 +449,12 @@ export type GetManufacturersQuery = (
   ) }
 );
 
-export type GetRanksQueryVariables = {};
+export type GetRanksQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
 
 
 export type GetRanksQuery = (
@@ -462,7 +469,12 @@ export type GetRanksQuery = (
   ) }
 );
 
-export type GetTypesQueryVariables = {};
+export type GetTypesQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
 
 
 export type GetTypesQuery = (
@@ -554,8 +566,8 @@ export type GetUsersQuery = (
 
 
 export const GetManufacturersDocument = gql`
-    query getManufacturers($offset: Int, $perPage: Int) {
-  manufacturers(offset: $offset, perPage: $perPage) {
+    query getManufacturers($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  manufacturers(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
     items {
       id
       name
@@ -583,6 +595,8 @@ export const GetManufacturersDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */
@@ -596,8 +610,8 @@ export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufactur
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
 export const GetRanksDocument = gql`
-    query getRanks {
-  ranks {
+    query getRanks($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  ranks(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
     items {
       id
       name
@@ -621,6 +635,10 @@ export const GetRanksDocument = gql`
  * @example
  * const { data, loading, error } = useGetRanksQuery({
  *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */
@@ -634,8 +652,8 @@ export type GetRanksQueryHookResult = ReturnType<typeof useGetRanksQuery>;
 export type GetRanksLazyQueryHookResult = ReturnType<typeof useGetRanksLazyQuery>;
 export type GetRanksQueryResult = ApolloReactCommon.QueryResult<GetRanksQuery, GetRanksQueryVariables>;
 export const GetTypesDocument = gql`
-    query getTypes {
-  types {
+    query getTypes($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  types(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
     items {
       id
       name
@@ -657,6 +675,10 @@ export const GetTypesDocument = gql`
  * @example
  * const { data, loading, error } = useGetTypesQuery({
  *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */
