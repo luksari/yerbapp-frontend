@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { TableProps } from 'utils/types';
 import { TypeModel } from '../TypesData';
 
-interface Props {
-  data: TypeModel[];
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-}
 
-export const TypesTable: FC<Props> = ({
+export const TypesTable: FC<TableProps<TypeModel>> = ({
   data,
   onEdit,
   onDelete,
+  handleSort,
+  isLoading,
 }) => (
   <>
     <Table<TypeModel>
@@ -37,7 +35,8 @@ export const TypesTable: FC<Props> = ({
         },
       ]}
       data={data}
-      onSort={console.log}
+      isLoading={isLoading}
+      onSort={handleSort}
     />
   </>
 );
