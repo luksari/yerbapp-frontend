@@ -86,6 +86,7 @@ export const SortingIcon = styled(Logo)<{ sortedDesc?: boolean }>`
   margin-left: 6px;
   width: fit-content;
   display: inline-block;
+  transform: rotate(180deg);
   ${StyledLogo} {
     transition: transform 0.2s;
     height: 20px;
@@ -94,7 +95,7 @@ export const SortingIcon = styled(Logo)<{ sortedDesc?: boolean }>`
   ${({ sortedDesc }) => sortedDesc && css`
 
     ${StyledLogo} {
-      transform: rotate(180deg);
+      transform: rotate(-180deg);
     }
 
   `}

@@ -1,17 +1,10 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { TableProps } from 'utils/types';
 import { UserData } from '../types';
 
-interface Props {
-  data: UserData[];
-  isLoading?: boolean;
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-  handleSort: (columnId: string, order: string) => void;
-}
-
-export const UsersTable: FC<Props> = ({
+export const UsersTable: FC<TableProps<UserData>> = ({
   data,
   onEdit,
   onDelete,

@@ -7,7 +7,6 @@ export const useSort = () => {
   const handleSort = (_orderBy: string, _order: string) => {
     setOrder(_order.toUpperCase());
     setOrderBy(_orderBy);
-    console.log(order, orderBy);
   };
 
   return { order, orderBy, handleSort };
