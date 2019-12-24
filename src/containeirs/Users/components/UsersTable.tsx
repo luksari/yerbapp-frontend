@@ -5,14 +5,18 @@ import { UserData } from '../types';
 
 interface Props {
   data: UserData[];
+  isLoading?: boolean;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
+  handleSort: (columnId: string, order: string) => void;
 }
 
 export const UsersTable: FC<Props> = ({
   data,
   onEdit,
   onDelete,
+  handleSort,
+  isLoading,
 }) => (
   <>
     <Table<UserData>
@@ -39,7 +43,8 @@ export const UsersTable: FC<Props> = ({
         },
       ]}
       data={data}
-      onSort={console.log}
+      onSort={handleSort}
+      isLoading={isLoading}
     />
   </>
 );
