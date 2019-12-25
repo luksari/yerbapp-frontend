@@ -1,20 +1,27 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import { UserData } from '../types';
 
 interface Props {
   data: UserData[];
-  onChangeRole: (id: number) => void;
-  onEdit: (id: number) => void;
+  onMakeAdmin: (id: number) => void;
+  onMakeUser: (id: number) => void;
   onDelete: (id: number) => void;
+  isAdmin: boolean;
+  currentUserId: number;
 }
 
-export const UsersTable: FC<Props> = ({
+export const UsersTableRaw: FC<Props> = ({
   data,
-  onChangeRole,
-  onEdit,
+  onMakeAdmin,
+  onMakeUser,
   onDelete,
+  isAdmin,
+  currentUserId,
 }) => (
   <>
     <Table<UserData>
@@ -24,18 +31,18 @@ export const UsersTable: FC<Props> = ({
         { Header: 'Nazwa użytkownika', accessor: 'username', disableSortBy: false },
         { Header: 'Rola', accessor: 'role', disableSortBy: false },
         {
-          id: 'roleChange',
+          id: 'makeAdmin',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onChangeRole(row.values.id)}>Zmień rolę</Button>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin} onClick={() => onMakeAdmin(row.values.id)}>Przypisz admina</Button>
             </div>
           ),
         },
         {
-          id: 'edit',
+          id: 'makeUser',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
+              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin} onClick={() => onMakeUser(row.values.id)}>Odbierz admina</Button>
             </div>
           ),
         },
@@ -43,7 +50,7 @@ export const UsersTable: FC<Props> = ({
           id: 'remove',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} onClick={() => onDelete(row.values.id)}>Usuń</Button>
+              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} disabled={row.values.id === currentUserId} onClick={() => onDelete(row.values.id)}>Usuń użytkownika</Button>
             </div>
           ),
         },
@@ -53,3 +60,10 @@ export const UsersTable: FC<Props> = ({
     />
   </>
 );
+
+const mapStateToProps = createStructuredSelector({
+  isAdmin: makeSelectIsAdmin(),
+  currentUserId: makeSelectUserId(),
+});
+
+export const UsersTable = connect(mapStateToProps)(UsersTableRaw);
