@@ -21,12 +21,12 @@ export const UsersRaw: FC = () => {
 
   const { data, loading } = useGetUsersQuery({ variables: { offset, perPage } });
 
-  const handleChangeRole = (id: number) => {
-    console.warn(`Change role for user ${id}`);
+  const handleMakeAdmin = (id: number) => {
+    console.warn(`Grant user ${id} admin privileges`);
   };
 
-  const handleEdit = (id: number) => {
-    console.warn(`Redirect to edit form for users ${id}`);
+  const handleMakeUser = (id: number) => {
+    console.warn(`Normal user role for user ${id}`);
   };
 
   const handleDelete = (id: number) => {
@@ -52,7 +52,7 @@ export const UsersRaw: FC = () => {
               currentPage={1}
               onPageChange={(value) => setPage(value)}
             />
-            <UsersTable data={data.users} onEdit={handleEdit} onDelete={handleDelete} onChangeRole={handleChangeRole} />
+            <UsersTable data={data.users} onMakeAdmin={handleMakeAdmin} onDelete={handleDelete} onMakeUser={handleMakeUser} />
           </>
         )
       }
