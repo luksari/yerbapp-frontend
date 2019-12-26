@@ -39,3 +39,12 @@ export enum UserRoles {
   ADMIN = 'admin',
   USER = 'user'
 }
+
+export interface FormProps<T> {
+  data: T;
+  isLoading: boolean;
+  onSubmit: (values: T) => void;
+  handleBack: VoidFunction;
+  isSaving: boolean;
+  iEdit?: boolean;
+}
