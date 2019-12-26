@@ -8,7 +8,7 @@ export const PaginationWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-export const PaginationButton = styled(Button).attrs({ variant: ButtonVariant.Narrow })`
+export const PaginationButton = styled(Button)`
   display: flex;
   font-size: 26px;
   border-radius: 4px;

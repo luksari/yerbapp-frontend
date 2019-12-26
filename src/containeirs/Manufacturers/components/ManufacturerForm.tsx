@@ -15,7 +15,6 @@ const ManufacturerForm: FC<FormProps<ManufacturerFormData>> = ({
   onSubmit,
   isLoading,
   isSaving,
-  isEdit,
 }) => {
   return (
     <Form<ManufacturerFormData>
