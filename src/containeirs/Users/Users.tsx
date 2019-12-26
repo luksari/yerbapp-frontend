@@ -33,12 +33,6 @@ export const UsersRaw: FC = () => {
     console.warn(`Delete  user ${id}`);
   };
 
-  if (loading) {
-    return <Loader fullscreen />;
-  }
-  if (data) {
-    console.log(data);
-  } else console.log('pusto');
   return (
     <Wrapper>
       <Helmet title="Użytkownicy" />

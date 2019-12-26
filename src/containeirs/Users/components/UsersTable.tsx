@@ -33,7 +33,7 @@ export const UsersTableRaw: FC<Props> = ({
           id: 'makeAdmin',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz admina</Button>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
             </div>
           ),
         },
@@ -41,7 +41,7 @@ export const UsersTableRaw: FC<Props> = ({
           id: 'makeUser',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz admina</Button>
+              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
             </div>
           ),
         },
