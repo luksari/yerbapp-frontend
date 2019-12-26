@@ -2,15 +2,26 @@ import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { TableProps } from 'utils/types';
+import { connect } from 'react-redux';
+import { makeSelectUserId } from 'store/auth/slice';
+import { createStructuredSelector } from 'reselect';
+import { isAdmin } from 'utils/isAdmin';
 import { UserData } from '../types';
 
-export const UsersTable: FC<TableProps<UserData> & { onChangeRole: (id: number) => void }> = ({
+type UserTableProps = TableProps<UserData> & {
+  onMakeAdmin: (id: number) => void;
+  onMakeUser: (id: number) => void;
+  currentUserId: number;
+}
+
+const UsersTableRaw: FC<UserTableProps> = ({
   data,
-  onChangeRole,
-  onEdit,
+  onMakeAdmin,
+  onMakeUser,
   onDelete,
   handleSort,
   isLoading,
+  currentUserId,
 }) => (
   <>
     <Table<UserData>
@@ -20,18 +31,18 @@ export const UsersTable: FC<TableProps<UserData> & { onChangeRole: (id: number) 
         { Header: 'Nazwa użytkownika', accessor: 'username', disableSortBy: false },
         { Header: 'Rola', accessor: 'role', disableSortBy: false },
         {
-          id: 'roleChange',
+          id: 'makeAdmin',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onChangeRole(row.values.id)}>Zmień rolę</Button>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
             </div>
           ),
         },
         {
-          id: 'edit',
+          id: 'makeUser',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
+              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
             </div>
           ),
         },
@@ -39,7 +50,7 @@ export const UsersTable: FC<TableProps<UserData> & { onChangeRole: (id: number) 
           id: 'remove',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} onClick={() => onDelete(row.values.id)}>Usuń</Button>
+              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} disabled={row.values.id === currentUserId} onClick={() => onDelete(row.values.id)}>Usuń użytkownika</Button>
             </div>
           ),
         },
@@ -50,3 +61,9 @@ export const UsersTable: FC<TableProps<UserData> & { onChangeRole: (id: number) 
     />
   </>
 );
+
+const mapStateToProps = createStructuredSelector({
+  currentUserId: makeSelectUserId(),
+});
+
+export const UsersTable = connect(mapStateToProps)(UsersTableRaw);
