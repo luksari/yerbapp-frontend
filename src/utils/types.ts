@@ -36,6 +36,6 @@ export interface ErrorModel<T> {
 }
 
 export enum UserRoles {
-  ADMIN = 'admin',
-  USER = 'user'
+  Admin = 'admin',
+  User = 'user'
 }
