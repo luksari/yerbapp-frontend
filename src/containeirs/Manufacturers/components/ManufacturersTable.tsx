@@ -2,17 +2,14 @@ import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Manufacturer } from 'generated/graphql';
+import { TableProps } from 'utils/types';
 
-interface Props {
-  data: Manufacturer[];
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-}
-
-export const ManuFacturersTable: FC<Props> = ({
+export const ManuFacturersTable: FC<TableProps<Manufacturer>> = ({
   data,
   onEdit,
   onDelete,
+  isLoading,
+  handleSort,
 }) => (
   <>
     <Table<Manufacturer>
@@ -38,7 +35,8 @@ export const ManuFacturersTable: FC<Props> = ({
         },
       ]}
       data={data}
-      onSort={console.log}
+      isLoading={isLoading}
+      onSort={handleSort}
     />
   </>
 );

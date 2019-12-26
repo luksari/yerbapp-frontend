@@ -1,35 +1,40 @@
 import React, {
-  memo, FC, useState, useEffect,
+  memo, FC,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { useGetRanksQuery } from 'generated/graphql';
+import { GetRanksDocument } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
+import { usePagination } from 'hooks/usePagination';
+import { useCachedQuery } from 'hooks/useCachedQuery';
+import { useSort } from 'hooks/useSort';
 import { Wrapper } from './styled';
 import { RanksTable } from './components/RanksTable';
 
 export const RanksRaw: FC = () => {
-  const perPage = 5;
-  const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
+  const { offset, perPage, setPage } = usePagination(5, 1);
+  const { order, orderBy, handleSort } = useSort();
 
-  useEffect(() => {
-    setOffset((prevOffset) => (page * perPage) + prevOffset);
-  }, [page]);
-
-  const { data, loading } = useGetRanksQuery({ variables: { offset, perPage } });
+  const { data, loading } = useCachedQuery(
+    GetRanksDocument,
+    {
+      variables: {
+        offset, perPage, order, orderBy,
+      },
+    },
+  );
 
   const handleEdit = (id: number) => {
     console.warn(`Redirect to edit form for ranks ${id}`);
   };
 
   const handleDelete = (id: number) => {
-    console.warn(`Delete rank ${id}`);
+    console.warn(`Delete  rank ${id}`);
   };
 
-  if (loading) {
+  if (!data) {
     return <Loader fullscreen />;
   }
   return (
@@ -37,12 +42,18 @@ export const RanksRaw: FC = () => {
       <Helmet title="Rangi" />
       <Title>Rangi</Title>
       <Pagination
-        itemCount={data.ranks.length}
+        itemCount={data.ranks.total}
         perPage={perPage}
         currentPage={1}
         onPageChange={(value) => setPage(value)}
       />
-      <RanksTable data={data.ranks} onEdit={handleEdit} onDelete={handleDelete} />
+      <RanksTable
+        data={data.ranks.items}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        handleSort={handleSort}
+        isLoading={loading}
+      />
     </Wrapper>
   );
 };
