@@ -7,3 +7,10 @@ export const Wrapper = styled.div`
   height: 100%;
   grid-gap: 25px;
 `;
+
+export const ActionWrapper = styled.div`
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
+
+`;
