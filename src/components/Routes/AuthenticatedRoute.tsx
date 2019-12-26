@@ -35,7 +35,7 @@ export const AuthenticatedRoute: FC<Props> = ({
           return <Redirect to="/login" />;
         }
 
-        if (mustBeAdmin && data && data.whoAmI.role !== UserRoles.ADMIN) {
+        if (mustBeAdmin && data && data.whoAmI.role !== UserRoles.Admin) {
           return <Redirect to="/405" />;
         }
 

@@ -7,6 +7,13 @@ module.exports = {
               }
           }
       }
+    //   {
+    //     "http://localhost:4000/graphql": {
+    //         "headers": {
+    //             "Authorization": "Bearer " + process.env.AUTH_TOKEN
+    //         }
+    //     }
+    // }
   ],
   "documents": [
       "./src/**/*.tsx",
