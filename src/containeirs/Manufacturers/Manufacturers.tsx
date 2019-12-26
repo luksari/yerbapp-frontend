@@ -1,17 +1,21 @@
 import React, {
-  memo, FC, useState, useEffect,
+  memo, FC,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { useGetManufacturersQuery } from 'generated/graphql';
+import { GetManufacturersDocument } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Button, ButtonType } from 'components/Button';
-import { Wrapper, ActionWrapper } from './styled';
+import { usePagination } from 'hooks/usePagination';
+import { useSort } from 'hooks/useSort';
+import { useCachedQuery } from 'hooks/useCachedQuery';
 import { ManuFacturersTable } from './components/ManufacturersTable';
+import { Wrapper, ActionWrapper } from './styled';
+
 
 interface Props {
   redirectEdit: (id: number) => void;
@@ -22,15 +26,17 @@ export const ManufacturesRaw: FC<Props> = ({
   redirectCreate,
   redirectEdit,
 }) => {
-  const perPage = 5;
-  const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
+  const { offset, perPage, setPage } = usePagination(5, 1);
+  const { order, orderBy, handleSort } = useSort();
 
-  useEffect(() => {
-    setOffset((prevOffset) => (page * perPage) + prevOffset);
-  }, [page]);
-
-  const { data, loading } = useGetManufacturersQuery({ variables: { offset, perPage } });
+  const { data, loading } = useCachedQuery(
+    GetManufacturersDocument,
+    {
+      variables: {
+        offset, perPage, order, orderBy,
+      },
+    },
+  );
 
   const handleEdit = (id: number) => {
     redirectEdit(id);
@@ -44,7 +50,7 @@ export const ManufacturesRaw: FC<Props> = ({
     console.warn(`Delete  manufacturer ${id}`);
   };
 
-  if (loading) {
+  if (!data) {
     return <Loader fullscreen />;
   }
 
@@ -60,13 +66,19 @@ export const ManufacturesRaw: FC<Props> = ({
         Utwórz producenta
         </Button>
         <Pagination
-          itemCount={data.manufacturers.length}
+          itemCount={data.manufacturers.total}
           perPage={perPage}
           currentPage={1}
           onPageChange={(value) => setPage(value)}
         />
       </ActionWrapper>
-      <ManuFacturersTable data={data.manufacturers} onEdit={handleEdit} onDelete={handleDelete} />
+      <ManuFacturersTable
+        data={data.manufacturers.items}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        handleSort={handleSort}
+        isLoading={loading}
+      />
     </Wrapper>
   );
 };
