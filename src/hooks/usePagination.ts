@@ -5,11 +5,7 @@ export const usePagination = (perPage = 5, start = 1) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    if (page === 1) {
-      setOffset(0);
-    } else {
-      setOffset((prevOffset) => prevOffset + perPage);
-    }
+    setOffset(page * perPage - perPage);
   }, [page]);
 
   return { offset, perPage, setPage };
