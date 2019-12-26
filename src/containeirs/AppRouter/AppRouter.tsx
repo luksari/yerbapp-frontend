@@ -18,6 +18,7 @@ import { Manufacturers } from 'containeirs/Manufacturers';
 import { Users } from 'containeirs/Users';
 import { Types } from 'containeirs/Types';
 import { Ranks } from 'containeirs/Ranks';
+import { ManufacturerCreateForm } from 'containeirs/Manufacturers/containers';
 
 
 export const AppRouter: FC = () => {
@@ -29,7 +30,8 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute path="/explore" component={Explore} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/profile" component={Profile} layout={AppLayout} />
       <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
-      <AuthenticatedRoute path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute exact path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/manufacturers/create" component={ManufacturerCreateForm} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/users" component={Users} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/types" component={Types} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/ranks" component={Ranks} layout={AppLayout} mustBeAdmin />

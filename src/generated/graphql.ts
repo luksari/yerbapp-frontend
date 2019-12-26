@@ -383,6 +383,46 @@ export type GetManufacturersQuery = (
   )> }
 );
 
+export type GetManufacturerQueryVariables = {
+  manufacturerId: Scalars['ID']
+};
+
+
+export type GetManufacturerQuery = (
+  { __typename?: 'Query' }
+  & { manufacturer: (
+    { __typename?: 'Manufacturer' }
+    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl'>
+  ) }
+);
+
+export type AddManufacturerMutationVariables = {
+  manufacturer: AddManufacturerInput
+};
+
+
+export type AddManufacturerMutation = (
+  { __typename?: 'Mutation' }
+  & { addManufacturer: (
+    { __typename?: 'Manufacturer' }
+    & Pick<Manufacturer, 'id' | 'name'>
+  ) }
+);
+
+export type EditManufacturerMutationVariables = {
+  manufacturerId: Scalars['ID'],
+  manufacturer: EditManufacturerInput
+};
+
+
+export type EditManufacturerMutation = (
+  { __typename?: 'Mutation' }
+  & { editManufacturer: (
+    { __typename?: 'Manufacturer' }
+    & Pick<Manufacturer, 'id' | 'name'>
+  ) }
+);
+
 export type GetRanksQueryVariables = {};
 
 
@@ -514,6 +554,109 @@ export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
+export const GetManufacturerDocument = gql`
+    query getManufacturer($manufacturerId: ID!) {
+  manufacturer(manufacturerId: $manufacturerId) {
+    id
+    name
+    country
+    photoUrl
+  }
+}
+    `;
+
+/**
+ * __useGetManufacturerQuery__
+ *
+ * To run a query within a React component, call `useGetManufacturerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetManufacturerQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetManufacturerQuery({
+ *   variables: {
+ *      manufacturerId: // value for 'manufacturerId'
+ *   },
+ * });
+ */
+export function useGetManufacturerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetManufacturerQuery, GetManufacturerQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetManufacturerQuery, GetManufacturerQueryVariables>(GetManufacturerDocument, baseOptions);
+      }
+export function useGetManufacturerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetManufacturerQuery, GetManufacturerQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetManufacturerQuery, GetManufacturerQueryVariables>(GetManufacturerDocument, baseOptions);
+        }
+export type GetManufacturerQueryHookResult = ReturnType<typeof useGetManufacturerQuery>;
+export type GetManufacturerLazyQueryHookResult = ReturnType<typeof useGetManufacturerLazyQuery>;
+export type GetManufacturerQueryResult = ApolloReactCommon.QueryResult<GetManufacturerQuery, GetManufacturerQueryVariables>;
+export const AddManufacturerDocument = gql`
+    mutation addManufacturer($manufacturer: AddManufacturerInput!) {
+  addManufacturer(manufacturer: $manufacturer) {
+    id
+    name
+  }
+}
+    `;
+export type AddManufacturerMutationFn = ApolloReactCommon.MutationFunction<AddManufacturerMutation, AddManufacturerMutationVariables>;
+
+/**
+ * __useAddManufacturerMutation__
+ *
+ * To run a mutation, you first call `useAddManufacturerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddManufacturerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addManufacturerMutation, { data, loading, error }] = useAddManufacturerMutation({
+ *   variables: {
+ *      manufacturer: // value for 'manufacturer'
+ *   },
+ * });
+ */
+export function useAddManufacturerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddManufacturerMutation, AddManufacturerMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddManufacturerMutation, AddManufacturerMutationVariables>(AddManufacturerDocument, baseOptions);
+      }
+export type AddManufacturerMutationHookResult = ReturnType<typeof useAddManufacturerMutation>;
+export type AddManufacturerMutationResult = ApolloReactCommon.MutationResult<AddManufacturerMutation>;
+export type AddManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<AddManufacturerMutation, AddManufacturerMutationVariables>;
+export const EditManufacturerDocument = gql`
+    mutation editManufacturer($manufacturerId: ID!, $manufacturer: EditManufacturerInput!) {
+  editManufacturer(manufacturerId: $manufacturerId, manufacturer: $manufacturer) {
+    id
+    name
+  }
+}
+    `;
+export type EditManufacturerMutationFn = ApolloReactCommon.MutationFunction<EditManufacturerMutation, EditManufacturerMutationVariables>;
+
+/**
+ * __useEditManufacturerMutation__
+ *
+ * To run a mutation, you first call `useEditManufacturerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditManufacturerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editManufacturerMutation, { data, loading, error }] = useEditManufacturerMutation({
+ *   variables: {
+ *      manufacturerId: // value for 'manufacturerId'
+ *      manufacturer: // value for 'manufacturer'
+ *   },
+ * });
+ */
+export function useEditManufacturerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<EditManufacturerMutation, EditManufacturerMutationVariables>) {
+        return ApolloReactHooks.useMutation<EditManufacturerMutation, EditManufacturerMutationVariables>(EditManufacturerDocument, baseOptions);
+      }
+export type EditManufacturerMutationHookResult = ReturnType<typeof useEditManufacturerMutation>;
+export type EditManufacturerMutationResult = ApolloReactCommon.MutationResult<EditManufacturerMutation>;
+export type EditManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<EditManufacturerMutation, EditManufacturerMutationVariables>;
 export const GetRanksDocument = gql`
     query getRanks {
   ranks {
