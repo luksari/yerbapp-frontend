@@ -40,13 +40,14 @@ export enum UserRoles {
   USER = 'user'
 }
 
+type FormData<T> = Partial<Omit<T, '__typename'>>
 export interface FormProps<T> {
-  data?: T;
+  data: FormData<T>;
   isLoading?: boolean;
-  onSubmit: (values: T) => void;
+  onSubmit: (values: FormData<T>) => void;
   handleBack: VoidFunction;
   isSaving: boolean;
-  iEdit?: boolean;
+  isEdit?: boolean;
   title?: string;
   subTitle?: string;
 }
