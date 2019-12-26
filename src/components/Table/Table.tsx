@@ -52,18 +52,19 @@ export function Table<T extends object>({
     manualSorting: !autoSort,
   }, useSortBy, useExpanded);
 
-  const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length }), [flatColumns]);
+  const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length, rows: rows.length }), [flatColumns]);
 
   let tableBody: ReactNode;
   if (data.length === 0) {
-    tableBody = isLoading
-      ? renderMockupRows(mockupRows)
-      : renderEmptyRows(flatColumns);
+    tableBody = renderEmptyRows(flatColumns);
+  } else if (isLoading) {
+    tableBody = renderMockupRows(mockupRows);
   } else {
     tableBody = renderRows({
       rows, flatColumns, prepareRow, renderSubRow,
     });
   }
+
 
   return (
     <TableContainer {...getTableProps()} className={className}>

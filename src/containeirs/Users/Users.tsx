@@ -17,7 +17,7 @@ export const UsersRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data } = useCachedQuery(
+  const { data, loading } = useCachedQuery(
     GetUsersDocument,
     {
       variables: {
@@ -58,6 +58,7 @@ export const UsersRaw: FC = () => {
         onMakeAdmin={handleMakeAdmin}
         onDelete={handleDelete}
         onMakeUser={handleMakeUser}
+        isLoading={loading}
       />
     </Wrapper>
   );

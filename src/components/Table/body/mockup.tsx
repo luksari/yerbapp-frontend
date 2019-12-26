@@ -10,7 +10,7 @@ export const mapMockupRow = (opts: { columns: number }) => () => range(0, opts.c
 /**
  * Return (Row = Record<ColumnIndex, MockSize>)[]
  */
-export const getMockupRows = (opts: { columns: number }) => range(0, random(4, 10)).map(mapMockupRow({ columns: opts.columns })) as Record<number, number>[];
+export const getMockupRows = (opts: { columns: number; rows: number }) => range(0, opts.rows).map(mapMockupRow({ columns: opts.columns })) as Record<number, number>[];
 
 /**
  * Render row with mockup animated data of random length
@@ -21,7 +21,7 @@ export const renderMockupRows = (rows: Record<number, number>[]) => (
     <Row key={`__mockRow-${i}`} isEven={i % 2 === 0}>
       {Object.entries(row).map(([col, length]) => (
         <Cell key={`__mockCell-${col}`} alignText="left">
-          <MockupCellData style={{ width: `${5 * length}px`, animationDelay: `${random(-2, 0, true)}s` }} />
+          <MockupCellData style={{ width: `${2 * length}px`, animationDelay: `${random(-2, 0, true)}s` }} />
         </Cell>
       ))}
     </Row>
