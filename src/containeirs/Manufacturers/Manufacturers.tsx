@@ -1,5 +1,5 @@
 import React, {
-  memo, FC,
+  memo, FC, useEffect,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
@@ -9,10 +9,11 @@ import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Button, ButtonType } from 'components/Button';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useCachedQuery } from 'hooks/useCachedQuery';
+import { GET_MANUFACTURERS } from 'queries/ManufacturerQueries';
 import { ManuFacturersTable } from './components/ManufacturersTable';
 import { Wrapper, ActionWrapper } from './styled';
 
@@ -29,7 +30,7 @@ export const ManufacturesRaw: FC<Props> = ({
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data, loading } = useCachedQuery(
+  const { data, loading, refetch } = useCachedQuery(
     GetManufacturersDocument,
     {
       variables: {
@@ -37,6 +38,8 @@ export const ManufacturesRaw: FC<Props> = ({
       },
     },
   );
+
+  useEffect(() => { refetch(); }, []);
 
   const handleEdit = (id: number) => {
     redirectEdit(id);
@@ -59,18 +62,19 @@ export const ManufacturesRaw: FC<Props> = ({
       <Helmet title="Producenci" />
       <Title>Producenci</Title>
       <ActionWrapper>
-        <Button
-          themeType={ButtonType.Primary}
-          onClick={handleCreate}
-        >
-        Utwórz producenta
-        </Button>
         <Pagination
           itemCount={data.manufacturers.total}
           perPage={perPage}
           currentPage={1}
           onPageChange={(value) => setPage(value)}
         />
+        <Button
+          variant={ButtonVariant.Normal}
+          themeType={ButtonType.Primary}
+          onClick={handleCreate}
+        >
+        Utwórz producenta
+        </Button>
       </ActionWrapper>
       <ManuFacturersTable
         data={data.manufacturers.items}

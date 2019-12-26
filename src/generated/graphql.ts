@@ -471,7 +471,7 @@ export type AddManufacturerMutation = (
   { __typename?: 'Mutation' }
   & { addManufacturer: (
     { __typename?: 'Manufacturer' }
-    & Pick<Manufacturer, 'id' | 'name'>
+    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'createdAt' | 'editedAt'>
   ) }
 );
 
@@ -690,6 +690,9 @@ export const AddManufacturerDocument = gql`
   addManufacturer(manufacturer: $manufacturer) {
     id
     name
+    country
+    createdAt
+    editedAt
   }
 }
     `;

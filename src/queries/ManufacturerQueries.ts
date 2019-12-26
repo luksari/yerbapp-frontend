@@ -32,6 +32,9 @@ export const ADD_MANUFACTURER = gql`
     addManufacturer(manufacturer: $manufacturer) {
       id,
       name,
+      country,
+      createdAt,
+      editedAt,
     }
   }
 `;
