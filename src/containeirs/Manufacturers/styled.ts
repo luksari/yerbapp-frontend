@@ -10,7 +10,5 @@ export const Wrapper = styled.div`
 
 export const ActionWrapper = styled.div`
   display: flex;
-  padding: 10px 0;
   justify-content: space-between;
-
 `;

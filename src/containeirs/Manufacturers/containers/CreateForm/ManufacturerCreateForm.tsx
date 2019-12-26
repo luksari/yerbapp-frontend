@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import ManufacturerForm, { ManufacturerFormData } from 'containeirs/Manufacturers/components/ManufacturerForm';
 import { notificationError, notificationSuccess } from 'components/Notification';
-import { useAddManufacturerMutation } from 'generated/graphql';
+import { useAddManufacturerMutation, GetManufacturersDocument } from 'generated/graphql';
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
+import { GET_MANUFACTURERS } from 'queries/ManufacturerQueries';
 
 interface Props {
   handleBack: VoidFunction;
