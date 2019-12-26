@@ -74,9 +74,12 @@ export function Table<T extends object>({
             {headerGroup.headers.map((column) => (
               <HeadCell
                 {...column.getHeaderProps(column.getSortByToggleProps())}
+                disableSortBy={column.disableSortBy}
                 onClick={() => {
-                  const order = sortColumn(column);
-                  onSort(column.id, order);
+                  if (!column.disableSortBy) {
+                    const order = sortColumn(column);
+                    onSort(column.id, order);
+                  }
                 }}
                 alignText={column.align || 'left'}
               >

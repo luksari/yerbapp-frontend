@@ -25,14 +25,14 @@ export const Cell = styled.td<{ alignText: string }>`
   color: ${({ theme }) => theme.colors.primaryText};
 `;
 
-export const HeadCell = styled.th<{ alignText: string }>`
+export const HeadCell = styled.th<{ alignText: string; disableSortBy: boolean }>`
   user-select: none;
   text-align: ${({ alignText }) => alignText};
   color: ${({ theme }) => theme.colors.info};
   background: ${({ theme }) => theme.colors.mainBackground};
   font-weight: 600;
   padding: 20px 0;
-  cursor: pointer;
+  cursor: ${({ disableSortBy }) => disableSortBy ? 'normal' : 'pointer'};
 
   &:first-child {
     padding-left: ${tableSidePadding};
