@@ -17,7 +17,7 @@ export const TypesRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data } = useCachedQuery(
+  const { data, loading } = useCachedQuery(
     GetTypesDocument,
     {
       variables: {
@@ -53,6 +53,7 @@ export const TypesRaw: FC = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
+        isLoading={loading}
       />
     </Wrapper>
   );

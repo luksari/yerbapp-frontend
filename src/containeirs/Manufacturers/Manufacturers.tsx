@@ -17,7 +17,7 @@ export const ManufacturesRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data } = useCachedQuery(
+  const { data, loading } = useCachedQuery(
     GetManufacturersDocument,
     {
       variables: {
@@ -54,6 +54,7 @@ export const ManufacturesRaw: FC = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
+        isLoading={loading}
       />
     </Wrapper>
   );
