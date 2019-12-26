@@ -18,15 +18,20 @@ const ManufacturerCreateForm: FC<Props> = ({
   });
 
   const handleSubmit = async (values: ManufacturerFormData) => {
-    await addManufacturer({
-      variables: {
-        manufacturer: {
-          name: values.name!,
-          country: values.country!,
-          creatorId: localStorage.getItem('userId'),
+    try {
+      await addManufacturer({
+        variables: {
+          manufacturer: {
+            name: values.name!,
+            country: values.country!,
+            creatorId: localStorage.getItem('userId'),
+          },
         },
-      },
-    });
+      });
+      handleBack();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
 
@@ -37,6 +42,7 @@ const ManufacturerCreateForm: FC<Props> = ({
       handleBack={handleBack}
       onSubmit={handleSubmit}
       isSaving={saving}
+      data={{ name: '', country: '' }}
     />
   );
 };
