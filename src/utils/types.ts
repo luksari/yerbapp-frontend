@@ -39,3 +39,11 @@ export enum UserRoles {
   Admin = 'admin',
   User = 'user'
 }
+
+export interface TableProps<T> {
+  data: T[];
+  isLoading?: boolean;
+  onEdit?: (id: number) => void;
+  onDelete: (id: number) => void;
+  handleSort: (columnId: string, order: string) => void;
+}

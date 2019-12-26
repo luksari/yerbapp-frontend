@@ -3,7 +3,6 @@ import React, { ReactNode, useMemo } from 'react';
 import {
   TableContainer, HeadCell, HeadRow, SortingIcon,
 } from 'components/Table/styled';
-import { Loader } from 'components/Loader';
 import { getMockupRows, renderMockupRows } from 'components/Table/body/mockup';
 import { renderRows, renderEmptyRows } from 'components/Table/body/rows';
 import {
@@ -64,10 +63,6 @@ export function Table<T extends object>({
     tableBody = renderRows({
       rows, flatColumns, prepareRow, renderSubRow,
     });
-  }
-
-  if (isLoading) {
-    return <Loader />;
   }
 
   return (

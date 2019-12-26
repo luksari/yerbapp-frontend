@@ -1,25 +1,26 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { TableProps } from 'utils/types';
+import { connect } from 'react-redux';
 import { makeSelectUserId } from 'store/auth/slice';
 import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 import { isAdmin } from 'utils/isAdmin';
 import { UserData } from '../types';
 
-interface Props {
-  data: UserData[];
+type UserTableProps = TableProps<UserData> & {
   onMakeAdmin: (id: number) => void;
   onMakeUser: (id: number) => void;
-  onDelete: (id: number) => void;
   currentUserId: number;
 }
 
-export const UsersTableRaw: FC<Props> = ({
+const UsersTableRaw: FC<UserTableProps> = ({
   data,
   onMakeAdmin,
   onMakeUser,
   onDelete,
+  handleSort,
+  isLoading,
   currentUserId,
 }) => (
   <>
@@ -55,7 +56,8 @@ export const UsersTableRaw: FC<Props> = ({
         },
       ]}
       data={data}
-      onSort={console.log}
+      onSort={handleSort}
+      isLoading={isLoading}
     />
   </>
 );
