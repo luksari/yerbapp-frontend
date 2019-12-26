@@ -17,7 +17,7 @@ export const RanksRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data } = useCachedQuery(
+  const { data, loading } = useCachedQuery(
     GetRanksDocument,
     {
       variables: {
@@ -52,6 +52,7 @@ export const RanksRaw: FC = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
+        isLoading={loading}
       />
     </Wrapper>
   );

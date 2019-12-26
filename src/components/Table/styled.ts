@@ -90,10 +90,10 @@ export const SortingIcon = styled(Logo)<{ sortedDesc?: boolean }>`
   ${StyledLogo} {
     transition: transform 0.2s;
     height: 20px;
+
   }
 
   ${({ sortedDesc }) => sortedDesc && css`
-
     ${StyledLogo} {
       transform: rotate(-180deg);
     }
@@ -116,16 +116,19 @@ export const TableContainer = styled.table`
 const blinkFrames = keyframes`
   0% {
     filter: brightness(100%);
+    opacity: 0.35;
   }
 
   100% {
     filter: brightness(125%);
+    opacity: 1;
+
   }
 `;
 
 export const MockupCellData = styled.div`
   height: 1em;
-  background: ${({ theme }) => theme.colors.disabledBackground};
-  opacity: 0.35;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.colors.info};
   animation: ${blinkFrames} 500ms ease-in-out alternate-reverse infinite;
 `;
