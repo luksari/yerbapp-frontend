@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
-import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
+import { makeSelectUserId } from 'store/auth/slice';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { isAdmin } from 'utils/isAdmin';
 import { UserData } from '../types';
 
 interface Props {
@@ -11,7 +12,6 @@ interface Props {
   onMakeAdmin: (id: number) => void;
   onMakeUser: (id: number) => void;
   onDelete: (id: number) => void;
-  isAdmin: boolean;
   currentUserId: number;
 }
 
@@ -20,7 +20,6 @@ export const UsersTableRaw: FC<Props> = ({
   onMakeAdmin,
   onMakeUser,
   onDelete,
-  isAdmin,
   currentUserId,
 }) => (
   <>
@@ -34,7 +33,7 @@ export const UsersTableRaw: FC<Props> = ({
           id: 'makeAdmin',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin} onClick={() => onMakeAdmin(row.values.id)}>Przypisz admina</Button>
+              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz admina</Button>
             </div>
           ),
         },
@@ -42,7 +41,7 @@ export const UsersTableRaw: FC<Props> = ({
           id: 'makeUser',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin} onClick={() => onMakeUser(row.values.id)}>Odbierz admina</Button>
+              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz admina</Button>
             </div>
           ),
         },
@@ -62,7 +61,6 @@ export const UsersTableRaw: FC<Props> = ({
 );
 
 const mapStateToProps = createStructuredSelector({
-  isAdmin: makeSelectIsAdmin(),
   currentUserId: makeSelectUserId(),
 });
 
