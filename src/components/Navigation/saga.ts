@@ -1,5 +1,8 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
 import { LocationChangeAction } from 'connected-react-router';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { LoginResponse } from 'api/AuthApi';
+import { UserRoles } from 'utils/types';
 import { actions } from './slice';
 
 function* setSelectedNavItemSaga(action: LocationChangeAction) {
@@ -16,7 +19,13 @@ function* setCommonItemsNavbarSaga(action: LocationChangeAction) {
     yield put(actions.setCommonNavItems());
   }
 }
-
+function* setAdminPanelVisibleSaga() {
+  if (localStorage.getItem('userRole') === UserRoles.Admin) {
+    yield put(actions.setItemVisible('/admin'));
+  } else {
+    yield put(actions.setItemHidden('/admin'));
+  }
+}
 
 export function* navWatchSaga() {
   yield all([
@@ -24,4 +33,5 @@ export function* navWatchSaga() {
     takeLatest('@@router/LOCATION_CHANGE', setCommonItemsNavbarSaga),
     takeLatest('@@router/LOCATION_CHANGE', setSelectedNavItemSaga),
   ]);
+  yield takeLatest(actions.setCommonNavItems, setAdminPanelVisibleSaga);
 }
