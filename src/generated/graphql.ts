@@ -489,6 +489,16 @@ export type EditManufacturerMutation = (
   ) }
 );
 
+export type DeleteManufacturerMutationVariables = {
+  manufacturerId: Scalars['ID']
+};
+
+
+export type DeleteManufacturerMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteManufacturer'>
+);
+
 export type GetRanksQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -755,6 +765,36 @@ export function useEditManufacturerMutation(baseOptions?: ApolloReactHooks.Mutat
 export type EditManufacturerMutationHookResult = ReturnType<typeof useEditManufacturerMutation>;
 export type EditManufacturerMutationResult = ApolloReactCommon.MutationResult<EditManufacturerMutation>;
 export type EditManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<EditManufacturerMutation, EditManufacturerMutationVariables>;
+export const DeleteManufacturerDocument = gql`
+    mutation deleteManufacturer($manufacturerId: ID!) {
+  deleteManufacturer(manufacturerId: $manufacturerId)
+}
+    `;
+export type DeleteManufacturerMutationFn = ApolloReactCommon.MutationFunction<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
+
+/**
+ * __useDeleteManufacturerMutation__
+ *
+ * To run a mutation, you first call `useDeleteManufacturerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteManufacturerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteManufacturerMutation, { data, loading, error }] = useDeleteManufacturerMutation({
+ *   variables: {
+ *      manufacturerId: // value for 'manufacturerId'
+ *   },
+ * });
+ */
+export function useDeleteManufacturerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>(DeleteManufacturerDocument, baseOptions);
+      }
+export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteManufacturerMutation>;
+export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
+export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
 export const GetRanksDocument = gql`
     query getRanks($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   ranks(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {

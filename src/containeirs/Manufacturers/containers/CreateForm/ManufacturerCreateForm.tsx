@@ -4,7 +4,6 @@ import { notificationError, notificationSuccess } from 'components/Notification'
 import { useAddManufacturerMutation, GetManufacturersDocument } from 'generated/graphql';
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
-import { GET_MANUFACTURERS } from 'queries/ManufacturerQueries';
 
 interface Props {
   handleBack: VoidFunction;
@@ -28,6 +27,9 @@ const ManufacturerCreateForm: FC<Props> = ({
             creatorId: localStorage.getItem('userId'),
           },
         },
+        refetchQueries: [{
+          query: GetManufacturersDocument,
+        }],
       });
       handleBack();
     } catch (err) {
