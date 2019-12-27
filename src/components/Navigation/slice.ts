@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { memoize, find } from 'lodash';
-import { UserRoles } from 'utils/types';
 
 export type NavSliceState = {
   navItems: NavigationItem[];
