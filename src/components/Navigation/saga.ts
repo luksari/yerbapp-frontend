@@ -1,7 +1,5 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
 import { LocationChangeAction } from 'connected-react-router';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { LoginResponse } from 'api/AuthApi';
 import { UserRoles } from 'utils/types';
 import { actions } from './slice';
 

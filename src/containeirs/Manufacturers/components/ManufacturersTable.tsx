@@ -3,6 +3,7 @@ import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Manufacturer } from 'generated/graphql';
 import { TableProps } from 'utils/types';
+import { Icon } from 'antd';
 
 export const ManuFacturersTable: FC<TableProps<Manufacturer>> = ({
   data,
@@ -22,7 +23,14 @@ export const ManuFacturersTable: FC<TableProps<Manufacturer>> = ({
           align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Normal} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
+              <Button
+                themeType={ButtonType.Primary}
+                variant={ButtonVariant.Normal}
+                onClick={() => onEdit(row.values.id)}
+                icon={<Icon type="edit" />}
+              >
+Edytuj
+              </Button>
             </div>
           ),
         },
@@ -31,7 +39,14 @@ export const ManuFacturersTable: FC<TableProps<Manufacturer>> = ({
           align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Normal} onClick={() => onDelete(row.values.id)}>Usuń</Button>
+              <Button
+                themeType={ButtonType.Danger}
+                variant={ButtonVariant.Normal}
+                icon={<Icon type="delete" />}
+                onClick={() => onDelete(row.values.id)}
+              >
+Usuń
+              </Button>
             </div>
           ),
         },
