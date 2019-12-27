@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { memoize, find } from 'lodash';
+import { UserRoles } from 'utils/types';
 
 export type NavSliceState = {
   navItems: NavigationItem[];
@@ -25,7 +26,7 @@ const commonNavItems: NavigationItem[] = [
     to: '/admin',
     selected: undefined,
     title: 'Panel administratora',
-    visible: true,
+    visible: false,
     icon: 'appstore',
   },
   {
