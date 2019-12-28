@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ButtonBox } from 'components/Button/styled';
 
 export const FormContainer = styled.div`
   padding: ${({ theme }) => theme.metrics.padding.xl};
@@ -19,12 +20,17 @@ export const FormCard = styled(StyledForm)`
     margin-top: ${({ theme }) => theme.metrics.margin.xl};
     min-width: 460px;
     min-height: 460px;
+    justify-items: stretch;
+    grid-template-columns: 460px;
     border-radius: 4px;
       ${({ theme }) => css`
       font-size: ${theme.metrics.fontSize.m};
       box-shadow: 0 10px 10px -5px ${theme.colors.shadow};
+    ${ButtonBox} {
+      max-width: 100%;
+    }
 
-`}
+    `}
 `;
 
 export const FormTitle = styled.h2`

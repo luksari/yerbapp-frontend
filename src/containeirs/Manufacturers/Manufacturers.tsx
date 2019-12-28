@@ -1,65 +1,117 @@
+/* eslint-disable no-restricted-syntax */
 import React, {
-  memo, FC,
+  memo, FC, useEffect,
 } from 'react';
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { GetManufacturersDocument } from 'generated/graphql';
+import {
+  GetManufacturersDocument, useDeleteManufacturerMutation,
+} from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
-import { useCachedQuery } from 'hooks/useCachedQuery';
-import { Wrapper } from './styled';
+import { useQuery } from '@apollo/react-hooks';
+import { Icon } from 'antd';
 import { ManuFacturersTable } from './components/ManufacturersTable';
+import { Wrapper, ActionWrapper } from './styled';
 
-export const ManufacturesRaw: FC = () => {
+
+interface Props {
+  redirectEdit: (id: string) => void;
+  redirectCreate: VoidFunction;
+}
+
+export const ManufacturesRaw: FC<Props> = ({
+  redirectCreate,
+  redirectEdit,
+}) => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
-  const { data, loading } = useCachedQuery(
+  const { data, loading, refetch } = useQuery(
     GetManufacturersDocument,
     {
       variables: {
         offset, perPage, order, orderBy,
       },
+      fetchPolicy: 'cache-and-network',
     },
   );
 
-  const handleEdit = (id: number) => {
-    console.warn(`Redirect to edit form for manufacturer ${id}`);
+  useEffect(() => {
+    refetch({
+      offset, perPage, order, orderBy,
+    });
+  }, []);
+
+  const [deleteManufacturer, { loading: deleting }] = useDeleteManufacturerMutation();
+
+  const handleEdit = (id: string) => {
+    redirectEdit(id);
   };
 
-  const handleDelete = (id: number) => {
-    console.warn(`Delete  manufacturer ${id}`);
+  const handleCreate = () => {
+    redirectCreate();
+  };
+
+  const handleDelete = (id: string) => {
+    deleteManufacturer({
+      variables: { manufacturerId: id },
+      refetchQueries: [{
+        query: GetManufacturersDocument,
+        variables: {
+          offset, perPage, order, orderBy,
+        },
+      }],
+    });
   };
 
   if (!data) {
     return <Loader fullscreen />;
   }
 
-
   return (
     <Wrapper>
       <Helmet title="Producenci" />
       <Title>Producenci</Title>
-      <Pagination
-        itemCount={data.manufacturers.total}
-        perPage={perPage}
-        currentPage={1}
-        onPageChange={(value) => setPage(value)}
-      />
+      <ActionWrapper>
+        <Pagination
+          itemCount={data.manufacturers.total}
+          perPage={perPage}
+          currentPage={1}
+          onPageChange={(value) => setPage(value)}
+        />
+        <Button
+          variant={ButtonVariant.Normal}
+          themeType={ButtonType.Primary}
+          onClick={handleCreate}
+          icon={<Icon type="plus" />}
+        >
+        Utwórz producenta
+        </Button>
+      </ActionWrapper>
       <ManuFacturersTable
         data={data.manufacturers.items}
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
-        isLoading={loading}
+        isLoading={loading || deleting}
       />
     </Wrapper>
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  redirectEdit: (id: string) => dispatch(push(`/admin/manufacturers/${id}`)),
+  redirectCreate: () => dispatch(push('/admin/manufacturers/create')),
+});
+
 export default compose(
   memo,
+  connect(null, mapDispatchToProps),
 )(ManufacturesRaw);

@@ -37,5 +37,6 @@ const httpLinkWithOmitTypename = ApolloLink.from([
 export const client = new ApolloClient({
   link: authLink.concat(httpLinkWithOmitTypename),
   cache: new InMemoryCache({
+    dataIdFromObject: object => object.id,
   }),
 });

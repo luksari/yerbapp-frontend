@@ -34,14 +34,12 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
     });
   };
 
-  if (loading) {
+  if (loading || !data) {
     return <Loader fullscreen />;
   }
 
   return (
-    <>
-      {data && <ProfileForm data={data} isLoading={loading} isSaving={saving} onSubmit={handleSubmit} handleBack={handleBack} /> }
-    </>
+    <ProfileForm data={data?.whoAmI} isLoading={loading} isSaving={saving} onSubmit={handleSubmit} handleBack={handleBack} />
   );
 };
 
