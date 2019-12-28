@@ -4,21 +4,21 @@ import React, {
 import { compose } from 'redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
-import { GetManufacturersDocument } from 'generated/graphql';
+import { GetTypesDocument } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { Pagination } from 'components/Pagination';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useCachedQuery } from 'hooks/useCachedQuery';
 import { Wrapper } from './styled';
-import { ManuFacturersTable } from './components/ManufacturersTable';
+import { TypesTable } from './components/TypesTable';
 
-export const ManufacturesRaw: FC = () => {
+export const TypesRaw: FC = () => {
   const { offset, perPage, setPage } = usePagination(5, 1);
   const { order, orderBy, handleSort } = useSort();
 
   const { data, loading } = useCachedQuery(
-    GetManufacturersDocument,
+    GetTypesDocument,
     {
       variables: {
         offset, perPage, order, orderBy,
@@ -27,30 +27,29 @@ export const ManufacturesRaw: FC = () => {
   );
 
   const handleEdit = (id: number) => {
-    console.warn(`Redirect to edit form for manufacturer ${id}`);
+    console.warn(`Redirect to edit form for types ${id}`);
   };
 
   const handleDelete = (id: number) => {
-    console.warn(`Delete  manufacturer ${id}`);
+    console.warn(`Delete  type ${id}`);
   };
 
   if (!data) {
     return <Loader fullscreen />;
   }
 
-
   return (
     <Wrapper>
-      <Helmet title="Producenci" />
-      <Title>Producenci</Title>
+      <Helmet title="Typy" />
+      <Title>Typy</Title>
       <Pagination
-        itemCount={data.manufacturers.total}
+        itemCount={data.types.total}
         perPage={perPage}
         currentPage={1}
         onPageChange={(value) => setPage(value)}
       />
-      <ManuFacturersTable
-        data={data.manufacturers.items}
+      <TypesTable
+        data={data.types.items}
         onEdit={handleEdit}
         onDelete={handleDelete}
         handleSort={handleSort}
@@ -62,4 +61,4 @@ export const ManufacturesRaw: FC = () => {
 
 export default compose(
   memo,
-)(ManufacturesRaw);
+)(TypesRaw);

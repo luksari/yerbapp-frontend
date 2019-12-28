@@ -99,7 +99,13 @@ export type Manufacturer = {
   photoUrl?: Maybe<Scalars['String']>,
   products?: Maybe<Array<Product>>,
   editedAt: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ManufacturersResponse = {
+   __typename?: 'ManufacturersResponse',
+  items: Array<Manufacturer>,
+  total: Scalars['Int'],
 };
 
 export type Mutation = {
@@ -235,14 +241,20 @@ export type Product = {
   name: Scalars['String'],
   details: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ProductsResponse = {
+   __typename?: 'ProductsResponse',
+  items: Array<Product>,
+  total: Scalars['Int'],
 };
 
 export type ProductType = {
    __typename?: 'ProductType',
   id: Scalars['ID'],
   name: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
 };
 
 export type Profile = {
@@ -264,16 +276,16 @@ export type Query = {
    __typename?: 'Query',
   user: User,
   whoAmI: User,
-  users: Array<User>,
+  users: UsersResponse,
   review: Review,
-  reviews: Array<Review>,
-  types: Array<ProductType>,
+  reviews: ReviewsResponse,
+  types: TypesResponse,
   type: ProductType,
-  products: Array<Product>,
+  products: ProductsResponse,
   product: Product,
-  manufacturers: Array<Manufacturer>,
+  manufacturers: ManufacturersResponse,
   manufacturer: Manufacturer,
-  ranks: Array<Rank>,
+  ranks: RanksResponse,
   rank: Rank,
 };
 
@@ -284,6 +296,8 @@ export type QueryUserArgs = {
 
 
 export type QueryUsersArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -295,6 +309,16 @@ export type QueryReviewArgs = {
 
 
 export type QueryReviewsArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryTypesArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -306,6 +330,8 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -317,6 +343,8 @@ export type QueryProductArgs = {
 
 
 export type QueryManufacturersArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
   offset?: Maybe<Scalars['Int']>
 };
@@ -324,6 +352,14 @@ export type QueryManufacturersArgs = {
 
 export type QueryManufacturerArgs = {
   manufacturerId: Scalars['ID']
+};
+
+
+export type QueryRanksArgs = {
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>,
+  perPage?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>
 };
 
 
@@ -337,7 +373,13 @@ export type Rank = {
   name: Scalars['String'],
   lowerRange: Scalars['Int'],
   upperRange: Scalars['Int'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type RanksResponse = {
+   __typename?: 'RanksResponse',
+  items: Array<Rank>,
+  total: Scalars['Int'],
 };
 
 export type Review = {
@@ -353,7 +395,19 @@ export type Review = {
   product: Product,
   author: User,
   editedAt: Scalars['String'],
-  addedAt: Scalars['String'],
+  createdAt: Scalars['String'],
+};
+
+export type ReviewsResponse = {
+   __typename?: 'ReviewsResponse',
+  items: Array<Review>,
+  total: Scalars['Int'],
+};
+
+export type TypesResponse = {
+   __typename?: 'TypesResponse',
+  items: Array<ProductType>,
+  total: Scalars['Int'],
 };
 
 export type User = {
@@ -369,18 +423,70 @@ export type User = {
   createdAt: Scalars['String'],
 };
 
+export type UsersResponse = {
+   __typename?: 'UsersResponse',
+  items: Array<User>,
+  total: Scalars['Int'],
+};
+
 export type GetManufacturersQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
 };
 
 
 export type GetManufacturersQuery = (
   { __typename?: 'Query' }
-  & { manufacturers: Array<(
-    { __typename?: 'Manufacturer' }
-    & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'addedAt'>
-  )> }
+  & { manufacturers: (
+    { __typename?: 'ManufacturersResponse' }
+    & Pick<ManufacturersResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'id' | 'name' | 'country' | 'photoUrl' | 'editedAt' | 'createdAt'>
+    )> }
+  ) }
+);
+
+export type GetRanksQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
+
+
+export type GetRanksQuery = (
+  { __typename?: 'Query' }
+  & { ranks: (
+    { __typename?: 'RanksResponse' }
+    & Pick<RanksResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Rank' }
+      & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
+    )> }
+  ) }
+);
+
+export type GetTypesQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
+
+
+export type GetTypesQuery = (
+  { __typename?: 'Query' }
+  & { types: (
+    { __typename?: 'TypesResponse' }
+    & Pick<TypesResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'id' | 'name'>
+    )> }
+  ) }
 );
 
 export type GetMeQueryVariables = {};
@@ -438,16 +544,39 @@ export type EditUserMutation = (
   ) }
 );
 
+export type GetUsersQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
+
+
+export type GetUsersQuery = (
+  { __typename?: 'Query' }
+  & { users: (
+    { __typename?: 'UsersResponse' }
+    & Pick<UsersResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email' | 'role'>
+    )> }
+  ) }
+);
+
 
 export const GetManufacturersDocument = gql`
-    query getManufacturers($offset: Int, $perPage: Int) {
-  manufacturers(offset: $offset, perPage: $perPage) {
-    id
-    name
-    country
-    photoUrl
-    editedAt
-    addedAt
+    query getManufacturers($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  manufacturers(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    items {
+      id
+      name
+      country
+      photoUrl
+      editedAt
+      createdAt
+    }
+    total
   }
 }
     `;
@@ -466,6 +595,8 @@ export const GetManufacturersDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */
@@ -478,6 +609,88 @@ export function useGetManufacturersLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type GetManufacturersQueryHookResult = ReturnType<typeof useGetManufacturersQuery>;
 export type GetManufacturersLazyQueryHookResult = ReturnType<typeof useGetManufacturersLazyQuery>;
 export type GetManufacturersQueryResult = ApolloReactCommon.QueryResult<GetManufacturersQuery, GetManufacturersQueryVariables>;
+export const GetRanksDocument = gql`
+    query getRanks($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  ranks(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    items {
+      id
+      name
+      lowerRange
+      upperRange
+    }
+    total
+  }
+}
+    `;
+
+/**
+ * __useGetRanksQuery__
+ *
+ * To run a query within a React component, call `useGetRanksQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRanksQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRanksQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetRanksQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetRanksQuery, GetRanksQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetRanksQuery, GetRanksQueryVariables>(GetRanksDocument, baseOptions);
+      }
+export function useGetRanksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetRanksQuery, GetRanksQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetRanksQuery, GetRanksQueryVariables>(GetRanksDocument, baseOptions);
+        }
+export type GetRanksQueryHookResult = ReturnType<typeof useGetRanksQuery>;
+export type GetRanksLazyQueryHookResult = ReturnType<typeof useGetRanksLazyQuery>;
+export type GetRanksQueryResult = ApolloReactCommon.QueryResult<GetRanksQuery, GetRanksQueryVariables>;
+export const GetTypesDocument = gql`
+    query getTypes($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  types(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    items {
+      id
+      name
+    }
+    total
+  }
+}
+    `;
+
+/**
+ * __useGetTypesQuery__
+ *
+ * To run a query within a React component, call `useGetTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTypesQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetTypesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetTypesQuery, GetTypesQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetTypesQuery, GetTypesQueryVariables>(GetTypesDocument, baseOptions);
+      }
+export function useGetTypesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetTypesQuery, GetTypesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetTypesQuery, GetTypesQueryVariables>(GetTypesDocument, baseOptions);
+        }
+export type GetTypesQueryHookResult = ReturnType<typeof useGetTypesQuery>;
+export type GetTypesLazyQueryHookResult = ReturnType<typeof useGetTypesLazyQuery>;
+export type GetTypesQueryResult = ApolloReactCommon.QueryResult<GetTypesQuery, GetTypesQueryVariables>;
 export const GetMeDocument = gql`
     query getMe {
   whoAmI {
@@ -630,3 +843,45 @@ export function useEditUserMutation(baseOptions?: ApolloReactHooks.MutationHookO
 export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
 export type EditUserMutationResult = ApolloReactCommon.MutationResult<EditUserMutation>;
 export type EditUserMutationOptions = ApolloReactCommon.BaseMutationOptions<EditUserMutation, EditUserMutationVariables>;
+export const GetUsersDocument = gql`
+    query getUsers($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  users(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    items {
+      id
+      username
+      email
+      role
+    }
+    total
+  }
+}
+    `;
+
+/**
+ * __useGetUsersQuery__
+ *
+ * To run a query within a React component, call `useGetUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUsersQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetUsersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
+      }
+export function useGetUsersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
+        }
+export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
+export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
+export type GetUsersQueryResult = ApolloReactCommon.QueryResult<GetUsersQuery, GetUsersQueryVariables>;

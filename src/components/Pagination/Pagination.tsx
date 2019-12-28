@@ -35,6 +35,7 @@ export const Pagination: FC<Props> = ({
 
   const isPrevDisabled = (page === 1);
   const isNextDisabled = (page === Math.ceil(total / perPage));
+  const noData = total === 0;
 
   const goToPage = (p: number) => {
     if (p < 1 || p > Math.ceil(total / perPage)) {
@@ -47,12 +48,12 @@ export const Pagination: FC<Props> = ({
 
   return (
     <PaginationWrapper>
-      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled} icon={<Icon type="arrow-left" />}>
+      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled || noData} icon={<Icon type="arrow-left" />}>
       </PaginationButton>
       <PaginationText>
         {paginationText}
       </PaginationText>
-      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled} icon={<Icon type="arrow-right" />} />
+      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled || noData} icon={<Icon type="arrow-right" />} />
     </PaginationWrapper>
   );
 };
