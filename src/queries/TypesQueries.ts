@@ -11,3 +11,37 @@ export const GET_TYPES = gql`
   }
 }
 `;
+
+export const GET_TYPE = gql`
+  query getType($typeId: ID!) {
+    type(typeId: $typeId) {
+      id,
+      name,
+    }
+  }
+`;
+
+export const ADD_TYPE = gql`
+  mutation addType($type: AddTypeInput!) {
+    addType(type: $type) {
+      id,
+      name,
+    }
+  }
+`;
+
+
+export const EDIT_TYPE = gql`
+  mutation editType($typeId: ID!, $type: EditTypeInput!) {
+    editType(typeId: $typeId, type: $type) {
+      id,
+      name,
+    }
+  }
+`;
+
+export const DELETE_TYPE = gql`
+  mutation deleteType($typeId: ID!) {
+    deleteType(typeId: $typeId)
+  }
+`;
