@@ -519,6 +519,56 @@ export type GetRanksQuery = (
   ) }
 );
 
+export type GetRankQueryVariables = {
+  rankId: Scalars['ID']
+};
+
+
+export type GetRankQuery = (
+  { __typename?: 'Query' }
+  & { rank: (
+    { __typename?: 'Rank' }
+    & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
+  ) }
+);
+
+export type AddRankMutationVariables = {
+  rank: AddRankInput
+};
+
+
+export type AddRankMutation = (
+  { __typename?: 'Mutation' }
+  & { addRank: (
+    { __typename?: 'Rank' }
+    & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange' | 'createdAt'>
+  ) }
+);
+
+export type EditRankMutationVariables = {
+  rankId: Scalars['ID'],
+  rank: EditRankInput
+};
+
+
+export type EditRankMutation = (
+  { __typename?: 'Mutation' }
+  & { editRank: (
+    { __typename?: 'Rank' }
+    & Pick<Rank, 'id' | 'name' | 'lowerRange' | 'upperRange'>
+  ) }
+);
+
+export type DeleteRankMutationVariables = {
+  rankId: Scalars['ID']
+};
+
+
+export type DeleteRankMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteRank'>
+);
+
 export type GetTypesQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -537,6 +587,56 @@ export type GetTypesQuery = (
       & Pick<ProductType, 'id' | 'name'>
     )> }
   ) }
+);
+
+export type GetTypeQueryVariables = {
+  typeId: Scalars['ID']
+};
+
+
+export type GetTypeQuery = (
+  { __typename?: 'Query' }
+  & { type: (
+    { __typename?: 'ProductType' }
+    & Pick<ProductType, 'id' | 'name'>
+  ) }
+);
+
+export type AddTypeMutationVariables = {
+  type: AddTypeInput
+};
+
+
+export type AddTypeMutation = (
+  { __typename?: 'Mutation' }
+  & { addType: (
+    { __typename?: 'ProductType' }
+    & Pick<ProductType, 'id' | 'name'>
+  ) }
+);
+
+export type EditTypeMutationVariables = {
+  typeId: Scalars['ID'],
+  type: EditTypeInput
+};
+
+
+export type EditTypeMutation = (
+  { __typename?: 'Mutation' }
+  & { editType: (
+    { __typename?: 'ProductType' }
+    & Pick<ProductType, 'id' | 'name'>
+  ) }
+);
+
+export type DeleteTypeMutationVariables = {
+  typeId: Scalars['ID']
+};
+
+
+export type DeleteTypeMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteType'>
 );
 
 export type GetMeQueryVariables = {};
@@ -837,6 +937,144 @@ export function useGetRanksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetRanksQueryHookResult = ReturnType<typeof useGetRanksQuery>;
 export type GetRanksLazyQueryHookResult = ReturnType<typeof useGetRanksLazyQuery>;
 export type GetRanksQueryResult = ApolloReactCommon.QueryResult<GetRanksQuery, GetRanksQueryVariables>;
+export const GetRankDocument = gql`
+    query getRank($rankId: ID!) {
+  rank(rankId: $rankId) {
+    id
+    name
+    lowerRange
+    upperRange
+  }
+}
+    `;
+
+/**
+ * __useGetRankQuery__
+ *
+ * To run a query within a React component, call `useGetRankQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRankQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRankQuery({
+ *   variables: {
+ *      rankId: // value for 'rankId'
+ *   },
+ * });
+ */
+export function useGetRankQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetRankQuery, GetRankQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetRankQuery, GetRankQueryVariables>(GetRankDocument, baseOptions);
+      }
+export function useGetRankLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetRankQuery, GetRankQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetRankQuery, GetRankQueryVariables>(GetRankDocument, baseOptions);
+        }
+export type GetRankQueryHookResult = ReturnType<typeof useGetRankQuery>;
+export type GetRankLazyQueryHookResult = ReturnType<typeof useGetRankLazyQuery>;
+export type GetRankQueryResult = ApolloReactCommon.QueryResult<GetRankQuery, GetRankQueryVariables>;
+export const AddRankDocument = gql`
+    mutation addRank($rank: AddRankInput!) {
+  addRank(rank: $rank) {
+    id
+    name
+    lowerRange
+    upperRange
+    createdAt
+  }
+}
+    `;
+export type AddRankMutationFn = ApolloReactCommon.MutationFunction<AddRankMutation, AddRankMutationVariables>;
+
+/**
+ * __useAddRankMutation__
+ *
+ * To run a mutation, you first call `useAddRankMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddRankMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addRankMutation, { data, loading, error }] = useAddRankMutation({
+ *   variables: {
+ *      rank: // value for 'rank'
+ *   },
+ * });
+ */
+export function useAddRankMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddRankMutation, AddRankMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddRankMutation, AddRankMutationVariables>(AddRankDocument, baseOptions);
+      }
+export type AddRankMutationHookResult = ReturnType<typeof useAddRankMutation>;
+export type AddRankMutationResult = ApolloReactCommon.MutationResult<AddRankMutation>;
+export type AddRankMutationOptions = ApolloReactCommon.BaseMutationOptions<AddRankMutation, AddRankMutationVariables>;
+export const EditRankDocument = gql`
+    mutation editRank($rankId: ID!, $rank: EditRankInput!) {
+  editRank(rankId: $rankId, rank: $rank) {
+    id
+    name
+    lowerRange
+    upperRange
+  }
+}
+    `;
+export type EditRankMutationFn = ApolloReactCommon.MutationFunction<EditRankMutation, EditRankMutationVariables>;
+
+/**
+ * __useEditRankMutation__
+ *
+ * To run a mutation, you first call `useEditRankMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditRankMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editRankMutation, { data, loading, error }] = useEditRankMutation({
+ *   variables: {
+ *      rankId: // value for 'rankId'
+ *      rank: // value for 'rank'
+ *   },
+ * });
+ */
+export function useEditRankMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<EditRankMutation, EditRankMutationVariables>) {
+        return ApolloReactHooks.useMutation<EditRankMutation, EditRankMutationVariables>(EditRankDocument, baseOptions);
+      }
+export type EditRankMutationHookResult = ReturnType<typeof useEditRankMutation>;
+export type EditRankMutationResult = ApolloReactCommon.MutationResult<EditRankMutation>;
+export type EditRankMutationOptions = ApolloReactCommon.BaseMutationOptions<EditRankMutation, EditRankMutationVariables>;
+export const DeleteRankDocument = gql`
+    mutation deleteRank($rankId: ID!) {
+  deleteRank(rankId: $rankId)
+}
+    `;
+export type DeleteRankMutationFn = ApolloReactCommon.MutationFunction<DeleteRankMutation, DeleteRankMutationVariables>;
+
+/**
+ * __useDeleteRankMutation__
+ *
+ * To run a mutation, you first call `useDeleteRankMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteRankMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteRankMutation, { data, loading, error }] = useDeleteRankMutation({
+ *   variables: {
+ *      rankId: // value for 'rankId'
+ *   },
+ * });
+ */
+export function useDeleteRankMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteRankMutation, DeleteRankMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteRankMutation, DeleteRankMutationVariables>(DeleteRankDocument, baseOptions);
+      }
+export type DeleteRankMutationHookResult = ReturnType<typeof useDeleteRankMutation>;
+export type DeleteRankMutationResult = ApolloReactCommon.MutationResult<DeleteRankMutation>;
+export type DeleteRankMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteRankMutation, DeleteRankMutationVariables>;
 export const GetTypesDocument = gql`
     query getTypes($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   types(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
@@ -877,6 +1115,137 @@ export function useGetTypesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetTypesQueryHookResult = ReturnType<typeof useGetTypesQuery>;
 export type GetTypesLazyQueryHookResult = ReturnType<typeof useGetTypesLazyQuery>;
 export type GetTypesQueryResult = ApolloReactCommon.QueryResult<GetTypesQuery, GetTypesQueryVariables>;
+export const GetTypeDocument = gql`
+    query getType($typeId: ID!) {
+  type(typeId: $typeId) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetTypeQuery__
+ *
+ * To run a query within a React component, call `useGetTypeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTypeQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTypeQuery({
+ *   variables: {
+ *      typeId: // value for 'typeId'
+ *   },
+ * });
+ */
+export function useGetTypeQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetTypeQuery, GetTypeQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetTypeQuery, GetTypeQueryVariables>(GetTypeDocument, baseOptions);
+      }
+export function useGetTypeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetTypeQuery, GetTypeQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetTypeQuery, GetTypeQueryVariables>(GetTypeDocument, baseOptions);
+        }
+export type GetTypeQueryHookResult = ReturnType<typeof useGetTypeQuery>;
+export type GetTypeLazyQueryHookResult = ReturnType<typeof useGetTypeLazyQuery>;
+export type GetTypeQueryResult = ApolloReactCommon.QueryResult<GetTypeQuery, GetTypeQueryVariables>;
+export const AddTypeDocument = gql`
+    mutation addType($type: AddTypeInput!) {
+  addType(type: $type) {
+    id
+    name
+  }
+}
+    `;
+export type AddTypeMutationFn = ApolloReactCommon.MutationFunction<AddTypeMutation, AddTypeMutationVariables>;
+
+/**
+ * __useAddTypeMutation__
+ *
+ * To run a mutation, you first call `useAddTypeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddTypeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addTypeMutation, { data, loading, error }] = useAddTypeMutation({
+ *   variables: {
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useAddTypeMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddTypeMutation, AddTypeMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddTypeMutation, AddTypeMutationVariables>(AddTypeDocument, baseOptions);
+      }
+export type AddTypeMutationHookResult = ReturnType<typeof useAddTypeMutation>;
+export type AddTypeMutationResult = ApolloReactCommon.MutationResult<AddTypeMutation>;
+export type AddTypeMutationOptions = ApolloReactCommon.BaseMutationOptions<AddTypeMutation, AddTypeMutationVariables>;
+export const EditTypeDocument = gql`
+    mutation editType($typeId: ID!, $type: EditTypeInput!) {
+  editType(typeId: $typeId, type: $type) {
+    id
+    name
+  }
+}
+    `;
+export type EditTypeMutationFn = ApolloReactCommon.MutationFunction<EditTypeMutation, EditTypeMutationVariables>;
+
+/**
+ * __useEditTypeMutation__
+ *
+ * To run a mutation, you first call `useEditTypeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditTypeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editTypeMutation, { data, loading, error }] = useEditTypeMutation({
+ *   variables: {
+ *      typeId: // value for 'typeId'
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useEditTypeMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<EditTypeMutation, EditTypeMutationVariables>) {
+        return ApolloReactHooks.useMutation<EditTypeMutation, EditTypeMutationVariables>(EditTypeDocument, baseOptions);
+      }
+export type EditTypeMutationHookResult = ReturnType<typeof useEditTypeMutation>;
+export type EditTypeMutationResult = ApolloReactCommon.MutationResult<EditTypeMutation>;
+export type EditTypeMutationOptions = ApolloReactCommon.BaseMutationOptions<EditTypeMutation, EditTypeMutationVariables>;
+export const DeleteTypeDocument = gql`
+    mutation deleteType($typeId: ID!) {
+  deleteType(typeId: $typeId)
+}
+    `;
+export type DeleteTypeMutationFn = ApolloReactCommon.MutationFunction<DeleteTypeMutation, DeleteTypeMutationVariables>;
+
+/**
+ * __useDeleteTypeMutation__
+ *
+ * To run a mutation, you first call `useDeleteTypeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTypeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTypeMutation, { data, loading, error }] = useDeleteTypeMutation({
+ *   variables: {
+ *      typeId: // value for 'typeId'
+ *   },
+ * });
+ */
+export function useDeleteTypeMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteTypeMutation, DeleteTypeMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteTypeMutation, DeleteTypeMutationVariables>(DeleteTypeDocument, baseOptions);
+      }
+export type DeleteTypeMutationHookResult = ReturnType<typeof useDeleteTypeMutation>;
+export type DeleteTypeMutationResult = ApolloReactCommon.MutationResult<DeleteTypeMutation>;
+export type DeleteTypeMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteTypeMutation, DeleteTypeMutationVariables>;
 export const GetMeDocument = gql`
     query getMe {
   whoAmI {
