@@ -55,3 +55,17 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query getUsers($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+    users(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+      items {
+        id,
+        username,
+        email,
+        role,
+      }
+      total
+  }
+}
+`;

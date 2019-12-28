@@ -15,6 +15,10 @@ import { NoMatch } from 'containeirs/NoMatch';
 import { AdminPanel } from 'containeirs/AdminPanel';
 import { NotAllowed } from 'containeirs/NotAllowed';
 import { Manufacturers } from 'containeirs/Manufacturers';
+import { Users } from 'containeirs/Users';
+import { Types } from 'containeirs/Types';
+import { Ranks } from 'containeirs/Ranks';
+
 
 export const AppRouter: FC = () => {
   return (
@@ -26,6 +30,9 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute path="/profile" component={Profile} layout={AppLayout} />
       <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/users" component={Users} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/types" component={Types} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/ranks" component={Ranks} layout={AppLayout} mustBeAdmin />
 
       <LayoutRoute path="/login" component={Login} layout={AuthLayout} />
       <LayoutRoute path="/register" component={Register} layout={AuthLayout} />

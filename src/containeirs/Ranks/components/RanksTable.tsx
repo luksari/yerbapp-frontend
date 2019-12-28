@@ -1,22 +1,23 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
-import { Manufacturer } from 'generated/graphql';
 import { TableProps } from 'utils/types';
+import { RankData } from '../types';
 
-export const ManuFacturersTable: FC<TableProps<Manufacturer>> = ({
+export const RanksTable: FC<TableProps<RankData>> = ({
   data,
   onEdit,
   onDelete,
-  isLoading,
   handleSort,
+  isLoading,
 }) => (
   <>
-    <Table<Manufacturer>
+    <Table<RankData>
       columns={[
         { Header: 'Id', accessor: 'id', disableSortBy: false },
-        { Header: 'Nazwa producenta', accessor: 'name', disableSortBy: false },
-        { Header: 'Kraj producenta', accessor: 'country', disableSortBy: false },
+        { Header: 'Nazwa rangi', accessor: 'name', disableSortBy: false },
+        { Header: 'Dolna granica', accessor: 'lowerRange', disableSortBy: false },
+        { Header: 'Górna granica', accessor: 'upperRange', disableSortBy: false },
         {
           id: 'edit',
           Cell: ({ row }) => (

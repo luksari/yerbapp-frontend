@@ -32,6 +32,16 @@ const THEME = {
       box-shadow: none;
     }
   `,
+  [ButtonType.Warning]: css`
+  background-color: ${({ theme }) => theme.colors.warning};
+  color: ${({ theme }) => theme.colors.alternativeText};
+  &:hover {
+    background: ${({ theme }) => theme.colors.warningHover};
+  }
+  &:active {
+    box-shadow: none;
+  }
+`,
   [ButtonType.Link]: css`
     background-color: transparent;
     color: ${({ theme }) => theme.colors.info};
