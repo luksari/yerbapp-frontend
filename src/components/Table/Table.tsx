@@ -3,7 +3,6 @@ import React, { ReactNode, useMemo } from 'react';
 import {
   TableContainer, HeadCell, HeadRow, SortingIcon,
 } from 'components/Table/styled';
-import { Loader } from 'components/Loader';
 import { getMockupRows, renderMockupRows } from 'components/Table/body/mockup';
 import { renderRows, renderEmptyRows } from 'components/Table/body/rows';
 import {
@@ -53,22 +52,19 @@ export function Table<T extends object>({
     manualSorting: !autoSort,
   }, useSortBy, useExpanded);
 
-  const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length }), [flatColumns]);
+  const mockupRows = useMemo(() => getMockupRows({ columns: flatColumns.length, rows: rows.length }), [flatColumns]);
 
   let tableBody: ReactNode;
   if (data.length === 0) {
-    tableBody = isLoading
-      ? renderMockupRows(mockupRows)
-      : renderEmptyRows(flatColumns);
+    tableBody = renderEmptyRows(flatColumns);
+  } else if (isLoading) {
+    tableBody = renderMockupRows(mockupRows);
   } else {
     tableBody = renderRows({
       rows, flatColumns, prepareRow, renderSubRow,
     });
   }
 
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <TableContainer {...getTableProps()} className={className}>
@@ -78,9 +74,12 @@ export function Table<T extends object>({
             {headerGroup.headers.map((column) => (
               <HeadCell
                 {...column.getHeaderProps(column.getSortByToggleProps())}
+                disableSortBy={column.disableSortBy}
                 onClick={() => {
-                  const order = sortColumn(column);
-                  onSort(column.id, order);
+                  if (!column.disableSortBy) {
+                    const order = sortColumn(column);
+                    onSort(column.id, order);
+                  }
                 }}
                 alignText={column.align || 'left'}
               >

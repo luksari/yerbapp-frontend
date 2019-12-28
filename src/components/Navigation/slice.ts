@@ -66,6 +66,14 @@ const adminNavItems: NavigationItem[] = [
     visible: true,
     icon: 'smile',
   },
+
+  {
+    to: '/admin/ranks',
+    selected: undefined,
+    title: 'Rangi',
+    visible: true,
+    icon: 'trophy',
+  },
 ];
 
 const initialState: NavSliceState = {
