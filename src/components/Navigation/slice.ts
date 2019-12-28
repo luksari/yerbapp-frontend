@@ -25,7 +25,7 @@ const commonNavItems: NavigationItem[] = [
     to: '/admin',
     selected: undefined,
     title: 'Panel administratora',
-    visible: true,
+    visible: false,
     icon: 'appstore',
   },
   {

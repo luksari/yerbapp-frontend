@@ -71,13 +71,13 @@ const iconPositionMap = {
 
 const ButtonVariantMap = {
   [ButtonVariant.Normal]: css`
-    min-width: 220px;
+    max-width: 220px;
   `,
   [ButtonVariant.Wide]: css`
-    min-width: 360px;
+    max-width: 360px;
   `,
   [ButtonVariant.Narrow]: css`
-    min-width: 50px;
+    max-width: 50px;
     font-size: 0.8rem;
 `,
 };

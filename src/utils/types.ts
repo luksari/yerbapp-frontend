@@ -43,7 +43,19 @@ export enum UserRoles {
 export interface TableProps<T> {
   data: T[];
   isLoading?: boolean;
-  onEdit?: (id: number) => void;
-  onDelete: (id: number) => void;
+  onEdit?: (id: string | number) => void;
+  onDelete: (id: string | number) => void;
   handleSort: (columnId: string, order: string) => void;
+}
+
+type FormData<T> = Partial<Omit<T, '__typename'>>
+export interface FormProps<T> {
+  data: FormData<T>;
+  isLoading?: boolean;
+  onSubmit: (values: FormData<T>) => void;
+  handleBack: VoidFunction;
+  isSaving: boolean;
+  isEdit?: boolean;
+  title?: string;
+  subTitle?: string;
 }

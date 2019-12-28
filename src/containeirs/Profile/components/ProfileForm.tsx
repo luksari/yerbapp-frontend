@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Form } from 'components/Form';
-import { GetMeDetailsQuery, Profile } from 'generated/graphql';
+import { User } from 'generated/graphql';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormFieldset } from 'components/Form/components/FormFieldset/FormFieldset';
@@ -8,20 +8,14 @@ import { Rating } from 'components/Rating';
 import { BigUserAvatar } from './styled';
 
 interface Props {
-  data: GetMeDetailsQuery;
+  data: ProfileFormData;
   isLoading: boolean;
   onSubmit: (user: ProfileFormData) => void;
   handleBack: VoidFunction;
   isSaving: boolean;
 }
 
-export interface ProfileFormData {
-  id?: string;
-  name?: string;
-  description?: string;
-  role?: string;
-  profile: Partial<Profile>;
-}
+export type ProfileFormData = Partial<User>;
 
 export const ProfileForm: FC<Props> = ({
   data,
@@ -34,13 +28,13 @@ export const ProfileForm: FC<Props> = ({
     <Form<ProfileFormData>
       title="Twój profil"
       subTitle="Edytuj swoje dane"
-      initialValues={data.whoAmI}
+      initialValues={data}
       isLoading={isLoading}
       isSaving={isSaving}
       handleClose={handleBack}
       onSubmit={onSubmit}
     >
-      <BigUserAvatar username={data.whoAmI.username} />
+      <BigUserAvatar username={data.username} />
       <FormFieldset
         legendTitle="Twoje dane"
       >

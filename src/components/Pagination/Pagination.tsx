@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { PaginationWrapper, PaginationButton, PaginationText } from 'components/Pagination/styled';
 import { Icon } from 'antd';
+import { ButtonVariant } from 'components/Button';
 
 interface Props {
   itemCount: number;
@@ -48,12 +49,12 @@ export const Pagination: FC<Props> = ({
 
   return (
     <PaginationWrapper>
-      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled || noData} icon={<Icon type="arrow-left" />}>
+      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled || noData} variant={ButtonVariant.Narrow} icon={<Icon type="arrow-left" />}>
       </PaginationButton>
       <PaginationText>
         {paginationText}
       </PaginationText>
-      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled || noData} icon={<Icon type="arrow-right" />} />
+      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled || noData} variant={ButtonVariant.Narrow} icon={<Icon type="arrow-right" />} />
     </PaginationWrapper>
   );
 };
