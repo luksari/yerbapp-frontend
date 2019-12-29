@@ -50,8 +50,8 @@ const TypeEditForm: FC<Props> = ({
 
   return (
     <TypeForm
-      title="Utwórz typ"
-      subTitle="Dodaj nowy typ Yerba Mata"
+      title="Edytuj typ"
+      subTitle="Zmodyfikuj istniejący typ Yerba Mate"
       handleBack={handleBack}
       onSubmit={handleSubmit}
       isSaving={saving}
