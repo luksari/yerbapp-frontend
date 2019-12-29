@@ -41,7 +41,7 @@ const ManufacturerCreateForm: FC<Props> = ({
   return (
     <ManufacturerForm
       title="Utwórz producenta"
-      subTitle="Dodaj nowego producenta Yerba Mata"
+      subTitle="Dodaj nowego producenta Yerba Mate"
       handleBack={handleBack}
       onSubmit={handleSubmit}
       isSaving={saving}
