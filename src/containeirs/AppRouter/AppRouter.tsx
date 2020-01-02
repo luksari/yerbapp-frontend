@@ -19,6 +19,8 @@ import { Users } from 'containeirs/Users';
 import { Types } from 'containeirs/Types';
 import { Ranks } from 'containeirs/Ranks';
 import { ManufacturerCreateForm, ManufacturerEditForm } from 'containeirs/Manufacturers/containers';
+import { TypeCreateForm, TypeEditForm } from 'containeirs/Types/containers';
+import { RankCreateForm, RankEditForm } from 'containeirs/Ranks/containers';
 
 
 export const AppRouter: FC = () => {
@@ -35,9 +37,15 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute path="/admin/manufacturers/create" component={ManufacturerCreateForm} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/manufacturers/:manufacturerId" component={ManufacturerEditForm} layout={AppLayout} mustBeAdmin />
 
+      <AuthenticatedRoute exact path="/admin/types" component={Types} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/types/create" component={TypeCreateForm} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/types/:typeId" component={TypeEditForm} layout={AppLayout} mustBeAdmin />
+
+      <AuthenticatedRoute exact path="/admin/ranks" component={Ranks} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/ranks/create" component={RankCreateForm} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/admin/ranks/:rankId" component={RankEditForm} layout={AppLayout} mustBeAdmin />
+
       <AuthenticatedRoute path="/admin/users" component={Users} layout={AppLayout} mustBeAdmin />
-      <AuthenticatedRoute path="/admin/types" component={Types} layout={AppLayout} mustBeAdmin />
-      <AuthenticatedRoute path="/admin/ranks" component={Ranks} layout={AppLayout} mustBeAdmin />
 
       <LayoutRoute path="/login" component={Login} layout={AuthLayout} />
       <LayoutRoute path="/register" component={Register} layout={AuthLayout} />
