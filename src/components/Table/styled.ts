@@ -6,10 +6,6 @@ export const tableSidePadding = '30px';
 
 const cellStyled = () => css`
   padding: 12px 12px 12px 0;
-  white-space: nowrap;
-  max-width: 200px;
-  overflow: hidden;
-  box-sizing: border-box;
 
   &:first-child {
     padding-left: ${tableSidePadding};
@@ -26,6 +22,12 @@ export const Cell = styled.td<{ alignText: string }>`
   height: 60px; /** works like min-height */
   text-align: ${({ alignText }) => alignText};
   color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+export const CellValue = styled.div`
+  max-width: 400px;
+  max-height: 60px;
+  overflow: hidden;
 `;
 
 export const HeadCell = styled.th<{ alignText: string; disableSortBy: boolean }>`
