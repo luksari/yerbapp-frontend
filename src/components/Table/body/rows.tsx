@@ -1,7 +1,7 @@
 import React, { ReactNode, Fragment } from 'react';
 import { ColumnInstance, Row as RowType } from 'react-table';
 import {
-  Row, Cell, NestedRow, EmptyRow,
+  Row, Cell, NestedRow, EmptyRow, CellValue,
 } from 'components/Table/styled';
 
 export const renderEmptyRows = <T extends object>(flatColumns: ColumnInstance<T>[]) => (
@@ -35,7 +35,7 @@ export const renderRows = <T extends object>({
                 {...cell.getCellProps()}
                 alignText={cell.column.align || 'left'}
               >
-                {cell.render('Cell', { rowRef: ref })}
+                <CellValue>{cell.render('Cell', { rowRef: ref })}</CellValue>
               </Cell>
             ))}
           </Row>
