@@ -5,8 +5,11 @@ import { StyledLogo } from 'components/Logo/styled';
 export const tableSidePadding = '30px';
 
 const cellStyled = () => css`
-  padding: 12px 0;
+  padding: 12px 12px 12px 0;
   white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  box-sizing: border-box;
 
   &:first-child {
     padding-left: ${tableSidePadding};
