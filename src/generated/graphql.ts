@@ -417,7 +417,7 @@ export type User = {
   username: Scalars['String'],
   email: Scalars['String'],
   country?: Maybe<Scalars['String']>,
-  avatarUrl: Scalars['String'],
+  avatarUrl?: Maybe<Scalars['String']>,
   role: Scalars['String'],
   reviews?: Maybe<Array<Review>>,
   createdAt: Scalars['String'],
@@ -711,6 +711,42 @@ export type GetUsersQuery = (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'email' | 'role'>
     )> }
+  ) }
+);
+
+export type AssignAdminMutationVariables = {
+  userId: Scalars['ID']
+};
+
+
+export type AssignAdminMutation = (
+  { __typename?: 'Mutation' }
+  & { assignAdmin: (
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  ) }
+);
+
+export type DeleteUserMutationVariables = {
+  userId: Scalars['ID']
+};
+
+
+export type DeleteUserMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteUser'>
+);
+
+export type RevokeAdminMutationVariables = {
+  userId: Scalars['ID']
+};
+
+
+export type RevokeAdminMutation = (
+  { __typename?: 'Mutation' }
+  & { revokeAdmin: (
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
   ) }
 );
 
@@ -1440,3 +1476,97 @@ export function useGetUsersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
 export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
 export type GetUsersQueryResult = ApolloReactCommon.QueryResult<GetUsersQuery, GetUsersQueryVariables>;
+export const AssignAdminDocument = gql`
+    mutation assignAdmin($userId: ID!) {
+  assignAdmin(userId: $userId) {
+    id
+  }
+}
+    `;
+export type AssignAdminMutationFn = ApolloReactCommon.MutationFunction<AssignAdminMutation, AssignAdminMutationVariables>;
+
+/**
+ * __useAssignAdminMutation__
+ *
+ * To run a mutation, you first call `useAssignAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAssignAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [assignAdminMutation, { data, loading, error }] = useAssignAdminMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useAssignAdminMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AssignAdminMutation, AssignAdminMutationVariables>) {
+        return ApolloReactHooks.useMutation<AssignAdminMutation, AssignAdminMutationVariables>(AssignAdminDocument, baseOptions);
+      }
+export type AssignAdminMutationHookResult = ReturnType<typeof useAssignAdminMutation>;
+export type AssignAdminMutationResult = ApolloReactCommon.MutationResult<AssignAdminMutation>;
+export type AssignAdminMutationOptions = ApolloReactCommon.BaseMutationOptions<AssignAdminMutation, AssignAdminMutationVariables>;
+export const DeleteUserDocument = gql`
+    mutation deleteUser($userId: ID!) {
+  deleteUser(userId: $userId)
+}
+    `;
+export type DeleteUserMutationFn = ApolloReactCommon.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+
+/**
+ * __useDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useDeleteUserMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, baseOptions);
+      }
+export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
+export type DeleteUserMutationResult = ApolloReactCommon.MutationResult<DeleteUserMutation>;
+export type DeleteUserMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+export const RevokeAdminDocument = gql`
+    mutation revokeAdmin($userId: ID!) {
+  revokeAdmin(userId: $userId) {
+    id
+  }
+}
+    `;
+export type RevokeAdminMutationFn = ApolloReactCommon.MutationFunction<RevokeAdminMutation, RevokeAdminMutationVariables>;
+
+/**
+ * __useRevokeAdminMutation__
+ *
+ * To run a mutation, you first call `useRevokeAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRevokeAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [revokeAdminMutation, { data, loading, error }] = useRevokeAdminMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useRevokeAdminMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RevokeAdminMutation, RevokeAdminMutationVariables>) {
+        return ApolloReactHooks.useMutation<RevokeAdminMutation, RevokeAdminMutationVariables>(RevokeAdminDocument, baseOptions);
+      }
+export type RevokeAdminMutationHookResult = ReturnType<typeof useRevokeAdminMutation>;
+export type RevokeAdminMutationResult = ApolloReactCommon.MutationResult<RevokeAdminMutation>;
+export type RevokeAdminMutationOptions = ApolloReactCommon.BaseMutationOptions<RevokeAdminMutation, RevokeAdminMutationVariables>;
