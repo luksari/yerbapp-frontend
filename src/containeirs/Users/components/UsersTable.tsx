@@ -10,8 +10,8 @@ import { userRoleMap } from 'utils/roleMap';
 import { UserData } from '../types';
 
 type UserTableProps = TableProps<UserData> & {
-  onMakeAdmin: (id: number) => void;
-  onMakeUser: (id: number) => void;
+  onMakeAdmin: (id: string) => void;
+  onMakeUser: (id: string) => void;
   currentUserId: number;
 }
 

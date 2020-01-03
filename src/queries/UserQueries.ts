@@ -69,3 +69,25 @@ export const GET_USERS = gql`
   }
 }
 `;
+
+export const ASSIGN_ADMIN = gql`
+  mutation assignAdmin($userId: ID!) {
+    assignAdmin(userId: $userId) {
+      id
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation deleteUser($userId: ID!) {
+    deleteUser(userId: $userId)
+  }
+`;
+
+export const REVOKE_ADMIN = gql`
+  mutation revokeAdmin($userId: ID!) {
+    revokeAdmin(userId: $userId) {
+      id
+    }
+  }
+`;
