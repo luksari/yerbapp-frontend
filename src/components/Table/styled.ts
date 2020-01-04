@@ -5,8 +5,7 @@ import { StyledLogo } from 'components/Logo/styled';
 export const tableSidePadding = '30px';
 
 const cellStyled = () => css`
-  padding: 12px 0;
-  white-space: nowrap;
+  padding: 12px 12px 12px 0;
 
   &:first-child {
     padding-left: ${tableSidePadding};
@@ -23,6 +22,12 @@ export const Cell = styled.td<{ alignText: string }>`
   height: 60px; /** works like min-height */
   text-align: ${({ alignText }) => alignText};
   color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+export const CellValue = styled.div`
+  max-width: 400px;
+  max-height: 60px;
+  overflow: hidden;
 `;
 
 export const HeadCell = styled.th<{ alignText: string; disableSortBy: boolean }>`
