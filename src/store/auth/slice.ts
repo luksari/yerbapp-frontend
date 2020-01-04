@@ -1,15 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { LoginResponse } from 'api/AuthApi';
+import { UserRoles } from 'utils/types';
 
 interface AuthSliceState {
   token?: string;
   userId?: number;
+  userRole?: UserRoles;
+  expireDate?: Date;
 }
 
 const initialState: AuthSliceState = {
   token: undefined,
   userId: undefined,
+  userRole: undefined,
 };
 
 export const { name, actions, reducer } = createSlice({
@@ -19,10 +23,12 @@ export const { name, actions, reducer } = createSlice({
     setUser(state, action: PayloadAction<LoginResponse>) {
       state.token = action.payload.access_token;
       state.userId = action.payload.user_id;
+      state.userRole = action.payload.user_role;
     },
     unsetUser(state) {
       state.token = undefined;
       state.userId = undefined;
+      state.userRole = undefined;
     },
   },
 });
@@ -37,4 +43,8 @@ export const makeSelectIsAuthenticated = () => createSelector(
 export const makeSelectUserId = () => createSelector(
   selectAuthDomain,
   (substate) => substate.userId || localStorage.getItem('userId'),
+);
+export const makeSelectIsAdmin = () => createSelector(
+  selectAuthDomain,
+  (substate) => substate.userRole || localStorage.getItem('userRole') === 'admin',
 );

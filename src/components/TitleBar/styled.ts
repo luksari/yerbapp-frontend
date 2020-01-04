@@ -5,7 +5,9 @@ export const TitleBarWrapper = styled.div`
   display: grid;
   align-items: center;
   justify-self: flex-start;
-  margin-right: auto;
+  position: absolute;
+  left: calc(${({ theme }) => theme.metrics.width.sidebarWidth} + 25px);
+  top: 30px;
 `;
 
 export const TitleBarTitle = styled.h1`

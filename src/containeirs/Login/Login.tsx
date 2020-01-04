@@ -2,9 +2,11 @@ import React, { FC } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import { name, reducer, actions } from './slice';
+import { injectReducer } from 'utils/injectReducer';
+import { injectSaga } from 'utils/injectSaga';
+import {
+  name, reducer, actions, makeSelectIsPending,
+} from './slice';
 import { watchLoginSaga } from './saga';
 import { LoginForm } from './components/LoginForm';
 import { LoginFormData } from './types';
@@ -12,13 +14,13 @@ import { LoginFormData } from './types';
 
 interface Props {
   setLoginBegin: (values: LoginFormData) => void;
+  isPending?: boolean;
 }
 
 const LoginRaw: FC<Props> = ({
   setLoginBegin,
+  isPending,
 }) => {
-  useInjectReducer({ key: name, reducer });
-  useInjectSaga({ key: name, saga: watchLoginSaga });
   return (
     <div>
       <LoginForm
@@ -27,20 +29,25 @@ const LoginRaw: FC<Props> = ({
           username: '', password: '',
         }}
         onSubmit={(values) => setLoginBegin(values)}
+        isPending={isPending}
       />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-
+  isPending: makeSelectIsPending(),
 });
 const mapDispatchToProps = (dispatch) => ({
   setLoginBegin: (payload: LoginFormData) => dispatch(actions.setLoginPending(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: name, reducer });
+const withSaga = injectSaga({ key: name, saga: watchLoginSaga });
 
 export default compose(
+  withReducer,
+  withSaga,
   withConnect,
 )(LoginRaw);

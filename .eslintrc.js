@@ -19,20 +19,19 @@ module.exports = {
       pragma: "React",
       version: "detect"
     },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    },
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
+        paths: ['src/']
+    },
       // use <root>/tsconfig.json
       "typescript": {
         "alwaysTryTypes": true // always try to resolve types under <roo/>@types directory even it doesn't contain any source code, like @types/unist
       },
-
       // use <root>/path/to/folder/tsconfig.json
       "typescript": {
         "directory": "./tsconfig.json"
@@ -70,5 +69,15 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 0,
     'no-console': 0,
     'linebreak-style': 0,
+    "import/extensions": [
+      2,
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ],
   },
 };

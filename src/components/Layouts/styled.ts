@@ -34,6 +34,7 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
 
 export const ComponentWrapper = styled.div`
   overflow-y: scroll;
+  min-height: calc(100vh - 115px);
   max-height: calc(100vh - 115px);
   display: flex;
   align-items: flex-start;
