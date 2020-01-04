@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Wrapper } from 'containeirs/Users/styled';
 
 const Explore: FC = () => {
   return (
-    <div>
+    <Wrapper>
         Lets explore Yerba Mate!
-    </div>
+    </Wrapper>
   );
 };
 

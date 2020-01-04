@@ -9,16 +9,14 @@ import {
   GetManufacturersDocument, useDeleteManufacturerMutation,
 } from 'generated/graphql';
 import { Loader } from 'components/Loader';
-import { Pagination } from 'components/Pagination';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
-import { Icon } from 'antd';
+import { ActionBar } from 'components/ActionBar/ActionBar';
 import { ManuFacturersTable } from './components/ManufacturersTable';
-import { Wrapper, ActionWrapper } from './styled';
+import { Wrapper } from './styled';
 
 
 interface Props {
@@ -79,22 +77,13 @@ export const ManufacturesRaw: FC<Props> = ({
     <Wrapper>
       <Helmet title="Producenci" />
       <Title>Producenci</Title>
-      <ActionWrapper>
-        <Pagination
-          itemCount={data.manufacturers.total}
-          perPage={perPage}
-          currentPage={1}
-          onPageChange={(value) => setPage(value)}
-        />
-        <Button
-          variant={ButtonVariant.Normal}
-          themeType={ButtonType.Primary}
-          onClick={handleCreate}
-          icon={<Icon type="plus" />}
-        >
-        Utwórz producenta
-        </Button>
-      </ActionWrapper>
+      <ActionBar
+        redirectCreate={handleCreate}
+        onPageChange={setPage}
+        perPage={5}
+        total={data.manufacturers.total}
+        createText="Utwórz producenta"
+      />
       <ManuFacturersTable
         data={data.manufacturers.items}
         onEdit={handleEdit}
