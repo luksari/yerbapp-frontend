@@ -18,6 +18,7 @@ export const ActionBar: FC<Props> = ({
   onPageChange,
   redirectCreate,
   createText,
+  children,
 }) => {
   return (
     <ActionWrapper>
@@ -27,6 +28,7 @@ export const ActionBar: FC<Props> = ({
         currentPage={1}
         onPageChange={onPageChange}
       />
+      {children}
       <Button
         variant={ButtonVariant.Normal}
         themeType={ButtonType.Primary}
