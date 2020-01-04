@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { getInitials } from 'helpers/getInitials';
 import { getInitialsCode } from 'helpers/getInitialsCode';
 import {
@@ -10,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-export const UserAvatar: FC<Props> = ({
+export const UserAvatar: FC<Props> = memo(({
   username,
   className,
 }) => {
@@ -28,4 +28,4 @@ export const UserAvatar: FC<Props> = ({
       <RightLogo />
     </AvatarWrapper>
   );
-};
+});

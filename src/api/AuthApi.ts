@@ -1,8 +1,10 @@
+import { UserRoles } from 'utils/types';
 import { postRequest } from './requests';
 
 export interface LoginResponse {
   access_token: string;
   user_id: number;
+  user_role: UserRoles;
 }
 
 export interface RegisterResponse {

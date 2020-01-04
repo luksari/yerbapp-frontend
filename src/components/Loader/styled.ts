@@ -8,6 +8,7 @@ export const LoaderWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
+  background: ${({ theme }) => theme.colors.mainBackground};
 `;
 
 const pulse = keyframes`
@@ -45,10 +46,7 @@ export const StyledLoader = styled(Logo)`
   z-index: 1;
 `;
 
-export const StyledAltLoader = styled(Logo)`
-  width: 80px;
-  height: 80px;
-  position: absolute;
+export const StyledAltLoader = styled(StyledLoader)`
   animation: ${pulseFade} 2s infinite;
   z-index: 0;
 `;

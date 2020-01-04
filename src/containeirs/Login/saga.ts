@@ -30,12 +30,6 @@ export function* loginSaga({ payload }: PayloadAction<LoginFormData>) {
   }
 }
 
-function* setTokenSaga(action: PayloadAction<LoginResponse>) {
-  yield localStorage.setItem('token', action.payload.access_token);
-  yield localStorage.setItem('userId', `${action.payload.user_id}`);
-}
-
 export function* watchLoginSaga() {
   yield takeLatest(actions.setLoginPending, loginSaga);
-  yield takeLatest(actions.setLoginSuccess, setTokenSaga);
 }

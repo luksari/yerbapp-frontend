@@ -24,7 +24,7 @@ const THEME = {
   `,
   [ButtonType.Danger]: css`
     background-color: ${({ theme }) => theme.colors.danger};
-    color: ${({ theme }) => theme.colors.primaryText};
+    color: ${({ theme }) => theme.colors.alternativeText};
     &:hover {
       background: ${({ theme }) => theme.colors.dangerHover};
     }
@@ -32,6 +32,16 @@ const THEME = {
       box-shadow: none;
     }
   `,
+  [ButtonType.Warning]: css`
+  background-color: ${({ theme }) => theme.colors.warning};
+  color: ${({ theme }) => theme.colors.alternativeText};
+  &:hover {
+    background: ${({ theme }) => theme.colors.warningHover};
+  }
+  &:active {
+    box-shadow: none;
+  }
+`,
   [ButtonType.Link]: css`
     background-color: transparent;
     color: ${({ theme }) => theme.colors.info};
@@ -61,13 +71,14 @@ const iconPositionMap = {
 
 const ButtonVariantMap = {
   [ButtonVariant.Normal]: css`
-    min-width: 220px;
+    max-width: 220px;
   `,
   [ButtonVariant.Wide]: css`
-    min-width: 360px;
+    max-width: 360px;
   `,
   [ButtonVariant.Narrow]: css`
-    min-width: 50px;
+    max-width: 50px;
+    font-size: 0.8rem;
 `,
 };
 

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { ButtonType, Button } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Logo } from 'components/Logo/Logo';
+import Helmet from 'react-helmet';
 import {
   Wrapper, LeftSide, RightSide, NoMatchAltLoader, NoMatchLoader, NoMatchAppTitle, LogoLink, Text404, TextMessage,
 } from './styled';
@@ -10,6 +11,7 @@ const NoMatch: FC = () => {
   return (
     <Wrapper>
       <LeftSide>
+        <Helmet title="404 - Not found" />
         <LogoLink to="/">
           <Logo />
           <NoMatchAppTitle>
@@ -20,7 +22,9 @@ const NoMatch: FC = () => {
             404
         </Text404>
         <TextMessage>
-          No nie! Twoja strona nie została znaleziona :(
+          Coś jest nie tak! Chciałeś się znaleźć w
+          {' '}
+          <pre>null | undefined</pre>
         </TextMessage>
         <Link to="/">
           <Button themeType={ButtonType.Secondary} type="button">

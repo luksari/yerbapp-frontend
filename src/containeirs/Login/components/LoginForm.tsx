@@ -5,24 +5,28 @@ import {
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormCard, FormTitle } from 'components/Form/styled';
-import { Button, ButtonType } from 'components/Button';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { LoginFormData } from '../types';
 
 interface OwnFormProps extends FormikConfig<LoginFormData> {
   title: string;
+  isPending: boolean;
 }
 export const LoginForm: FC<OwnFormProps> = ({
   onSubmit,
   initialValues,
   title,
+  isPending,
 }) => {
   return (
     <Formik
       onSubmit={onSubmit}
       initialValues={initialValues}
     >
-      {({ handleChange, handleSubmit, values }) => (
+      {({
+        handleChange, handleSubmit, values, isSubmitting,
+      }) => (
         <FormCard
           onSubmit={handleSubmit}
         >
@@ -52,7 +56,12 @@ export const LoginForm: FC<OwnFormProps> = ({
               autoComplete: 'password',
             }}
           />
-          <Button themeType={ButtonType.Primary} type="submit">
+          <Button
+            variant={ButtonVariant.Wide}
+            themeType={ButtonType.Primary}
+            type="submit"
+            disabled={isSubmitting || isPending}
+          >
         Zaloguj się
           </Button>
           <Button themeType={ButtonType.Link} type="button">

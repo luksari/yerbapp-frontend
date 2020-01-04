@@ -52,19 +52,6 @@ export const NavList = styled.ul`
   display:block;
 `;
 
-export const NavItem = styled.li`
-  font-family: 'Montserrat', sans-serif;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  &::after{
-    width: 80%;
-    content: '';
-    display: block;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.primaryTextDarken};
-  }
-`;
 
 export const NavIcon = styled(Icon)`
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
@@ -75,7 +62,7 @@ export const NavText = styled.p`
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   color: ${({ theme }) => theme.colors.alternativeText};
   font-weight: 500;
-  margin: ${({ theme }) => theme.metrics.margin.m};
+  margin-top: ${({ theme }) => theme.metrics.margin.m};
   width: 100%;
   justify-content: center;
   text-align: center;
@@ -88,6 +75,7 @@ export const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
   ${({ theme }) => css`
     padding: ${theme.metrics.padding.xxl} ${theme.metrics.padding.xl};
     &:hover {
@@ -98,3 +86,27 @@ export const NavLink = styled(Link)`
       }
     }
   `}`;
+
+export const NavItem = styled.li<{selected: boolean; visible: boolean}>`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  &::after{
+    width: 80%;
+    content: '';
+    display: block;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primaryTextDarken};
+  }
+  ${({ selected, theme }) => selected && css`
+    background: ${theme.colors.primaryTextDarken};
+    border-left: 5px solid ${theme.colors.info};
+      color: ${theme.colors.info};
+      ${NavText}, ${NavIcon}{
+        color: ${theme.colors.info}
+      }
+  `}
+  ${({ visible }) => !visible && css`
+      display: none
+  `}
+`;

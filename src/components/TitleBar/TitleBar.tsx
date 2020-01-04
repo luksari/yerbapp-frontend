@@ -1,16 +1,20 @@
-import React, { createRef, memo, ReactNode } from 'react';
+import React, {
+  createRef, memo, ReactNode, FC,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { TitleBarWrapper, TitleBarTitle } from './styled';
 
 const titleBarTitleRef = createRef<HTMLHeadingElement>();
 
-const TitleBarComponent: React.FunctionComponent = () => (
-  <TitleBarWrapper>
-    <TitleBarTitle ref={titleBarTitleRef} />
-  </TitleBarWrapper>
-);
+const TitleBarComponent: FC = () => {
+  return (
+    <TitleBarWrapper>
+      <TitleBarTitle ref={titleBarTitleRef} />
+    </TitleBarWrapper>
+  );
+};
 
-export const TitleBar = memo(TitleBarComponent);
+export const TitleBar = TitleBarComponent;
 
 /**
  * Use title component to place title on the top bar
@@ -22,7 +26,7 @@ export const TitleBar = memo(TitleBarComponent);
 interface TitleProps {
   children: ReactNode;
 }
-const TitleComponent: React.FunctionComponent<TitleProps> = ({ children }) => {
+const TitleComponent: FC<TitleProps> = ({ children }) => {
   const container = titleBarTitleRef.current;
 
   if (container) {

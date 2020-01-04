@@ -1,11 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { LogoContainer, StyledLogo } from './styled';
 
+interface Props {
+  className?: string;
+}
 
-export const Logo: FC = () => {
+export const Logo: FC<Props> = memo(({ className }) => {
   return (
-    <LogoContainer>
+    <LogoContainer className={className}>
       <StyledLogo />
     </LogoContainer>
   );
-};
+});
