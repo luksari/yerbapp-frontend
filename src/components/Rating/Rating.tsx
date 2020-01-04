@@ -14,6 +14,7 @@ type Props = {
   label?: string;
   vertical?: boolean;
   size?: SizeType;
+  handleChangeCallback?: (value: number, name: string) => void;
 } & RatingComponentProps;
 
 export const Rating: FC<Props> = ({
@@ -24,13 +25,15 @@ export const Rating: FC<Props> = ({
   vertical = false,
   onChange,
   className,
+  handleChangeCallback,
   ...rest
 }) => {
   const context = useFormikContext<any>();
   const value = context ? get(context.values, name) : initialRating;
   const [rating, setRating] = useState(value);
   const handleClick = (val) => setRating(val);
-  const handleChange = useCallback((val: number) => context ? context.setFieldValue(name, val, false) : onChange(val), [rating]);
+  const handleChange = useCallback((val: number) => context ? context.setFieldValue(name, val, false) : handleChangeCallback(value, name), [rating]);
+
   return useMemo(() => (
     <InputWrapper size={size} vertical={vertical} className={className}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
