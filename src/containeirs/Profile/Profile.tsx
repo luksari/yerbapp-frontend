@@ -30,6 +30,7 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
       variables: {
         user: userData,
         userId: data.whoAmI.id,
+
       },
     });
   };
