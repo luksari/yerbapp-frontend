@@ -2,6 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components';
 
 interface WrapperProps {
   fullWidth?: boolean;
+  noMargin?: boolean;
 }
 
 
@@ -45,6 +46,7 @@ export const baseInputStyles = css`
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   line-height: 16px;
   padding: 10px;
+  margin: 0 !important;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.primaryText};
   border: 1px solid transparent;
