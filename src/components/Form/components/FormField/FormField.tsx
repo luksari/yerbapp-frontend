@@ -10,6 +10,7 @@ type CustomFormFieldProps<T> = T extends FC<infer R> ? {
   props: Omit<R, keyof FieldConfig>;
   label?: string;
   fullWidth?: boolean;
+  noMargin?: boolean;
 } : never;
 
 type WrappedFormFieldProps<T> = CustomFormFieldProps<T> & FieldConfig;
