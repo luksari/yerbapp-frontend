@@ -7,12 +7,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { compose } from 'redux';
 import { usePagination } from 'hooks/usePagination';
-import { Rating } from 'components/Rating';
-import { SizeType } from 'components/Rating/types';
-import { Formik } from 'formik';
-import { FormField } from 'components/Form/components/FormField';
-import { Input } from 'components/Input';
-import { RatingWrapper, FilterWrapper } from './styled';
+import { FilterForm } from './components/FilterForm';
 
 interface Props {
   redirectEdit: (id: string) => void;
@@ -32,9 +27,8 @@ const Explore: FC<Props> = ({
     priceImportance: 0,
     tasteImportance: 0,
     overallImportance: 0,
+    name: '',
   };
-
-  type ValuesType = typeof formValues;
 
   return (
     <Wrapper>
@@ -49,55 +43,10 @@ const Explore: FC<Props> = ({
         redirectCreate={redirectCreate}
         onPageChange={setPage}
       >
-        <Formik<ValuesType>
-          initialValues={formValues}
-          onSubmit={console.log}
-        >
-          {({ values, submitForm }) => (
-            <FilterWrapper>
-              <FormField
-                name="name"
-                component={Input}
-                fullWidth
-                props={{
-                  placeholder: 'Wyszukaj po nazwie...',
-                }}
-              />
-              <RatingWrapper>
-                <Rating
-                  label="Aromat"
-                  name="aromaImportance"
-                  size={SizeType.Small}
-                />
-                <Rating
-                  label="Gorycz"
-                  name="bitternessImportance"
-                  size={SizeType.Small}
-                />
-                <Rating
-                  label="Pobudzenie"
-                  name="energyImportance"
-                  size={SizeType.Small}
-                />
-                <Rating
-                  label="Cena"
-                  name="priceImportance"
-                  size={SizeType.Small}
-                />
-                <Rating
-                  label="Smak"
-                  name="tasteImportance"
-                  size={SizeType.Small}
-                />
-                <Rating
-                  label="Ogólna ocena"
-                  name="overallImportance"
-                  size={SizeType.Small}
-                />
-              </RatingWrapper>
-            </FilterWrapper>
-          )}
-        </Formik>
+        <FilterForm
+          formValues={formValues}
+          handleSubmit={console.log}
+        />
       </ActionBar>
     </Wrapper>
   );
