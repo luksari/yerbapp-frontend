@@ -517,7 +517,7 @@ export type GetProductsQuery = (
       & Pick<Product, 'id' | 'name' | 'details'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
-        & Pick<Manufacturer, 'name'>
+        & Pick<Manufacturer, 'name' | 'country'>
       ), type: (
         { __typename?: 'ProductType' }
         & Pick<ProductType, 'name'>
@@ -967,6 +967,7 @@ export const GetProductsDocument = gql`
       name
       manufacturer {
         name
+        country
       }
       type {
         name

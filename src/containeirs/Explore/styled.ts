@@ -13,3 +13,12 @@ export const FilterWrapper = styled.div`
   justify-items: stretch;
   grid-column-gap: 25px;
 `;
+
+export const DataGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(690px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 45px;
+`;

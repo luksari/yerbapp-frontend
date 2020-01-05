@@ -9,7 +9,8 @@ export const GET_PRODUCTS = gql`
         id,
         name,
         manufacturer {
-          name
+          name,
+          country
         },
         type {
           name
