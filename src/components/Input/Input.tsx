@@ -26,7 +26,7 @@ export const Input: FC<Props> = ({
   const meta = { touched, error };
   return (
     <StyledTextInput
-      value={value}
+      value={value || ''}
       onChange={onChange}
       onBlur={onBlur}
       disabled={rest.disabled}
