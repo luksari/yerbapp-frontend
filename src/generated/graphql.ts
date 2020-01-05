@@ -499,6 +499,33 @@ export type DeleteManufacturerMutation = (
   & Pick<Mutation, 'deleteManufacturer'>
 );
 
+export type GetProductsQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  order?: Maybe<Scalars['String']>,
+  orderBy?: Maybe<Scalars['String']>
+};
+
+
+export type GetProductsQuery = (
+  { __typename?: 'Query' }
+  & { products: (
+    { __typename?: 'ProductsResponse' }
+    & Pick<ProductsResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Product' }
+      & Pick<Product, 'id' | 'name' | 'details'>
+      & { manufacturer: (
+        { __typename?: 'Manufacturer' }
+        & Pick<Manufacturer, 'name'>
+      ), type: (
+        { __typename?: 'ProductType' }
+        & Pick<ProductType, 'name'>
+      ) }
+    )> }
+  ) }
+);
+
 export type GetRanksQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -931,6 +958,53 @@ export function useDeleteManufacturerMutation(baseOptions?: ApolloReactHooks.Mut
 export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteManufacturerMutation>;
 export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
 export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
+export const GetProductsDocument = gql`
+    query getProducts($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+  products(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    total
+    items {
+      id
+      name
+      manufacturer {
+        name
+      }
+      type {
+        name
+      }
+      details
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductsQuery__
+ *
+ * To run a query within a React component, call `useGetProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductsQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      order: // value for 'order'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+      }
+export function useGetProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+        }
+export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
+export type GetProductsLazyQueryHookResult = ReturnType<typeof useGetProductsLazyQuery>;
+export type GetProductsQueryResult = ApolloReactCommon.QueryResult<GetProductsQuery, GetProductsQueryVariables>;
 export const GetRanksDocument = gql`
     query getRanks($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   ranks(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {

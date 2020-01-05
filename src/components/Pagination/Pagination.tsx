@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { PaginationWrapper, PaginationButton, PaginationText } from 'components/Pagination/styled';
 import { Icon } from 'antd';
-import { ButtonVariant, ButtonType } from 'components/Button';
+import { ButtonVariant } from 'components/Button';
 
 interface Props {
   itemCount: number;

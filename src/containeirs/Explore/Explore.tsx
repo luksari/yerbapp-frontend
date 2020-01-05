@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { compose } from 'redux';
 import { usePagination } from 'hooks/usePagination';
+import { useQuery } from 'react-apollo';
+import { GET_PRODUCTS } from 'queries/ProductQueries';
+import { Loader } from 'components/Loader';
 import { FilterForm } from './components/FilterForm';
 
 interface Props {
@@ -20,6 +23,16 @@ const Explore: FC<Props> = ({
 }) => {
   const { offset, perPage, setPage } = usePagination(5, 1);
 
+  const { data, loading, refetch } = useQuery(
+    GET_PRODUCTS,
+    {
+      variables: {
+        offset, perPage,
+      },
+      fetchPolicy: 'cache-and-network',
+    },
+  );
+
   const formValues = {
     aromaImportance: 0,
     bitternessImportance: 0,
@@ -30,6 +43,10 @@ const Explore: FC<Props> = ({
     name: '',
   };
 
+  if (!data) {
+    return <Loader fullscreen />;
+  }
+
   return (
     <Wrapper>
       <Helmet
@@ -37,9 +54,9 @@ const Explore: FC<Props> = ({
       />
       <Title>Przeglądaj produkty</Title>
       <ActionBar
-        perPage={perPage}
+        perPage={5}
         createText="Utwórz Yerba Mate"
-        total={5}
+        total={data.products.total}
         redirectCreate={redirectCreate}
         onPageChange={setPage}
       >
