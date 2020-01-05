@@ -22,13 +22,13 @@ export const ActionBar: FC<Props> = ({
 }) => {
   return (
     <ActionWrapper>
+      {children}
       <Pagination
         itemCount={total}
         perPage={perPage}
         currentPage={1}
         onPageChange={onPageChange}
       />
-      {children}
       <Button
         variant={ButtonVariant.Normal}
         themeType={ButtonType.Primary}
