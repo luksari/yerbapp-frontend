@@ -77,7 +77,7 @@ const ButtonVariantMap = {
     max-width: 360px;
   `,
   [ButtonVariant.Narrow]: css`
-    max-width: 50px;
+    max-width: 120px;
     font-size: 0.8rem;
 `,
 };
@@ -98,13 +98,16 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType: ButtonTy
   justify-content: center;
   align-items: center;
   border: none;
-  min-width: 220px;
   ${({ iconPosition }) => IconPositionMixin(iconPosition)};
 
   svg {
     height: 100%;
     margin-right: 10px;;
   }
+
+  ${({ variant }) => {
+    return ButtonVariantMap[variant];
+  }}
 
   ${({ disabled, themeType, theme }) => {
     if (disabled) {
@@ -115,8 +118,5 @@ export const ButtonBox = styled.button<{ disabled?: boolean; themeType: ButtonTy
       `;
     }
     return THEME[themeType];
-  }}
-  ${({ variant }) => {
-    return ButtonVariantMap[variant];
   }}
   `;
