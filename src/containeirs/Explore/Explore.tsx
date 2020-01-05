@@ -10,7 +10,12 @@ import { usePagination } from 'hooks/usePagination';
 import { useQuery } from 'react-apollo';
 import { GET_PRODUCTS } from 'queries/ProductQueries';
 import { Loader } from 'components/Loader';
+import {
+  GetProductsDocument, GetProductsQueryHookResult, GetProductsQueryVariables, GetProductsQuery,
+} from 'generated/graphql';
+import { Card } from 'components/Card';
 import { FilterForm } from './components/FilterForm';
+import { DataGrid } from './styled';
 
 interface Props {
   redirectEdit: (id: string) => void;
@@ -21,10 +26,10 @@ interface Props {
 const Explore: FC<Props> = ({
   redirectCreate,
 }) => {
-  const { offset, perPage, setPage } = usePagination(5, 1);
+  const { offset, perPage, setPage } = usePagination(4, 1);
 
-  const { data, loading, refetch } = useQuery(
-    GET_PRODUCTS,
+  const { data, loading, refetch } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
+    GetProductsDocument,
     {
       variables: {
         offset, perPage,
@@ -54,7 +59,7 @@ const Explore: FC<Props> = ({
       />
       <Title>Przeglądaj produkty</Title>
       <ActionBar
-        perPage={5}
+        perPage={perPage}
         createText="Utwórz Yerba Mate"
         total={data.products.total}
         redirectCreate={redirectCreate}
@@ -65,6 +70,18 @@ const Explore: FC<Props> = ({
           handleSubmit={console.log}
         />
       </ActionBar>
+      <DataGrid>
+        {data.products.items.map((product) => (
+          <Card
+            name={product.name}
+            manufacturer={product.manufacturer.name}
+            country={product.manufacturer.country}
+            key={product.id}
+            details={product.details}
+            type={product.type.name}
+          />
+        ))}
+      </DataGrid>
     </Wrapper>
   );
 };

@@ -8,36 +8,36 @@ import {
 import { CardValue } from './CardValue';
 
 interface CardProps {
-  id: number;
-  manufacturer: string;
-  type: string;
-  name: string;
-  details: string;
-  country: string;
-  photoUrl: string;
-  addedAt: string;
-  aromaScore: number;
-  tasteScore: number;
-  bitternessScore: number;
-  energyScore: number;
-  priceScore: number;
-  overallScore: number;
+  id?: number;
+  manufacturer?: string;
+  type?: string;
+  name?: string;
+  details?: string;
+  country?: string;
+  photoUrl?: string;
+  addedAt?: string;
+  aromaScore?: number;
+  tasteScore?: number;
+  bitternessScore?: number;
+  energyScore?: number;
+  priceScore?: number;
+  overallScore?: number;
 }
 
 export const Card: FC<CardProps> = (
   {
-    name,
+    name = 'Brak danych',
     photoUrl,
-    manufacturer,
-    type,
-    country,
-    aromaScore,
-    tasteScore,
-    bitternessScore,
-    energyScore,
-    priceScore,
-    overallScore,
-    details,
+    manufacturer = 'Brak danych',
+    type = 'Brak danych',
+    country = 'Brak danych',
+    aromaScore = 0,
+    tasteScore = 0,
+    bitternessScore = 0,
+    energyScore = 0,
+    priceScore = 0,
+    overallScore = 0,
+    details = 'Brak danych',
   },
 ) => {
   const shortDescription = truncate(details, { length: 150, separator: '.' });
