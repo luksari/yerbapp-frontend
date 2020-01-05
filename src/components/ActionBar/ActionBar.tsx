@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Pagination } from 'components/Pagination';
 import { Button, ButtonVariant, ButtonType } from 'components/Button';
 import { Icon } from 'antd';
-import { ActionWrapper } from './styled';
+import { ActionWrapper, BasicActionsWrapper } from './styled';
 
 interface Props {
   total: number;
@@ -22,21 +22,23 @@ export const ActionBar: FC<Props> = ({
 }) => {
   return (
     <ActionWrapper>
+      <BasicActionsWrapper>
+        <Pagination
+          itemCount={total}
+          perPage={perPage}
+          currentPage={1}
+          onPageChange={onPageChange}
+        />
+        <Button
+          variant={ButtonVariant.Normal}
+          themeType={ButtonType.Primary}
+          onClick={redirectCreate}
+          icon={<Icon type="plus" />}
+        >
+          {createText}
+        </Button>
+      </BasicActionsWrapper>
       {children}
-      <Pagination
-        itemCount={total}
-        perPage={perPage}
-        currentPage={1}
-        onPageChange={onPageChange}
-      />
-      <Button
-        variant={ButtonVariant.Normal}
-        themeType={ButtonType.Primary}
-        onClick={redirectCreate}
-        icon={<Icon type="plus" />}
-      >
-        {createText}
-      </Button>
     </ActionWrapper>
   );
 };
