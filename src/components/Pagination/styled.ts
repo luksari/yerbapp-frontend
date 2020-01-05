@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Button, ButtonType, ButtonVariant } from 'components/Button';
 
 export const PaginationWrapper = styled.div`
