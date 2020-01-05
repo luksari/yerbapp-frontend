@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo } from 'react';
 import { Wrapper } from 'containeirs/Users/styled';
 import { Title } from 'components/TitleBar';
 import Helmet from 'react-helmet';
@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { usePagination } from 'hooks/usePagination';
 import { Rating } from 'components/Rating';
 import { SizeType } from 'components/Rating/types';
-import { Formik, useFormikContext, useFormik } from 'formik';
+import { Formik } from 'formik';
 import { RatingWrapper } from './styled';
 
 interface Props {
@@ -19,18 +19,20 @@ interface Props {
 
 
 const Explore: FC<Props> = ({
-  redirectEdit,
   redirectCreate,
 }) => {
   const { offset, perPage, setPage } = usePagination(5, 1);
-  const [formValues, setFormValues] = useState({
+
+  const formValues = {
     aromaImportance: 0,
     bitternessImportance: 0,
     energyImportance: 0,
     priceImportance: 0,
     tasteImportance: 0,
     overallImportance: 0,
-  });
+  };
+
+  type ValuesType = typeof formValues;
 
   return (
     <Wrapper>
@@ -45,7 +47,7 @@ const Explore: FC<Props> = ({
         redirectCreate={redirectCreate}
         onPageChange={setPage}
       >
-        <Formik
+        <Formik<ValuesType>
           initialValues={formValues}
           onSubmit={console.log}
         >

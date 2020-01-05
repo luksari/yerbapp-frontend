@@ -23,7 +23,6 @@ export const Rating: FC<Props> = ({
   initialRating,
   size = SizeType.Normal,
   vertical = false,
-  onChange,
   className,
   handleChangeCallback,
   ...rest
