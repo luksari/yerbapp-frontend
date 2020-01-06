@@ -15,22 +15,24 @@ type Props = {
   size?: SizeType;
 } & RatingComponentProps;
 
-export const Rating: FC<Props> = ({
+export const FormikRating: FC<Props> = ({
   name,
   label,
   initialRating,
   size = SizeType.Normal,
   vertical = false,
   className,
+  readonly,
   ...rest
 }) => {
+  const [field] = useField(readonly ? '' : name);
   const [rating, setRating] = useState(initialRating);
   const handleClick = (val) => setRating(val);
 
   return useMemo(() => (
     <InputWrapper size={size} vertical={vertical} className={className}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <StyledRating {...rest} onClick={handleClick} initialRating={rating} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
+      <StyledRating {...rest} onChange={field.onChange} onClick={handleClick} initialRating={rating} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>
   ), [rating]);
 };

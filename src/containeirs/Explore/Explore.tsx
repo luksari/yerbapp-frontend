@@ -8,10 +8,9 @@ import { push } from 'connected-react-router';
 import { compose } from 'redux';
 import { usePagination } from 'hooks/usePagination';
 import { useQuery } from 'react-apollo';
-import { GET_PRODUCTS } from 'queries/ProductQueries';
 import { Loader } from 'components/Loader';
 import {
-  GetProductsDocument, GetProductsQueryHookResult, GetProductsQueryVariables, GetProductsQuery,
+  GetProductsDocument, GetProductsQueryVariables, GetProductsQuery,
 } from 'generated/graphql';
 import { Card } from 'components/Card';
 import { FilterForm } from './components/FilterForm';
