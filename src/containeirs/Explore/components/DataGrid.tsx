@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Product } from 'generated/graphql';
 import { Card } from 'components/Card';
 import { Loader } from 'components/Loader';
@@ -9,7 +9,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-export const DataGrid: FC<Props> = ({
+export const DataGrid: FC<Props> = memo(({
   data,
   isLoading,
 }) => {
@@ -30,4 +30,4 @@ export const DataGrid: FC<Props> = ({
       ))}
     </CardGrid>
   );
-};
+});

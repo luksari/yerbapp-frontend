@@ -12,6 +12,7 @@ export const StyledFormField = styled(FormField)`
 `;
 
 export const CardGrid = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(690px, 1fr));
   justify-content: center;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ButtonType } from 'components/Button';
 import { SizeType } from 'components/Rating/types';
 import { truncate } from 'lodash';
@@ -24,7 +24,7 @@ interface CardProps {
   overallScore?: number;
 }
 
-export const Card: FC<CardProps> = (
+export const Card: FC<CardProps> = memo((
   {
     name = 'Brak danych',
     photoUrl,
@@ -68,4 +68,4 @@ export const Card: FC<CardProps> = (
       </DataWrapper>
     </CardContainer>
   );
-};
+});
