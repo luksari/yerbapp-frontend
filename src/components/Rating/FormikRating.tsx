@@ -2,7 +2,7 @@ import React, {
   FC, useMemo, useCallback, useState,
 } from 'react';
 import { RatingComponentProps } from 'react-rating';
-import { useField, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import { get } from 'lodash';
 import {
   EmptySymbol, FullSymbol, StyledRating, InputWrapper, InputLabel,
