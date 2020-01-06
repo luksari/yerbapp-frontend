@@ -10,7 +10,7 @@ type CustomFormFieldProps<T> = T extends FC<infer R> ? {
   props: Omit<R, keyof FieldConfig>;
   label?: string;
   fullWidth?: boolean;
-  noMargin?: boolean;
+  className?: string;
 } : never;
 
 type WrappedFormFieldProps<T> = CustomFormFieldProps<T> & FieldConfig;
@@ -24,7 +24,7 @@ export function FormField<T extends FC<any>>({
 }: WrappedFormFieldProps<T>) {
   const [field, meta] = useField(rest);
   return (
-    <InputWrapper fullWidth={fullWidth}>
+    <InputWrapper fullWidth={fullWidth} className={rest.className}>
       {label && <InputLabel htmlFor={field.name}>{label}</InputLabel>}
       <Component
         {...rest}

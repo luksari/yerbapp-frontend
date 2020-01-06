@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Pagination } from 'components/Pagination';
-import { Button, ButtonVariant, ButtonType } from 'components/Button';
+import { ButtonVariant, ButtonType } from 'components/Button';
 import { Icon } from 'antd';
 import { ActionWrapper, CreateButton } from './styled';
 
