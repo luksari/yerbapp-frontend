@@ -17,7 +17,7 @@ export const ActionWrapper = styled.div`
   ${RatingWrapper} {
     order: 3;
     width: 100%;
-    grid-column: 2;
+    grid-column: 1 / 1;
   }
   ${StyledFormField} {
     order: 1;

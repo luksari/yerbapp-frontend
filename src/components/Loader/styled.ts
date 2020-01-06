@@ -1,13 +1,16 @@
 import styled, { keyframes } from 'styled-components';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 
-export const LoaderWrapper = styled.div`
+export const LoaderWrapper = styled.div<{ fullscreen?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  width: ${({ fullscreen }) => fullscreen ? '100vw' : '100%'};
+  height: ${({ fullscreen }) => fullscreen ? '100vh' : '100%'};
+  position:  ${({ fullscreen }) => fullscreen ? 'fixed' : 'absolute'};
+  z-index: 999;
+  top: 0;
+  left: 0;
   background: ${({ theme }) => theme.colors.mainBackground};
 `;
 

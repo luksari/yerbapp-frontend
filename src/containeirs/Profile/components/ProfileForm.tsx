@@ -4,7 +4,6 @@ import { User } from 'generated/graphql';
 import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormFieldset } from 'components/Form/components/FormFieldset/FormFieldset';
-import { Rating } from 'components/Rating';
 import { FormikRating } from 'components/Rating/FormikRating';
 import { BigUserAvatar } from './styled';
 

@@ -7,9 +7,9 @@ interface Props {
   fullscreen?: boolean;
 }
 
-export const Loader: React.FC<Props> = memo(() => {
+export const Loader: React.FC<Props> = memo(({ fullscreen }) => {
   return (
-    <LoaderWrapper>
+    <LoaderWrapper fullscreen={fullscreen}>
       <StyledLoader />
       <StyledAltLoader />
     </LoaderWrapper>

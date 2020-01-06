@@ -4,14 +4,14 @@ import { FormField } from 'components/Form/components/FormField';
 export const RatingWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-self: center;
+  grid-gap: 10px;
 `;
 
 export const StyledFormField = styled(FormField)`
 
 `;
 
-export const DataGrid = styled.div`
+export const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(690px, 1fr));
   justify-content: center;
