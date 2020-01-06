@@ -4,6 +4,7 @@ import { Form } from 'components/Form';
 import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
 import { Select } from 'components/Select';
+import { Textarea } from 'components/Textarea';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>
@@ -36,29 +37,11 @@ const ProductForm: FC<FormProps<ProductFormData>> = ({
         }}
       />
       <FormField
-        name="manufacturerId"
-        component={Select}
-        label="ID producenta:"
-        props={{
-          placeholder: 'Pole zostanie uzupełnione automatycznie...',
-          isDisabled: true,
-        }}
-      />
-      <FormField
         name="manufacturer"
         component={Select}
         label="Producent:"
         props={{
           placeholder: 'Wskaż producenta...',
-        }}
-      />
-      <FormField
-        name="typeId"
-        component={Select}
-        label="ID typu:"
-        props={{
-          placeholder: 'Pole zostanie uzupełnione automatycznie...',
-          isDisabled: true,
         }}
       />
       <FormField
@@ -71,7 +54,7 @@ const ProductForm: FC<FormProps<ProductFormData>> = ({
       />
       <FormField
         name="details"
-        component={Input}
+        component={Textarea}
         label="Opis:"
         props={{
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',

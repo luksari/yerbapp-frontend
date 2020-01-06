@@ -17,6 +17,16 @@ const ProductCreateForm: FC<Props> = ({
     onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie utworzono produkt!' }),
   });
 
+  /**
+    * Tutaj, zarówno jak i w ProductEditForm należy pobrać dane dotyczące producentów i typów
+    * query do pobrania listy typów i producentów już są, ewentualnie możesz stworzyć nowe które pobierają tylko id i name
+    */
+
+  /**
+    * Ja już to zrobię jak tylko załatwisz pobieranie tych danych
+    * Tu będzie mapowanie obiektów typu { id: string, name: string } -> { value: string, label: string }
+    */
+
   const handleSubmit = async (values: ProductFormData) => {
     try {
       await addProduct({
@@ -46,6 +56,7 @@ const ProductCreateForm: FC<Props> = ({
       handleBack={handleBack}
       onSubmit={handleSubmit}
       isSaving={saving}
+      /** Te dane muszą mieć strukturę manufacturer: { value: '', label: '' } itd. */
       data={{
         name: '', manufacturer: { id: '', name: '' }, type: { id: '', name: '' }, details: '',
       }}

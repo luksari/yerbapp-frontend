@@ -17,7 +17,6 @@ import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
 import { Icon } from 'antd';
-import { ProductsTable } from './components/ProductsTable';
 import { Wrapper, ActionWrapper } from './styled';
 
 
@@ -31,13 +30,12 @@ export const ProductsRaw: FC<Props> = ({
   redirectEdit,
 }) => {
   const { offset, perPage, setPage } = usePagination(5, 1);
-  const { order, orderBy, handleSort } = useSort();
 
   const { data, loading, refetch } = useQuery(
     GetProductsDocument,
     {
       variables: {
-        offset, perPage, order, orderBy,
+        offset, perPage,
       },
       fetchPolicy: 'cache-and-network',
     },
@@ -45,11 +43,10 @@ export const ProductsRaw: FC<Props> = ({
 
   useEffect(() => {
     refetch({
-      offset, perPage, order, orderBy,
+      offset, perPage,
     });
   }, []);
 
-  const [deleteProduct, { loading: deleting }] = useDeleteProductMutation();
 
   const handleEdit = (id: string) => {
     redirectEdit(id);
@@ -57,18 +54,6 @@ export const ProductsRaw: FC<Props> = ({
 
   const handleCreate = () => {
     redirectCreate();
-  };
-
-  const handleDelete = (id: string) => {
-    deleteProduct({
-      variables: { productId: id },
-      refetchQueries: [{
-        query: GetProductsDocument,
-        variables: {
-          offset, perPage, order, orderBy,
-        },
-      }],
-    });
   };
 
   if (!data) {
@@ -94,13 +79,10 @@ export const ProductsRaw: FC<Props> = ({
         Utwórz produkt
         </Button>
       </ActionWrapper>
-      <ProductsTable
-        data={data.products.items}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        handleSort={handleSort}
-        isLoading={loading || deleting}
-      />
+      {/** To jest fajny sposób debugowania danych bez bawienia się w jakieś tabelki i kopiowania niepotrzebnego kodu
+       * który trzeba pozniej wyczyścić, a to marnuje czas
+       */}
+      {JSON.stringify(data.products.items, null, 2)}
     </Wrapper>
   );
 };
