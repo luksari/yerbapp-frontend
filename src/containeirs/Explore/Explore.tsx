@@ -12,9 +12,8 @@ import { Loader } from 'components/Loader';
 import {
   GetProductsDocument, GetProductsQueryVariables, GetProductsQuery,
 } from 'generated/graphql';
-import { Card } from 'components/Card';
 import { FilterForm } from './components/FilterForm';
-import { DataGrid } from './styled';
+import { DataGrid } from './components/DataGrid';
 
 interface Props {
   redirectEdit: (id: string) => void;
@@ -69,18 +68,7 @@ const Explore: FC<Props> = ({
           handleSubmit={console.log}
         />
       </ActionBar>
-      <DataGrid>
-        {data.products.items.map((product) => (
-          <Card
-            name={product.name}
-            manufacturer={product.manufacturer.name}
-            country={product.manufacturer.country}
-            key={product.id}
-            details={product.details}
-            type={product.type.name}
-          />
-        ))}
-      </DataGrid>
+      <DataGrid data={data.products.items} isLoading={loading} />
     </Wrapper>
   );
 };
