@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FormField } from 'components/Form/components/FormField';
 
 export const RatingWrapper = styled.div`
   display: grid;
@@ -6,12 +7,8 @@ export const RatingWrapper = styled.div`
   justify-self: center;
 `;
 
-export const FilterWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: stretch;
-  grid-column-gap: 25px;
+export const StyledFormField = styled(FormField)`
+
 `;
 
 export const DataGrid = styled.div`

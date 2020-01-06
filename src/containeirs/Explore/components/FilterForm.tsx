@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { Formik } from 'formik';
-import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { Rating } from 'components/Rating';
 import { SizeType } from 'components/Rating/types';
-import { FilterWrapper, RatingWrapper } from '../styled';
+import { RatingWrapper, StyledFormField } from '../styled';
 import { WithAutoSave } from './WithAutoSave';
 
 interface Props {
@@ -21,9 +20,9 @@ export const FilterForm: FC<Props> = ({
       initialValues={formValues}
       onSubmit={handleSubmit}
     >
-      <WithAutoSave debounceMs={500}>
-        <FilterWrapper>
-          <FormField
+      {({ handleChange, values }) => (
+        <WithAutoSave debounceMs={500}>
+          <StyledFormField
             name="name"
             component={Input}
             fullWidth
@@ -63,8 +62,8 @@ export const FilterForm: FC<Props> = ({
               size={SizeType.Small}
             />
           </RatingWrapper>
-        </FilterWrapper>
-      </WithAutoSave>
+        </WithAutoSave>
+      )}
     </Formik>
   );
 };
