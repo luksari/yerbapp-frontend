@@ -9,8 +9,8 @@ export const LoaderWrapper = styled.div<{ fullscreen?: boolean }>`
   height: ${({ fullscreen }) => fullscreen ? '100vh' : '100%'};
   position:  ${({ fullscreen }) => fullscreen ? 'fixed' : 'absolute'};
   z-index: 999;
-  top: 0;
   left: 0;
+  top: 0;
   background: ${({ theme }) => theme.colors.mainBackground};
 `;
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { ValueWrapper, StyledLabel, StyledValue } from './styled';
 
 interface Props {
@@ -6,11 +6,11 @@ interface Props {
   value: number | string;
 }
 
-export const CardValue: FC<Props> = ({ label, value }) => {
+export const CardValue: FC<Props> = memo(({ label, value }) => {
   return (
     <ValueWrapper>
       <StyledLabel>{label}</StyledLabel>
       <StyledValue>{value}</StyledValue>
     </ValueWrapper>
   );
-};
+});
