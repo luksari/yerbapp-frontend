@@ -1,8 +1,7 @@
 import React, {
-  FC, useMemo, useCallback, useState,
+  FC, useMemo, useState,
 } from 'react';
 import { RatingComponentProps } from 'react-rating';
-import { useField } from 'formik';
 import {
   EmptySymbol, FullSymbol, StyledRating, InputWrapper, InputLabel,
 } from './styled';
