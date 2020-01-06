@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { Input } from 'components/Input';
 import { Rating } from 'components/Rating';
 import { SizeType } from 'components/Rating/types';
+import { FormikRating } from 'components/Rating/FormikRating';
 import { RatingWrapper, StyledFormField } from '../styled';
 import { WithAutoSave } from './WithAutoSave';
 
@@ -31,32 +32,32 @@ export const FilterForm: FC<Props> = ({
             }}
           />
           <RatingWrapper>
-            <Rating
+            <FormikRating
               label="Aromat"
               name="aromaImportance"
               size={SizeType.Small}
             />
-            <Rating
+            <FormikRating
               label="Gorycz"
               name="bitternessImportance"
               size={SizeType.Small}
             />
-            <Rating
+            <FormikRating
               label="Pobudzenie"
               name="energyImportance"
               size={SizeType.Small}
             />
-            <Rating
+            <FormikRating
               label="Cena"
               name="priceImportance"
               size={SizeType.Small}
             />
-            <Rating
+            <FormikRating
               label="Smak"
               name="tasteImportance"
               size={SizeType.Small}
             />
-            <Rating
+            <FormikRating
               label="Ogólna ocena"
               name="overallImportance"
               size={SizeType.Small}
