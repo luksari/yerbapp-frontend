@@ -8,9 +8,10 @@ export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${({ theme }) => theme.metrics.margin.m};
-  box-shadow: 0 10px 10px -5px ${({ theme }) => theme.colors.shadow};
-  border-radius: 8px;
+  box-shadow: 0 6px 10px -5px ${({ theme }) => theme.colors.shadow};
+  border-radius: 0 0 8px 8px;
   overflow: hidden;
+  border-top: 5px solid ${({ theme }) => theme.colors.primary};
 `;
 
 export const YerbaTitle = styled.h4`
@@ -35,7 +36,7 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   }
   padding: ${({ theme }) => theme.metrics.padding.l} ${({ theme }) => theme.metrics.padding.s};
   ${({ primary, theme }) => primary && css`
-    box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
+    /* box-shadow: 0 5px 10px -2px ${theme.colors.shadow}; */
     justify-content: space-between;
   `};
 `;
@@ -58,11 +59,8 @@ export const Description = styled.p`
 
 export const ValueWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 1fr;
   padding-bottom: ${({ theme }) => theme.metrics.padding.s};
-  &:nth-child(3) {
-    margin-bottom: ${({ theme }) => theme.metrics.margin.m};
-  }
 `;
 
 export const StyledLabel = styled.label`
@@ -73,20 +71,10 @@ export const StyledLabel = styled.label`
 
 
 export const StyledValue = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
-  color: ${({ theme }) => theme.colors.alternativeText};
-  font-size: ${({ theme }) => theme.metrics.fontSize.xs};
-  margin-left: 3px;
+  color: ${({ theme }) => theme.colors.disabledText};
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 600;
-  padding: ${({ theme }) => theme.metrics.padding.xs};
-  background: ${({ theme }) => theme.gradients.primaryToAlt};
-  box-shadow: 0 5px 5px -4px ${({ theme }) => theme.colors.shadow};
-  border-right: 18px solid ${({ theme }) => theme.colors.mainBackground}7e;
-  max-width: 145px;
-  border-radius: 4px;
 `;
 
 export const CardButton = styled(Button)`
