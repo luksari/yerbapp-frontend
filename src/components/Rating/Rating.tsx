@@ -31,5 +31,5 @@ export const Rating: FC<Props> = ({
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <StyledRating {...rest} onClick={handleClick} initialRating={rating} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>
-  ), [initialRating]);
+  ), [rating]);
 };

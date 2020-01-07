@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { Wrapper } from 'containeirs/Users/styled';
 import { Title } from 'components/TitleBar';
 import Helmet from 'react-helmet';
@@ -20,8 +20,17 @@ interface Props {
   redirectCreate: VoidFunction;
 }
 
+const formValues = {
+  aromaImportance: 0,
+  bitternessImportance: 0,
+  energyImportance: 0,
+  priceImportance: 0,
+  tasteImportance: 0,
+  overallImportance: 0,
+  name: '',
+};
 
-const Explore: FC<Props> = ({
+const Explore: FC<Props> = memo(({
   redirectCreate,
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
@@ -35,16 +44,6 @@ const Explore: FC<Props> = ({
       fetchPolicy: 'cache-and-network',
     },
   );
-
-  const formValues = {
-    aromaImportance: 0,
-    bitternessImportance: 0,
-    energyImportance: 0,
-    priceImportance: 0,
-    tasteImportance: 0,
-    overallImportance: 0,
-    name: '',
-  };
 
   if (!data) {
     return <Loader fullscreen />;
@@ -62,6 +61,7 @@ const Explore: FC<Props> = ({
         total={data.products.total}
         redirectCreate={redirectCreate}
         onPageChange={setPage}
+        isLoading={loading}
       >
         <FilterForm
           formValues={formValues}
@@ -71,7 +71,7 @@ const Explore: FC<Props> = ({
       <DataGrid data={data.products.items} isLoading={loading} />
     </Wrapper>
   );
-};
+});
 
 const mapDispatchToProps = (dispatch) => ({
   redirectEdit: (id: string) => dispatch(push(`/explore/${id}`)),
