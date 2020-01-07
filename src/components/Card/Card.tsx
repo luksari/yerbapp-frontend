@@ -40,7 +40,11 @@ export const Card: FC<CardProps> = memo((
     details = 'Brak danych',
   },
 ) => {
-  const shortDescription = truncate(details, { length: 150, separator: '.' });
+  const shortDescription = truncate(details, { length: 150, separator: '...' });
+  const shortName = truncate(name, { length: 15, separator: '...' });
+  const shortProducer = truncate(manufacturer, { length: 15, separator: '...' });
+  const shortType = truncate(type, { length: 15, separator: '...' });
+  const shortCountry = truncate(country, { length: 15, separator: '...' });
   return (
     <CardContainer>
       <DataWrapper primary>
@@ -56,15 +60,15 @@ export const Card: FC<CardProps> = memo((
         <CardValue label="Producent: " value={manufacturer} />
         <CardValue label="Typ: " value={type} />
         <CardValue label="Kraj pochodzenia: " value={country} />
+        <Description>
+          {shortDescription}
+        </Description>
         <StyledRating size={SizeType.Small} label="Aromat: " initialRating={aromaScore} readonly />
         <StyledRating size={SizeType.Small} label="Smak: " initialRating={tasteScore} readonly />
         <StyledRating size={SizeType.Small} label="Gorycz: " initialRating={bitternessScore} readonly />
         <StyledRating size={SizeType.Small} label="Moc: " initialRating={energyScore} readonly />
         <StyledRating size={SizeType.Small} label="Cena: " initialRating={priceScore} readonly />
         <StyledRating size={SizeType.Small} label="Ocena ogólna: " initialRating={overallScore} readonly />
-        <Description>
-          {shortDescription}
-        </Description>
       </DataWrapper>
     </CardContainer>
   );
