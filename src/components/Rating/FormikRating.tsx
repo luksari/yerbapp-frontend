@@ -24,17 +24,17 @@ export const FormikRating: FC<Props> = ({
   className,
   ...rest
 }) => {
-  const context = useFormikContext<any>();
-  const value = get(context.values, name);
+  const { values, setFieldValue } = useFormikContext<any>();
+  const value = get(values, name);
   const [rating, setRating] = useState(value);
 
   const handleClick = (val) => setRating(val);
-  const handleChange = useCallback((val: number) => context.setFieldValue(name, val, false), [rating]);
+  const handleChange = useCallback((val: number) => setFieldValue(name, val, false), [rating]);
 
   return useMemo(() => (
     <InputWrapper size={size} vertical={vertical} className={className}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <StyledRating {...rest} onChange={handleChange} onClick={handleClick} initialRating={rating} emptySymbol={<EmptySymbol />} fullSymbol={<FullSymbol />} quiet />
     </InputWrapper>
-  ), [rating]);
+  ), [values[name]]);
 };
