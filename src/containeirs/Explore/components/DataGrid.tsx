@@ -13,21 +13,20 @@ export const DataGrid: FC<Props> = memo(({
   data,
   isLoading,
 }) => {
-  if (isLoading) {
-    return <Loader />;
-  }
   return (
     <CardGrid>
-      {data.map((product) => (
-        <Card
-          name={product.name}
-          manufacturer={product.manufacturer.name}
-          country={product.manufacturer.country}
-          key={product.id}
-          details={product.details}
-          type={product.type.name}
-        />
-      ))}
+      {isLoading || !data
+        ? <Loader />
+        : data.map((product) => (
+          <Card
+            name={product.name}
+            manufacturer={product.manufacturer.name}
+            country={product.manufacturer.country}
+            key={product.id}
+            details={product.details}
+            type={product.type.name}
+          />
+        ))}
     </CardGrid>
   );
 });
