@@ -15,7 +15,7 @@ export const EmptySymbol = styled(FullSymbol)`
   filter: grayscale(100%) brightness(135%);
 `;
 
-export const StyledRating = styled(Rating)`
+export const StyledRating = styled(Rating)<{ readonly?: boolean }>`
   display: flex !important;
   align-items: center;
   span {
@@ -23,7 +23,7 @@ export const StyledRating = styled(Rating)`
     max-height: 40px;
     transition: transform 0.1s linear;
     &:hover {
-      transform: scale(1.1);
+      transform: ${({ readonly }) => readonly ? 'none' : 'scale(1.1)'};
     }
   }
 `;

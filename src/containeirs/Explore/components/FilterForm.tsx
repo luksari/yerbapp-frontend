@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { Formik } from 'formik';
 import { Input } from 'components/Input';
 import { SizeType } from 'components/Rating/types';
@@ -11,11 +11,11 @@ interface Props {
   handleSubmit: (values: any) => void;
 }
 
-export const FilterForm: FC<Props> = ({
+export const FilterForm: FC<Props> = memo(({
   formValues,
   handleSubmit,
 }) => {
-  return (
+  return useMemo(() => (
     <Formik<typeof formValues>
       initialValues={formValues}
       onSubmit={handleSubmit}
@@ -63,5 +63,5 @@ export const FilterForm: FC<Props> = ({
         </RatingWrapper>
       </WithAutoSave>
     </Formik>
-  );
-};
+  ), [formValues]);
+});

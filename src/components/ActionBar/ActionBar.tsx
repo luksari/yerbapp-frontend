@@ -10,6 +10,7 @@ interface Props {
   onPageChange: (page: number) => void;
   redirectCreate: VoidFunction;
   createText: string;
+  isLoading?: boolean;
 }
 
 export const ActionBar: FC<Props> = ({
@@ -19,6 +20,7 @@ export const ActionBar: FC<Props> = ({
   redirectCreate,
   createText,
   children,
+  isLoading,
 }) => {
   return (
     <ActionWrapper>
@@ -27,6 +29,7 @@ export const ActionBar: FC<Props> = ({
         perPage={perPage}
         currentPage={1}
         onPageChange={onPageChange}
+        isLoading={isLoading}
       />
       <CreateButton
         variant={ButtonVariant.Normal}
