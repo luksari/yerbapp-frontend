@@ -74,8 +74,8 @@ const Explore: FC<Props> = memo(({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  redirectEdit: (id: string) => dispatch(push(`/explore/${id}`)),
-  redirectCreate: () => dispatch(push('/explore/create')),
+  redirectEdit: (id: string) => dispatch(push(`/products/${id}`)),
+  redirectCreate: () => dispatch(push('/products/create')),
 });
 
 export default compose(
