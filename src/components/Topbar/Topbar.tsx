@@ -40,8 +40,8 @@ const TopbarRaw: FC<TopbarProps> = memo(({
       ) }
       {
         isAuthenticatedMemo
-          ? <Button themeType={ButtonType.Link} variant={ButtonVariant.Narrow} onClick={handleLogout}>Wyloguj się</Button>
-          : <Button themeType={ButtonType.Link} variant={ButtonVariant.Narrow}><Link to="/login">Zaloguj się</Link></Button>
+          ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
+          : <Button themeType={ButtonType.Link}><Link to="/login">Zaloguj się</Link></Button>
       }
     </StyledTopbar>
   );

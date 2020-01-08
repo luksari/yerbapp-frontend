@@ -11,7 +11,7 @@ export const CardContainer = styled.div`
   box-shadow: 0 6px 10px -5px ${({ theme }) => theme.colors.shadow};
   border-radius: 0 0 8px 8px;
   overflow: hidden;
-  border-top: 5px solid ${({ theme }) => theme.colors.primary};
+  border-top: 3px solid ${({ theme }) => theme.colors.alternative};
 `;
 
 export const YerbaTitle = styled.h4`

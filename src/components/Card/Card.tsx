@@ -41,8 +41,8 @@ export const Card: FC<CardProps> = memo((
   },
 ) => {
   const shortDescription = truncate(details, { length: 150, separator: '...' });
-  const shortName = truncate(name, { length: 25, separator: '...' });
-  const shortProducer = truncate(manufacturer, { length: 15, separator: '...' });
+  const shortName = truncate(name, { length: 45, separator: '...' });
+  const shortProducer = truncate(manufacturer, { length: 45, separator: '...' });
   const shortType = truncate(type, { length: 15, separator: '...' });
   const shortCountry = truncate(country, { length: 15, separator: '...' });
   return (
