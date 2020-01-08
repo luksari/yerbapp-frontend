@@ -1,10 +1,10 @@
-import { ReactComponent as Logo } from 'assets/logo.svg';
+import Logo from 'assets/logo.svg';
 import styled, { css } from 'styled-components';
 import Rating from 'react-rating';
 import { SizeType } from './types';
 
 
-export const FullSymbol = styled(Logo)`
+export const FullSymbol = styled.img.attrs({ src: Logo })`
   width: 40px;
   height: 40px;
   pointer-events: none;
