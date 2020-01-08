@@ -1,27 +1,31 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-   query getProducts($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
-    products(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    query getProducts($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
+    products(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy)
+   {
+      total,
       items {
         id,
         name,
         manufacturer {
-          id,
           name,
-        }
+          country
+        },
         type {
-          id,
-          name,
-        }
+          name
+        },
+        aromaAverage,
+        tasteAverage,
+        bitternessAverage,
+        energyAverage,
+        priceAverage,
         details,
-        createdAt,
+        overallAverage,
       }
-      total
+    }
   }
-}
 `;
-
 export const GET_PRODUCT = gql`
   query getProduct($productId: ID!) {
     product(productId: $productId) {
