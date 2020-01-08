@@ -12,7 +12,7 @@ export interface DatedMessage {
 }
 
 export interface SelectableItem {
-  value: string | number;
+  value: string;
   label: string;
 }
 

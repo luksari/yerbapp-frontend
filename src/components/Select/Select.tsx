@@ -4,11 +4,12 @@ import ReactSelect, {
 } from 'react-select';
 import { Checkbox } from 'components/Checkbox';
 import { SelectableItem } from 'utils/types';
+import { useFormikContext } from 'formik';
 import { customSelectStyles, OptionWrapper } from './styled';
 import { FixedSelectProps } from './types';
 
 type OwnProps = {
-    /** These props are used by Redux form inputs */
+    /** These props are used by Formik inputs */
     touched?: boolean;
     error?: any;
     warning?: any;
@@ -57,25 +58,30 @@ export const Select: FC<SelectProps> = memo(({
   ...rest
 }) => {
   const meta = { touched, error, warning };
+  const { setFieldValue } = useFormikContext();
   /** Workaround for null value payload after remove-value action,
    *  that is fired on click when removing button is clicked on single element of react-select
    * @see https://github.com/JedWatson/react-select/issues/3632
   */
-  const handleOnChange = (val: ValueType<SelectableItem>, action: ActionMeta) => {
+  /** @todo Here is bug */
+  const handleOnChange = (val: SelectableItem, action: ActionMeta) => {
     if (!onChange) return;
+    console.log(val, action);
     if (val === null) {
       onChange([], action);
+      setFieldValue(name, []);
     } else {
-      onChange(value, action);
+      onChange(val, action);
+      setFieldValue(name, val.value);
     }
   };
-  /** Marked as any because type mismatching with React-Select componenents prop */
+  /** Marked as any because type mismatching with React-Select componennts prop */
   const Input: any = useMemo(() => name && InputFactory(name), [name]);
   return (
     <ReactSelect
       onChange={handleOnChange}
       styles={customSelectStyles}
-      value={value}
+      value={options ? options.find((option) => option.value === value) : ''}
       options={options}
       components={{ Option, MultiValue, Input }}
       placeholder={placeholder}
