@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { FormProps } from 'utils/types';
+import { FormProps, SelectableItem } from 'utils/types';
 import { Form } from 'components/Form';
 import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
 import { Select } from 'components/Select';
-import { Product } from 'generated/graphql';
-import { Textarea } from 'components/Textarea';
+import { ProductData } from '../types';
 
-export type ProductFormData = Partial<Product>
+export type ProductFormData = Partial<ProductData>;
+type ProductFormProps = FormProps<ProductFormData> & { manufacturers: SelectableItem[]; types: SelectableItem[]}
 
-const ProductForm: FC<FormProps<ProductFormData>> = ({
+export const ProductForm: FC<ProductFormProps> = ({
   data,
   title,
   subTitle,
@@ -17,6 +17,8 @@ const ProductForm: FC<FormProps<ProductFormData>> = ({
   onSubmit,
   isLoading,
   isSaving,
+  manufacturers,
+  types,
 }) => {
   return (
     <Form<ProductFormData>
@@ -42,19 +44,22 @@ const ProductForm: FC<FormProps<ProductFormData>> = ({
         label="Producent:"
         props={{
           placeholder: 'Wskaż producenta...',
+          options: manufacturers,
         }}
       />
+
       <FormField
         name="type"
         component={Select}
         label="Typ:"
         props={{
           placeholder: 'Wskaż typ yerba mate...',
+          options: types,
         }}
       />
       <FormField
         name="details"
-        component={Textarea}
+        component={Input}
         label="Opis:"
         props={{
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
@@ -63,5 +68,3 @@ const ProductForm: FC<FormProps<ProductFormData>> = ({
     </Form>
   );
 };
-
-export default ProductForm;

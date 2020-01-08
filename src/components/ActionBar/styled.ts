@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RatingWrapper, StyledFormField } from 'containeirs/Explore/styled';
+import { RatingWrapper, StyledFormField } from 'containeirs/Products/styled';
 import { Button } from 'components/Button';
 import { PaginationWrapper } from 'components/Pagination/styled';
 

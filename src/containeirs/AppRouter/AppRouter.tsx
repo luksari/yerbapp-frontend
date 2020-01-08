@@ -8,7 +8,7 @@ import { AuthenticatedRoute, LayoutRoute } from 'components/Routes';
 import { Tutorial } from 'containeirs/Tutorial';
 import { About } from 'containeirs/About';
 import { Home } from 'containeirs/Home';
-import { Explore } from 'containeirs/Explore';
+import { Explore } from 'containeirs/Products';
 import { Profile } from 'containeirs/Profile';
 import { HomepageLayout } from 'components/Layouts/HomepageLayout';
 import { NoMatch } from 'containeirs/NoMatch';
