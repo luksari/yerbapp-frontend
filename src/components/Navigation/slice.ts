@@ -8,7 +8,7 @@ export type NavSliceState = {
 
 const commonNavItems: NavigationItem[] = [
   {
-    to: '/explore',
+    to: '/products',
     selected: undefined,
     title: 'Przeglądaj',
     visible: true,
@@ -39,7 +39,7 @@ const commonNavItems: NavigationItem[] = [
 
 const adminNavItems: NavigationItem[] = [
   {
-    to: '/explore',
+    to: '/products',
     selected: undefined,
     title: 'Wróć do aplikacji',
     visible: true,

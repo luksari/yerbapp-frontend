@@ -10,7 +10,7 @@ const Home: FC = () => {
       <Slogan>
        Świat yerba mate stoi przed Tobą otworem
       </Slogan>
-      <StyledLink to="/explore">
+      <StyledLink to="/products">
         <ExploreButton themeType={ButtonType.Secondary} variant={ButtonVariant.Wide}>
           Zobacz!
         </ExploreButton>

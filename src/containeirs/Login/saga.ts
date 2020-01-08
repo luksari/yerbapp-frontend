@@ -19,7 +19,7 @@ export function* loginSaga({ payload }: PayloadAction<LoginFormData>) {
       title: 'Sukces',
       message: 'Zalogowano pomyślnie!',
     });
-    yield put(push('/explore'));
+    yield put(push('/products'));
   } catch (error) {
     console.error(error);
     yield put(actions.setLoginFailed(error));

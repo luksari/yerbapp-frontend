@@ -13,7 +13,7 @@ function* setAdminItemsNavbarSaga(action: LocationChangeAction) {
   }
 }
 function* setCommonItemsNavbarSaga(action: LocationChangeAction) {
-  if (action.payload.location.pathname === '/explore') {
+  if (action.payload.location.pathname === '/products') {
     yield put(actions.setCommonNavItems());
   }
 }
