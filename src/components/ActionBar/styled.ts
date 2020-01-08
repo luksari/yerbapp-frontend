@@ -6,18 +6,19 @@ import { PaginationWrapper } from 'components/Pagination/styled';
 export const CreateButton = styled(Button)``;
 
 export const ActionWrapper = styled.div`
+  background: white;
   display: grid;
   justify-items: center;
-  grid-template-columns: 350px 1fr 220px;
-  grid-gap: 15px;
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-row-gap: 30px;
   background: ${({ theme }) => theme.colors.mainBackground};
   ${CreateButton} {
     order: 2;
+    justify-self: flex-end;
   }
   ${RatingWrapper} {
     order: 3;
-    width: 100%;
-    grid-column: 1 / 1;
+    grid-column: 2 / 2;
   }
   ${StyledFormField} {
     order: 1;
@@ -25,6 +26,7 @@ export const ActionWrapper = styled.div`
   }
   ${PaginationWrapper} {
     order: 0;
-    width: 350px;
+    justify-self: flex-start;
+    width: 100%;
   }
 `;

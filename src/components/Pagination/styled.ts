@@ -5,7 +5,6 @@ export const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
   user-select: none;
-  flex-shrink: 0;
 `;
 
 export const PaginationButton = styled(Button).attrs({ themeType: ButtonType.Primary, variant: ButtonVariant.Narrow })`

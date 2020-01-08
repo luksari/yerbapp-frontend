@@ -15,8 +15,13 @@ export const GET_PRODUCTS = gql`
         type {
           name
         },
-        details
-
+        aromaAverage,
+        tasteAverage,
+        bitternessAverage,
+        energyAverage,
+        priceAverage,
+        details,
+        overallAverage,
       }
     }
   }

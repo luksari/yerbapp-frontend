@@ -241,6 +241,12 @@ export type Product = {
   name: Scalars['String'],
   details: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
+  aromaAverage: Scalars['Float'],
+  tasteAverage: Scalars['Float'],
+  bitternessAverage: Scalars['Float'],
+  energyAverage: Scalars['Float'],
+  priceAverage: Scalars['Float'],
+  overallAverage: Scalars['Float'],
   createdAt: Scalars['String'],
 };
 
@@ -330,6 +336,7 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
   orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -343,6 +350,7 @@ export type QueryProductArgs = {
 
 
 export type QueryManufacturersArgs = {
+  searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
   orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -514,7 +522,7 @@ export type GetProductsQuery = (
     & Pick<ProductsResponse, 'total'>
     & { items: Array<(
       { __typename?: 'Product' }
-      & Pick<Product, 'id' | 'name' | 'details'>
+      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
         & Pick<Manufacturer, 'name' | 'country'>
@@ -972,7 +980,13 @@ export const GetProductsDocument = gql`
       type {
         name
       }
+      aromaAverage
+      tasteAverage
+      bitternessAverage
+      energyAverage
+      priceAverage
       details
+      overallAverage
     }
   }
 }
