@@ -26,18 +26,18 @@ interface CardProps {
 
 export const Card: FC<CardProps> = memo((
   {
-    name = 'Brak danych',
+    name = 'Brak nazwy',
     photoUrl,
-    manufacturer = 'Brak danych',
-    type = 'Brak danych',
-    country = 'Brak danych',
+    manufacturer = 'Nieznanty producent',
+    type = 'Nieznany typ',
+    country = 'Nieznany kraj',
     aromaScore = 0,
     tasteScore = 0,
     bitternessScore = 0,
     energyScore = 0,
     priceScore = 0,
     overallScore = 0,
-    details = 'Brak danych',
+    details = 'Brak opisu',
   },
 ) => {
   const shortDescription = truncate(details, { length: 150, separator: '...' });

@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
 import { Wrapper } from 'containeirs/Users/styled';
 import { Title } from 'components/TitleBar';
 import Helmet from 'react-helmet';

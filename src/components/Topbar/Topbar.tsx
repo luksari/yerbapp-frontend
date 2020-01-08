@@ -1,7 +1,7 @@
 import React, {
   FC, memo, useCallback, useMemo,
 } from 'react';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { Button, ButtonType } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
