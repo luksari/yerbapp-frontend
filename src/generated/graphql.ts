@@ -509,9 +509,7 @@ export type DeleteManufacturerMutation = (
 
 export type GetProductsQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>,
-  order?: Maybe<Scalars['String']>,
-  orderBy?: Maybe<Scalars['String']>
+  perPage?: Maybe<Scalars['Int']>
 };
 
 
@@ -525,10 +523,10 @@ export type GetProductsQuery = (
       & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
-        & Pick<Manufacturer, 'name' | 'country'>
+        & Pick<Manufacturer, 'id' | 'name' | 'country'>
       ), type: (
         { __typename?: 'ProductType' }
-        & Pick<ProductType, 'name'>
+        & Pick<ProductType, 'id' | 'name'>
       ) }
     )> }
   ) }
@@ -1038,17 +1036,19 @@ export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteMa
 export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
 export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
 export const GetProductsDocument = gql`
-    query getProducts($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
-  products(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
+    query getProducts($offset: Int, $perPage: Int) {
+  products(offset: $offset, perPage: $perPage) {
     total
     items {
       id
       name
       manufacturer {
+        id
         name
         country
       }
       type {
+        id
         name
       }
       aromaAverage
@@ -1077,8 +1077,6 @@ export const GetProductsDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      perPage: // value for 'perPage'
- *      order: // value for 'order'
- *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

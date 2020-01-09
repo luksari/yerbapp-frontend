@@ -1,18 +1,20 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-    query getProducts($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
-    products(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy)
+    query getProducts($offset: Int, $perPage: Int) {
+    products(offset: $offset, perPage: $perPage)
    {
       total,
       items {
         id,
         name,
         manufacturer {
+          id,
           name,
           country
         },
         type {
+          id,
           name
         },
         aromaAverage,

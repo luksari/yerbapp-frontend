@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import { Wrapper } from 'containeirs/Users/styled';
 import { Title } from 'components/TitleBar';
 import Helmet from 'react-helmet';
@@ -41,13 +41,16 @@ const Explore: FC<Props> = memo(({
       variables: {
         offset, perPage,
       },
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'network-only',
     },
   );
 
   if (!data) {
     return <Loader fullscreen />;
   }
+
+  console.log('Products', data.products.items);
+
 
   return (
     <Wrapper>
