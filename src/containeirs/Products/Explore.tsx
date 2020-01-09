@@ -65,6 +65,7 @@ const Explore: FC<Props> = memo(({
         redirectCreate={redirectCreate}
         onPageChange={setPage}
         isLoading={loading}
+        gridColumns="0.5fr 1fr 0.5fr"
       >
         <FilterForm
           formValues={formValues}

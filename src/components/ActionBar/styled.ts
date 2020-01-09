@@ -5,11 +5,11 @@ import { PaginationWrapper } from 'components/Pagination/styled';
 
 export const CreateButton = styled(Button)``;
 
-export const ActionWrapper = styled.div`
+export const ActionWrapper = styled.div<{ gridColumns?: string }>`
   background: white;
   display: grid;
   justify-items: center;
-  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-template-columns: ${({ gridColumns }) => gridColumns};
   grid-row-gap: 30px;
   background: ${({ theme }) => theme.colors.mainBackground};
   ${CreateButton} {

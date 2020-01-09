@@ -80,7 +80,7 @@ export const ManufacturesRaw: FC<Props> = ({
       <ActionBar
         redirectCreate={handleCreate}
         onPageChange={setPage}
-        perPage={5}
+        perPage={perPage}
         total={data.manufacturers.total}
         createText="Utwórz producenta"
       />

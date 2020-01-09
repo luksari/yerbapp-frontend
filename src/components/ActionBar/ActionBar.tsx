@@ -11,6 +11,8 @@ interface Props {
   redirectCreate: VoidFunction;
   createText: string;
   isLoading?: boolean;
+  className?: string;
+  gridColumns?: string;
 }
 
 export const ActionBar: FC<Props> = ({
@@ -21,9 +23,11 @@ export const ActionBar: FC<Props> = ({
   createText,
   children,
   isLoading,
+  className,
+  gridColumns = '1fr 1fr',
 }) => {
   return (
-    <ActionWrapper>
+    <ActionWrapper className={className} gridColumns={gridColumns}>
       <Pagination
         itemCount={total}
         perPage={perPage}
