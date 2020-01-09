@@ -1,6 +1,6 @@
 import React, { FC, useMemo, memo } from 'react';
 import ReactSelect, {
-  OptionProps, components, ValueType, ActionMeta,
+  OptionProps, components,
 } from 'react-select';
 import { Checkbox } from 'components/Checkbox';
 import { SelectableItem } from 'utils/types';
@@ -50,7 +50,6 @@ export const Select: FC<SelectProps> = memo(({
   placeholder,
   onChange,
   value,
-  onBlur,
   touched,
   error,
   warning,
@@ -58,21 +57,18 @@ export const Select: FC<SelectProps> = memo(({
   ...rest
 }) => {
   const meta = { touched, error, warning };
-  const { setFieldValue } = useFormikContext();
+  const { setFieldValue, setFieldTouched } = useFormikContext();
   /** Workaround for null value payload after remove-value action,
    *  that is fired on click when removing button is clicked on single element of react-select
    * @see https://github.com/JedWatson/react-select/issues/3632
   */
   /** @todo Here is bug */
-  const handleOnChange = (val: SelectableItem, action: ActionMeta) => {
+  const handleOnChange = (val: SelectableItem) => {
     if (!onChange) return;
-    console.log(val, action);
     if (val === null) {
-      onChange([], action);
       setFieldValue(name, []);
     } else {
-      onChange(val, action);
-      setFieldValue(name, val.value);
+      setFieldValue(name, val);
     }
   };
   /** Marked as any because type mismatching with React-Select componennts prop */
@@ -81,11 +77,11 @@ export const Select: FC<SelectProps> = memo(({
     <ReactSelect
       onChange={handleOnChange}
       styles={customSelectStyles}
-      value={options ? options.find((option) => option.value === value) : ''}
+      value={value}
       options={options}
       components={{ Option, MultiValue, Input }}
       placeholder={placeholder}
-      onBlur={() => onBlur && onBlur(value)}
+      onBlur={setFieldTouched}
       hideSelectedOptions={false}
       closeMenuOnSelect={false}
       noOptionsMessage={() => 'Brak rekordów!'}

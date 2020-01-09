@@ -51,7 +51,7 @@ export const Image = styled.img`
 
 export const Description = styled.p`
   margin: 0;
-  margin-top: ${({ theme }) => theme.metrics.margin.m};
+  margin: ${({ theme }) => theme.metrics.margin.m} 0;
   color: ${({ theme }) => theme.colors.labelText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;

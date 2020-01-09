@@ -4,6 +4,7 @@ import { Form } from 'components/Form';
 import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
 import { Select } from 'components/Select';
+import { Textarea } from 'components/Textarea';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>;
@@ -45,6 +46,7 @@ export const ProductForm: FC<ProductFormProps> = ({
         props={{
           placeholder: 'Wskaż producenta...',
           options: manufacturers,
+          isClearable: true,
         }}
       />
 
@@ -55,11 +57,12 @@ export const ProductForm: FC<ProductFormProps> = ({
         props={{
           placeholder: 'Wskaż typ yerba mate...',
           options: types,
+          isClearable: true,
         }}
       />
       <FormField
         name="details"
-        component={Input}
+        component={Textarea}
         label="Opis:"
         props={{
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
