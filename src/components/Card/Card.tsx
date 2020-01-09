@@ -40,7 +40,7 @@ export const Card: FC<CardProps> = memo((
     details = 'Brak opisu',
   },
 ) => {
-  const shortDescription = truncate(details, { length: 150, separator: '...' });
+  const shortDescription = truncate(details, { length: 100, separator: '...' });
   const shortName = truncate(name, { length: 45, separator: '...' });
   const shortProducer = truncate(manufacturer, { length: 45, separator: '...' });
   const shortType = truncate(type, { length: 15, separator: '...' });
