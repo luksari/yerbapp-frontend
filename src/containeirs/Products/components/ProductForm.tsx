@@ -5,6 +5,7 @@ import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
 import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
+import { UploadImage } from 'components/UploadImage';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>;
@@ -31,6 +32,7 @@ export const ProductForm: FC<ProductFormProps> = ({
       handleClose={handleBack}
       onSubmit={onSubmit}
     >
+      <UploadImage />
       <FormField
         name="name"
         component={Input}
