@@ -47,9 +47,6 @@ const Explore: FC<Props> = memo(({
     return <Loader fullscreen />;
   }
 
-  console.log('Products', data.products.items);
-
-
   return (
     <Wrapper>
       <Helmet

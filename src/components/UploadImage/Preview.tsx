@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyledThumb, ThumbInner } from './styled';
 
 interface Props {
@@ -6,16 +6,18 @@ interface Props {
 }
 
 export const Preview: FC<Props> = ({ file }) => {
+  const [preview, setPreview] = useState(file);
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
-    URL.revokeObjectURL(file.path);
+    setPreview(file);
+    URL.revokeObjectURL(preview.path);
   }, [file]);
 
   return (
     <>
       {file ? (
-        <StyledThumb key={file.name}>
-          <ThumbInner src={file.preview} />
+        <StyledThumb key={preview.name}>
+          <ThumbInner src={preview.preview} />
         </StyledThumb>
       )
         : <p>Brak pliku</p>}
