@@ -1,27 +1,27 @@
-import React, { FC } from 'react';
-import { Switch, Redirect } from 'react-router';
-import { Login } from 'containeirs/Login';
-import { Register } from 'containeirs/Register';
 import { AppLayout } from 'components/Layouts';
 import { AuthLayout } from 'components/Layouts/AuthLayout';
-import { AuthenticatedRoute, LayoutRoute } from 'components/Routes';
-import { Tutorial } from 'containeirs/Tutorial';
-import { About } from 'containeirs/About';
-import { Home } from 'containeirs/Home';
-import { Explore } from 'containeirs/Products';
-import { Profile } from 'containeirs/Profile';
 import { HomepageLayout } from 'components/Layouts/HomepageLayout';
-import { NoMatch } from 'containeirs/NoMatch';
+import { AuthenticatedRoute, LayoutRoute } from 'components/Routes';
+import { About } from 'containeirs/About';
 import { AdminPanel } from 'containeirs/AdminPanel';
-import { NotAllowed } from 'containeirs/NotAllowed';
+import { Home } from 'containeirs/Home';
+import { Login } from 'containeirs/Login';
 import { Manufacturers } from 'containeirs/Manufacturers';
-import { Users } from 'containeirs/Users';
-import { Types } from 'containeirs/Types';
-import { Ranks } from 'containeirs/Ranks';
 import { ManufacturerCreateForm, ManufacturerEditForm } from 'containeirs/Manufacturers/containers';
-import { TypeCreateForm, TypeEditForm } from 'containeirs/Types/containers';
-import { RankCreateForm, RankEditForm } from 'containeirs/Ranks/containers';
+import { NoMatch } from 'containeirs/NoMatch';
+import { NotAllowed } from 'containeirs/NotAllowed';
+import { Explore } from 'containeirs/Products';
 import { ProductCreateForm, ProductEditForm } from 'containeirs/Products/containers';
+import { Profile } from 'containeirs/Profile';
+import { Ranks } from 'containeirs/Ranks';
+import { RankCreateForm, RankEditForm } from 'containeirs/Ranks/containers';
+import { Register } from 'containeirs/Register';
+import { Tutorial } from 'containeirs/Tutorial';
+import { Types } from 'containeirs/Types';
+import { TypeCreateForm, TypeEditForm } from 'containeirs/Types/containers';
+import { Users } from 'containeirs/Users';
+import React, { FC } from 'react';
+import { Redirect, Switch } from 'react-router';
 
 
 export const AppRouter: FC = () => {
@@ -31,12 +31,12 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute path="/tutorial" component={Tutorial} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/about" component={About} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/profile" component={Profile} layout={AppLayout} />
-      <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
 
       <AuthenticatedRoute exact path="/products" component={Explore} layout={AppLayout} canBeGuest />
-      <AuthenticatedRoute path="/products/create" component={ProductCreateForm} layout={AppLayout} mustBeAdmin />
-      <AuthenticatedRoute path="/products/:productId" component={ProductEditForm} layout={AppLayout} mustBeAdmin />
+      <AuthenticatedRoute path="/products/create" component={ProductCreateForm} layout={AppLayout} />
+      <AuthenticatedRoute path="/products/:productId" component={ProductEditForm} layout={AppLayout} />
 
+      <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute exact path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/manufacturers/create" component={ManufacturerCreateForm} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute path="/admin/manufacturers/:manufacturerId" component={ManufacturerEditForm} layout={AppLayout} mustBeAdmin />

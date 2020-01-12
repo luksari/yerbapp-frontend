@@ -23,6 +23,6 @@ export interface LoginBody {
 }
 
 export const AuthApi = {
-  login: (paylaod: LoginBody) => postRequest<LoginResponse>('/auth/login', paylaod),
+  login: (payload: LoginBody) => postRequest<LoginResponse>('/auth/login', payload),
   register: (payload: RegisterBody) => postRequest<RegisterResponse>('/auth/register', payload),
 };

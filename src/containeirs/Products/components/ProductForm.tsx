@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
-import { FormProps, SelectableItem } from 'utils/types';
 import { Form } from 'components/Form';
-import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
+import { Input } from 'components/Input';
 import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
 import { UploadImage } from 'components/UploadImage';
+import React, { FC } from 'react';
+import { FormProps, SelectableItem } from 'utils/types';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>;
@@ -32,7 +32,6 @@ export const ProductForm: FC<ProductFormProps> = ({
       handleClose={handleBack}
       onSubmit={onSubmit}
     >
-      <UploadImage />
       <FormField
         name="name"
         component={Input}
@@ -70,6 +69,7 @@ export const ProductForm: FC<ProductFormProps> = ({
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
         }}
       />
+      <UploadImage name="image" />
     </Form>
   );
 };
