@@ -3,6 +3,7 @@ import { useFormikContext } from 'formik';
 import { get } from 'lodash';
 import React, { FC, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { uploadImage } from 'utils/uploadImage';
 import { Preview } from './Preview';
 import { Container } from './styled';
 
@@ -17,12 +18,17 @@ export const UploadImage: FC<Props> = ({ name, label }) => {
   const value: ExtendedFile = get(values, name);
 
   const [file, setFile] = useState(value);
+  const [photoUrl, setPhotoUrl] = useState();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    const newFile = Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) });
-    setFieldValue(name, acceptedFiles[0]);
-    setFile(newFile);
+  const onDrop = useCallback(async (acceptedFiles) => {
+    const copyFile = new File([acceptedFiles[0]], acceptedFiles[0].name, { type: acceptedFiles[0].type });
+
+    const previewFile = Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) });
+    const { url } = await uploadImage(copyFile);
+    setFieldValue(name, url);
+    setFile(previewFile);
   }, []);
+
 
   const {
     getRootProps,

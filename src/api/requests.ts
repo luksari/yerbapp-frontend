@@ -10,13 +10,17 @@ export class HttpError extends Error {
   }
 }
 
-const getDefaultHeaders = (isMultipart: boolean) => {
+const getDefaultHeaders = (isMultipart: boolean, isAuthorized: boolean) => {
   const headers = {
     Accept: 'application/json',
+    Authorization: '',
   };
 
   if (!isMultipart) {
     headers['Content-Type'] = 'application/json';
+  }
+  if (isAuthorized) {
+    headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
   return headers;
@@ -35,14 +39,14 @@ const parseResponse = async <T>(response: Response): Promise<null | T> => {
   }
 };
 
-const apiRequest = async <T>(path: string, fetchOptions?: RequestInit): Promise<T | null> => {
+const apiRequest = async <T>(path: string, fetchOptions?: RequestInit, isMultipart = false, isAuthorized = false): Promise<T | null> => {
   const normalizedPath = path.replace(/^\//, '');
   const url = `${SERVER_URL}/${normalizedPath}`;
   const fetchResponse = await fetch(url, {
     ...fetchOptions,
     headers: {
       ...(fetchOptions && fetchOptions.headers),
-      ...getDefaultHeaders(false),
+      ...getDefaultHeaders(isMultipart, isAuthorized),
     },
   });
   const parsedResponse = await parseResponse<T>(fetchResponse);
@@ -64,6 +68,12 @@ export const postRequest = async <T>(path: string, body?: Record<string, any>, f
   body: body && JSON.stringify(body),
   method: 'POST',
 });
+
+export const postFormDataRequest = async <T>(path: string, body?: FormData, fetchOptions?: RequestInit) => apiRequest<T>(path, {
+  ...fetchOptions,
+  body,
+  method: 'POST',
+}, true, true);
 
 export const patchRequest = async <T>(path: string, body?: Record<string, any>, fetchOptions?: RequestInit) => apiRequest<T>(path, {
   ...fetchOptions,

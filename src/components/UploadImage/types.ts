@@ -1,4 +1,4 @@
-interface UploadedFile {
+interface UploadedFile extends File {
   name: string;
   lastModified: number;
   lastModifiedDate: Date;
