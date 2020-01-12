@@ -69,7 +69,7 @@ export const ProductForm: FC<ProductFormProps> = ({
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
         }}
       />
-      <UploadImage name="image" label="Zdjęcie Yerba Mate:" />
+      <UploadImage name="photoUrl" label="Zdjęcie Yerba Mate:" />
     </Form>
   );
 };

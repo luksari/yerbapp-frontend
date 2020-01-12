@@ -6,5 +6,5 @@ export interface ProductData {
   manufacturer: SelectableItem;
   type: SelectableItem;
   details: string;
-  image: ExtendedFile;
+  photoUrl: string;
 }

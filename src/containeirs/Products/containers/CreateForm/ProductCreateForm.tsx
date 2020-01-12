@@ -1,7 +1,9 @@
 import { notificationError, notificationSuccess } from 'components/Notification';
 import { push } from 'connected-react-router';
 import { ProductForm, ProductFormData } from 'containeirs/Products/components/ProductForm';
-import { useAddProductMutation, useGetManufacturersQuery, useGetTypesQuery } from 'generated/graphql';
+import {
+  GetProductsDocument, useAddProductMutation, useGetManufacturersQuery, useGetTypesQuery,
+} from 'generated/graphql';
 import React, { FC, useMemo } from 'react';
 import { connect } from 'react-redux';
 
@@ -27,22 +29,22 @@ const ProductCreateForm: FC<Props> = ({
   const types = useMemo(() => typesData?.types?.items?.map(({ id, name }) => ({ value: id, label: name })), [typesData]);
 
   const handleSubmit = async (values: ProductFormData) => {
-    console.log(values);
     try {
-      // await addProduct({
-      //   variables: {
-      //     product: {
-      //       name: values.name!,
-      //       manufacturerId: values.manufacturer.value!,
-      //       typeId: values.type.value!,
-      //       details: values.details!,
-      //     },
-      //   },
-      //   refetchQueries: [{
-      //     query: GetProductsDocument,
-      //   }],
-      // });
-      // handleBack();
+      await addProduct({
+        variables: {
+          product: {
+            name: values.name!,
+            manufacturerId: values.manufacturer.value,
+            typeId: values.type.value,
+            details: values.details,
+            photoUrl: values.photoUrl,
+          },
+        },
+        refetchQueries: [{
+          query: GetProductsDocument,
+        }],
+      });
+      handleBack();
     } catch (err) {
       console.error(err);
     }
