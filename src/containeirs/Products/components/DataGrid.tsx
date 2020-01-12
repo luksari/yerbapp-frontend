@@ -31,6 +31,7 @@ export const DataGrid: FC<Props> = memo(({
             overallScore={product.overallAverage}
             priceScore={product.priceAverage}
             tasteScore={product.tasteAverage}
+            photoUrl={product.photoUrl}
           />
         ))}
     </CardGrid>

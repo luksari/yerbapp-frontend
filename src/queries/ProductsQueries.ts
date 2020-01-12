@@ -24,6 +24,7 @@ export const GET_PRODUCTS = gql`
         priceAverage,
         details,
         overallAverage,
+        photoUrl,
       }
     }
   }
