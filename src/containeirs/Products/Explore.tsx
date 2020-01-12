@@ -1,19 +1,17 @@
-import React, { FC, memo, useEffect } from 'react';
-import { Wrapper } from 'containeirs/Users/styled';
-import { Title } from 'components/TitleBar';
-import Helmet from 'react-helmet';
 import { ActionBar } from 'components/ActionBar/ActionBar';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
-import { compose } from 'redux';
-import { usePagination } from 'hooks/usePagination';
-import { useQuery } from 'react-apollo';
 import { Loader } from 'components/Loader';
-import {
-  GetProductsDocument, GetProductsQueryVariables, GetProductsQuery,
-} from 'generated/graphql';
-import { FilterForm } from './components/FilterForm';
+import { Title } from 'components/TitleBar';
+import { push } from 'connected-react-router';
+import { Wrapper } from 'containeirs/Users/styled';
+import { GetProductsDocument, GetProductsQuery, GetProductsQueryVariables } from 'generated/graphql';
+import { usePagination } from 'hooks/usePagination';
+import React, { FC, memo } from 'react';
+import { useQuery } from 'react-apollo';
+import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { DataGrid } from './components/DataGrid';
+import { FilterForm } from './components/FilterForm';
 
 interface Props {
   redirectEdit: (id: string) => void;
