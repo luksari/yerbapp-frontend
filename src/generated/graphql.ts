@@ -520,7 +520,7 @@ export type GetProductsQuery = (
     & Pick<ProductsResponse, 'total'>
     & { items: Array<(
       { __typename?: 'Product' }
-      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage'>
+      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage' | 'photoUrl'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
         & Pick<Manufacturer, 'id' | 'name' | 'country'>
@@ -1058,6 +1058,7 @@ export const GetProductsDocument = gql`
       priceAverage
       details
       overallAverage
+      photoUrl
     }
   }
 }
