@@ -25,8 +25,10 @@ export const UploadImage: FC<Props> = ({ name, label }) => {
 
     const previewFile = Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) });
     const { url } = await uploadImage(copyFile);
+
     setFieldValue(name, url);
     setFile(previewFile);
+    setPhotoUrl(url);
   }, []);
 
 
@@ -48,7 +50,7 @@ export const UploadImage: FC<Props> = ({ name, label }) => {
             ? <p>Upuść plik w tym miejscu...</p>
             : <p>Upuść plik w tym miejscu, lub kliknij i wybierz...</p>
         }
-        {file && <Preview file={file} /> }
+        {file && <Preview file={file} url={photoUrl} /> }
       </Container>
     </InputWrapper>
   );

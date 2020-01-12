@@ -3,9 +3,10 @@ import { StyledThumb, ThumbInner } from './styled';
 
 interface Props {
   file?: ExtendedFile;
+  url?: string;
 }
 
-export const Preview: FC<Props> = ({ file }) => {
+export const Preview: FC<Props> = ({ file, url }) => {
   const [preview, setPreview] = useState(file);
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
@@ -17,7 +18,7 @@ export const Preview: FC<Props> = ({ file }) => {
     <>
       {file ? (
         <StyledThumb key={preview.name}>
-          <ThumbInner src={preview.preview} />
+          <ThumbInner src={preview.preview || url} />
         </StyledThumb>
       )
         : <p>Brak pliku</p>}

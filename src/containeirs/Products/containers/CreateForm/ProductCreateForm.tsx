@@ -62,7 +62,7 @@ const ProductCreateForm: FC<Props> = ({
       types={types}
       isLoading={isLoading}
       data={{
-        name: '', manufacturer: { value: '', label: '' }, type: { value: '', label: '' }, details: '',
+        name: '', manufacturer: { value: '', label: '' }, type: { value: '', label: '' }, details: '', photoUrl: '',
       }}
     />
   );
