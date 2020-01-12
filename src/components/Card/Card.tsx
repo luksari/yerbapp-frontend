@@ -26,25 +26,25 @@ interface CardProps {
 
 export const Card: FC<CardProps> = memo((
   {
-    name = 'Brak nazwy',
+    name,
     photoUrl,
-    manufacturer = 'Nieznanty producent',
-    type = 'Nieznany typ',
-    country = 'Nieznany kraj',
+    manufacturer,
+    type,
+    country,
     aromaScore = 0,
     tasteScore = 0,
     bitternessScore = 0,
     energyScore = 0,
     priceScore = 0,
     overallScore = 0,
-    details = 'Brak opisu',
+    details,
   },
 ) => {
-  const shortDescription = truncate(details, { length: 100, separator: '...' });
-  const shortName = truncate(name, { length: 45, separator: '...' });
-  const shortProducer = truncate(manufacturer, { length: 45, separator: '...' });
-  const shortType = truncate(type, { length: 15, separator: '...' });
-  const shortCountry = truncate(country, { length: 15, separator: '...' });
+  const shortDescription = details ? truncate(details, { length: 100, separator: '...' }) : 'Nieznany opis';
+  const shortName = name ? truncate(name, { length: 45, separator: '...' }) : 'Nieznana nazwa';
+  const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '...' }) : 'Nieznany producent';
+  const shortType = type ? truncate(type, { length: 15, separator: '...' }) : 'Nieznany typ';
+  const shortCountry = country ? truncate(country, { length: 15, separator: '...' }) : 'Nieznany kraj';
   return (
     <CardContainer>
       <DataWrapper primary>
