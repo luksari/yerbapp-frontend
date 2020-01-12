@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { ThemeInterface } from 'theme/theme';
 
 const getColor = (state: Partial<DropzoneState>, theme: ThemeInterface) => {
-  console.log(state);
   if (state.isDragAccept) {
     return theme.colors.primary;
   }
