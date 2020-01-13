@@ -7,7 +7,10 @@ import { makeSelectUserId } from 'store/auth/slice';
 import { createStructuredSelector } from 'reselect';
 import { isAdmin } from 'utils/isAdmin';
 import { userRoleMap } from 'utils/roleMap';
+import { UserAvatar } from 'components/UserAvatar';
 import { UserData } from '../types';
+import { HorizontalContainer } from '../styled';
+
 
 type UserTableProps = TableProps<UserData> & {
   onMakeAdmin: (id: string) => void;
@@ -27,9 +30,22 @@ const UsersTableRaw: FC<UserTableProps> = ({
   <>
     <Table<UserData>
       columns={[
-        { Header: 'Id', accessor: 'id', disableSortBy: false },
-        { Header: 'Adres e-mail', accessor: 'email', disableSortBy: false },
-        { Header: 'Nazwa użytkownika', accessor: 'username', disableSortBy: false },
+        {
+          Header: 'Id',
+          accessor: 'id',
+          disableSortBy: false,
+        },
+        {
+          Header: 'Użytkownik',
+          accessor: 'username',
+          disableSortBy: false,
+          Cell: ({ row: { values: { username, avatarUrl } } }) => (
+            <HorizontalContainer>
+              <UserAvatar username={username} avatarUrl={avatarUrl} />
+              <p>{username}</p>
+            </HorizontalContainer>
+          ),
+        },
         {
           Header: 'Rola',
           accessor: 'role',

@@ -755,7 +755,7 @@ export type GetMeQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email'>
+    & Pick<User, 'username' | 'avatarUrl' | 'email'>
   ) }
 );
 
@@ -777,7 +777,7 @@ export type GetMeDetailsQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'role'>
+    & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     & { profile: (
       { __typename?: 'Profile' }
       & Pick<Profile, 'aromaImportance' | 'tasteImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
@@ -818,7 +818,7 @@ export type GetUsersQuery = (
     & Pick<UsersResponse, 'total'>
     & { items: Array<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'role'>
+      & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     )> }
   ) }
 );
@@ -1611,6 +1611,7 @@ export const GetMeDocument = gql`
     query getMe {
   whoAmI {
     username
+    avatarUrl
     email
   }
 }
@@ -1679,6 +1680,7 @@ export const GetMeDetailsDocument = gql`
     username
     email
     role
+    avatarUrl
     profile {
       aromaImportance
       tasteImportance
@@ -1767,6 +1769,7 @@ export const GetUsersDocument = gql`
       username
       email
       role
+      avatarUrl
     }
     total
   }

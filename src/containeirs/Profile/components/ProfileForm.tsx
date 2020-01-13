@@ -35,7 +35,9 @@ export const ProfileForm: FC<Props> = ({
       handleClose={handleBack}
       onSubmit={onSubmit}
     >
-      <BigUserAvatar username={data.username} />
+      <BigUserAvatar
+        username={data.username}
+      />
       <FormFieldset
         legendTitle="Twoje dane"
       >
