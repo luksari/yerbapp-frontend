@@ -42,25 +42,28 @@ const UsersTableRaw: FC<UserTableProps> = ({
         },
         {
           id: 'makeAdmin',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
+              <Button themeType={ButtonType.Primary} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
             </div>
           ),
         },
         {
           id: 'makeUser',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Warning} variant={ButtonVariant.Narrow} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
+              <Button themeType={ButtonType.Warning} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
             </div>
           ),
         },
         {
           id: 'remove',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} disabled={row.values.id === currentUserId} onClick={() => onDelete(row.values.id)}>Usuń użytkownika</Button>
+              <Button themeType={ButtonType.Danger} disabled={row.values.id === currentUserId} onClick={() => onDelete(row.values.id)}>Usuń użytkownika</Button>
             </div>
           ),
         },

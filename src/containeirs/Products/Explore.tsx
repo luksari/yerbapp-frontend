@@ -33,6 +33,7 @@ const Explore: FC<Props> = memo(({
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
 
+
   const { data, loading, refetch } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
@@ -42,6 +43,20 @@ const Explore: FC<Props> = memo(({
       fetchPolicy: 'network-only',
     },
   );
+
+  const handleSubmit = async (values: typeof formValues) => {
+    const userId = localStorage.getItem('userId');
+    try {
+      refetch({
+        searchByName: values.name,
+        ...(userId && { personalizeForUser: userId }),
+        offset,
+        perPage,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   if (!data) {
     return <Loader fullscreen />;
@@ -64,7 +79,7 @@ const Explore: FC<Props> = memo(({
       >
         <FilterForm
           formValues={formValues}
-          handleSubmit={console.log}
+          handleSubmit={handleSubmit}
         />
       </ActionBar>
       <DataGrid data={data.products.items} isLoading={loading} />
