@@ -7,6 +7,32 @@ import { RankData } from '../types';
 
 export type RankFormData = Partial<RankData>
 
+const validate = ({ name, lowerRange, upperRange }: RankData) => {
+  const errors = {} as Record<keyof RankData, string>;
+
+  if (!name) {
+    errors.name = 'Pole wymagane';
+  } else if (name.length > 100) {
+    errors.name = 'Długość nie powinna być dłuższa niż 100 znaków';
+  }
+
+  if (lowerRange === null || lowerRange === undefined) {
+    errors.lowerRange = 'Pole wymagane';
+  } else if (lowerRange < 0) {
+    errors.lowerRange = 'Wartość musi być większa od 0';
+  } else if (lowerRange > upperRange) {
+    errors.lowerRange = `Wartość musi być mniejsza niż ${upperRange}`;
+  }
+
+  if (upperRange === null || upperRange === undefined) {
+    errors.upperRange = 'Pole wymagane';
+  } else if (upperRange < 0) {
+    errors.upperRange = 'Wartość musi być większa od 0';
+  } else if (upperRange < lowerRange) {
+    errors.upperRange = `Wartość musi być większa niż ${lowerRange}`;
+  }
+  return errors;
+};
 const RankForm: FC<FormProps<RankFormData>> = ({
   data,
   title,
@@ -25,6 +51,7 @@ const RankForm: FC<FormProps<RankFormData>> = ({
       isSaving={isSaving}
       handleClose={handleBack}
       onSubmit={onSubmit}
+      validate={validate}
     >
       <FormField
         name="name"
