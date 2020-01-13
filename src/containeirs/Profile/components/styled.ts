@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { UserAvatar } from 'components/UserAvatar';
 import { LeftLogo, RightLogo } from 'components/UserAvatar/styled';
+import { FormikUserAvatar } from 'components/UserAvatar/FormikUserAvatar';
 
-export const BigUserAvatar = styled(UserAvatar)`
+export const BigUserAvatar = styled(FormikUserAvatar)`
   margin: ${({ theme }) => theme.metrics.margin.xl} 0;
   justify-self: center;
   width: 200px;

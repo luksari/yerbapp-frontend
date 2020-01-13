@@ -29,17 +29,18 @@ export const RightLogo = styled(StyledLogo)`
   bottom: -15px;
 `;
 
-export const StyledAvatar = styled.div<{code: number}>`
+export const StyledAvatar = styled.div<{code: number; avatarUrl?: string}>`
   width: 100%;
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  ${({ code }) => css`
-    background: hsl(${code}, 95%, 93%);
+  ${({ code, avatarUrl }) => css`
+    background: ${avatarUrl ? `url(${avatarUrl}) center center/cover no-repeat` : `hsl(${code}, 95%, 93%)`};
     ${StyledInitial} {
       color: hsl(${code}, 25%, 55%);
+      display: ${avatarUrl ? 'none' : 'block'};
     }
   `}
 `;

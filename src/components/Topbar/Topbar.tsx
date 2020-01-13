@@ -30,11 +30,11 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   }
   return (
     <StyledTopbar>
-      { data && (
+      { data && data.whoAmI && (
         <>
           <UserProfileLink to="/profile">
             <UserTitle>{data.whoAmI.email}</UserTitle>
-            <UserAvatar username={data.whoAmI.username} />
+            <UserAvatar username={data.whoAmI.username} avatarUrl={data.whoAmI.avatarUrl} />
           </UserProfileLink>
         </>
       ) }
