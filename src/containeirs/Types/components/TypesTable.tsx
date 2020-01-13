@@ -19,17 +19,19 @@ export const TypesTable: FC<TableProps<TypeModel>> = ({
         { Header: 'Nazwa typu', accessor: 'name', disableSortBy: false },
         {
           id: 'edit',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
+              <Button themeType={ButtonType.Primary} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
             </div>
           ),
         },
         {
           id: 'remove',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} onClick={() => onDelete(row.values.id)}>Usuń</Button>
+              <Button themeType={ButtonType.Danger} onClick={() => onDelete(row.values.id)}>Usuń</Button>
             </div>
           ),
         },
