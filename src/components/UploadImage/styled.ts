@@ -1,6 +1,7 @@
 import { DropzoneState } from 'react-dropzone';
 import styled, { css } from 'styled-components';
 import { ThemeInterface } from 'theme/theme';
+import { ButtonBox } from 'components/Button/styled';
 
 const getColor = (state: Partial<DropzoneState>, theme: ThemeInterface) => {
   if (state.isDragAccept) {
@@ -34,10 +35,36 @@ export const Container = styled.div<{ state: Partial<DropzoneState> }>`
   }
 `;
 
+export const ActionButtons = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #ffffffaa;
+  display: flex;
+  transform: scale(0);
+  justify-content: center;
+  align-items: flex-end;
+  transition: transform 150ms linear;
+  ${ButtonBox} {
+    transform: scale(0);
+    transition: transform 150ms 150ms linear;
+  }
+`;
+
+
 export const StyledThumb = styled.div`
+  position: relative;
   padding: 25px;
   max-width: 250px;
   max-height: 250px;
+  :hover {
+    ${ActionButtons} {
+      transform: scale(1);
+      ${ButtonBox} {
+        transform: scale(1);
+      }
+    }
+  }
 `;
 
 export const ThumbInner = styled.div<{ src: string }>`

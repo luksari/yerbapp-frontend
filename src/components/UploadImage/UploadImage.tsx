@@ -1,7 +1,9 @@
 import { InputLabel, InputWrapper } from 'components/Form/components/FormField/styled';
 import { useFormikContext } from 'formik';
 import { get } from 'lodash';
-import React, { FC, useCallback, useState } from 'react';
+import React, {
+  FC, useCallback, useState, memo,
+} from 'react';
 import { useDropzone } from 'react-dropzone';
 import { uploadImage } from 'utils/uploadImage';
 import { Preview } from './Preview';
@@ -12,7 +14,7 @@ interface Props {
   label: string;
 }
 
-export const UploadImage: FC<Props> = ({ name, label }) => {
+export const UploadImage: FC<Props> = memo(({ name, label }) => {
   const { values, setFieldValue } = useFormikContext<any>();
 
   const value: ExtendedFile = get(values, name);
@@ -20,9 +22,15 @@ export const UploadImage: FC<Props> = ({ name, label }) => {
   const [file, setFile] = useState(value);
   const [photoUrl, setPhotoUrl] = useState();
 
+  const handleRemoveImage = useCallback(() => {
+    console.log('run');
+    setFile(null);
+    setPhotoUrl('');
+    setFieldValue(name, '');
+  }, []);
+
   const onDrop = useCallback(async (acceptedFiles) => {
     const copyFile = new File([acceptedFiles[0]], acceptedFiles[0].name, { type: acceptedFiles[0].type });
-
     const previewFile = Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) });
     const { url } = await uploadImage(copyFile);
 
@@ -50,8 +58,8 @@ export const UploadImage: FC<Props> = ({ name, label }) => {
             ? <p>Upuść plik w tym miejscu...</p>
             : <p>Upuść plik w tym miejscu, lub kliknij i wybierz...</p>
         }
-        {file && <Preview file={file} url={photoUrl} /> }
       </Container>
+      {file && <Preview file={file} url={photoUrl} removeImage={handleRemoveImage} />}
     </InputWrapper>
   );
-};
+});
