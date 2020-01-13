@@ -16,7 +16,7 @@ const validate = (values: ProductFormData) => {
   if (!values.name) {
     errors.name = 'Pole wymagane';
   } else if (values.name.length > 100) {
-    errors.details = 'Długość nie powinna być dłuższa niż 100 znaków';
+    errors.name = 'Długość nie powinna być dłuższa niż 100 znaków';
   }
   if (!values.details) {
     errors.details = 'Pole wymagane';

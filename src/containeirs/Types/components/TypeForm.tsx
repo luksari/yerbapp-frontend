@@ -7,6 +7,17 @@ import { TypeModel } from '../TypesData';
 
 export type TypeFormData = Partial<TypeModel>
 
+const validate = (values: TypeModel) => {
+  const errors = {} as Record<keyof TypeModel, string>;
+
+  if (!values.name) {
+    errors.name = 'Pole wymagane';
+  } else if (values.name.length > 100) {
+    errors.name = 'Długość nie powinna być dłuższa niż 100 znaków';
+  }
+
+  return errors;
+};
 const TypeForm: FC<FormProps<TypeFormData>> = ({
   data,
   title,
@@ -25,6 +36,7 @@ const TypeForm: FC<FormProps<TypeFormData>> = ({
       isSaving={isSaving}
       handleClose={handleBack}
       onSubmit={onSubmit}
+      validate={validate}
     >
       <FormField
         name="name"
