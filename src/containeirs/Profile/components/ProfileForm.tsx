@@ -5,6 +5,7 @@ import { FormField } from 'components/Form/components/FormField';
 import { Input } from 'components/Input';
 import { FormFieldset } from 'components/Form/components/FormFieldset/FormFieldset';
 import { FormikRating } from 'components/Rating/FormikRating';
+import { UploadImage } from 'components/UploadImage';
 import { BigUserAvatar } from './styled';
 
 interface Props {
@@ -65,6 +66,7 @@ export const ProfileForm: FC<Props> = ({
             placeholder: 'Twoja rola użytkownika...',
           }}
         />
+        <UploadImage name="avatarUrl" label="Avatar użytkownika:" />
       </FormFieldset>
       <FormFieldset
         legendTitle="Twoje preferencje"

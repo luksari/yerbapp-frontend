@@ -25,6 +25,7 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
   const handleSubmit = async (user: ProfileFormData) => {
     const userData = {
       ...user.profile,
+      avatarUrl: user.avatarUrl,
     };
     await editUser({
       variables: {
@@ -45,7 +46,7 @@ const ProfileRaw: FC<Props> = ({ handleBack }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleBack: () => dispatch(push('/explore')),
+  handleBack: () => dispatch(push('/products')),
 });
 
 export default connect(null, mapDispatchToProps)(ProfileRaw);
