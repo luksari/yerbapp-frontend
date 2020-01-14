@@ -1,14 +1,15 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { ButtonType } from 'components/Button';
 import { SizeType } from 'components/Rating/types';
 import { truncate } from 'lodash';
+import { Icon } from 'antd';
 import {
-  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton,
 } from './styled';
 import { CardValue } from './CardValue';
 
 interface CardProps {
-  id?: number;
+  id?: string;
   manufacturer?: string;
   type?: string;
   name?: string;
@@ -24,10 +25,13 @@ interface CardProps {
   overallScore?: number;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
+  isAdmin: boolean;
+  userId: string;
 }
 
 export const Card: FC<CardProps> = memo((
   {
+    id,
     name,
     photoUrl,
     manufacturer,
@@ -40,6 +44,10 @@ export const Card: FC<CardProps> = memo((
     priceScore = 0,
     overallScore = 0,
     details,
+    isAdmin,
+    userId,
+    onDelete,
+    onEdit,
   },
 ) => {
   const shortDescription = details ? truncate(details, { length: 100, separator: '...' }) : 'Nieznany opis';
@@ -47,8 +55,14 @@ export const Card: FC<CardProps> = memo((
   const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '...' }) : 'Nieznany producent';
   const shortType = type ? truncate(type, { length: 15, separator: '...' }) : 'Nieznany typ';
   const shortCountry = country ? truncate(country, { length: 15, separator: '...' }) : 'Nieznany kraj';
+
+  const isAllowed = useMemo(() => isAdmin, [isAdmin, userId]);
   return (
     <CardContainer>
+      <ActionButtons isAllowed={isAllowed}>
+        <RoundedButton onClick={() => onEdit(id)} icon={<Icon type="edit" />} themeType={ButtonType.Secondary} />
+        <RoundedButton onClick={() => onDelete(id)} icon={<Icon type="delete" />} themeType={ButtonType.Danger} />
+      </ActionButtons>
       <DataWrapper primary>
         <YerbaTitle>
           {shortName}

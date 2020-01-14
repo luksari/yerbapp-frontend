@@ -49,7 +49,7 @@ export interface TableProps<T> {
 }
 
 type FormData<T> = Partial<Omit<T, '__typename'>>
-export interface FormProps<T> {
+export interface FormProps<T, K = T> {
   data: FormData<T>;
   isLoading?: boolean;
   onSubmit: (values: FormData<T>) => void;

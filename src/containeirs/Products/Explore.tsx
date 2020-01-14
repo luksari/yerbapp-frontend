@@ -13,12 +13,16 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { notificationError, notificationSuccess } from 'components/Notification';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
 import { DataGrid } from './components/DataGrid';
 import { FilterForm } from './components/FilterForm';
 
 interface Props {
   redirectEdit: (id: string) => void;
   redirectCreate: VoidFunction;
+  userId: string;
+  isAdmin: boolean;
 }
 
 const formValues = {
@@ -31,9 +35,11 @@ const formValues = {
   name: '',
 };
 
-const Explore: FC<Props> = memo(({
+const Explore: FC<Props> = ({
   redirectCreate,
   redirectEdit,
+  isAdmin,
+  userId,
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
 
@@ -44,7 +50,7 @@ const Explore: FC<Props> = memo(({
       variables: {
         offset, perPage,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-and-network',
     },
   );
 
@@ -56,17 +62,7 @@ const Explore: FC<Props> = memo(({
   const handleDelete = async (id: string) => {
     try {
       await deleteProduct({ variables: { productId: id } });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleSubmit = async (values: typeof formValues) => {
-    const userId = localStorage.getItem('userId');
-    try {
       refetch({
-        searchByName: values.name,
-        ...(userId && { personalizeForUser: userId }),
         offset,
         perPage,
       });
@@ -75,6 +71,18 @@ const Explore: FC<Props> = memo(({
     }
   };
 
+  const handleSubmit = async (values: typeof formValues) => {
+    try {
+      refetch({
+        searchByName: values.name,
+        offset,
+        perPage,
+        ...(userId && { personalizeForUser: userId }),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   if (!data) {
     return <Loader fullscreen />;
   }
@@ -104,11 +112,17 @@ const Explore: FC<Props> = memo(({
         isLoading={loading || deleting}
         handleEdit={redirectEdit}
         handleDelete={handleDelete}
+        userId={userId}
+        isAdmin={isAdmin}
       />
     </Wrapper>
   );
-});
+};
 
+const mapStateToProps = createStructuredSelector({
+  isAdmin: makeSelectIsAdmin(),
+  userId: makeSelectUserId(),
+});
 const mapDispatchToProps = (dispatch) => ({
   redirectEdit: (id: string) => dispatch(push(`/products/${id}`)),
   redirectCreate: () => dispatch(push('/products/create')),
@@ -116,5 +130,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   memo,
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Explore);

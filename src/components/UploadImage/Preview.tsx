@@ -18,7 +18,6 @@ export const Preview: FC<Props> = memo(({ file, url, removeImage }) => {
     setPreview(file);
     URL.revokeObjectURL(preview.path);
   }, [file]);
-  console.log('Preview', preview);
 
   return (
     <>

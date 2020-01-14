@@ -5,11 +5,12 @@ import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
 import { UploadImage } from 'components/UploadImage';
 import React, { FC } from 'react';
-import { FormProps, SelectableItem } from 'utils/types';
+import { FormProps } from 'utils/types';
+import { Manufacturer, ProductType } from 'generated/graphql';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>;
-type ProductFormProps = FormProps<ProductFormData> & { manufacturers: SelectableItem[]; types: SelectableItem[]}
+type ProductFormProps = FormProps<ProductFormData> & { manufacturers: Manufacturer[]; types: ProductType[]}
 const validate = (values: ProductFormData) => {
   const errors = {} as Record<keyof ProductData, string>;
 
@@ -37,6 +38,7 @@ export const ProductForm: FC<ProductFormProps> = ({
   isSaving,
   manufacturers,
   types,
+  isEdit,
 }) => {
   return (
     <Form<ProductFormData>
@@ -65,6 +67,9 @@ export const ProductForm: FC<ProductFormProps> = ({
           placeholder: 'Wskaż producenta...',
           options: manufacturers,
           isClearable: true,
+          isDisabled: isEdit,
+          getOptionLabel: (option) => option.name,
+          getOptionValue: (option) => option.id,
         }}
       />
 
@@ -75,7 +80,10 @@ export const ProductForm: FC<ProductFormProps> = ({
         props={{
           placeholder: 'Wskaż typ yerba mate...',
           options: types,
+          isDisabled: isEdit,
           isClearable: true,
+          getOptionLabel: (option) => option.name,
+          getOptionValue: (option) => option.id,
         }}
       />
       <FormField

@@ -36,11 +36,11 @@ export const GET_PRODUCT = gql`
       name,
       manufacturer {
         id,
-        name,
+        name
       }
       type {
         id,
-        name,
+        name
       }
       details,
     }

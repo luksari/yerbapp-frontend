@@ -23,7 +23,6 @@ export const UploadImage: FC<Props> = memo(({ name, label }) => {
   const [photoUrl, setPhotoUrl] = useState();
 
   const handleRemoveImage = useCallback(() => {
-    console.log('run');
     setFile(null);
     setPhotoUrl('');
     setFieldValue(name, '');

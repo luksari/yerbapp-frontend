@@ -693,7 +693,7 @@ export type GetTypesQuery = (
     & Pick<TypesResponse, 'total'>
     & { items: Array<(
       { __typename?: 'ProductType' }
-      & Pick<ProductType, 'id' | 'name'>
+      & Pick<ProductType, 'id' | 'name' | 'createdAt'>
     )> }
   ) }
 );
@@ -707,7 +707,7 @@ export type GetTypeQuery = (
   { __typename?: 'Query' }
   & { type: (
     { __typename?: 'ProductType' }
-    & Pick<ProductType, 'id' | 'name'>
+    & Pick<ProductType, 'id' | 'name' | 'createdAt'>
   ) }
 );
 
@@ -1442,6 +1442,7 @@ export const GetTypesDocument = gql`
     items {
       id
       name
+      createdAt
     }
     total
   }
@@ -1481,6 +1482,7 @@ export const GetTypeDocument = gql`
   type(typeId: $typeId) {
     id
     name
+    createdAt
   }
 }
     `;

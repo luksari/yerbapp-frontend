@@ -12,6 +12,7 @@ export const CardContainer = styled.div`
   border-radius: 0 0 8px 8px;
   overflow: hidden;
   border-top: 3px solid ${({ theme }) => theme.colors.alternative};
+  position: relative;
 `;
 
 export const YerbaTitle = styled.h4`
@@ -85,4 +86,28 @@ export const CardButton = styled(Button)`
 export const StyledRating = styled(Rating)`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
+`;
+
+export const ActionButtons = styled.div<{ isAllowed: boolean}>`
+  position: absolute;
+  z-index: 10;
+  justify-content: space-between;
+  width: 80px;
+  top: 10px;
+  right: 10px;
+  display: ${({ isAllowed }) => isAllowed ? 'flex' : 'none'};
+`;
+
+export const RoundedButton = styled(Button)`
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  min-width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    margin: 0;
+
+  }
 `;

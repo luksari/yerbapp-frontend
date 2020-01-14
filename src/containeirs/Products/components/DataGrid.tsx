@@ -9,13 +9,17 @@ interface Props {
   isLoading?: boolean;
   handleEdit: (id: string) => void;
   handleDelete: (id: string) => void;
+  userId: string;
+  isAdmin: boolean;
 }
 
-export const DataGrid: FC<Props> = memo(({
+export const DataGrid: FC<Props> = ({
   data,
   isLoading,
   handleDelete,
   handleEdit,
+  isAdmin,
+  userId,
 }) => {
   return (
     <CardGrid>
@@ -23,6 +27,7 @@ export const DataGrid: FC<Props> = memo(({
         ? <Loader />
         : data.map((product) => (
           <Card
+            id={product.id}
             name={product.name}
             manufacturer={product.manufacturer.name}
             country={product.manufacturer.country}
@@ -38,8 +43,10 @@ export const DataGrid: FC<Props> = memo(({
             photoUrl={product.photoUrl}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            isAdmin={isAdmin}
+            userId={userId}
           />
         ))}
     </CardGrid>
   );
-});
+};

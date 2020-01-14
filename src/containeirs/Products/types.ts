@@ -1,10 +1,10 @@
-import { SelectableItem } from 'utils/types';
+import { Manufacturer, ProductType } from 'generated/graphql';
 
 export interface ProductData {
   id: string;
   name: string;
-  manufacturer: SelectableItem;
-  type: SelectableItem;
+  manufacturer: Manufacturer;
+  type: ProductType;
   details: string;
   photoUrl: string;
 }

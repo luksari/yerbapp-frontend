@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { Button, ButtonType } from 'components/Button';
 import { TableProps } from 'utils/types';
 import { RankData } from '../types';
 

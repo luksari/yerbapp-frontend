@@ -46,5 +46,5 @@ export const makeSelectUserId = () => createSelector(
 );
 export const makeSelectIsAdmin = () => createSelector(
   selectAuthDomain,
-  (substate) => substate.userRole || localStorage.getItem('userRole') === 'admin',
+  (substate) => substate.userRole === UserRoles.Admin || localStorage.getItem('userRole') === UserRoles.Admin,
 );
