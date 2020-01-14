@@ -22,6 +22,8 @@ interface CardProps {
   energyScore?: number;
   priceScore?: number;
   overallScore?: number;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 export const Card: FC<CardProps> = memo((
