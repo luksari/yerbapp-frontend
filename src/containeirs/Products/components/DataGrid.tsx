@@ -7,11 +7,15 @@ import { CardGrid } from '../styled';
 interface Props {
   data: Partial<Product>[];
   isLoading?: boolean;
+  handleEdit: (id: string) => void;
+  handleDelete: (id: string) => void;
 }
 
 export const DataGrid: FC<Props> = memo(({
   data,
   isLoading,
+  handleDelete,
+  handleEdit,
 }) => {
   return (
     <CardGrid>
@@ -32,6 +36,8 @@ export const DataGrid: FC<Props> = memo(({
             priceScore={product.priceAverage}
             tasteScore={product.tasteAverage}
             photoUrl={product.photoUrl}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         ))}
     </CardGrid>
