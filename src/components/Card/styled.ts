@@ -16,13 +16,12 @@ export const CardContainer = styled.div`
 
 export const YerbaTitle = styled.h4`
   color: ${({ theme }) => theme.colors.primaryText};
-  padding: 0 15px;
-  margin-top: ${({ theme }) => theme.metrics.margin.m};
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
   font-weight: 700;
   line-height: 35px;
   text-transform: uppercase;
-  text-align: center;
+  background: #ffffffaa;
+  width: 100%;
 `;
 
 export const DataWrapper = styled.div<{primary?: boolean}>`
@@ -42,6 +41,7 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
 `;
 
 export const Image = styled.img`
+  position: absolute;
   max-width:100%;
   z-index: 0;
   top: 100px;
@@ -78,8 +78,8 @@ export const StyledValue = styled.p`
 `;
 
 export const CardButton = styled(Button)`
-  margin: ${({ theme }) => theme.metrics.margin.l};
-  justify-self: flex-end;
+  justify-self: center;
+  align-self: center;
 `;
 
 export const StyledRating = styled(Rating)`

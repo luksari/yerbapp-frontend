@@ -1,14 +1,31 @@
-import React, { FC } from 'react';
-import { FormProps, SelectableItem } from 'utils/types';
 import { Form } from 'components/Form';
-import { Input } from 'components/Input';
 import { FormField } from 'components/Form/components/FormField';
+import { Input } from 'components/Input';
 import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
+import { UploadImage } from 'components/UploadImage';
+import React, { FC } from 'react';
+import { FormProps, SelectableItem } from 'utils/types';
 import { ProductData } from '../types';
 
 export type ProductFormData = Partial<ProductData>;
 type ProductFormProps = FormProps<ProductFormData> & { manufacturers: SelectableItem[]; types: SelectableItem[]}
+const validate = (values: ProductFormData) => {
+  const errors = {} as Record<keyof ProductData, string>;
+
+  if (!values.name) {
+    errors.name = 'Pole wymagane';
+  } else if (values.name.length > 100) {
+    errors.name = 'Długość nie powinna być dłuższa niż 100 znaków';
+  }
+  if (!values.details) {
+    errors.details = 'Pole wymagane';
+  } else if (values.details.length > 1000) {
+    errors.details = 'Długość nie powinna być dłuższa niż 1000 znaków';
+  }
+
+  return errors;
+};
 
 export const ProductForm: FC<ProductFormProps> = ({
   data,
@@ -30,6 +47,7 @@ export const ProductForm: FC<ProductFormProps> = ({
       isSaving={isSaving}
       handleClose={handleBack}
       onSubmit={onSubmit}
+      validate={validate}
     >
       <FormField
         name="name"
@@ -68,6 +86,7 @@ export const ProductForm: FC<ProductFormProps> = ({
           placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
         }}
       />
+      <UploadImage name="photoUrl" label="Zdjęcie Yerba Mate:" />
     </Form>
   );
 };

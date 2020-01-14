@@ -19,15 +19,13 @@ const cellStyled = () => css`
 export const Cell = styled.td<{ alignText: string }>`
   ${cellStyled()}
 
-  height: 60px; /** works like min-height */
+  min-height: 1200px; /** works like min-height */
   text-align: ${({ alignText }) => alignText};
   color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 export const CellValue = styled.div`
   max-width: 400px;
-  max-height: 60px;
-  overflow: hidden;
 `;
 
 export const HeadCell = styled.th<{ alignText: string; disableSortBy: boolean }>`

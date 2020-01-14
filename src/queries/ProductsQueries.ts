@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-    query getProducts($offset: Int, $perPage: Int) {
-    products(offset: $offset, perPage: $perPage)
+    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String) {
+    products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName)
    {
       total,
       items {
@@ -24,6 +24,7 @@ export const GET_PRODUCTS = gql`
         priceAverage,
         details,
         overallAverage,
+        photoUrl,
       }
     }
   }

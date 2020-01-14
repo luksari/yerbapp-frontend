@@ -15,14 +15,13 @@ export type AddManufacturerInput = {
   name: Scalars['String'],
   country: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
-  creatorId: Scalars['ID'],
 };
 
 export type AddProductInput = {
   manufacturerId: Scalars['ID'],
   typeId: Scalars['ID'],
   name: Scalars['String'],
-  details: Scalars['String'],
+  details?: Maybe<Scalars['String']>,
   photoUrl?: Maybe<Scalars['String']>,
 };
 
@@ -33,14 +32,13 @@ export type AddRankInput = {
 };
 
 export type AddReviewInput = {
-  aroma?: Maybe<Scalars['Int']>,
-  taste?: Maybe<Scalars['Int']>,
-  bitterness?: Maybe<Scalars['Int']>,
-  energy?: Maybe<Scalars['Int']>,
-  price?: Maybe<Scalars['Int']>,
-  overall?: Maybe<Scalars['Int']>,
-  description: Scalars['String'],
-  authorId: Scalars['ID'],
+  aroma: Scalars['Int'],
+  taste: Scalars['Int'],
+  bitterness: Scalars['Int'],
+  energy: Scalars['Int'],
+  price: Scalars['Int'],
+  overall: Scalars['Int'],
+  description?: Maybe<Scalars['String']>,
   productId: Scalars['ID'],
 };
 
@@ -58,6 +56,8 @@ export type EditProductInput = {
   name?: Maybe<Scalars['String']>,
   details?: Maybe<Scalars['String']>,
   photoUrl?: Maybe<Scalars['String']>,
+  typeId?: Maybe<Scalars['ID']>,
+  manufacturerId?: Maybe<Scalars['ID']>,
 };
 
 export type EditRankInput = {
@@ -73,7 +73,7 @@ export type EditReviewInput = {
   energy?: Maybe<Scalars['Int']>,
   price?: Maybe<Scalars['Int']>,
   overall?: Maybe<Scalars['Int']>,
-  description: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
 };
 
 export type EditTypeInput = {
@@ -82,7 +82,7 @@ export type EditTypeInput = {
 
 export type EditUserInput = {
   country?: Maybe<Scalars['String']>,
-  photoUrl?: Maybe<Scalars['String']>,
+  avatarUrl?: Maybe<Scalars['String']>,
   aromaImportance?: Maybe<Scalars['Int']>,
   tasteImportance?: Maybe<Scalars['Int']>,
   bitternessImportance?: Maybe<Scalars['Int']>,
@@ -248,6 +248,7 @@ export type Product = {
   priceAverage: Scalars['Float'],
   overallAverage: Scalars['Float'],
   createdAt: Scalars['String'],
+  personalizedScore?: Maybe<Scalars['Float']>,
 };
 
 export type ProductsResponse = {
@@ -336,6 +337,7 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  personalizeForUser?: Maybe<Scalars['ID']>,
   searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
   orderBy?: Maybe<Scalars['String']>,
@@ -399,7 +401,7 @@ export type Review = {
   energy: Scalars['Int'],
   price: Scalars['Int'],
   overall: Scalars['Int'],
-  description: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
   product: Product,
   author: User,
   editedAt: Scalars['String'],
@@ -428,6 +430,7 @@ export type User = {
   avatarUrl?: Maybe<Scalars['String']>,
   role: Scalars['String'],
   reviews?: Maybe<Array<Review>>,
+  products?: Maybe<Array<Product>>,
   createdAt: Scalars['String'],
 };
 
@@ -509,7 +512,9 @@ export type DeleteManufacturerMutation = (
 
 export type GetProductsQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
-  perPage?: Maybe<Scalars['Int']>
+  perPage?: Maybe<Scalars['Int']>,
+  personalizeForUser?: Maybe<Scalars['ID']>,
+  searchByName?: Maybe<Scalars['String']>
 };
 
 
@@ -520,7 +525,7 @@ export type GetProductsQuery = (
     & Pick<ProductsResponse, 'total'>
     & { items: Array<(
       { __typename?: 'Product' }
-      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage'>
+      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage' | 'photoUrl'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
         & Pick<Manufacturer, 'id' | 'name' | 'country'>
@@ -750,7 +755,7 @@ export type GetMeQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email'>
+    & Pick<User, 'username' | 'avatarUrl' | 'email'>
   ) }
 );
 
@@ -772,7 +777,7 @@ export type GetMeDetailsQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'role'>
+    & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     & { profile: (
       { __typename?: 'Profile' }
       & Pick<Profile, 'aromaImportance' | 'tasteImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
@@ -813,7 +818,7 @@ export type GetUsersQuery = (
     & Pick<UsersResponse, 'total'>
     & { items: Array<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'role'>
+      & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     )> }
   ) }
 );
@@ -1036,8 +1041,8 @@ export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteMa
 export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
 export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
 export const GetProductsDocument = gql`
-    query getProducts($offset: Int, $perPage: Int) {
-  products(offset: $offset, perPage: $perPage) {
+    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String) {
+  products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName) {
     total
     items {
       id
@@ -1058,6 +1063,7 @@ export const GetProductsDocument = gql`
       priceAverage
       details
       overallAverage
+      photoUrl
     }
   }
 }
@@ -1077,6 +1083,8 @@ export const GetProductsDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      perPage: // value for 'perPage'
+ *      personalizeForUser: // value for 'personalizeForUser'
+ *      searchByName: // value for 'searchByName'
  *   },
  * });
  */
@@ -1603,6 +1611,7 @@ export const GetMeDocument = gql`
     query getMe {
   whoAmI {
     username
+    avatarUrl
     email
   }
 }
@@ -1671,6 +1680,7 @@ export const GetMeDetailsDocument = gql`
     username
     email
     role
+    avatarUrl
     profile {
       aromaImportance
       tasteImportance
@@ -1759,6 +1769,7 @@ export const GetUsersDocument = gql`
       username
       email
       role
+      avatarUrl
     }
     total
   }

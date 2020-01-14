@@ -35,4 +35,6 @@ export const PaginationText = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.primaryText};
   margin: 0 1em;
+  min-width: 60px;
+  text-align: center;
 `;

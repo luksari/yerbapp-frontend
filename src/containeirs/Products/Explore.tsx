@@ -1,19 +1,20 @@
-import React, { FC, memo, useEffect } from 'react';
-import { Wrapper } from 'containeirs/Users/styled';
-import { Title } from 'components/TitleBar';
-import Helmet from 'react-helmet';
 import { ActionBar } from 'components/ActionBar/ActionBar';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
-import { compose } from 'redux';
-import { usePagination } from 'hooks/usePagination';
-import { useQuery } from 'react-apollo';
 import { Loader } from 'components/Loader';
+import { Title } from 'components/TitleBar';
+import { push } from 'connected-react-router';
+import { Wrapper } from 'containeirs/Users/styled';
 import {
-  GetProductsDocument, GetProductsQueryVariables, GetProductsQuery,
+  GetProductsDocument, GetProductsQuery, GetProductsQueryVariables, useDeleteProductMutation,
 } from 'generated/graphql';
-import { FilterForm } from './components/FilterForm';
+import { usePagination } from 'hooks/usePagination';
+import React, { FC, memo } from 'react';
+import { useQuery } from 'react-apollo';
+import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { DataGrid } from './components/DataGrid';
+import { FilterForm } from './components/FilterForm';
 
 interface Props {
   redirectEdit: (id: string) => void;
@@ -32,8 +33,10 @@ const formValues = {
 
 const Explore: FC<Props> = memo(({
   redirectCreate,
+  redirectEdit,
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
+
 
   const { data, loading, refetch } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
@@ -45,12 +48,36 @@ const Explore: FC<Props> = memo(({
     },
   );
 
+  const [deleteProduct, { loading: deleting }] = useDeleteProductMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się usunąć Yerba Mate!' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto Yerba Mate!' }),
+  });
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteProduct({ variables: { productId: id } });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSubmit = async (values: typeof formValues) => {
+    const userId = localStorage.getItem('userId');
+    try {
+      refetch({
+        searchByName: values.name,
+        ...(userId && { personalizeForUser: userId }),
+        offset,
+        perPage,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (!data) {
     return <Loader fullscreen />;
   }
-
-  console.log('Products', data.products.items);
-
 
   return (
     <Wrapper>
@@ -69,10 +96,15 @@ const Explore: FC<Props> = memo(({
       >
         <FilterForm
           formValues={formValues}
-          handleSubmit={console.log}
+          handleSubmit={handleSubmit}
         />
       </ActionBar>
-      <DataGrid data={data.products.items} isLoading={loading} />
+      <DataGrid
+        data={data.products.items}
+        isLoading={loading || deleting}
+        handleEdit={redirectEdit}
+        handleDelete={handleDelete}
+      />
     </Wrapper>
   );
 });

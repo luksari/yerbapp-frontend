@@ -4,6 +4,7 @@ export const GET_ME = gql`
   query getMe {
     whoAmI{
       username,
+      avatarUrl,
       email
     }
   }
@@ -25,6 +26,7 @@ export const GET_ME_DETAILS = gql`
       username,
       email,
       role,
+      avatarUrl,
       profile {
         aromaImportance,
         tasteImportance,
@@ -64,6 +66,7 @@ export const GET_USERS = gql`
         username,
         email,
         role,
+        avatarUrl,
       }
       total
   }
