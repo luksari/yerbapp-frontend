@@ -9,6 +9,7 @@ interface Props {
   isLoading?: boolean;
   handleEdit: (id: string) => void;
   handleDelete: (id: string) => void;
+  handleRedirectDetails: (id: string) => void;
   userId: string;
   isAdmin: boolean;
 }
@@ -20,6 +21,7 @@ export const DataGrid: FC<Props> = ({
   handleEdit,
   isAdmin,
   userId,
+  handleRedirectDetails,
 }) => {
   return (
     <CardGrid>
@@ -44,6 +46,7 @@ export const DataGrid: FC<Props> = ({
             author={product?.author}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onRedirectDetails={handleRedirectDetails}
             isAdmin={isAdmin}
             userId={userId}
           />

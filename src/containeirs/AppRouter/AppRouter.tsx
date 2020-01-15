@@ -11,7 +11,7 @@ import { ManufacturerCreateForm, ManufacturerEditForm } from 'containeirs/Manufa
 import { NoMatch } from 'containeirs/NoMatch';
 import { NotAllowed } from 'containeirs/NotAllowed';
 import { Explore } from 'containeirs/Products';
-import { ProductCreateForm, ProductEditForm } from 'containeirs/Products/containers';
+import { ProductCreateForm, ProductEditForm, Details } from 'containeirs/Products/containers';
 import { Profile } from 'containeirs/Profile';
 import { Ranks } from 'containeirs/Ranks';
 import { RankCreateForm, RankEditForm } from 'containeirs/Ranks/containers';
@@ -34,7 +34,8 @@ export const AppRouter: FC = () => {
 
       <AuthenticatedRoute exact path="/products" component={Explore} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/products/create" component={ProductCreateForm} layout={AppLayout} />
-      <AuthenticatedRoute path="/products/:productId" component={ProductEditForm} layout={AppLayout} />
+      <AuthenticatedRoute exact path="/products/:productId" component={ProductEditForm} layout={AppLayout} />
+      <AuthenticatedRoute exact path="/products/details/:productId" component={Details} layout={AppLayout} />
 
       <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute exact path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />

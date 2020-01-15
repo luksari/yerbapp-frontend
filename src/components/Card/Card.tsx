@@ -26,6 +26,7 @@ interface CardProps {
   overallScore?: number;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
+  onRedirectDetails: (id: string) => void;
   isAdmin: boolean;
   userId: string;
   author: User;
@@ -50,6 +51,7 @@ export const Card: FC<CardProps> = memo((
     userId,
     onDelete,
     onEdit,
+    onRedirectDetails,
     author,
   },
 ) => {
@@ -72,7 +74,7 @@ export const Card: FC<CardProps> = memo((
         </YerbaTitle>
         <AuthorLabel>{authorUsername}</AuthorLabel>
         <Image src={photoUrl} alt={name} />
-        <CardButton themeType={ButtonType.Secondary}>
+        <CardButton themeType={ButtonType.Secondary} onClick={() => onRedirectDetails(id)}>
           Zobacz więcej
         </CardButton>
       </DataWrapper>

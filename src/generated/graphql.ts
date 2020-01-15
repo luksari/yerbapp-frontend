@@ -550,7 +550,7 @@ export type GetProductQuery = (
   { __typename?: 'Query' }
   & { product: (
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'name' | 'details'>
+    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl'>
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'id' | 'name'>
@@ -558,6 +558,33 @@ export type GetProductQuery = (
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'id' | 'name'>
     ) }
+  ) }
+);
+
+export type GetProductDetailsQueryVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type GetProductDetailsQuery = (
+  { __typename?: 'Query' }
+  & { product: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl'>
+    & { manufacturer: (
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'name'>
+    ), type: (
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'name'>
+    ), reviews: Maybe<Array<(
+      { __typename?: 'Review' }
+      & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
+      & { author: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'avatarUrl'>
+      ) }
+    )>> }
   ) }
 );
 
@@ -1111,6 +1138,8 @@ export const GetProductDocument = gql`
   product(productId: $productId) {
     id
     name
+    details
+    photoUrl
     manufacturer {
       id
       name
@@ -1119,7 +1148,6 @@ export const GetProductDocument = gql`
       id
       name
     }
-    details
   }
 }
     `;
@@ -1149,6 +1177,65 @@ export function useGetProductLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
 export type GetProductLazyQueryHookResult = ReturnType<typeof useGetProductLazyQuery>;
 export type GetProductQueryResult = ApolloReactCommon.QueryResult<GetProductQuery, GetProductQueryVariables>;
+export const GetProductDetailsDocument = gql`
+    query getProductDetails($productId: ID!) {
+  product(productId: $productId) {
+    id
+    name
+    details
+    photoUrl
+    manufacturer {
+      name
+    }
+    type {
+      name
+    }
+    reviews {
+      id
+      description
+      aroma
+      taste
+      bitterness
+      energy
+      price
+      overall
+      author {
+        id
+        username
+        avatarUrl
+      }
+      editedAt
+      createdAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetProductDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductDetailsQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetProductDetailsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductDetailsQuery, GetProductDetailsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetProductDetailsQuery, GetProductDetailsQueryVariables>(GetProductDetailsDocument, baseOptions);
+      }
+export function useGetProductDetailsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductDetailsQuery, GetProductDetailsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetProductDetailsQuery, GetProductDetailsQueryVariables>(GetProductDetailsDocument, baseOptions);
+        }
+export type GetProductDetailsQueryHookResult = ReturnType<typeof useGetProductDetailsQuery>;
+export type GetProductDetailsLazyQueryHookResult = ReturnType<typeof useGetProductDetailsLazyQuery>;
+export type GetProductDetailsQueryResult = ApolloReactCommon.QueryResult<GetProductDetailsQuery, GetProductDetailsQueryVariables>;
 export const AddProductDocument = gql`
     mutation addProduct($product: AddProductInput!) {
   addProduct(product: $product) {

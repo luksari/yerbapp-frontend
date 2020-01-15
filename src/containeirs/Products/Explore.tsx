@@ -20,6 +20,7 @@ import { FilterForm } from './components/FilterForm';
 
 interface Props {
   redirectEdit: (id: string) => void;
+  redirectDetails: (id: string) => void;
   redirectCreate: VoidFunction;
   userId: string;
   isAdmin: boolean;
@@ -38,6 +39,7 @@ const formValues = {
 const Explore: FC<Props> = ({
   redirectCreate,
   redirectEdit,
+  redirectDetails,
   isAdmin,
   userId,
 }) => {
@@ -112,6 +114,7 @@ const Explore: FC<Props> = ({
         isLoading={loading || deleting}
         handleEdit={redirectEdit}
         handleDelete={handleDelete}
+        handleRedirectDetails={redirectDetails}
         userId={userId}
         isAdmin={isAdmin}
       />
@@ -125,6 +128,7 @@ const mapStateToProps = createStructuredSelector({
 });
 const mapDispatchToProps = (dispatch) => ({
   redirectEdit: (id: string) => dispatch(push(`/products/${id}`)),
+  redirectDetails: (id) => dispatch(push(`/products/details/${id}`)),
   redirectCreate: () => dispatch(push('/products/create')),
 });
 

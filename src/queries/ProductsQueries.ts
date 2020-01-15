@@ -39,6 +39,8 @@ export const GET_PRODUCT = gql`
     product(productId: $productId) {
       id,
       name,
+      details,
+      photoUrl,
       manufacturer {
         id,
         name
@@ -47,7 +49,40 @@ export const GET_PRODUCT = gql`
         id,
         name
       }
+
+    }
+  }
+`;
+export const GET_PRODUCT_DETAILS = gql`
+  query getProductDetails($productId: ID!) {
+    product(productId: $productId) {
+      id,
+      name,
       details,
+      photoUrl,
+      manufacturer {
+        name
+      },
+      type {
+        name
+      },
+      reviews {
+        id,
+        description,
+        aroma,
+        taste,
+        bitterness,
+        energy,
+        price,
+        overall,
+          author {
+            id,
+            username,
+            avatarUrl
+          }
+        editedAt,
+        createdAt
+      }
     }
   }
 `;
