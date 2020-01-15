@@ -3,8 +3,9 @@ import { ButtonType } from 'components/Button';
 import { SizeType } from 'components/Rating/types';
 import { truncate } from 'lodash';
 import { Icon } from 'antd';
+import { User } from 'generated/graphql';
 import {
-  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton, AuthorLabel,
 } from './styled';
 import { CardValue } from './CardValue';
 
@@ -27,6 +28,7 @@ interface CardProps {
   onDelete: (id: string) => void;
   isAdmin: boolean;
   userId: string;
+  author: User;
 }
 
 export const Card: FC<CardProps> = memo((
@@ -48,6 +50,7 @@ export const Card: FC<CardProps> = memo((
     userId,
     onDelete,
     onEdit,
+    author,
   },
 ) => {
   const shortDescription = details ? truncate(details, { length: 100, separator: '...' }) : 'Nieznany opis';
@@ -55,8 +58,8 @@ export const Card: FC<CardProps> = memo((
   const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '...' }) : 'Nieznany producent';
   const shortType = type ? truncate(type, { length: 15, separator: '...' }) : 'Nieznany typ';
   const shortCountry = country ? truncate(country, { length: 15, separator: '...' }) : 'Nieznany kraj';
-
-  const isAllowed = useMemo(() => isAdmin, [isAdmin, userId]);
+  const authorUsername = author?.username ? truncate(author.username, { length: 15, separator: '...' }) : 'Gal Anonim';
+  const isAllowed = useMemo(() => isAdmin || author?.id === userId, [isAdmin, userId]);
   return (
     <CardContainer>
       <ActionButtons isAllowed={isAllowed}>
@@ -67,6 +70,7 @@ export const Card: FC<CardProps> = memo((
         <YerbaTitle>
           {shortName}
         </YerbaTitle>
+        <AuthorLabel>{authorUsername}</AuthorLabel>
         <Image src={photoUrl} alt={name} />
         <CardButton themeType={ButtonType.Secondary}>
           Zobacz więcej

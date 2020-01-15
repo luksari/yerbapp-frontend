@@ -6,6 +6,7 @@ import {
 } from 'generated/graphql';
 import React, { FC, useMemo } from 'react';
 import { connect } from 'react-redux';
+import { Loader } from 'components/Loader';
 
 interface Props {
   handleBack: VoidFunction;
@@ -20,13 +21,8 @@ const ProductCreateForm: FC<Props> = ({
   });
 
   const { data: manufacturersData, loading: loadingManufacturers } = useGetManufacturersQuery({ variables: { offset: 0, perPage: 500 } });
-
   const { data: typesData, loading: loadingTypes } = useGetTypesQuery({ variables: { offset: 0, perPage: 500 } });
-
   const isLoading = useMemo(() => loadingManufacturers || loadingTypes || saving, [loadingManufacturers, loadingTypes, saving]);
-
-  // const manufacturers = useMemo(() => manufactuersData?.manufacturers?.items?.map(({ id, name }) => ({ value: id, label: name })), [manufactuersData]);
-  // const types = useMemo(() => typesData?.types?.items?.map(({ id, name }) => ({ value: id, label: name })), [typesData]);
 
   const handleSubmit = async (values: ProductFormData) => {
     try {
@@ -49,6 +45,10 @@ const ProductCreateForm: FC<Props> = ({
       console.error(err);
     }
   };
+
+  if (isLoading) {
+    return <Loader fullscreen />;
+  }
 
 
   return (

@@ -238,6 +238,7 @@ export type Product = {
   manufacturer: Manufacturer,
   type: ProductType,
   reviews?: Maybe<Array<Review>>,
+  author?: Maybe<User>,
   name: Scalars['String'],
   details: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
@@ -525,14 +526,17 @@ export type GetProductsQuery = (
     & Pick<ProductsResponse, 'total'>
     & { items: Array<(
       { __typename?: 'Product' }
-      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage' | 'photoUrl'>
+      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage' | 'photoUrl' | 'personalizedScore'>
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
         & Pick<Manufacturer, 'id' | 'name' | 'country'>
       ), type: (
         { __typename?: 'ProductType' }
         & Pick<ProductType, 'id' | 'name'>
-      ) }
+      ), author: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username'>
+      )> }
     )> }
   ) }
 );
@@ -1056,6 +1060,10 @@ export const GetProductsDocument = gql`
         id
         name
       }
+      author {
+        id
+        username
+      }
       aromaAverage
       tasteAverage
       bitternessAverage
@@ -1064,6 +1072,7 @@ export const GetProductsDocument = gql`
       details
       overallAverage
       photoUrl
+      personalizedScore
     }
   }
 }

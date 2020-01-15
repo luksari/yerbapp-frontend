@@ -23,6 +23,7 @@ export const YerbaTitle = styled.h4`
   text-transform: uppercase;
   background: #ffffffaa;
   width: 100%;
+  margin-bottom: 0;
 `;
 
 export const DataWrapper = styled.div<{primary?: boolean}>`
@@ -110,4 +111,12 @@ export const RoundedButton = styled(Button)`
     margin: 0;
 
   }
+`;
+
+export const AuthorLabel = styled.p`
+  margin-bottom: auto;
+  justify-self: flex-start;
+  align-self: flex-start;
+  font-weight: 700;
+
 `;

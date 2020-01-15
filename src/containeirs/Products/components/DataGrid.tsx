@@ -41,6 +41,7 @@ export const DataGrid: FC<Props> = ({
             priceScore={product.priceAverage}
             tasteScore={product.tasteAverage}
             photoUrl={product.photoUrl}
+            author={product?.author}
             onEdit={handleEdit}
             onDelete={handleDelete}
             isAdmin={isAdmin}

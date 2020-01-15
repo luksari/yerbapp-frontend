@@ -17,6 +17,10 @@ export const GET_PRODUCTS = gql`
           id,
           name
         },
+        author {
+          id,
+          username
+        },
         aromaAverage,
         tasteAverage,
         bitternessAverage,
@@ -25,6 +29,7 @@ export const GET_PRODUCTS = gql`
         details,
         overallAverage,
         photoUrl,
+        personalizedScore
       }
     }
   }

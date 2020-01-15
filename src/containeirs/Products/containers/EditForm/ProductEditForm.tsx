@@ -34,10 +34,6 @@ const ProductEditForm: FC<Props> = ({
 
   const isLoading = useMemo(() => loadingManufacturers || loadingTypes || saving || loading, [loadingManufacturers, loadingTypes, saving, loading]);
 
-  // const manufacturers = useMemo(() => manufactuersData?.manufacturers.items.map(({ id, name }) => ({ value: id, label: name })), [manufactuersData]);
-
-  // const types = useMemo(() => typesData?.types.items.map(({ id, name }) => ({ value: id, label: name })), [typesData]);
-
   const handleSubmit = async (values: ProductFormData) => {
     try {
       await editProduct({
