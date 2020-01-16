@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useGetProductDetailsQuery } from 'generated/graphql';
 import { RouteComponentProps } from 'react-router';
 import { Loader } from 'components/Loader';
-import { DetailsCard } from 'containeirs/Products/components/DetailsCard';
+import { DetailsView } from 'containeirs/Products/components/DetailsView';
 
 interface Props extends RouteComponentProps<{productId: string}> {
   redirectBack?: VoidFunction;
@@ -17,15 +17,13 @@ const Details: FC<Props> = ({
   });
   const isLoading = useMemo(() => loading, [loading]);
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <Loader fullscreen />;
   }
 
 
   return (
-    <div>
-      <DetailsCard data={data} />
-    </div>
+    <DetailsView data={data} />
   );
 };
 

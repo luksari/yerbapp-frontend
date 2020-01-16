@@ -60,6 +60,15 @@ export const GET_PRODUCT_DETAILS = gql`
       name,
       details,
       photoUrl,
+      aromaAverage,
+      tasteAverage,
+      bitternessAverage,
+      energyAverage,
+      priceAverage,
+      details,
+      overallAverage,
+      photoUrl,
+      personalizedScore,
       manufacturer {
         name
       },

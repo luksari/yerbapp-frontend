@@ -570,7 +570,7 @@ export type GetProductDetailsQuery = (
   { __typename?: 'Query' }
   & { product: (
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl'>
+    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'overallAverage' | 'personalizedScore'>
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'name'>
@@ -1184,6 +1184,15 @@ export const GetProductDetailsDocument = gql`
     name
     details
     photoUrl
+    aromaAverage
+    tasteAverage
+    bitternessAverage
+    energyAverage
+    priceAverage
+    details
+    overallAverage
+    photoUrl
+    personalizedScore
     manufacturer {
       name
     }

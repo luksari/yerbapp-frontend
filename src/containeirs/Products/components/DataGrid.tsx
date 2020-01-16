@@ -1,6 +1,6 @@
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import { Product } from 'generated/graphql';
-import { Card } from 'components/Card';
+import { Card } from 'containeirs/Products/components/Card';
 import { Loader } from 'components/Loader';
 import { CardGrid } from '../styled';
 
