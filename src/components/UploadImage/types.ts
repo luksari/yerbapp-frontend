@@ -8,10 +8,18 @@ interface UploadedFile extends File {
   path: string;
 }
 
-interface ExtendedFile extends UploadedFile {
+export interface ExtendedFile extends UploadedFile {
   preview: string;
 }
 
-interface FileFromApi {
+export interface FileFromApi {
   url: string;
+}
+
+export function isFileFromApi(arg: any): arg is FileFromApi {
+  return arg.url !== undefined;
+}
+
+export function isExtendedFile(arg: any): arg is ExtendedFile {
+  return arg.preview !== undefined;
 }

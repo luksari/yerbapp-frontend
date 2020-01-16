@@ -11,6 +11,8 @@ import {
 } from 'generated/graphql';
 import { UserAvatar } from 'components/UserAvatar';
 import { Loader } from 'components/Loader';
+import { ActionWrapper } from 'components/HomeTopbar/styled';
+import { StyledLink } from 'containeirs/Home/styled';
 import { StyledTopbar, UserProfileLink, UserTitle } from './styled';
 
 interface TopbarProps {
@@ -25,23 +27,32 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   const { data, loading } = useGetMeQuery();
   const handleLogout = useCallback(() => { logout(); }, [logout]);
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
-  if (loading) {
+  if (!data || loading) {
     return <Loader fullscreen />;
   }
   return (
     <StyledTopbar>
-      { data && data.whoAmI && (
-        <>
-          <UserProfileLink to="/profile">
-            <UserTitle>{data.whoAmI.email}</UserTitle>
-            <UserAvatar username={data.whoAmI.username} avatarUrl={data.whoAmI.avatarUrl} />
-          </UserProfileLink>
-        </>
-      ) }
+      <UserProfileLink to="/profile">
+        <UserTitle>{data.whoAmI.email}</UserTitle>
+        <UserAvatar username={data.whoAmI.username} avatarUrl={data.whoAmI.avatarUrl} />
+      </UserProfileLink>
       {
         isAuthenticatedMemo
           ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
-          : <Button themeType={ButtonType.Link}><Link to="/login">Zaloguj się</Link></Button>
+          : (
+            <ActionWrapper>
+              <StyledLink to="/login">
+                <Button themeType={ButtonType.Primary}>
+            Zaloguj się
+                </Button>
+              </StyledLink>
+              <StyledLink to="/register">
+                <Button themeType={ButtonType.Primary}>
+            Zarejestruj się
+                </Button>
+              </StyledLink>
+            </ActionWrapper>
+          )
       }
     </StyledTopbar>
   );

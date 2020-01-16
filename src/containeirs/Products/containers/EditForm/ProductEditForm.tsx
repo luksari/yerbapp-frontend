@@ -42,6 +42,7 @@ const ProductEditForm: FC<Props> = ({
           product: {
             name: values.name!,
             details: values.details!,
+            photoUrl: values.photoUrl,
           },
         },
       });
