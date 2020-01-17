@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 import { FormField } from 'components/Form/components/FormField';
+import { StyledValue, StyledLabel } from './components/Card/styled';
+
+
+export const SectionWrapper = styled.div`
+  background: ${({ theme }) => theme.colors.disabledBackground};
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
 
 export const RatingWrapper = styled.div`
   display: grid;
@@ -25,13 +36,19 @@ export const DetailsWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 65%;
+  width: 75%;
   height: 100%;
   background: ${({ theme }) => theme.colors.mainBackground};
   box-shadow: 0px 5px 10px -1px ${({ theme }) => theme.colors.shadow};
   z-index: 0;
   margin-top: 25px;
   border-radius: 10px;
+  ${StyledValue} {
+    font-size: ${({ theme }) => theme.metrics.fontSize.l}
+  }
+  ${StyledLabel} {
+    font-size: ${({ theme }) => theme.metrics.fontSize.m}
+  }
 `;
 
 export const YerbaDetailsTitle = styled.h2`
@@ -67,8 +84,8 @@ export const StyledImg = styled.img`
 
 export const ScoreValue = styled.span`
   font-weight: 700;
-  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
-  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.metrics.fontSize.xxl};
+  color: ${({ theme }) => theme.colors.alternative};
   position: absolute;
   top: 0;
   left: 0;
@@ -97,4 +114,9 @@ export const ImageWrapper = styled.div`
     }
   }
 
+`;
+
+export const ReviewFormWrapper = styled.form`
+  display: grid;
+  grid-row-gap: 25px;
 `;

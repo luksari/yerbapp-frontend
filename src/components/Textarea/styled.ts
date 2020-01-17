@@ -7,6 +7,6 @@ export const StyledTextArea = styled.textarea<Partial<FieldMetaProps<string>>>`
   ${({
     theme, error, touched,
   }) => errorBorderStyles({ theme, error, touched })}
-  min-height: 245px;
   margin-bottom: 9px;
+  height: auto;
 `;

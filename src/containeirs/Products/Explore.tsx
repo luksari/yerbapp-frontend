@@ -52,7 +52,7 @@ const Explore: FC<Props> = ({
       variables: {
         offset, perPage,
       },
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'no-cache',
     },
   );
 

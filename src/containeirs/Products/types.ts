@@ -8,3 +8,14 @@ export interface ProductData {
   details: string;
   photoUrl: string;
 }
+
+export interface ReviewFormData {
+  aroma?: number;
+  taste?: number;
+  bitterness?: number;
+  energy?: number;
+  price?: number;
+  overall?: number;
+  description?: string;
+  productId?: string;
+}

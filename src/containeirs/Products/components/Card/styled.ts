@@ -74,7 +74,7 @@ export const StyledLabel = styled.label`
 
 export const StyledValue = styled.p`
   margin: 0;
-  color: ${({ theme }) => theme.colors.disabledText};
+  color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 600;
 `;

@@ -70,7 +70,8 @@ export const GET_PRODUCT_DETAILS = gql`
       photoUrl,
       personalizedScore,
       manufacturer {
-        name
+        name,
+        country
       },
       type {
         name

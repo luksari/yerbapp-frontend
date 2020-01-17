@@ -573,7 +573,7 @@ export type GetProductDetailsQuery = (
     & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'overallAverage' | 'personalizedScore'>
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
-      & Pick<Manufacturer, 'name'>
+      & Pick<Manufacturer, 'name' | 'country'>
     ), type: (
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'name'>
@@ -707,6 +707,39 @@ export type DeleteRankMutationVariables = {
 export type DeleteRankMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'deleteRank'>
+);
+
+export type GetReviewsByQueryVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type GetReviewsByQuery = (
+  { __typename?: 'Query' }
+  & { product: (
+    { __typename?: 'Product' }
+    & { reviews: Maybe<Array<(
+      { __typename?: 'Review' }
+      & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
+      & { author: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'avatarUrl'>
+      ) }
+    )>> }
+  ) }
+);
+
+export type AddReviewMutationVariables = {
+  review: AddReviewInput
+};
+
+
+export type AddReviewMutation = (
+  { __typename?: 'Mutation' }
+  & { addReview: (
+    { __typename?: 'Review' }
+    & Pick<Review, 'id'>
+  ) }
 );
 
 export type GetTypesQueryVariables = {
@@ -1195,6 +1228,7 @@ export const GetProductDetailsDocument = gql`
     personalizedScore
     manufacturer {
       name
+      country
     }
     type {
       name
@@ -1541,6 +1575,87 @@ export function useDeleteRankMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type DeleteRankMutationHookResult = ReturnType<typeof useDeleteRankMutation>;
 export type DeleteRankMutationResult = ApolloReactCommon.MutationResult<DeleteRankMutation>;
 export type DeleteRankMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteRankMutation, DeleteRankMutationVariables>;
+export const GetReviewsByDocument = gql`
+    query getReviewsBy($productId: ID!) {
+  product(productId: $productId) {
+    reviews {
+      id
+      description
+      aroma
+      taste
+      bitterness
+      energy
+      price
+      overall
+      author {
+        id
+        username
+        avatarUrl
+      }
+      editedAt
+      createdAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetReviewsByQuery__
+ *
+ * To run a query within a React component, call `useGetReviewsByQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetReviewsByQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetReviewsByQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetReviewsByQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetReviewsByQuery, GetReviewsByQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetReviewsByQuery, GetReviewsByQueryVariables>(GetReviewsByDocument, baseOptions);
+      }
+export function useGetReviewsByLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetReviewsByQuery, GetReviewsByQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetReviewsByQuery, GetReviewsByQueryVariables>(GetReviewsByDocument, baseOptions);
+        }
+export type GetReviewsByQueryHookResult = ReturnType<typeof useGetReviewsByQuery>;
+export type GetReviewsByLazyQueryHookResult = ReturnType<typeof useGetReviewsByLazyQuery>;
+export type GetReviewsByQueryResult = ApolloReactCommon.QueryResult<GetReviewsByQuery, GetReviewsByQueryVariables>;
+export const AddReviewDocument = gql`
+    mutation addReview($review: AddReviewInput!) {
+  addReview(review: $review) {
+    id
+  }
+}
+    `;
+export type AddReviewMutationFn = ApolloReactCommon.MutationFunction<AddReviewMutation, AddReviewMutationVariables>;
+
+/**
+ * __useAddReviewMutation__
+ *
+ * To run a mutation, you first call `useAddReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addReviewMutation, { data, loading, error }] = useAddReviewMutation({
+ *   variables: {
+ *      review: // value for 'review'
+ *   },
+ * });
+ */
+export function useAddReviewMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddReviewMutation, AddReviewMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddReviewMutation, AddReviewMutationVariables>(AddReviewDocument, baseOptions);
+      }
+export type AddReviewMutationHookResult = ReturnType<typeof useAddReviewMutation>;
+export type AddReviewMutationResult = ApolloReactCommon.MutationResult<AddReviewMutation>;
+export type AddReviewMutationOptions = ApolloReactCommon.BaseMutationOptions<AddReviewMutation, AddReviewMutationVariables>;
 export const GetTypesDocument = gql`
     query getTypes($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   types(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {

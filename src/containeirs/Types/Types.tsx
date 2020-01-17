@@ -37,7 +37,7 @@ export const TypesRaw: FC<Props> = ({
       variables: {
         offset, perPage, order, orderBy,
       },
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'no-cache',
     },
   );
 

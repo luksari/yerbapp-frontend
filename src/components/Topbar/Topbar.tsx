@@ -2,7 +2,6 @@ import React, {
   FC, memo, useCallback, useMemo,
 } from 'react';
 import { Button, ButtonType } from 'components/Button';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
 import { connect } from 'react-redux';
@@ -24,8 +23,8 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   logout,
   isAuthenticated,
 }) => {
-  const { data, loading } = useGetMeQuery();
   const handleLogout = useCallback(() => { logout(); }, [logout]);
+  const { data, loading } = useGetMeQuery({ onError: () => logout() });
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
   if (!data || loading) {
     return <Loader fullscreen />;

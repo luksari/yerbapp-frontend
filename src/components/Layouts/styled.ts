@@ -36,6 +36,7 @@ export const ComponentWrapper = styled.div`
   overflow-y: scroll;
   min-height: calc(100vh - 115px);
   max-height: calc(100vh - 115px);
+  z-index: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
