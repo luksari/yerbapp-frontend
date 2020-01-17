@@ -64,3 +64,37 @@ export const StyledImg = styled.img`
   width: 500px;
   height: auto;
 `;
+
+export const ScoreValue = styled.span`
+  font-weight: 700;
+  font-size: ${({ theme }) => theme.metrics.fontSize.xl};
+  color: ${({ theme }) => theme.colors.primary};
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(0.01);
+  transition: 150ms linear transform;
+  background: #ffffffaa;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const MainDataWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+  &:hover {
+    ${ScoreValue} {
+      transform: scale(1)
+    }
+  }
+
+`;

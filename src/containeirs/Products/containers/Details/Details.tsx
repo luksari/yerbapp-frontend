@@ -15,7 +15,7 @@ const Details: FC<Props> = ({
       productId: match.params.productId,
     },
   });
-  const isLoading = useMemo(() => loading, [loading]);
+  const isLoading = useMemo(() => loading || !data, [loading, loading]);
 
   if (isLoading) {
     return <Loader fullscreen />;

@@ -3,7 +3,7 @@ import { GetProductDetailsQuery } from 'generated/graphql';
 import { Wrapper } from 'containeirs/AdminPanel/styled';
 import { Rating } from 'components/Rating';
 import {
-  DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper,
+  DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper, ScoreValue, MainDataWrapper, ImageWrapper,
 } from '../styled';
 import { Description } from './Card/styled';
 
@@ -17,10 +17,15 @@ export const DetailsView: FC<Props> = ({
   return (
     <DetailsWrapper>
       <YerbaDetailsTitle>{data.product.name}</YerbaDetailsTitle>
-      <Wrapper>
+      <MainDataWrapper>
         <Description>{data.product.details}</Description>
-        <StyledImg src={data.product.photoUrl} alt={data.product.name} />
-      </Wrapper>
+        <ImageWrapper>
+          <StyledImg src={data.product.photoUrl} alt={data.product.name} />
+          <ScoreValue>
+            {data.product.personalizedScore || '-'}
+          </ScoreValue>
+        </ImageWrapper>
+      </MainDataWrapper>
       <RatingWrapper>
         <Rating
           readonly
