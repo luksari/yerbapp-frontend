@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import { useGetReviewsByQuery, useAddReviewMutation, GetReviewsByDocument } from 'generated/graphql';
 import { Loader } from 'components/Loader';
 import { DetailsWrapper } from 'containeirs/Products/styled';
@@ -10,10 +10,10 @@ interface Props {
   productId: string;
 }
 
-export const ReviewSection: FC<Props> = memo(({
+export const ReviewSection: FC<Props> = ({
   productId,
 }) => {
-  const { data, loading, fetchMore } = useGetReviewsByQuery({ variables: { productId }, fetchPolicy: 'no-cache' });
+  const { data, loading } = useGetReviewsByQuery({ variables: { productId }, fetchPolicy: 'no-cache' });
   const [addReview, { loading: adding }] = useAddReviewMutation();
 
   const submitReview = async (values: ReviewFormData) => {
@@ -25,12 +25,16 @@ export const ReviewSection: FC<Props> = memo(({
             productId,
           },
         },
-        refetchQueries: GetReviewsByDocument,
+        refetchQueries: [{
+          query: GetReviewsByDocument,
+          variables: { productId },
+        }],
       });
     } catch (error) {
       console.error(error);
     }
   };
+
 
   if (loading || adding) {
     return <Loader />;
@@ -54,4 +58,4 @@ export const ReviewSection: FC<Props> = memo(({
       <ReviewsList isLoading={adding || loading} data={data} />
     </DetailsWrapper>
   );
-});
+};

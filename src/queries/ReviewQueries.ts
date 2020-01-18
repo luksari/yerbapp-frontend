@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const GET_REVIEWS = gql`
   query getReviewsBy($productId: ID!) {
     product(productId: $productId) {
+      id,
       reviews {
         id,
         description,

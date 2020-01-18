@@ -1,6 +1,8 @@
 import React, { FC, memo } from 'react';
 import { GetProductDetailsQuery } from 'generated/graphql';
 import { Rating } from 'components/Rating';
+import { Button, ButtonType } from 'components/Button';
+import { Icon } from 'antd';
 import {
   DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper, ScoreValue, MainDataWrapper, ImageWrapper,
 } from '../../styled';
@@ -9,13 +11,16 @@ import { CardValue } from '../../components/Card/CardValue';
 
 interface Props {
   data: GetProductDetailsQuery;
+  redirectBack: VoidFunction;
 }
 
 export const DetailsView: FC<Props> = memo(({
   data,
+  redirectBack,
 }) => {
   return (
     <DetailsWrapper>
+      <Button onClick={redirectBack} icon={<Icon type="arrow-left" />} themeType={ButtonType.Link}>Wróć</Button>
       <YerbaDetailsTitle>{data.product.name}</YerbaDetailsTitle>
       <CardValue label="Producent:" value={data.product.manufacturer.name} />
       <CardValue label="Kraj producenta:" value={data.product.manufacturer.country} />
@@ -25,7 +30,7 @@ export const DetailsView: FC<Props> = memo(({
         <ImageWrapper>
           <StyledImg src={data.product.photoUrl} alt={data.product.name} />
           <ScoreValue>
-            {data.product.personalizedScore || '2137'}
+            {data.product.personalizedScore}
           </ScoreValue>
         </ImageWrapper>
       </MainDataWrapper>

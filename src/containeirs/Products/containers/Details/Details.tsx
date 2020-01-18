@@ -5,13 +5,16 @@ import { Loader } from 'components/Loader';
 import { DetailsView } from 'containeirs/Products/containers/Details/DetailsView';
 import { SectionWrapper } from 'containeirs/Products/styled';
 import { notificationError } from 'components/Notification';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { ReviewSection } from '../Review/ReviewSection';
 
 interface Props extends RouteComponentProps<{productId: string}> {
-  redirectBack?: VoidFunction;
+  redirectBack: VoidFunction;
 }
 const Details: FC<Props> = ({
   match,
+  redirectBack,
 }) => {
   const { data, loading } = useGetProductDetailsQuery({
     variables: {
@@ -28,10 +31,18 @@ const Details: FC<Props> = ({
 
   return (
     <SectionWrapper>
-      {data && <DetailsView data={data} /> }
+      {data && <DetailsView data={data} redirectBack={redirectBack} /> }
       <ReviewSection productId={match.params.productId} />
     </SectionWrapper>
   );
 };
 
-export default Details;
+const mapDispatchToProps = (dispatch) => ({
+  redirectBack: () => dispatch(push('/products')),
+});
+
+const withConnect = connect(
+  mapDispatchToProps,
+);
+
+export default withConnect(Details);

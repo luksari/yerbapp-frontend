@@ -711,6 +711,7 @@ export type GetReviewsByQuery = (
   { __typename?: 'Query' }
   & { product: (
     { __typename?: 'Product' }
+    & Pick<Product, 'id'>
     & { reviews: Maybe<Array<(
       { __typename?: 'Review' }
       & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
@@ -1550,6 +1551,7 @@ export type DeleteRankMutationOptions = ApolloReactCommon.BaseMutationOptions<De
 export const GetReviewsByDocument = gql`
     query getReviewsBy($productId: ID!) {
   product(productId: $productId) {
+    id
     reviews {
       id
       description

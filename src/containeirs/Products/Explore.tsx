@@ -50,7 +50,9 @@ const Explore: FC<Props> = ({
     GetProductsDocument,
     {
       variables: {
-        offset, perPage,
+        offset,
+        perPage,
+        ...(userId && { personalizeForUser: userId }),
       },
       fetchPolicy: 'no-cache',
     },
