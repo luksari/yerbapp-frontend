@@ -87,7 +87,7 @@ const Explore: FC<Props> = ({
       console.error(err);
     }
   };
-  if (!data) {
+  if (loading) {
     return <Loader fullscreen />;
   }
 

@@ -23,18 +23,24 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   logout,
   isAuthenticated,
 }) => {
+  const { data, loading } = useGetMeQuery({ fetchPolicy: 'no-cache' });
   const handleLogout = useCallback(() => { logout(); }, [logout]);
-  const { data, loading } = useGetMeQuery();
+
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
-  if (!data || loading) {
+  if (loading) {
     return <Loader fullscreen />;
   }
   return (
     <StyledTopbar>
-      <UserProfileLink to="/profile">
-        <UserTitle>{data.whoAmI.email}</UserTitle>
-        <UserAvatar username={data.whoAmI.username} avatarUrl={data.whoAmI.avatarUrl} />
-      </UserProfileLink>
+      {
+        data
+        && (
+          <UserProfileLink to="/profile">
+            <UserTitle>{data.whoAmI.email}</UserTitle>
+            <UserAvatar username={data.whoAmI.username} avatarUrl={data.whoAmI.avatarUrl} />
+          </UserProfileLink>
+        )
+      }
       {
         isAuthenticatedMemo
           ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
