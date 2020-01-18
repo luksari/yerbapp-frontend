@@ -8,7 +8,6 @@ export const StyledLegend = styled.h3`
 `;
 
 export const StyledFieldset = styled.div<{ fullWidth?: boolean; columns: number }>`
-  border-top: 1px solid ${({ theme }) => theme.colors.decorators};
   display: grid;
   grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
   justify-content: center;

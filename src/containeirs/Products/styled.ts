@@ -113,10 +113,25 @@ export const ImageWrapper = styled.div`
       transform: scale(1)
     }
   }
-
 `;
 
 export const ReviewFormWrapper = styled.form`
   display: grid;
   grid-row-gap: 25px;
+`;
+
+export const ReviewCard = styled.section`
+  display: flex;
+  padding: 10px 25px;
+  border-left: 3px solid ${({ theme }) => theme.colors.alternative};
+  box-shadow: 0px 2px 10px -5px ${({ theme }) => theme.colors.shadow};
+`;
+
+export const ReviewDescription = styled.p`
+  background: ${({ theme }) => theme.colors.disabledBackground};
+  width: 65%;
+  min-height: 25px;
+  margin-bottom: 0;
+  padding: 5px 15px;
+  border-radius: 5px;
 `;

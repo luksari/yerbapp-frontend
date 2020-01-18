@@ -13,10 +13,11 @@ function* setAdminItemsNavbarSaga(action: LocationChangeAction) {
   }
 }
 function* setCommonItemsNavbarSaga(action: LocationChangeAction) {
-  if (action.payload.location.pathname === '/products') {
+  if (!action.payload.location.pathname.includes('/admin')) {
     yield put(actions.setCommonNavItems());
   }
 }
+
 function* setAdminPanelVisibleSaga() {
   if (localStorage.getItem('userRole') === UserRoles.Admin) {
     yield put(actions.setItemVisible('/admin'));

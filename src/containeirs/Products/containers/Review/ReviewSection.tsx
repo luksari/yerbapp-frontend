@@ -4,6 +4,7 @@ import { Loader } from 'components/Loader';
 import { DetailsWrapper } from 'containeirs/Products/styled';
 import { ReviewFormData } from 'containeirs/Products/types';
 import { ReviewForm } from './ReviewForm';
+import { ReviewsList } from './ReviewsList';
 
 interface Props {
   productId: string;
@@ -50,6 +51,7 @@ export const ReviewSection: FC<Props> = memo(({
         }}
         onSubmit={submitReview}
       />
+      <ReviewsList isLoading={adding || loading} data={data} />
     </DetailsWrapper>
   );
 });
