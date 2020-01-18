@@ -24,7 +24,7 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   isAuthenticated,
 }) => {
   const handleLogout = useCallback(() => { logout(); }, [logout]);
-  const { data, loading } = useGetMeQuery({ onError: () => logout() });
+  const { data, loading } = useGetMeQuery();
   const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
   if (!data || loading) {
     return <Loader fullscreen />;

@@ -54,10 +54,15 @@ export const Image = styled.img`
 export const Description = styled.p`
   margin: 0;
   margin: ${({ theme }) => theme.metrics.margin.m} 0;
-  color: ${({ theme }) => theme.colors.labelText};
+  color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
 `;
+
+export const DetailsDescription = styled(Description)`
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
+`;
+
 
 export const ValueWrapper = styled.div`
   display: grid;

@@ -4,7 +4,7 @@ import { Rating } from 'components/Rating';
 import {
   DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper, ScoreValue, MainDataWrapper, ImageWrapper,
 } from '../../styled';
-import { Description } from '../../components/Card/styled';
+import { DetailsDescription } from '../../components/Card/styled';
 import { CardValue } from '../../components/Card/CardValue';
 
 interface Props {
@@ -21,7 +21,7 @@ export const DetailsView: FC<Props> = memo(({
       <CardValue label="Kraj producenta:" value={data.product.manufacturer.country} />
       <CardValue label="Typ Yerba Mate:" value={data.product.type.name} />
       <MainDataWrapper>
-        <Description>{data.product.details}</Description>
+        <DetailsDescription>{data.product.details}</DetailsDescription>
         <ImageWrapper>
           <StyledImg src={data.product.photoUrl} alt={data.product.name} />
           <ScoreValue>

@@ -12,11 +12,11 @@ export const GET_REVIEWS = gql`
         energy,
         price,
         overall,
-          author {
-            id,
-            username,
-            avatarUrl
-          }
+        # author {
+        #   id,
+        #   username,
+        #   avatarUrl
+        # }
         editedAt,
         createdAt
       }

@@ -16,7 +16,9 @@ export function* unsetUserSaga() {
   yield localStorage.removeItem('userId');
   yield localStorage.removeItem('user');
   yield localStorage.removeItem('userRole');
-  window.location.reload();
+  // if (localStorage.getItem('token')) {
+  //   window.location.reload();
+  // }
 }
 
 export function* watchAuthSaga() {

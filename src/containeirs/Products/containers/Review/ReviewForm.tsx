@@ -8,28 +8,27 @@ import { FormikRating } from 'components/Rating/FormikRating';
 import { SizeType } from 'components/Rating/types';
 import { ReviewFormWrapper } from 'containeirs/Products/styled';
 import { Button } from 'components/Button';
-import { FormActionsWrapper } from 'components/Form/styled';
 import { RoundedButton } from 'containeirs/Products/components/Card/styled';
 import { Icon } from 'antd';
-import { errorBorderStyles, AdditionalText } from 'components/Form/components/FormField/styled';
-import { some, isInteger } from 'lodash';
+import { AdditionalText } from 'components/Form/components/FormField/styled';
+import { some } from 'lodash';
 
 
 type Props = FormikConfig<ReviewFormData>
 
-type Errors = Record<keyof (ReviewFormData & { additional: string }), string>;
+type Errors = Record<keyof ReviewFormData, string>;
 
 const validate = ({
   aroma, description, energy, bitterness, overall, price, taste,
 }: ReviewFormData) => {
   const errors = {} as Errors;
-  // if (some({
-  //   aroma, description, energy, bitterness, overall, price, taste,
-  // }, isInteger(0))) {
-  //   errors.additional = 'Musisz określić oceny aby dodać recenzję!';
-  // }
-  if (!description || description === '') {
-    errors.description = 'Musisz dodać opis!';
+  if (some({
+    aroma, description, energy, bitterness, overall, price, taste,
+  }, (o) => o === 0)) {
+    errors.additional = 'Musisz określić oceny aby dodać recenzję!';
+  }
+  if (description.length > 700) {
+    errors.description = 'Maksymalna długość recenzji to 700 znaków';
   }
   return errors;
 };
@@ -46,7 +45,7 @@ export const ReviewForm: FC<Props> = ({
       validateOnChange
     >
       {({
-        dirty, resetForm, values, isValid, errors,
+        dirty, resetForm, values, isValid, errors, isSubmitting, submitForm,
       }) => (
         <ReviewFormWrapper>
           <FormFieldset
@@ -84,7 +83,7 @@ export const ReviewForm: FC<Props> = ({
               label="Ogólna ocena"
               name="overall"
             />
-            {(errors as Errors).additional && <AdditionalText>{(errors as Errors).additional}</AdditionalText> }
+            {errors.additional && <AdditionalText error={errors.additional}>{errors.additional}</AdditionalText> }
             {dirty && <RoundedButton icon={<Icon type="close" />} onClick={() => resetForm({ values: { ...initialValues, description: values.description } })} />}
           </FormFieldset>
           <FormField
@@ -99,7 +98,7 @@ export const ReviewForm: FC<Props> = ({
               },
             }}
           />
-          <Button type="submit" disabled={!isValid}>Dodaj</Button>
+          <Button type="button" onClick={() => submitForm()} disabled={!isValid || isSubmitting || !dirty}>Dodaj</Button>
         </ReviewFormWrapper>
       )}
     </Formik>

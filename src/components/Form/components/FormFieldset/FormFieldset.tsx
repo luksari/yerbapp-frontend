@@ -1,5 +1,5 @@
 import React, {
-  HTMLAttributes, FC, Children, cloneElement, ReactElement,
+  HTMLAttributes, FC,
 } from 'react';
 
 import { StyledFieldset, StyledLegend } from './styled';

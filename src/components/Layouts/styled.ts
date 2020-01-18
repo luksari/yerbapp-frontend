@@ -24,11 +24,11 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
     background: ${transparentize(0.3, '#fff')}
   }
   *{
-    z-index: 1;
+    z-index: 2;
   }
 `;
 

@@ -10,12 +10,15 @@ export interface ProductData {
 }
 
 export interface ReviewFormData {
-  aroma?: number;
-  taste?: number;
-  bitterness?: number;
-  energy?: number;
-  price?: number;
-  overall?: number;
-  description?: string;
-  productId?: string;
+  aroma: number;
+  taste: number;
+  bitterness: number;
+  energy: number;
+  price: number;
+  overall: number;
+  description: string;
+  productId: string;
+
+  // In order to set error
+  additional?: string;
 }

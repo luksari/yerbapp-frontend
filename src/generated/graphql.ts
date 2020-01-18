@@ -577,14 +577,7 @@ export type GetProductDetailsQuery = (
     ), type: (
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'name'>
-    ), reviews: Maybe<Array<(
-      { __typename?: 'Review' }
-      & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
-      & { author: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'username' | 'avatarUrl'>
-      ) }
-    )>> }
+    ) }
   ) }
 );
 
@@ -721,10 +714,6 @@ export type GetReviewsByQuery = (
     & { reviews: Maybe<Array<(
       { __typename?: 'Review' }
       & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
-      & { author: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'username' | 'avatarUrl'>
-      ) }
     )>> }
   ) }
 );
@@ -1233,23 +1222,6 @@ export const GetProductDetailsDocument = gql`
     type {
       name
     }
-    reviews {
-      id
-      description
-      aroma
-      taste
-      bitterness
-      energy
-      price
-      overall
-      author {
-        id
-        username
-        avatarUrl
-      }
-      editedAt
-      createdAt
-    }
   }
 }
     `;
@@ -1587,11 +1559,6 @@ export const GetReviewsByDocument = gql`
       energy
       price
       overall
-      author {
-        id
-        username
-        avatarUrl
-      }
       editedAt
       createdAt
     }

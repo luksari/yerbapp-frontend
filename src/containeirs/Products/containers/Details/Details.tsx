@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Loader } from 'components/Loader';
 import { DetailsView } from 'containeirs/Products/containers/Details/DetailsView';
 import { SectionWrapper } from 'containeirs/Products/styled';
+import { notificationError } from 'components/Notification';
 import { ReviewSection } from '../Review/ReviewSection';
 
 interface Props extends RouteComponentProps<{productId: string}> {
@@ -17,6 +18,7 @@ const Details: FC<Props> = ({
       productId: match.params.productId,
     },
     fetchPolicy: 'no-cache',
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać detali Yerba Mate.' }),
   });
 
   if (loading) {
@@ -26,7 +28,7 @@ const Details: FC<Props> = ({
 
   return (
     <SectionWrapper>
-      <DetailsView data={data} />
+      {data && <DetailsView data={data} /> }
       <ReviewSection productId={match.params.productId} />
     </SectionWrapper>
   );

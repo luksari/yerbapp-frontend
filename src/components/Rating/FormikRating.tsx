@@ -4,7 +4,6 @@ import React, {
 import { RatingComponentProps } from 'react-rating';
 import { useFormikContext } from 'formik';
 import { get } from 'lodash';
-import { AdditionalText } from 'components/Form/components/FormField/styled';
 import {
   EmptySymbol, FullSymbol, StyledRating, InputWrapper, InputLabel,
 } from './styled';
