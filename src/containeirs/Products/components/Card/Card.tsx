@@ -55,12 +55,12 @@ export const Card: FC<CardProps> = memo((
     author,
   },
 ) => {
-  const shortDescription = details ? truncate(details, { length: 100, separator: '...' }) : 'Nieznany opis';
-  const shortName = name ? truncate(name, { length: 45, separator: '...' }) : 'Nieznana nazwa';
-  const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '...' }) : 'Nieznany producent';
-  const shortType = type ? truncate(type, { length: 15, separator: '...' }) : 'Nieznany typ';
-  const shortCountry = country ? truncate(country, { length: 15, separator: '...' }) : 'Nieznany kraj';
-  const authorUsername = author?.username ? truncate(author.username, { length: 15, separator: '...' }) : 'Gal Anonim';
+  const shortDescription = details ? truncate(details, { length: 94, separator: '.', omission: '...' }) : 'Nieznany opis';
+  const shortName = name ? truncate(name, { length: 45, separator: '.', omission: '...' }) : 'Nieznana nazwa';
+  const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '.', omission: '...' }) : 'Nieznany producent';
+  const shortType = type ? truncate(type, { length: 15, separator: '.', omission: '...' }) : 'Nieznany typ';
+  const shortCountry = country ? truncate(country, { length: 15, separator: '.', omission: '...' }) : 'Nieznany kraj';
+  const authorUsername = author?.username ? truncate(author.username, { length: 15, separator: '.', omission: '...' }) : 'Gal Anonim';
   const isAllowed = useMemo(() => isAdmin || author?.id === userId, [isAdmin, userId]);
   return (
     <CardContainer>

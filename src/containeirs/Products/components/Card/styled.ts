@@ -57,6 +57,9 @@ export const Description = styled.p`
   color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
+  max-width: 282px;
+  height: 85px;
+  overflow-wrap: break-word;
 `;
 
 export const DetailsDescription = styled(Description)`

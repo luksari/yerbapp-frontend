@@ -15,8 +15,8 @@ export const AppLayout: FC<Props> = ({
 }) => {
   return (
     <>
-      <TitleBar />
       <Navbar />
+      <TitleBar />
       <StyledAppLayout>
         <Topbar />
         <ComponentWrapper>

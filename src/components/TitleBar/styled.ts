@@ -8,6 +8,7 @@ export const TitleBarWrapper = styled.div`
   position: absolute;
   left: calc(${({ theme }) => theme.metrics.width.sidebarWidth} + 25px);
   top: 30px;
+  z-index: 11;
 `;
 
 export const TitleBarTitle = styled.h1`

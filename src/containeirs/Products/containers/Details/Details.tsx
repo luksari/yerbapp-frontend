@@ -7,6 +7,8 @@ import { SectionWrapper } from 'containeirs/Products/styled';
 import { notificationError } from 'components/Notification';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import Helmet from 'react-helmet';
+import { Title } from 'components/TitleBar';
 import { ReviewSection } from '../Review/ReviewSection';
 
 interface Props extends RouteComponentProps<{productId: string}> {
@@ -31,6 +33,10 @@ const Details: FC<Props> = ({
 
   return (
     <SectionWrapper>
+      <Helmet
+        title="Szczegóły produktu"
+      />
+      <Title>Szczegóły produktu</Title>
       {data && <DetailsView data={data} redirectBack={redirectBack} /> }
       <ReviewSection productId={match.params.productId} />
     </SectionWrapper>
@@ -42,6 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const withConnect = connect(
+  null,
   mapDispatchToProps,
 );
 
