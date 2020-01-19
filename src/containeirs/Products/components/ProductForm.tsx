@@ -91,7 +91,7 @@ export const ProductForm: FC<ProductFormProps> = ({
         component={Textarea}
         label="Opis:"
         props={{
-          placeholder: 'Scharakteryzuj produkt (pole nieobowiązkowe)...',
+          placeholder: 'Scharakteryzuj produkt...',
         }}
       />
       <UploadImage name="photoUrl" label="Zdjęcie Yerba Mate:" />

@@ -65,6 +65,7 @@ export const Description = styled.p`
 export const DetailsDescription = styled(Description)`
   font-size: ${({ theme }) => theme.metrics.fontSize.m};
   max-width: 100%;
+  width: 100%;
 `;
 
 

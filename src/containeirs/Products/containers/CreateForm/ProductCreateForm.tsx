@@ -20,8 +20,8 @@ const ProductCreateForm: FC<Props> = ({
     onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie utworzono produkt!' }),
   });
 
-  const { data: manufacturersData, loading: loadingManufacturers } = useGetManufacturersQuery({ variables: { offset: 0, perPage: 500 } });
-  const { data: typesData, loading: loadingTypes } = useGetTypesQuery({ variables: { offset: 0, perPage: 500 } });
+  const { data: manufacturersData, loading: loadingManufacturers } = useGetManufacturersQuery({ variables: { offset: 0, perPage: 500 }, fetchPolicy: 'no-cache' });
+  const { data: typesData, loading: loadingTypes } = useGetTypesQuery({ variables: { offset: 0, perPage: 500 }, fetchPolicy: 'no-cache' });
   const isLoading = useMemo(() => loadingManufacturers || loadingTypes || saving, [loadingManufacturers, loadingTypes, saving]);
 
   const handleSubmit = async (values: ProductFormData) => {

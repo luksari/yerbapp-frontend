@@ -18,6 +18,7 @@ export const DetailsView: FC<Props> = memo(({
   data,
   redirectBack,
 }) => {
+  const photo = data.product.photoUrl || '/assets/yerbapp.png';
   return (
     <DetailsWrapper>
       <Button onClick={redirectBack} icon={<Icon type="arrow-left" />} themeType={ButtonType.Link}>Wróć</Button>
@@ -28,7 +29,7 @@ export const DetailsView: FC<Props> = memo(({
       <MainDataWrapper>
         <DetailsDescription>{data.product.details}</DetailsDescription>
         <ImageWrapper>
-          <StyledImg src={data.product.photoUrl} alt={data.product.name} />
+          <StyledImg src={photo} alt={data.product.name} />
           <ScoreValue>
             {data.product.personalizedScore}
           </ScoreValue>

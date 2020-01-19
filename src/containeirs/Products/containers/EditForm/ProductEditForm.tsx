@@ -21,6 +21,7 @@ const ProductEditForm: FC<Props> = ({
     variables: {
       productId: match.params.productId,
     },
+    fetchPolicy: 'cache-and-network',
     onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać danych do edycji produktu.' }),
   });
 
@@ -29,8 +30,8 @@ const ProductEditForm: FC<Props> = ({
     onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie zmodyfikowano produkt!' }),
   });
 
-  const { data: manufacturersData, loading: loadingManufacturers } = useGetManufacturersQuery({ variables: { offset: 0, perPage: 500 } });
-  const { data: typesData, loading: loadingTypes } = useGetTypesQuery({ variables: { offset: 0, perPage: 500 } });
+  const { data: manufacturersData, loading: loadingManufacturers } = useGetManufacturersQuery({ variables: { offset: 0, perPage: 500 }, fetchPolicy: 'no-cache' });
+  const { data: typesData, loading: loadingTypes } = useGetTypesQuery({ variables: { offset: 0, perPage: 500 }, fetchPolicy: 'no-cache' });
 
   const isLoading = useMemo(() => loadingManufacturers || loadingTypes || saving || loading, [loadingManufacturers, loadingTypes, saving, loading]);
 
