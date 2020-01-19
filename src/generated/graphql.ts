@@ -15,14 +15,13 @@ export type AddManufacturerInput = {
   name: Scalars['String'],
   country: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
-  creatorId: Scalars['ID'],
 };
 
 export type AddProductInput = {
   manufacturerId: Scalars['ID'],
   typeId: Scalars['ID'],
   name: Scalars['String'],
-  details: Scalars['String'],
+  details?: Maybe<Scalars['String']>,
   photoUrl?: Maybe<Scalars['String']>,
 };
 
@@ -33,14 +32,13 @@ export type AddRankInput = {
 };
 
 export type AddReviewInput = {
-  aroma?: Maybe<Scalars['Int']>,
-  taste?: Maybe<Scalars['Int']>,
-  bitterness?: Maybe<Scalars['Int']>,
-  energy?: Maybe<Scalars['Int']>,
-  price?: Maybe<Scalars['Int']>,
-  overall?: Maybe<Scalars['Int']>,
-  description: Scalars['String'],
-  authorId: Scalars['ID'],
+  aroma: Scalars['Int'],
+  taste: Scalars['Int'],
+  bitterness: Scalars['Int'],
+  energy: Scalars['Int'],
+  price: Scalars['Int'],
+  overall: Scalars['Int'],
+  description?: Maybe<Scalars['String']>,
   productId: Scalars['ID'],
 };
 
@@ -58,6 +56,8 @@ export type EditProductInput = {
   name?: Maybe<Scalars['String']>,
   details?: Maybe<Scalars['String']>,
   photoUrl?: Maybe<Scalars['String']>,
+  typeId?: Maybe<Scalars['ID']>,
+  manufacturerId?: Maybe<Scalars['ID']>,
 };
 
 export type EditRankInput = {
@@ -73,7 +73,7 @@ export type EditReviewInput = {
   energy?: Maybe<Scalars['Int']>,
   price?: Maybe<Scalars['Int']>,
   overall?: Maybe<Scalars['Int']>,
-  description: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
 };
 
 export type EditTypeInput = {
@@ -82,7 +82,7 @@ export type EditTypeInput = {
 
 export type EditUserInput = {
   country?: Maybe<Scalars['String']>,
-  photoUrl?: Maybe<Scalars['String']>,
+  avatarUrl?: Maybe<Scalars['String']>,
   aromaImportance?: Maybe<Scalars['Int']>,
   tasteImportance?: Maybe<Scalars['Int']>,
   bitternessImportance?: Maybe<Scalars['Int']>,
@@ -238,10 +238,18 @@ export type Product = {
   manufacturer: Manufacturer,
   type: ProductType,
   reviews?: Maybe<Array<Review>>,
+  author?: Maybe<User>,
   name: Scalars['String'],
   details: Scalars['String'],
   photoUrl?: Maybe<Scalars['String']>,
+  aromaAverage: Scalars['Float'],
+  tasteAverage: Scalars['Float'],
+  bitternessAverage: Scalars['Float'],
+  energyAverage: Scalars['Float'],
+  priceAverage: Scalars['Float'],
+  overallAverage: Scalars['Float'],
   createdAt: Scalars['String'],
+  personalizedScore?: Maybe<Scalars['Float']>,
 };
 
 export type ProductsResponse = {
@@ -330,6 +338,8 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  personalizeForUser?: Maybe<Scalars['ID']>,
+  searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
   orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -343,6 +353,7 @@ export type QueryProductArgs = {
 
 
 export type QueryManufacturersArgs = {
+  searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
   orderBy?: Maybe<Scalars['String']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -391,7 +402,7 @@ export type Review = {
   energy: Scalars['Int'],
   price: Scalars['Int'],
   overall: Scalars['Int'],
-  description: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
   product: Product,
   author: User,
   editedAt: Scalars['String'],
@@ -420,6 +431,7 @@ export type User = {
   avatarUrl?: Maybe<Scalars['String']>,
   role: Scalars['String'],
   reviews?: Maybe<Array<Review>>,
+  products?: Maybe<Array<Product>>,
   createdAt: Scalars['String'],
 };
 
@@ -499,6 +511,127 @@ export type DeleteManufacturerMutation = (
   & Pick<Mutation, 'deleteManufacturer'>
 );
 
+export type GetProductsQueryVariables = {
+  offset?: Maybe<Scalars['Int']>,
+  perPage?: Maybe<Scalars['Int']>,
+  personalizeForUser?: Maybe<Scalars['ID']>,
+  searchByName?: Maybe<Scalars['String']>
+};
+
+
+export type GetProductsQuery = (
+  { __typename?: 'Query' }
+  & { products: (
+    { __typename?: 'ProductsResponse' }
+    & Pick<ProductsResponse, 'total'>
+    & { items: Array<(
+      { __typename?: 'Product' }
+      & Pick<Product, 'id' | 'name' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'details' | 'overallAverage' | 'photoUrl' | 'personalizedScore'>
+      & { manufacturer: (
+        { __typename?: 'Manufacturer' }
+        & Pick<Manufacturer, 'id' | 'name' | 'country'>
+      ), type: (
+        { __typename?: 'ProductType' }
+        & Pick<ProductType, 'id' | 'name'>
+      ), author: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username'>
+      )> }
+    )> }
+  ) }
+);
+
+export type GetProductQueryVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type GetProductQuery = (
+  { __typename?: 'Query' }
+  & { product: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl'>
+    & { manufacturer: (
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'id' | 'name'>
+    ), type: (
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'id' | 'name'>
+    ) }
+  ) }
+);
+
+export type GetProductDetailsQueryVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type GetProductDetailsQuery = (
+  { __typename?: 'Query' }
+  & { product: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'overallAverage' | 'personalizedScore'>
+    & { manufacturer: (
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'name' | 'country'>
+    ), type: (
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'name'>
+    ) }
+  ) }
+);
+
+export type AddProductMutationVariables = {
+  product: AddProductInput
+};
+
+
+export type AddProductMutation = (
+  { __typename?: 'Mutation' }
+  & { addProduct: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'name' | 'details' | 'createdAt'>
+    & { manufacturer: (
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'id' | 'name'>
+    ), type: (
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'id' | 'name'>
+    ) }
+  ) }
+);
+
+export type EditProductMutationVariables = {
+  productId: Scalars['ID'],
+  product: EditProductInput
+};
+
+
+export type EditProductMutation = (
+  { __typename?: 'Mutation' }
+  & { editProduct: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'name' | 'details'>
+    & { manufacturer: (
+      { __typename?: 'Manufacturer' }
+      & Pick<Manufacturer, 'id' | 'name'>
+    ), type: (
+      { __typename?: 'ProductType' }
+      & Pick<ProductType, 'id' | 'name'>
+    ) }
+  ) }
+);
+
+export type DeleteProductMutationVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type DeleteProductMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteProduct'>
+);
+
 export type GetRanksQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -569,6 +702,36 @@ export type DeleteRankMutation = (
   & Pick<Mutation, 'deleteRank'>
 );
 
+export type GetReviewsByQueryVariables = {
+  productId: Scalars['ID']
+};
+
+
+export type GetReviewsByQuery = (
+  { __typename?: 'Query' }
+  & { product: (
+    { __typename?: 'Product' }
+    & Pick<Product, 'id'>
+    & { reviews: Maybe<Array<(
+      { __typename?: 'Review' }
+      & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
+    )>> }
+  ) }
+);
+
+export type AddReviewMutationVariables = {
+  review: AddReviewInput
+};
+
+
+export type AddReviewMutation = (
+  { __typename?: 'Mutation' }
+  & { addReview: (
+    { __typename?: 'Review' }
+    & Pick<Review, 'id'>
+  ) }
+);
+
 export type GetTypesQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
@@ -584,7 +747,7 @@ export type GetTypesQuery = (
     & Pick<TypesResponse, 'total'>
     & { items: Array<(
       { __typename?: 'ProductType' }
-      & Pick<ProductType, 'id' | 'name'>
+      & Pick<ProductType, 'id' | 'name' | 'createdAt'>
     )> }
   ) }
 );
@@ -598,7 +761,7 @@ export type GetTypeQuery = (
   { __typename?: 'Query' }
   & { type: (
     { __typename?: 'ProductType' }
-    & Pick<ProductType, 'id' | 'name'>
+    & Pick<ProductType, 'id' | 'name' | 'createdAt'>
   ) }
 );
 
@@ -646,7 +809,7 @@ export type GetMeQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'username' | 'email'>
+    & Pick<User, 'username' | 'avatarUrl' | 'email'>
   ) }
 );
 
@@ -668,7 +831,7 @@ export type GetMeDetailsQuery = (
   { __typename?: 'Query' }
   & { whoAmI: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'role'>
+    & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     & { profile: (
       { __typename?: 'Profile' }
       & Pick<Profile, 'aromaImportance' | 'tasteImportance' | 'bitternessImportance' | 'priceImportance' | 'energyImportance' | 'overallImportance'>
@@ -709,7 +872,7 @@ export type GetUsersQuery = (
     & Pick<UsersResponse, 'total'>
     & { items: Array<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'role'>
+      & Pick<User, 'id' | 'username' | 'email' | 'role' | 'avatarUrl'>
     )> }
   ) }
 );
@@ -931,6 +1094,280 @@ export function useDeleteManufacturerMutation(baseOptions?: ApolloReactHooks.Mut
 export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteManufacturerMutation>;
 export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
 export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
+export const GetProductsDocument = gql`
+    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String) {
+  products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName) {
+    total
+    items {
+      id
+      name
+      manufacturer {
+        id
+        name
+        country
+      }
+      type {
+        id
+        name
+      }
+      author {
+        id
+        username
+      }
+      aromaAverage
+      tasteAverage
+      bitternessAverage
+      energyAverage
+      priceAverage
+      details
+      overallAverage
+      photoUrl
+      personalizedScore
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductsQuery__
+ *
+ * To run a query within a React component, call `useGetProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductsQuery({
+ *   variables: {
+ *      offset: // value for 'offset'
+ *      perPage: // value for 'perPage'
+ *      personalizeForUser: // value for 'personalizeForUser'
+ *      searchByName: // value for 'searchByName'
+ *   },
+ * });
+ */
+export function useGetProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+      }
+export function useGetProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductsQuery, GetProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+        }
+export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
+export type GetProductsLazyQueryHookResult = ReturnType<typeof useGetProductsLazyQuery>;
+export type GetProductsQueryResult = ApolloReactCommon.QueryResult<GetProductsQuery, GetProductsQueryVariables>;
+export const GetProductDocument = gql`
+    query getProduct($productId: ID!) {
+  product(productId: $productId) {
+    id
+    name
+    details
+    photoUrl
+    manufacturer {
+      id
+      name
+    }
+    type {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductQuery__
+ *
+ * To run a query within a React component, call `useGetProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetProductQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, baseOptions);
+      }
+export function useGetProductLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, baseOptions);
+        }
+export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
+export type GetProductLazyQueryHookResult = ReturnType<typeof useGetProductLazyQuery>;
+export type GetProductQueryResult = ApolloReactCommon.QueryResult<GetProductQuery, GetProductQueryVariables>;
+export const GetProductDetailsDocument = gql`
+    query getProductDetails($productId: ID!) {
+  product(productId: $productId) {
+    id
+    name
+    details
+    photoUrl
+    aromaAverage
+    tasteAverage
+    bitternessAverage
+    energyAverage
+    priceAverage
+    details
+    overallAverage
+    photoUrl
+    personalizedScore
+    manufacturer {
+      name
+      country
+    }
+    type {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetProductDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductDetailsQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetProductDetailsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductDetailsQuery, GetProductDetailsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetProductDetailsQuery, GetProductDetailsQueryVariables>(GetProductDetailsDocument, baseOptions);
+      }
+export function useGetProductDetailsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductDetailsQuery, GetProductDetailsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetProductDetailsQuery, GetProductDetailsQueryVariables>(GetProductDetailsDocument, baseOptions);
+        }
+export type GetProductDetailsQueryHookResult = ReturnType<typeof useGetProductDetailsQuery>;
+export type GetProductDetailsLazyQueryHookResult = ReturnType<typeof useGetProductDetailsLazyQuery>;
+export type GetProductDetailsQueryResult = ApolloReactCommon.QueryResult<GetProductDetailsQuery, GetProductDetailsQueryVariables>;
+export const AddProductDocument = gql`
+    mutation addProduct($product: AddProductInput!) {
+  addProduct(product: $product) {
+    id
+    name
+    manufacturer {
+      id
+      name
+    }
+    type {
+      id
+      name
+    }
+    details
+    createdAt
+  }
+}
+    `;
+export type AddProductMutationFn = ApolloReactCommon.MutationFunction<AddProductMutation, AddProductMutationVariables>;
+
+/**
+ * __useAddProductMutation__
+ *
+ * To run a mutation, you first call `useAddProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addProductMutation, { data, loading, error }] = useAddProductMutation({
+ *   variables: {
+ *      product: // value for 'product'
+ *   },
+ * });
+ */
+export function useAddProductMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddProductMutation, AddProductMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddProductMutation, AddProductMutationVariables>(AddProductDocument, baseOptions);
+      }
+export type AddProductMutationHookResult = ReturnType<typeof useAddProductMutation>;
+export type AddProductMutationResult = ApolloReactCommon.MutationResult<AddProductMutation>;
+export type AddProductMutationOptions = ApolloReactCommon.BaseMutationOptions<AddProductMutation, AddProductMutationVariables>;
+export const EditProductDocument = gql`
+    mutation editProduct($productId: ID!, $product: EditProductInput!) {
+  editProduct(productId: $productId, product: $product) {
+    id
+    name
+    manufacturer {
+      id
+      name
+    }
+    type {
+      id
+      name
+    }
+    details
+  }
+}
+    `;
+export type EditProductMutationFn = ApolloReactCommon.MutationFunction<EditProductMutation, EditProductMutationVariables>;
+
+/**
+ * __useEditProductMutation__
+ *
+ * To run a mutation, you first call `useEditProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editProductMutation, { data, loading, error }] = useEditProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *      product: // value for 'product'
+ *   },
+ * });
+ */
+export function useEditProductMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<EditProductMutation, EditProductMutationVariables>) {
+        return ApolloReactHooks.useMutation<EditProductMutation, EditProductMutationVariables>(EditProductDocument, baseOptions);
+      }
+export type EditProductMutationHookResult = ReturnType<typeof useEditProductMutation>;
+export type EditProductMutationResult = ApolloReactCommon.MutationResult<EditProductMutation>;
+export type EditProductMutationOptions = ApolloReactCommon.BaseMutationOptions<EditProductMutation, EditProductMutationVariables>;
+export const DeleteProductDocument = gql`
+    mutation deleteProduct($productId: ID!) {
+  deleteProduct(productId: $productId)
+}
+    `;
+export type DeleteProductMutationFn = ApolloReactCommon.MutationFunction<DeleteProductMutation, DeleteProductMutationVariables>;
+
+/**
+ * __useDeleteProductMutation__
+ *
+ * To run a mutation, you first call `useDeleteProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteProductMutation, { data, loading, error }] = useDeleteProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useDeleteProductMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteProductMutation, DeleteProductMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteProductMutation, DeleteProductMutationVariables>(DeleteProductDocument, baseOptions);
+      }
+export type DeleteProductMutationHookResult = ReturnType<typeof useDeleteProductMutation>;
+export type DeleteProductMutationResult = ApolloReactCommon.MutationResult<DeleteProductMutation>;
+export type DeleteProductMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteProductMutation, DeleteProductMutationVariables>;
 export const GetRanksDocument = gql`
     query getRanks($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   ranks(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
@@ -1111,12 +1548,90 @@ export function useDeleteRankMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type DeleteRankMutationHookResult = ReturnType<typeof useDeleteRankMutation>;
 export type DeleteRankMutationResult = ApolloReactCommon.MutationResult<DeleteRankMutation>;
 export type DeleteRankMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteRankMutation, DeleteRankMutationVariables>;
+export const GetReviewsByDocument = gql`
+    query getReviewsBy($productId: ID!) {
+  product(productId: $productId) {
+    id
+    reviews {
+      id
+      description
+      aroma
+      taste
+      bitterness
+      energy
+      price
+      overall
+      editedAt
+      createdAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetReviewsByQuery__
+ *
+ * To run a query within a React component, call `useGetReviewsByQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetReviewsByQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetReviewsByQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetReviewsByQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetReviewsByQuery, GetReviewsByQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetReviewsByQuery, GetReviewsByQueryVariables>(GetReviewsByDocument, baseOptions);
+      }
+export function useGetReviewsByLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetReviewsByQuery, GetReviewsByQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetReviewsByQuery, GetReviewsByQueryVariables>(GetReviewsByDocument, baseOptions);
+        }
+export type GetReviewsByQueryHookResult = ReturnType<typeof useGetReviewsByQuery>;
+export type GetReviewsByLazyQueryHookResult = ReturnType<typeof useGetReviewsByLazyQuery>;
+export type GetReviewsByQueryResult = ApolloReactCommon.QueryResult<GetReviewsByQuery, GetReviewsByQueryVariables>;
+export const AddReviewDocument = gql`
+    mutation addReview($review: AddReviewInput!) {
+  addReview(review: $review) {
+    id
+  }
+}
+    `;
+export type AddReviewMutationFn = ApolloReactCommon.MutationFunction<AddReviewMutation, AddReviewMutationVariables>;
+
+/**
+ * __useAddReviewMutation__
+ *
+ * To run a mutation, you first call `useAddReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addReviewMutation, { data, loading, error }] = useAddReviewMutation({
+ *   variables: {
+ *      review: // value for 'review'
+ *   },
+ * });
+ */
+export function useAddReviewMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddReviewMutation, AddReviewMutationVariables>) {
+        return ApolloReactHooks.useMutation<AddReviewMutation, AddReviewMutationVariables>(AddReviewDocument, baseOptions);
+      }
+export type AddReviewMutationHookResult = ReturnType<typeof useAddReviewMutation>;
+export type AddReviewMutationResult = ApolloReactCommon.MutationResult<AddReviewMutation>;
+export type AddReviewMutationOptions = ApolloReactCommon.BaseMutationOptions<AddReviewMutation, AddReviewMutationVariables>;
 export const GetTypesDocument = gql`
     query getTypes($offset: Int, $perPage: Int, $order: String, $orderBy: String) {
   types(offset: $offset, perPage: $perPage, order: $order, orderBy: $orderBy) {
     items {
       id
       name
+      createdAt
     }
     total
   }
@@ -1156,6 +1671,7 @@ export const GetTypeDocument = gql`
   type(typeId: $typeId) {
     id
     name
+    createdAt
   }
 }
     `;
@@ -1286,6 +1802,7 @@ export const GetMeDocument = gql`
     query getMe {
   whoAmI {
     username
+    avatarUrl
     email
   }
 }
@@ -1354,6 +1871,7 @@ export const GetMeDetailsDocument = gql`
     username
     email
     role
+    avatarUrl
     profile {
       aromaImportance
       tasteImportance
@@ -1442,6 +1960,7 @@ export const GetUsersDocument = gql`
       username
       email
       role
+      avatarUrl
     }
     total
   }

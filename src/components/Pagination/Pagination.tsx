@@ -11,6 +11,7 @@ interface Props {
   /** if set, the component behaves as controlled component */
   currentPage?: number; // starts from 1
   onPageChange?: (page: number) => void; // starting from 1
+  isLoading?: boolean;
 }
 
 export const Pagination: FC<Props> = ({
@@ -18,6 +19,7 @@ export const Pagination: FC<Props> = ({
   perPage,
   currentPage,
   onPageChange = () => { return null; },
+  isLoading,
 }) => {
   const [page, setPage] = useState(currentPage || 1);
 
@@ -49,12 +51,12 @@ export const Pagination: FC<Props> = ({
 
   return (
     <PaginationWrapper>
-      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled || noData} variant={ButtonVariant.Narrow} icon={<Icon type="arrow-left" />}>
+      <PaginationButton onClick={() => goToPage(page - 1)} disabled={isPrevDisabled || noData || isLoading} icon={<Icon type="arrow-left" />}>
       </PaginationButton>
       <PaginationText>
         {paginationText}
       </PaginationText>
-      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled || noData} variant={ButtonVariant.Narrow} icon={<Icon type="arrow-right" />} />
+      <PaginationButton onClick={() => goToPage(page + 1)} disabled={isNextDisabled || noData || isLoading} variant={ButtonVariant.Narrow} icon={<Icon type="arrow-right" />} />
     </PaginationWrapper>
   );
 };

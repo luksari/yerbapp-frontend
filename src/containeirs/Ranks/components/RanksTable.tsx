@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Table } from 'components/Table';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { Button, ButtonType } from 'components/Button';
 import { TableProps } from 'utils/types';
 import { RankData } from '../types';
 
@@ -20,17 +20,19 @@ export const RanksTable: FC<TableProps<RankData>> = ({
         { Header: 'Górna granica', accessor: 'upperRange', disableSortBy: false },
         {
           id: 'edit',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
+              <Button themeType={ButtonType.Primary} onClick={() => onEdit(row.values.id)}>Edytuj</Button>
             </div>
           ),
         },
         {
           id: 'remove',
+          align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Danger} variant={ButtonVariant.Narrow} onClick={() => onDelete(row.values.id)}>Usuń</Button>
+              <Button themeType={ButtonType.Danger} onClick={() => onDelete(row.values.id)}>Usuń</Button>
             </div>
           ),
         },

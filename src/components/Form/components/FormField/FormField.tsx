@@ -8,8 +8,9 @@ import { InputWrapper, InputLabel, AdditionalText } from './styled';
 type CustomFormFieldProps<T> = T extends FC<infer R> ? {
   component: T;
   props: Omit<R, keyof FieldConfig>;
-  label: string;
+  label?: string;
   fullWidth?: boolean;
+  className?: string;
 } : never;
 
 type WrappedFormFieldProps<T> = CustomFormFieldProps<T> & FieldConfig;
@@ -23,8 +24,8 @@ export function FormField<T extends FC<any>>({
 }: WrappedFormFieldProps<T>) {
   const [field, meta] = useField(rest);
   return (
-    <InputWrapper fullWidth={fullWidth}>
-      <InputLabel htmlFor={field.name}>{label}</InputLabel>
+    <InputWrapper fullWidth={fullWidth} className={rest.className}>
+      {label && <InputLabel htmlFor={field.name}>{label}</InputLabel>}
       <Component
         {...rest}
         {...props}

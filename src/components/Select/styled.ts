@@ -9,7 +9,7 @@ const errorReactSelectStyles = ({
   if (error) {
     styles.borderColor = `${theme.colors.danger}`;
   } else if (focused) {
-    styles.borderColor = `${theme.colors.primary}`;
+    styles.borderColor = `${theme.colors.info}`;
   } else {
     styles.borderColor = 'transparent';
   }
@@ -25,7 +25,7 @@ export const customSelectStyles: StylesConfig = {
     });
     return ({
       ...provided,
-      backgroundColor: `${theme.colors.mainBackground}`,
+      backgroundColor: `${theme.colors.disabledBackground}`,
       boxShadow: 'none',
       borderWidth: '1px',
       borderRadius: state.selectProps.menuIsOpen ? '4px 4px 0px 0px' : '4px',
@@ -71,22 +71,24 @@ export const customSelectStyles: StylesConfig = {
     ...provided,
     padding: 0,
   }),
-  option: (provided, state) => ({
-    ...provided,
-    margin: '0px',
-    fontWeight: 500,
-    background: 'none',
-    fontSize: '13px',
-    cursor: 'pointer',
-    color: state.isSelected ? `${theme.colors.primaryText}` : `${theme.colors.disabledText}`,
-    '&:hover': {
-      color: theme.colors.primaryText,
-      background: theme.colors.disabledBackground,
-    },
-    label: {
+  option: (provided, state) => {
+    return ({
+      ...provided,
+      margin: '0px',
+      fontWeight: 500,
+      background: 'none',
+      fontSize: '13px',
       cursor: 'pointer',
-    },
-  }),
+      color: state.data === state.selectProps.value ? `${theme.colors.primaryText}` : `${theme.colors.labelText}`,
+      '&:hover': {
+        color: theme.colors.primaryText,
+        background: theme.colors.disabledBackground,
+      },
+      label: {
+        cursor: 'pointer',
+      },
+    });
+  },
   placeholder: (provided) => ({
     ...provided,
     fontSize: '13px',

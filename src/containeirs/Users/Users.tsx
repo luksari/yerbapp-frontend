@@ -12,6 +12,7 @@ import { Pagination } from 'components/Pagination';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from 'react-apollo';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { Wrapper } from './styled';
 import { UsersTable } from './components/UsersTable';
 
@@ -29,9 +30,18 @@ export const UsersRaw: FC = () => {
     },
   );
 
-  const [assignAdmin, { loading: assigning }] = useAssignAdminMutation();
-  const [revokeAdmin, { loading: revoking }] = useRevokeAdminMutation();
-  const [deleteUser, { loading: deleting }] = useDeleteUserMutation();
+  const [assignAdmin, { loading: assigning }] = useAssignAdminMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się przypisać administratora!' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie przypisano administratora!' }),
+  });
+  const [revokeAdmin, { loading: revoking }] = useRevokeAdminMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się odebrać roli administratora!' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie odebrano role administratora!' }),
+  });
+  const [deleteUser, { loading: deleting }] = useDeleteUserMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się usunąć użytkownika!' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto użytkownika!' }),
+  });
 
   const isLoading = useMemo(() => loading || assigning || revoking || deleting, [loading, assigning, revoking, deleting]);
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ButtonType } from 'components/Button';
+import { ButtonType, ButtonVariant } from 'components/Button';
 import {
   Slogan, HomeContainer, ExploreButton, StyledLink,
 } from './styled';
@@ -10,8 +10,8 @@ const Home: FC = () => {
       <Slogan>
        Świat yerba mate stoi przed Tobą otworem
       </Slogan>
-      <StyledLink to="/explore">
-        <ExploreButton themeType={ButtonType.Secondary}>
+      <StyledLink to="/products">
+        <ExploreButton themeType={ButtonType.Secondary} variant={ButtonVariant.Wide}>
           Zobacz!
         </ExploreButton>
       </StyledLink>

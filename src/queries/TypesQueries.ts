@@ -6,6 +6,7 @@ export const GET_TYPES = gql`
       items {
         id,
         name,
+        createdAt,
       }
       total
   }
@@ -17,6 +18,7 @@ export const GET_TYPE = gql`
     type(typeId: $typeId) {
       id,
       name,
+      createdAt,
     }
   }
 `;

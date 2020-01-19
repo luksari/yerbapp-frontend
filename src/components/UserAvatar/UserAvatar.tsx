@@ -8,18 +8,21 @@ import {
 interface Props {
   username: string;
   className?: string;
+  avatarUrl?: string;
 }
 
 export const UserAvatar: FC<Props> = memo(({
   username,
   className,
+  avatarUrl,
 }) => {
   const { firstLetter, secondLetter } = getInitials(username);
-  const initialsCode = getInitialsCode(firstLetter, secondLetter);
+  const initialsCode = getInitialsCode(username);
+
   return (
     <AvatarWrapper className={className}>
       <LeftLogo />
-      <StyledAvatar role="img" aria-label={`Awatar użytkownika ${username}`} code={initialsCode}>
+      <StyledAvatar role="img" avatarUrl={avatarUrl} aria-label={`Awatar użytkownika ${username}`} code={initialsCode}>
         <StyledInitial>
           {firstLetter}
           {secondLetter}

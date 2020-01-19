@@ -24,11 +24,11 @@ export const StyledAuthLayout = styled(StyledAppLayout)`
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
     background: ${transparentize(0.3, '#fff')}
   }
   *{
-    z-index: 1;
+    z-index: 2;
   }
 `;
 
@@ -36,6 +36,7 @@ export const ComponentWrapper = styled.div`
   overflow-y: scroll;
   min-height: calc(100vh - 115px);
   max-height: calc(100vh - 115px);
+  z-index: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;

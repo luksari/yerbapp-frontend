@@ -24,7 +24,7 @@ const ManufacturerCreateForm: FC<Props> = ({
           manufacturer: {
             name: values.name!,
             country: values.country!,
-            creatorId: localStorage.getItem('userId'),
+            photoUrl: values.photoUrl,
           },
         },
         refetchQueries: [{

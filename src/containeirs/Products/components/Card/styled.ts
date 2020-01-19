@@ -8,20 +8,22 @@ export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${({ theme }) => theme.metrics.margin.m};
-  box-shadow: 0 10px 10px -5px ${({ theme }) => theme.colors.shadow};
-  border-radius: 8px;
+  box-shadow: 0 6px 10px -5px ${({ theme }) => theme.colors.shadow};
+  border-radius: 0 0 8px 8px;
   overflow: hidden;
+  border-top: 3px solid ${({ theme }) => theme.colors.alternative};
+  position: relative;
 `;
 
 export const YerbaTitle = styled.h4`
   color: ${({ theme }) => theme.colors.primaryText};
-  padding: 0 15px;
-  margin-top: ${({ theme }) => theme.metrics.margin.m};
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
   font-weight: 700;
   line-height: 35px;
   text-transform: uppercase;
-  text-align: center;
+  background: #ffffffaa;
+  width: 100%;
+  margin-bottom: 0;
 `;
 
 export const DataWrapper = styled.div<{primary?: boolean}>`
@@ -35,12 +37,13 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   }
   padding: ${({ theme }) => theme.metrics.padding.l} ${({ theme }) => theme.metrics.padding.s};
   ${({ primary, theme }) => primary && css`
-    box-shadow: 0 5px 10px -2px ${theme.colors.shadow};
+    /* box-shadow: 0 5px 10px -2px ${theme.colors.shadow}; */
     justify-content: space-between;
   `};
 `;
 
 export const Image = styled.img`
+  position: absolute;
   max-width:100%;
   z-index: 0;
   top: 100px;
@@ -50,19 +53,26 @@ export const Image = styled.img`
 
 export const Description = styled.p`
   margin: 0;
-  margin-top: ${({ theme }) => theme.metrics.margin.m};
-  color: ${({ theme }) => theme.colors.labelText};
+  margin: ${({ theme }) => theme.metrics.margin.m} 0;
+  color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 500;
+  max-width: 282px;
+  height: 85px;
+  overflow-wrap: break-word;
 `;
+
+export const DetailsDescription = styled(Description)`
+  font-size: ${({ theme }) => theme.metrics.fontSize.m};
+  max-width: 100%;
+  width: 100%;
+`;
+
 
 export const ValueWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 1fr;
   padding-bottom: ${({ theme }) => theme.metrics.padding.s};
-  &:nth-child(3) {
-    margin-bottom: ${({ theme }) => theme.metrics.margin.m};
-  }
 `;
 
 export const StyledLabel = styled.label`
@@ -73,28 +83,50 @@ export const StyledLabel = styled.label`
 
 
 export const StyledValue = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
-  color: ${({ theme }) => theme.colors.alternativeText};
-  font-size: ${({ theme }) => theme.metrics.fontSize.xs};
-  margin-left: 3px;
+  color: ${({ theme }) => theme.colors.primaryText};
+  font-size: ${({ theme }) => theme.metrics.fontSize.s};
   font-weight: 600;
-  padding: ${({ theme }) => theme.metrics.padding.xs};
-  background: ${({ theme }) => theme.gradients.primaryToAlt};
-  box-shadow: 0 5px 5px -4px ${({ theme }) => theme.colors.shadow};
-  border-right: 18px solid ${({ theme }) => theme.colors.mainBackground}7e;
-  max-width: 145px;
-  border-radius: 4px;
 `;
 
 export const CardButton = styled(Button)`
-  margin: ${({ theme }) => theme.metrics.margin.l};
-  justify-self: flex-end;
+  justify-self: center;
+  align-self: center;
 `;
 
 export const StyledRating = styled(Rating)`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
+`;
+
+export const ActionButtons = styled.div<{ isAllowed: boolean}>`
+  position: absolute;
+  z-index: 10;
+  justify-content: space-between;
+  width: 80px;
+  top: 10px;
+  right: 10px;
+  display: ${({ isAllowed }) => isAllowed ? 'flex' : 'none'};
+`;
+
+export const RoundedButton = styled(Button)`
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  min-width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    margin: 0;
+
+  }
+`;
+
+export const AuthorLabel = styled.p`
+  margin-bottom: auto;
+  justify-self: flex-start;
+  align-self: flex-start;
+  font-weight: 700;
+
 `;

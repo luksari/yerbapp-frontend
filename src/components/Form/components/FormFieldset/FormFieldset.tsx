@@ -1,5 +1,5 @@
 import React, {
-  HTMLAttributes, FC, Children, cloneElement, ReactElement,
+  HTMLAttributes, FC,
 } from 'react';
 
 import { StyledFieldset, StyledLegend } from './styled';
@@ -24,6 +24,6 @@ export const FormFieldset: FC<Props> = ({
     columns={columns}
   >
     {legendTitle && <StyledLegend>{legendTitle}</StyledLegend>}
-    {Children.map(children, (child: ReactElement) => cloneElement(child, { fullWidth }))}
+    {children}
   </StyledFieldset>
 );

@@ -4,7 +4,7 @@ export const theme = {
     primaryText: '#0F1A20',
     primaryTextDarken: '#0A141A',
     alternativeText: '#FFFFFF',
-    labelText: '#424B54',
+    labelText: '#535B63',
     disabledText: '#93A8AC',
     disabledBackground: '#EDF4ED',
     danger: '#EE5E41',

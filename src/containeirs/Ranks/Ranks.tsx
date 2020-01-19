@@ -9,16 +9,15 @@ import {
   GetRanksDocument, useDeleteRankMutation,
 } from 'generated/graphql';
 import { Loader } from 'components/Loader';
-import { Pagination } from 'components/Pagination';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
-import { Icon } from 'antd';
+import { ActionBar } from 'components/ActionBar/ActionBar';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { RanksTable } from './components/RanksTable';
-import { Wrapper, ActionWrapper } from './styled';
+import { Wrapper } from './styled';
 
 
 interface Props {
@@ -49,7 +48,12 @@ export const RanksRaw: FC<Props> = ({
     });
   }, []);
 
-  const [deleteRank, { loading: deleting }] = useDeleteRankMutation();
+  const [deleteRank, { loading: deleting }] = useDeleteRankMutation(
+    {
+      onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się rangi!' }),
+      onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto rangę!' }),
+    },
+  );
 
   const handleEdit = (id: string) => {
     redirectEdit(id);
@@ -79,22 +83,13 @@ export const RanksRaw: FC<Props> = ({
     <Wrapper>
       <Helmet title="Rangi" />
       <Title>Rangi</Title>
-      <ActionWrapper>
-        <Pagination
-          itemCount={data.ranks.total}
-          perPage={perPage}
-          currentPage={1}
-          onPageChange={(value) => setPage(value)}
-        />
-        <Button
-          variant={ButtonVariant.Normal}
-          themeType={ButtonType.Primary}
-          onClick={handleCreate}
-          icon={<Icon type="plus" />}
-        >
-        Utwórz rangę
-        </Button>
-      </ActionWrapper>
+      <ActionBar
+        redirectCreate={handleCreate}
+        onPageChange={setPage}
+        perPage={perPage}
+        total={data.ranks.total}
+        createText="Utwórz rangę"
+      />
       <RanksTable
         data={data.ranks.items}
         onEdit={handleEdit}

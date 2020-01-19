@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 /**
  * Frontend pagination to be used with Pagination component
  */
-export const usePagination = <T>(perPage: number, data: T[]) => {
+export const usePagination = (perPage: number, data: any[]) => {
   const [page, setPage] = useState(1);
 
   const sliceStart = (page - 1) * perPage;

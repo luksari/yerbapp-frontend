@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
+import { Button, ButtonType } from 'components/Button';
 import { Logo } from 'components/Logo';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated, actions } from 'store/auth/slice';
@@ -39,12 +39,12 @@ export const HomeTopbarRaw: FC<Props> = ({
         ) : (
           <ActionWrapper>
             <StyledLink to="/login">
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>
+              <Button themeType={ButtonType.Primary}>
           Zaloguj się
               </Button>
             </StyledLink>
             <StyledLink to="/register">
-              <Button themeType={ButtonType.Primary} variant={ButtonVariant.Narrow}>
+              <Button themeType={ButtonType.Primary}>
           Zarejestruj się
               </Button>
             </StyledLink>

@@ -10,6 +10,7 @@ export const StyledTopbar = styled.section`
   align-items: center;
   padding: ${({ theme }) => theme.metrics.padding.l};
   max-height: 115px;
+  z-index: 1;
 `;
 
 export const UserProfileLink = styled(Link)`

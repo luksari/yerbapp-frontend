@@ -9,16 +9,15 @@ import {
   GetTypesDocument, useDeleteTypeMutation,
 } from 'generated/graphql';
 import { Loader } from 'components/Loader';
-import { Pagination } from 'components/Pagination';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Button, ButtonType, ButtonVariant } from 'components/Button';
 import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
-import { Icon } from 'antd';
+import { ActionBar } from 'components/ActionBar/ActionBar';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { TypesTable } from './components/TypesTable';
-import { Wrapper, ActionWrapper } from './styled';
+import { Wrapper } from './styled';
 
 
 interface Props {
@@ -49,7 +48,10 @@ export const TypesRaw: FC<Props> = ({
     });
   }, []);
 
-  const [deleteType, { loading: deleting }] = useDeleteTypeMutation();
+  const [deleteType, { loading: deleting }] = useDeleteTypeMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się usunąć typu yerba mate.' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto typ yerba mate!' }),
+  });
 
   const handleEdit = (id: string) => {
     redirectEdit(id);
@@ -79,22 +81,13 @@ export const TypesRaw: FC<Props> = ({
     <Wrapper>
       <Helmet title="Typy" />
       <Title>Typy</Title>
-      <ActionWrapper>
-        <Pagination
-          itemCount={data.types.total}
-          perPage={perPage}
-          currentPage={1}
-          onPageChange={(value) => setPage(value)}
-        />
-        <Button
-          variant={ButtonVariant.Normal}
-          themeType={ButtonType.Primary}
-          onClick={handleCreate}
-          icon={<Icon type="plus" />}
-        >
-        Utwórz typ
-        </Button>
-      </ActionWrapper>
+      <ActionBar
+        redirectCreate={handleCreate}
+        onPageChange={setPage}
+        perPage={perPage}
+        total={data.types.total}
+        createText="Utwórz typ"
+      />
       <TypesTable
         data={data.types.items}
         onEdit={handleEdit}

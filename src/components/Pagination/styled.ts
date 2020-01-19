@@ -1,16 +1,16 @@
-import styled, { css } from 'styled-components';
-import { Button } from 'components/Button';
+import styled from 'styled-components';
+import { Button, ButtonType, ButtonVariant } from 'components/Button';
 
 export const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
   user-select: none;
-  flex-shrink: 0;
 `;
 
-export const PaginationButton = styled(Button)`
+export const PaginationButton = styled(Button).attrs({ themeType: ButtonType.Primary, variant: ButtonVariant.Narrow })`
   display: flex;
   font-size: 26px;
+  width: 100%;
   border-radius: 4px;
   transition: color 100ms ease-in-out;
   padding: 0;
@@ -29,27 +29,12 @@ export const PaginationButton = styled(Button)`
       }
     }
   }
-
-  ${({ theme }) => css`
-    background: ${theme.colors.info};
-    color: ${theme.colors.alternativeText};
-
-    &:hover, &:focus {
-      background: ${theme.colors.infoHover};
-      color: ${theme.colors.alternativeText};
-    }
-  `}
-
-  ${({ theme }) => css`
-    &[disabled] {
-      background: ${theme.colors.disabledBackground};
-      color: ${theme.colors.disabledText};
-    }
-  `}
 `;
 
 export const PaginationText = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.primaryText};
   margin: 0 1em;
+  min-width: 60px;
+  text-align: center;
 `;

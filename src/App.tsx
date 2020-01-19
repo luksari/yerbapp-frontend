@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { AppRouter } from 'containeirs/AppRouter';
+import { useInjectSaga } from 'utils/injectSaga';
+import { watchAuthSaga } from 'store/auth/saga';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -20,6 +22,8 @@ const Wrapper = styled.div`
 `;
 
 const App: FC = () => {
+  useInjectSaga({ key: 'auth', saga: watchAuthSaga });
+
   return (
     <Wrapper>
       <AppRouter />
