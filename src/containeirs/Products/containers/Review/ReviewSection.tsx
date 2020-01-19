@@ -13,8 +13,13 @@ interface Props {
 export const ReviewSection: FC<Props> = ({
   productId,
 }) => {
-  const { data, loading } = useGetReviewsByQuery({ variables: { productId }, fetchPolicy: 'no-cache' });
-  const [addReview, { loading: adding }] = useAddReviewMutation();
+  const { data, loading } = useGetReviewsByQuery({ variables: { productId }, fetchPolicy: 'cache-and-network' });
+  const [addReview, { loading: adding }] = useAddReviewMutation({
+    refetchQueries: [{
+      query: GetReviewsByDocument,
+      variables: { productId },
+    }],
+  });
 
   const submitReview = async (values: ReviewFormData) => {
     try {
@@ -25,10 +30,6 @@ export const ReviewSection: FC<Props> = ({
             productId,
           },
         },
-        refetchQueries: [{
-          query: GetReviewsByDocument,
-          variables: { productId },
-        }],
       });
     } catch (error) {
       console.error(error);
