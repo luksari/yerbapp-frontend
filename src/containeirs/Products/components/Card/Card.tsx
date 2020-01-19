@@ -62,6 +62,9 @@ export const Card: FC<CardProps> = memo((
   const shortCountry = country ? truncate(country, { length: 15, separator: '.', omission: '...' }) : 'Nieznany kraj';
   const authorUsername = author?.username ? truncate(author.username, { length: 15, separator: '.', omission: '...' }) : 'Gal Anonim';
   const isAllowed = useMemo(() => isAdmin || author?.id === userId, [isAdmin, userId]);
+  const photo = photoUrl || 'src/assets/yerbapp.png';
+  console.log(photo);
+
   return (
     <CardContainer>
       <ActionButtons isAllowed={isAllowed}>
@@ -73,7 +76,7 @@ export const Card: FC<CardProps> = memo((
           {shortName}
         </YerbaTitle>
         <AuthorLabel>{authorUsername}</AuthorLabel>
-        <Image src={photoUrl} alt={name} />
+        <Image src="./assets/yerbapp.png" alt={name} />
         <CardButton themeType={ButtonType.Secondary} onClick={() => onRedirectDetails(id)}>
           Zobacz więcej
         </CardButton>
