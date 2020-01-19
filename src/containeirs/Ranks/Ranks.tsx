@@ -15,6 +15,7 @@ import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
 import { ActionBar } from 'components/ActionBar/ActionBar';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { RanksTable } from './components/RanksTable';
 import { Wrapper } from './styled';
 
@@ -37,7 +38,7 @@ export const RanksRaw: FC<Props> = ({
       variables: {
         offset, perPage, order, orderBy,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-and-network',
     },
   );
 
@@ -47,7 +48,12 @@ export const RanksRaw: FC<Props> = ({
     });
   }, []);
 
-  const [deleteRank, { loading: deleting }] = useDeleteRankMutation();
+  const [deleteRank, { loading: deleting }] = useDeleteRankMutation(
+    {
+      onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się rangi!' }),
+      onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto rangę!' }),
+    },
+  );
 
   const handleEdit = (id: string) => {
     redirectEdit(id);

@@ -15,6 +15,7 @@ import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
 import { ActionBar } from 'components/ActionBar/ActionBar';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { TypesTable } from './components/TypesTable';
 import { Wrapper } from './styled';
 
@@ -37,7 +38,7 @@ export const TypesRaw: FC<Props> = ({
       variables: {
         offset, perPage, order, orderBy,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-and-network',
     },
   );
 
@@ -47,7 +48,10 @@ export const TypesRaw: FC<Props> = ({
     });
   }, []);
 
-  const [deleteType, { loading: deleting }] = useDeleteTypeMutation();
+  const [deleteType, { loading: deleting }] = useDeleteTypeMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się usunąć typu yerba mate.' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto typ yerba mate!' }),
+  });
 
   const handleEdit = (id: string) => {
     redirectEdit(id);

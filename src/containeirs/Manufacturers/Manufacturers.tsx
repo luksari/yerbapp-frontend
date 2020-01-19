@@ -15,6 +15,7 @@ import { usePagination } from 'hooks/usePagination';
 import { useSort } from 'hooks/useSort';
 import { useQuery } from '@apollo/react-hooks';
 import { ActionBar } from 'components/ActionBar/ActionBar';
+import { notificationSuccess, notificationError } from 'components/Notification';
 import { ManuFacturersTable } from './components/ManufacturersTable';
 import { Wrapper } from './styled';
 
@@ -37,7 +38,7 @@ export const ManufacturesRaw: FC<Props> = ({
       variables: {
         offset, perPage, order, orderBy,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-and-network',
     },
   );
 
@@ -47,7 +48,10 @@ export const ManufacturesRaw: FC<Props> = ({
     });
   }, []);
 
-  const [deleteManufacturer, { loading: deleting }] = useDeleteManufacturerMutation();
+  const [deleteManufacturer, { loading: deleting }] = useDeleteManufacturerMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się usunąć producenta yerba mate.' }),
+    onCompleted: () => notificationSuccess({ title: 'Sukces', message: 'Pomyślnie usunięto producenta yerba mate!' }),
+  });
 
   const handleEdit = (id: string) => {
     redirectEdit(id);
