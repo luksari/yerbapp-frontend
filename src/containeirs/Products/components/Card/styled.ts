@@ -43,10 +43,12 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
 
 export const Image = styled.img`
   position: absolute;
-  width:80%;
+  width: auto;
   z-index: 0;
   top: 100px;
-  height: auto;
+  height: 300px;
+  left: 50%;
+  transform: translateX(-50%)
 `;
 
 
