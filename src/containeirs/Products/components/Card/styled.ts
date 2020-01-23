@@ -35,16 +35,15 @@ export const DataWrapper = styled.div<{primary?: boolean}>`
   * {
     z-index: 1;
   }
-  padding: ${({ theme }) => theme.metrics.padding.l} ${({ theme }) => theme.metrics.padding.s};
-  ${({ primary, theme }) => primary && css`
-    /* box-shadow: 0 5px 10px -2px ${theme.colors.shadow}; */
+  padding: ${({ theme }) => theme.metrics.padding.l} 0;
+  ${({ primary }) => primary && css`
     justify-content: space-between;
   `};
 `;
 
 export const Image = styled.img`
   position: absolute;
-  max-width:100%;
+  width:80%;
   z-index: 0;
   top: 100px;
   height: auto;
@@ -128,5 +127,6 @@ export const AuthorLabel = styled.p`
   justify-self: flex-start;
   align-self: flex-start;
   font-weight: 700;
-
+  background: #ffffffaa;
+  width: 100%;
 `;

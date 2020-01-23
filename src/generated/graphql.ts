@@ -232,15 +232,24 @@ export type MutationDeleteRankArgs = {
   rankId: Scalars['ID']
 };
 
+export type PersonalizedProductsInput = {
+  aroma?: Maybe<Scalars['Int']>,
+  taste?: Maybe<Scalars['Int']>,
+  bitterness?: Maybe<Scalars['Int']>,
+  energy?: Maybe<Scalars['Int']>,
+  price?: Maybe<Scalars['Int']>,
+  overall?: Maybe<Scalars['Int']>,
+};
+
 export type Product = {
    __typename?: 'Product',
   id: Scalars['ID'],
   manufacturer: Manufacturer,
-  type: ProductType,
+  type?: Maybe<ProductType>,
   reviews?: Maybe<Array<Review>>,
   author?: Maybe<User>,
   name: Scalars['String'],
-  details: Scalars['String'],
+  details?: Maybe<Scalars['String']>,
   photoUrl?: Maybe<Scalars['String']>,
   aromaAverage: Scalars['Float'],
   tasteAverage: Scalars['Float'],
@@ -338,6 +347,7 @@ export type QueryTypeArgs = {
 
 
 export type QueryProductsArgs = {
+  personalizeBy?: Maybe<PersonalizedProductsInput>,
   personalizeForUser?: Maybe<Scalars['ID']>,
   searchByName?: Maybe<Scalars['String']>,
   order?: Maybe<Scalars['String']>,
@@ -404,7 +414,7 @@ export type Review = {
   overall: Scalars['Int'],
   description?: Maybe<Scalars['String']>,
   product: Product,
-  author: User,
+  author?: Maybe<User>,
   editedAt: Scalars['String'],
   createdAt: Scalars['String'],
 };
@@ -515,7 +525,8 @@ export type GetProductsQueryVariables = {
   offset?: Maybe<Scalars['Int']>,
   perPage?: Maybe<Scalars['Int']>,
   personalizeForUser?: Maybe<Scalars['ID']>,
-  searchByName?: Maybe<Scalars['String']>
+  searchByName?: Maybe<Scalars['String']>,
+  personalizeBy?: Maybe<PersonalizedProductsInput>
 };
 
 
@@ -530,10 +541,10 @@ export type GetProductsQuery = (
       & { manufacturer: (
         { __typename?: 'Manufacturer' }
         & Pick<Manufacturer, 'id' | 'name' | 'country'>
-      ), type: (
+      ), type: Maybe<(
         { __typename?: 'ProductType' }
         & Pick<ProductType, 'id' | 'name'>
-      ), author: Maybe<(
+      )>, author: Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id' | 'username'>
       )> }
@@ -554,10 +565,10 @@ export type GetProductQuery = (
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'id' | 'name'>
-    ), type: (
+    ), type: Maybe<(
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'id' | 'name'>
-    ) }
+    )> }
   ) }
 );
 
@@ -574,10 +585,10 @@ export type GetProductDetailsQuery = (
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'name' | 'country'>
-    ), type: (
+    ), type: Maybe<(
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'name'>
-    ) }
+    )> }
   ) }
 );
 
@@ -594,10 +605,10 @@ export type AddProductMutation = (
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'id' | 'name'>
-    ), type: (
+    ), type: Maybe<(
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'id' | 'name'>
-    ) }
+    )> }
   ) }
 );
 
@@ -615,10 +626,10 @@ export type EditProductMutation = (
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
       & Pick<Manufacturer, 'id' | 'name'>
-    ), type: (
+    ), type: Maybe<(
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'id' | 'name'>
-    ) }
+    )> }
   ) }
 );
 
@@ -1095,8 +1106,8 @@ export type DeleteManufacturerMutationHookResult = ReturnType<typeof useDeleteMa
 export type DeleteManufacturerMutationResult = ApolloReactCommon.MutationResult<DeleteManufacturerMutation>;
 export type DeleteManufacturerMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteManufacturerMutation, DeleteManufacturerMutationVariables>;
 export const GetProductsDocument = gql`
-    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String) {
-  products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName) {
+    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String, $personalizeBy: PersonalizedProductsInput) {
+  products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName, personalizeBy: $personalizeBy) {
     total
     items {
       id
@@ -1144,6 +1155,7 @@ export const GetProductsDocument = gql`
  *      perPage: // value for 'perPage'
  *      personalizeForUser: // value for 'personalizeForUser'
  *      searchByName: // value for 'searchByName'
+ *      personalizeBy: // value for 'personalizeBy'
  *   },
  * });
  */

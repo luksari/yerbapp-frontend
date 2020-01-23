@@ -15,6 +15,9 @@ import { compose } from 'redux';
 import { notificationError, notificationSuccess } from 'components/Notification';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
+import { FormikHelpers } from 'formik';
+import { getAnyImportance } from 'utils/getAnyImportance';
+import { size } from 'lodash';
 import { DataGrid } from './components/DataGrid';
 import { FilterForm } from './components/FilterForm';
 
@@ -75,13 +78,16 @@ const Explore: FC<Props> = ({
     }
   };
 
-  const handleSubmit = async (values: typeof formValues) => {
+  const handleSubmit = async (values: typeof formValues, formikHelpers: FormikHelpers<any>) => {
+    const properValues = getAnyImportance(values);
+    console.log(properValues);
     try {
       refetch({
         searchByName: values.name,
         offset,
         perPage,
-        ...(userId && { personalizeForUser: userId }),
+        ...(userId && size(properValues) !== 0 && { personalizeForUser: userId }),
+        ...(size(properValues) !== 0 && { personalizeBy: properValues }),
       });
     } catch (err) {
       console.error(err);

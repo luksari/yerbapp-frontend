@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String) {
-    products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName)
+    query getProducts($offset: Int, $perPage: Int, $personalizeForUser: ID, $searchByName: String, $personalizeBy: PersonalizedProductsInput) {
+    products(offset: $offset, perPage: $perPage, personalizeForUser: $personalizeForUser, searchByName: $searchByName, personalizeBy: $personalizeBy)
    {
       total,
       items {
