@@ -35,7 +35,7 @@ export const AppRouter: FC = () => {
       <AuthenticatedRoute exact path="/products" component={Explore} layout={AppLayout} canBeGuest />
       <AuthenticatedRoute path="/products/create" component={ProductCreateForm} layout={AppLayout} />
       <AuthenticatedRoute exact path="/products/:productId" component={ProductEditForm} layout={AppLayout} />
-      <AuthenticatedRoute exact path="/products/details/:productId" component={Details} layout={AppLayout} />
+      <AuthenticatedRoute exact path="/products/details/:productId" component={Details} layout={AppLayout} canBeGuest />
 
       <AuthenticatedRoute exact path="/admin" component={AdminPanel} layout={AppLayout} mustBeAdmin />
       <AuthenticatedRoute exact path="/admin/manufacturers" component={Manufacturers} layout={AppLayout} mustBeAdmin />

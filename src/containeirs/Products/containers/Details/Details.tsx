@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { useGetProductDetailsQuery } from 'generated/graphql';
+import React, { FC, useEffect } from 'react';
+import { useGetProductDetailsQuery, GetProductDetailsDocument } from 'generated/graphql';
 import { RouteComponentProps } from 'react-router';
 import { Loader } from 'components/Loader';
 import { DetailsView } from 'containeirs/Products/containers/Details/DetailsView';
@@ -9,24 +9,42 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectIsAuthenticated } from 'store/auth/slice';
+import { useQuery } from 'react-apollo';
 import { ReviewSection } from '../Review/ReviewSection';
 
 interface Props extends RouteComponentProps<{productId: string}> {
   redirectBack: VoidFunction;
+  isAuthenticated: boolean;
 }
 const Details: FC<Props> = ({
   match,
   redirectBack,
+  isAuthenticated,
 }) => {
-  const { data, loading } = useGetProductDetailsQuery({
-    variables: {
-      productId: match.params.productId,
-    },
-    fetchPolicy: 'no-cache',
-    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać detali Yerba Mate.' }),
-  });
+  const {
+    data, loading, networkStatus, refetch,
+  } = useQuery(GetProductDetailsDocument,
+    {
+      variables: {
+        productId: match.params.productId,
+      },
+      fetchPolicy: 'no-cache',
+      notifyOnNetworkStatusChange: true,
+      onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać detali Yerba Mate.' }),
+    });
 
-  if (loading) {
+  useEffect(() => {
+    if (networkStatus === 7) {
+      refetch({
+        productId: match.params.productId,
+      });
+    }
+  }, [networkStatus]);
+
+
+  if (loading || networkStatus === 4) {
     return <Loader fullscreen />;
   }
 
@@ -37,8 +55,8 @@ const Details: FC<Props> = ({
         title="Szczegóły produktu"
       />
       <Title>Szczegóły produktu</Title>
-      {data && <DetailsView data={data} redirectBack={redirectBack} /> }
-      <ReviewSection productId={match.params.productId} />
+      <DetailsView data={data} redirectBack={redirectBack} />
+      <ReviewSection productId={match.params.productId} isAuthenticated={isAuthenticated} handleRefetch={} />
     </SectionWrapper>
   );
 };
@@ -47,8 +65,12 @@ const mapDispatchToProps = (dispatch) => ({
   redirectBack: () => dispatch(push('/products')),
 });
 
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: makeSelectIsAuthenticated(),
+});
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

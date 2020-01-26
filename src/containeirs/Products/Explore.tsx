@@ -15,7 +15,6 @@ import { compose } from 'redux';
 import { notificationError, notificationSuccess } from 'components/Notification';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
-import { FormikHelpers } from 'formik';
 import { getAnyImportance } from 'utils/getAnyImportance';
 import { size } from 'lodash';
 import { DataGrid } from './components/DataGrid';
@@ -57,7 +56,7 @@ const Explore: FC<Props> = ({
         perPage,
         ...(userId && { personalizeForUser: userId }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-and-network',
     },
   );
 
@@ -78,9 +77,8 @@ const Explore: FC<Props> = ({
     }
   };
 
-  const handleSubmit = async (values: typeof formValues, formikHelpers: FormikHelpers<any>) => {
+  const handleSubmit = async (values: typeof formValues) => {
     const properValues = getAnyImportance(values);
-    console.log(properValues);
     try {
       refetch({
         searchByName: values.name,

@@ -78,8 +78,8 @@ export const YerbaDetailsTitle = styled.h2`
 `;
 
 export const StyledImg = styled.img`
-  width: 500px;
-  height: auto;
+  width: auto;
+  height: 500px;
 `;
 
 export const ScoreValue = styled.span`
@@ -103,11 +103,18 @@ export const MainDataWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  padding: 25px;
 
+  border-bottom: 1px solid ${({ theme }) => theme.colors.shadow};
+  margin-bottom: 25px;
 `;
 
 export const ImageWrapper = styled.div`
   position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 0 25px;
   &:hover {
     ${ScoreValue} {
       transform: scale(1)

@@ -70,12 +70,32 @@ export const GET_PRODUCT_DETAILS = gql`
       photoUrl,
       personalizedScore,
       manufacturer {
+        id,
         name,
         country
       },
       type {
+        id,
         name
       },
+      reviews {
+        id,
+        description,
+        aroma,
+        taste,
+        bitterness,
+        energy,
+        price,
+        overall,
+        # author {
+        #   id,
+        #   username,
+        #   avatarUrl
+        # }
+        editedAt,
+        createdAt
+      }
+    }
     }
   }
 `;

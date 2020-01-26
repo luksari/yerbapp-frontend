@@ -22,7 +22,12 @@ export const FilterForm: FC<Props> = memo(({
       initialValues={formValues}
       onSubmit={handleSubmit}
     >
-      {({ dirty, values, initialValues, resetForm }) => (
+      {({
+        dirty,
+        values,
+        initialValues,
+        resetForm,
+      }) => (
         <WithAutoSave debounceMs={500}>
           <StyledFormField
             name="name"

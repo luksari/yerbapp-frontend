@@ -385,6 +385,16 @@
             "description": "",
             "args": [
               {
+                "name": "personalizeFor",
+                "description": "",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "productId",
                 "description": "",
                 "type": {

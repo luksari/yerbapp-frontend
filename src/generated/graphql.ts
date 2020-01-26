@@ -358,6 +358,7 @@ export type QueryProductsArgs = {
 
 
 export type QueryProductArgs = {
+  personalizeFor?: Maybe<Scalars['ID']>,
   productId: Scalars['ID']
 };
 
@@ -584,10 +585,10 @@ export type GetProductDetailsQuery = (
     & Pick<Product, 'id' | 'name' | 'details' | 'photoUrl' | 'aromaAverage' | 'tasteAverage' | 'bitternessAverage' | 'energyAverage' | 'priceAverage' | 'overallAverage' | 'personalizedScore'>
     & { manufacturer: (
       { __typename?: 'Manufacturer' }
-      & Pick<Manufacturer, 'name' | 'country'>
+      & Pick<Manufacturer, 'id' | 'name' | 'country'>
     ), type: Maybe<(
       { __typename?: 'ProductType' }
-      & Pick<ProductType, 'name'>
+      & Pick<ProductType, 'id' | 'name'>
     )> }
   ) }
 );
@@ -1229,10 +1230,12 @@ export const GetProductDetailsDocument = gql`
     photoUrl
     personalizedScore
     manufacturer {
+      id
       name
       country
     }
     type {
+      id
       name
     }
   }

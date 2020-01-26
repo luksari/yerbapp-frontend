@@ -60,7 +60,6 @@ export const Card: FC<CardProps> = memo((
   const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '.', omission: '...' }) : 'Nieznany producent';
   const shortType = type ? truncate(type, { length: 15, separator: '.', omission: '...' }) : 'Nieznany typ';
   const shortCountry = country ? truncate(country, { length: 15, separator: '.', omission: '...' }) : 'Nieznany kraj';
-  const authorUsername = author?.username ? truncate(author.username, { length: 15, separator: '.', omission: '...' }) : 'Gal Anonim';
   const isAllowed = useMemo(() => isAdmin || author?.id === userId, [isAdmin, userId]);
   const photo = photoUrl || './assets/yerbapp.png';
 
@@ -74,7 +73,6 @@ export const Card: FC<CardProps> = memo((
         <YerbaTitle>
           {shortName}
         </YerbaTitle>
-        <AuthorLabel>{authorUsername}</AuthorLabel>
         <Image src={photo} alt={name} />
         <CardButton themeType={ButtonType.Secondary} onClick={() => onRedirectDetails(id)}>
           Zobacz więcej
