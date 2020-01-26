@@ -574,7 +574,8 @@ export type GetProductQuery = (
 );
 
 export type GetProductDetailsQueryVariables = {
-  productId: Scalars['ID']
+  productId: Scalars['ID'],
+  personalizeFor?: Maybe<Scalars['ID']>
 };
 
 
@@ -1217,8 +1218,8 @@ export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
 export type GetProductLazyQueryHookResult = ReturnType<typeof useGetProductLazyQuery>;
 export type GetProductQueryResult = ApolloReactCommon.QueryResult<GetProductQuery, GetProductQueryVariables>;
 export const GetProductDetailsDocument = gql`
-    query getProductDetails($productId: ID!) {
-  product(productId: $productId) {
+    query getProductDetails($productId: ID!, $personalizeFor: ID) {
+  product(productId: $productId, personalizeFor: $personalizeFor) {
     id
     name
     details
@@ -1270,6 +1271,7 @@ export const GetProductDetailsDocument = gql`
  * const { data, loading, error } = useGetProductDetailsQuery({
  *   variables: {
  *      productId: // value for 'productId'
+ *      personalizeFor: // value for 'personalizeFor'
  *   },
  * });
  */

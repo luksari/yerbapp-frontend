@@ -18,6 +18,7 @@ export const DetailsView: FC<Props> = memo(({
   data,
   redirectBack,
 }) => {
+  const newPersonalizedScore = data.product.personalizedScore ? data.product.personalizedScore.toPrecision(2) : '😭';
   const photo = data.product.photoUrl || '/assets/yerbapp.png';
   return (
     <DetailsWrapper>
@@ -31,7 +32,7 @@ export const DetailsView: FC<Props> = memo(({
         <ImageWrapper>
           <StyledImg src={photo} alt={data.product.name} />
           <ScoreValue>
-            {data.product.personalizedScore}
+            {newPersonalizedScore}
           </ScoreValue>
         </ImageWrapper>
       </MainDataWrapper>

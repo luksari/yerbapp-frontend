@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useCallback, useMemo,
+  FC, memo, useCallback,
 } from 'react';
 import { Button, ButtonType } from 'components/Button';
 import { createStructuredSelector } from 'reselect';

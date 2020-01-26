@@ -61,7 +61,7 @@ const UsersTableRaw: FC<UserTableProps> = ({
           align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Primary} disabled={isAdmin(row.values.role)} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
+              <Button themeType={ButtonType.Primary} disabled={isAdmin(row.values.role) || row.values.id === currentUserId} onClick={() => onMakeAdmin(row.values.id)}>Przypisz administratora</Button>
             </div>
           ),
         },
@@ -70,7 +70,7 @@ const UsersTableRaw: FC<UserTableProps> = ({
           align: 'center',
           Cell: ({ row }) => (
             <div>
-              <Button themeType={ButtonType.Warning} disabled={!isAdmin(row.values.role)} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
+              <Button themeType={ButtonType.Warning} disabled={!isAdmin(row.values.role) || row.values.id === currentUserId} onClick={() => onMakeUser(row.values.id)}>Odbierz administatora</Button>
             </div>
           ),
         },

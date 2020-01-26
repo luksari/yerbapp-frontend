@@ -4,6 +4,7 @@ import { SizeType } from 'components/Rating/types';
 import { truncate } from 'lodash';
 import { Icon } from 'antd';
 import { User } from 'generated/graphql';
+
 import {
   CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton,
 } from './styled';
@@ -24,6 +25,7 @@ interface CardProps {
   energyScore?: number;
   priceScore?: number;
   overallScore?: number;
+  personalizedScore?: number;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
   onRedirectDetails: (id: string) => void;
@@ -53,6 +55,7 @@ export const Card: FC<CardProps> = memo((
     onEdit,
     onRedirectDetails,
     author,
+    personalizedScore,
   },
 ) => {
   const shortDescription = details ? truncate(details, { length: 94, separator: '.', omission: '...' }) : 'Nieznany opis';
@@ -60,6 +63,7 @@ export const Card: FC<CardProps> = memo((
   const shortProducer = manufacturer ? truncate(manufacturer, { length: 45, separator: '.', omission: '...' }) : 'Nieznany producent';
   const shortType = type ? truncate(type, { length: 15, separator: '.', omission: '...' }) : 'Nieznany typ';
   const shortCountry = country ? truncate(country, { length: 15, separator: '.', omission: '...' }) : 'Nieznany kraj';
+  const newPersonalizedScore = personalizedScore ? personalizedScore.toPrecision(2) : '😭';
   const isAllowed = useMemo(() => isAdmin || author?.id === userId, [isAdmin, userId]);
   const photo = photoUrl || './assets/yerbapp.png';
 
@@ -82,6 +86,7 @@ export const Card: FC<CardProps> = memo((
         <CardValue label="Producent: " value={shortProducer} />
         <CardValue label="Typ: " value={shortType} />
         <CardValue label="Kraj pochodzenia: " value={shortCountry} />
+        <CardValue label="Ocena:" value={newPersonalizedScore} />
         <Description>
           {shortDescription}
         </Description>

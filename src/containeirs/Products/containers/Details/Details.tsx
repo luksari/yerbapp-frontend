@@ -10,7 +10,7 @@ import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { Title } from 'components/TitleBar';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectIsAuthenticated } from 'store/auth/slice';
+import { makeSelectIsAuthenticated, makeSelectUserId } from 'store/auth/slice';
 import { useQuery } from 'react-apollo';
 import { ReviewFormData } from 'containeirs/Products/types';
 import { ReviewSection } from '../Review/ReviewSection';
@@ -18,11 +18,13 @@ import { ReviewSection } from '../Review/ReviewSection';
 interface Props extends RouteComponentProps<{productId: string}> {
   redirectBack: VoidFunction;
   isAuthenticated: boolean;
+  userId: string;
 }
 const Details: FC<Props> = ({
   match,
   redirectBack,
   isAuthenticated,
+  userId,
 }) => {
   const { productId } = match.params;
 
@@ -32,6 +34,7 @@ const Details: FC<Props> = ({
     {
       variables: {
         productId,
+        peersonalizeFor: userId,
       },
       fetchPolicy: 'no-cache',
       notifyOnNetworkStatusChange: true,
@@ -44,6 +47,7 @@ const Details: FC<Props> = ({
       notificationSuccess({ title: 'Sukces', message: 'Pomyślnie dodano recenzję Yerba Mate!' });
       refetch({
         productId,
+        peersonalizeFor: userId,
       });
     },
   });
@@ -90,6 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = createStructuredSelector({
   isAuthenticated: makeSelectIsAuthenticated(),
+  userId: makeSelectUserId(),
 });
 
 const withConnect = connect(

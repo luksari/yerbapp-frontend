@@ -48,6 +48,7 @@ export const DataGrid: FC<Props> = ({
             onDelete={handleDelete}
             onRedirectDetails={handleRedirectDetails}
             isAdmin={isAdmin}
+            personalizedScore={product.personalizedScore}
             userId={userId}
           />
         ))}

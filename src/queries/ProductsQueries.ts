@@ -54,8 +54,8 @@ export const GET_PRODUCT = gql`
   }
 `;
 export const GET_PRODUCT_DETAILS = gql`
-  query getProductDetails($productId: ID!) {
-    product(productId: $productId) {
+  query getProductDetails($productId: ID!, $personalizeFor: ID) {
+    product(productId: $productId, personalizeFor: $personalizeFor) {
       id,
       name,
       details,

@@ -6,7 +6,7 @@ export const theme = {
     alternativeText: '#FFFFFF',
     labelText: '#535B63',
     disabledText: '#93A8AC',
-    disabledBackground: '#EDF4ED',
+    disabledBackground: '#EDF2F4',
     danger: '#EE5E41',
     dangerHover: '#F1694F',
     warning: '#F7B800',
