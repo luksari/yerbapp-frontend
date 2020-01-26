@@ -107,6 +107,7 @@
     "apollo:download": "yarn run apollo schema:download --endpoint=http://157.230.108.68:4000/graphql graphql-schema.json",
     "apollo:gen": "yarn run apollo codegen:generate  --endpoint=http://157.230.108.68:4000/graphql --header=\"Authorization:\" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJhZG1pbjEyNCIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNTc1NzMyNzg2LCJleHAiOjE1NzU3NzU5ODZ9.qxqYj5zU1YhtEX8MyV8WCaFQWEjzN-vKg21rllVjxDI --localSchemaFile=graphql-schema.json --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --outputFlat=src/generated",
     "generate": "graphql-codegen --config codegen.js",
+    "deploy:prod": "yarn run build && scp -r ./build/* yerbapp@165.22.91.2:/var/www/yerbapp.com/html",
     "generate:watch": "yarn run generate --watch"
   },
   "lint-staged": {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const StyledTopbar = styled.section`
   box-shadow: 0px 10px 10px ${({ theme }) => theme.colors.decorators};
+  border-top: 3px solid ${({ theme }) => theme.colors.alternative};
   background: ${({ theme }) => theme.colors.mainBackground};
   display: flex;
   flex-direction: row;

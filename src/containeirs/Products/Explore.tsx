@@ -48,7 +48,7 @@ const Explore: FC<Props> = ({
   const { offset, perPage, setPage } = usePagination(4, 1);
 
   const {
-    data, loading, refetch, networkStatus,
+    data, loading, refetch,
   } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
@@ -93,7 +93,7 @@ const Explore: FC<Props> = ({
       console.error(err);
     }
   };
-  if (!data || networkStatus === 4) {
+  if (!data) {
     return <Loader fullscreen />;
   }
 
