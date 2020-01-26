@@ -1,5 +1,5 @@
-import React, { FC, useEffect, memo } from 'react';
-import { useGetProductDetailsQuery, GetProductDetailsDocument, useAddReviewMutation } from 'generated/graphql';
+import React, { FC } from 'react';
+import { GetProductDetailsDocument, useAddReviewMutation } from 'generated/graphql';
 import { RouteComponentProps } from 'react-router';
 import { Loader } from 'components/Loader';
 import { DetailsView } from 'containeirs/Products/containers/Details/DetailsView';

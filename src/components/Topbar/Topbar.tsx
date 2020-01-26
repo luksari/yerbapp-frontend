@@ -26,7 +26,6 @@ const TopbarRaw: FC<TopbarProps> = memo(({
   const { data, loading } = useGetMeQuery({ fetchPolicy: 'no-cache' });
   const handleLogout = useCallback(() => { logout(); }, [logout]);
 
-  const isAuthenticatedMemo = useMemo(() => isAuthenticated, [isAuthenticated]);
   if (loading) {
     return <Loader fullscreen />;
   }
@@ -42,7 +41,7 @@ const TopbarRaw: FC<TopbarProps> = memo(({
         )
       }
       {
-        isAuthenticatedMemo
+        isAuthenticated
           ? <Button themeType={ButtonType.Link} onClick={handleLogout}>Wyloguj się</Button>
           : (
             <ActionWrapper>

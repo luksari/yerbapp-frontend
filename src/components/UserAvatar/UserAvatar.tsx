@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { getInitials } from 'helpers/getInitials';
 import { getInitialsCode } from 'helpers/getInitialsCode';
 import {
@@ -16,8 +16,8 @@ export const UserAvatar: FC<Props> = memo(({
   className,
   avatarUrl,
 }) => {
-  const { firstLetter, secondLetter } = getInitials(username);
-  const initialsCode = getInitialsCode(username);
+  const { firstLetter, secondLetter } = useMemo(() => getInitials(username), [username]);
+  const initialsCode = useMemo(() => getInitialsCode(username), [username]);
 
   return (
     <AvatarWrapper className={className}>

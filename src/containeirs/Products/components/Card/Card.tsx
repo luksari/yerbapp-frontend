@@ -5,7 +5,7 @@ import { truncate } from 'lodash';
 import { Icon } from 'antd';
 import { User } from 'generated/graphql';
 import {
-  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton, AuthorLabel,
+  CardContainer, YerbaTitle, DataWrapper, Image, CardButton, Description, StyledRating, ActionButtons, RoundedButton,
 } from './styled';
 import { CardValue } from './CardValue';
 

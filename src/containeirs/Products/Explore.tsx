@@ -47,8 +47,9 @@ const Explore: FC<Props> = ({
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
 
-
-  const { data, loading, refetch } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
+  const {
+    data, loading, refetch, networkStatus,
+  } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
       variables: {
@@ -57,6 +58,7 @@ const Explore: FC<Props> = ({
         ...(userId && { personalizeForUser: userId }),
       },
       fetchPolicy: 'cache-and-network',
+      notifyOnNetworkStatusChange: true,
     },
   );
 
@@ -91,7 +93,7 @@ const Explore: FC<Props> = ({
       console.error(err);
     }
   };
-  if (!data) {
+  if (!data || networkStatus === 4) {
     return <Loader fullscreen />;
   }
 
@@ -139,6 +141,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default compose(
-  memo,
   connect(mapStateToProps, mapDispatchToProps),
+  memo,
 )(Explore);
