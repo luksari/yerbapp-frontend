@@ -589,7 +589,10 @@ export type GetProductDetailsQuery = (
     ), type: Maybe<(
       { __typename?: 'ProductType' }
       & Pick<ProductType, 'id' | 'name'>
-    )> }
+    )>, reviews: Maybe<Array<(
+      { __typename?: 'Review' }
+      & Pick<Review, 'id' | 'description' | 'aroma' | 'taste' | 'bitterness' | 'energy' | 'price' | 'overall' | 'editedAt' | 'createdAt'>
+    )>> }
   ) }
 );
 
@@ -1237,6 +1240,18 @@ export const GetProductDetailsDocument = gql`
     type {
       id
       name
+    }
+    reviews {
+      id
+      description
+      aroma
+      taste
+      bitterness
+      energy
+      price
+      overall
+      editedAt
+      createdAt
     }
   }
 }

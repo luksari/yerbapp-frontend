@@ -1,10 +1,10 @@
-import React, { FC, useEffect } from 'react';
-import { useGetProductDetailsQuery, GetProductDetailsDocument } from 'generated/graphql';
+import React, { FC, useEffect, memo } from 'react';
+import { useGetProductDetailsQuery, GetProductDetailsDocument, useAddReviewMutation } from 'generated/graphql';
 import { RouteComponentProps } from 'react-router';
 import { Loader } from 'components/Loader';
 import { DetailsView } from 'containeirs/Products/containers/Details/DetailsView';
 import { SectionWrapper } from 'containeirs/Products/styled';
-import { notificationError } from 'components/Notification';
+import { notificationError, notificationSuccess } from 'components/Notification';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
@@ -12,6 +12,7 @@ import { Title } from 'components/TitleBar';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAuthenticated } from 'store/auth/slice';
 import { useQuery } from 'react-apollo';
+import { ReviewFormData } from 'containeirs/Products/types';
 import { ReviewSection } from '../Review/ReviewSection';
 
 interface Props extends RouteComponentProps<{productId: string}> {
@@ -23,28 +24,50 @@ const Details: FC<Props> = ({
   redirectBack,
   isAuthenticated,
 }) => {
+  const { productId } = match.params;
+
   const {
     data, loading, networkStatus, refetch,
   } = useQuery(GetProductDetailsDocument,
     {
       variables: {
-        productId: match.params.productId,
+        productId,
       },
       fetchPolicy: 'no-cache',
       notifyOnNetworkStatusChange: true,
       onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się pobrać detali Yerba Mate.' }),
     });
 
-  useEffect(() => {
-    if (networkStatus === 7) {
+  const [addReview, { loading: adding }] = useAddReviewMutation({
+    onError: () => notificationError({ title: 'Wystąpił błąd', message: 'Nie udało się dodać recenzji Yerba Mate.' }),
+    onCompleted: () => {
+      notificationSuccess({ title: 'Sukces', message: 'Pomyślnie dodano recenzję Yerba Mate!' });
       refetch({
-        productId: match.params.productId,
+        productId,
       });
+    },
+  });
+
+  const submitReview = async (values: ReviewFormData) => {
+    try {
+      await addReview({
+        variables: {
+          review: {
+            ...values,
+            productId,
+          },
+        },
+        fetchPolicy: 'no-cache',
+      });
+    } catch (error) {
+      console.error(error);
     }
-  }, [networkStatus]);
+  };
+
+  const isLoading = loading || adding || networkStatus === 4;
 
 
-  if (loading || networkStatus === 4) {
+  if (isLoading) {
     return <Loader fullscreen />;
   }
 
@@ -56,7 +79,7 @@ const Details: FC<Props> = ({
       />
       <Title>Szczegóły produktu</Title>
       <DetailsView data={data} redirectBack={redirectBack} />
-      <ReviewSection productId={match.params.productId} isAuthenticated={isAuthenticated} handleRefetch={} />
+      <ReviewSection productId={productId} isAuthenticated={isAuthenticated} isLoading={isLoading} data={data} handleSubmitReview={submitReview} />
     </SectionWrapper>
   );
 };

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { GetReviewsByQuery } from 'generated/graphql';
+import { GetProductDetailsQuery } from 'generated/graphql';
 import { Wrapper } from 'containeirs/Types/styled';
 import { Loader } from 'components/Loader';
 import { StyledLegend } from 'components/Form/components/FormFieldset/styled';
@@ -7,7 +7,7 @@ import { Pagination, usePagination } from 'components/Pagination';
 import { ReviewItem } from './ReviewItem';
 
 interface Props {
-  data: GetReviewsByQuery;
+  data: GetProductDetailsQuery;
   isLoading: boolean;
 }
 
