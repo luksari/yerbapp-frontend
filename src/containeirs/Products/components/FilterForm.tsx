@@ -1,5 +1,5 @@
 import React, { FC, memo, useMemo } from 'react';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { Input } from 'components/Input';
 import { SizeType } from 'components/Rating/types';
 import { FormikRating } from 'components/Rating/FormikRating';
@@ -10,7 +10,7 @@ import { RoundedButton } from './Card/styled';
 
 interface Props {
   formValues: any;
-  handleSubmit: (values: any, formikHelpers: FormikHelpers<any>) => void;
+  handleSubmit: (values: any) => void;
 }
 
 export const FilterForm: FC<Props> = memo(({
@@ -68,7 +68,15 @@ export const FilterForm: FC<Props> = memo(({
               name="overall"
               size={SizeType.Small}
             />
-            {dirty && <RoundedButton icon={<Icon type="close" />} onClick={() => resetForm({ values: { ...initialValues, name: values.name } })} />}
+            {dirty && (
+              <RoundedButton
+                icon={<Icon type="close" />}
+                onClick={() => {
+                  resetForm({ values: { ...initialValues, name: values.name } });
+                  handleSubmit({ values: { ...initialValues, name: values.name } });
+                }}
+              />
+            )}
           </RatingWrapper>
         </WithAutoSave>
       )}

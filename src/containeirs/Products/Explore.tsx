@@ -29,12 +29,12 @@ interface Props {
 }
 
 const formValues = {
-  aromaImportance: 0,
-  bitternessImportance: 0,
-  energyImportance: 0,
-  priceImportance: 0,
-  tasteImportance: 0,
-  overallImportance: 0,
+  aroma: 0,
+  bitterness: 0,
+  energy: 0,
+  price: 0,
+  taste: 0,
+  overall: 0,
   name: '',
 };
 
@@ -48,7 +48,7 @@ const Explore: FC<Props> = ({
   const { offset, perPage, setPage } = usePagination(4, 1);
 
   const {
-    data, loading, refetch,
+    data, loading, refetch, networkStatus,
   } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
@@ -57,7 +57,7 @@ const Explore: FC<Props> = ({
         perPage,
         ...(userId && { personalizeForUser: userId }),
       },
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'no-cache',
       notifyOnNetworkStatusChange: true,
     },
   );
@@ -80,19 +80,23 @@ const Explore: FC<Props> = ({
   };
 
   const handleSubmit = async (values: typeof formValues) => {
-    const properValues = getAnyImportance(values);
+    const personalizeBy = getAnyImportance(values);
+
+    const vars = {
+      searchByName: values.name,
+      offset,
+      perPage,
+      ...(userId && size(personalizeBy) !== 0 && { personalizeForUser: userId }),
+      ...(size(personalizeBy) !== 0 && { personalizeBy }),
+    };
+    console.log('Run with variables', vars);
     try {
-      refetch({
-        searchByName: values.name,
-        offset,
-        perPage,
-        ...(userId && size(properValues) !== 0 && { personalizeForUser: userId }),
-        ...(size(properValues) !== 0 && { personalizeBy: properValues }),
-      });
+      refetch(vars);
     } catch (err) {
       console.error(err);
     }
   };
+
   if (!data) {
     return <Loader fullscreen />;
   }
@@ -142,5 +146,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  memo,
 )(Explore);

@@ -31,11 +31,11 @@ export const DataGrid: FC<Props> = ({
           <Card
             id={product.id}
             name={product.name}
-            manufacturer={product.manufacturer.name}
-            country={product.manufacturer.country}
+            manufacturer={product.manufacturer?.name}
+            country={product.manufacturer?.country}
             key={product.id}
             details={product.details}
-            type={product.type.name}
+            type={product.type?.name}
             aromaScore={product.aromaAverage}
             bitternessScore={product.bitternessAverage}
             energyScore={product.energyAverage}

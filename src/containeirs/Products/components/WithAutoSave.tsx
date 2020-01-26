@@ -10,10 +10,12 @@ interface Props {
 export const WithAutoSave: FC<Props> = ({ debounceMs, children }) => {
   const formik = useFormikContext();
   const debouncedSubmit = useCallback(
-    debounce(
-      () => formik.submitForm(),
-      debounceMs,
-    ),
+    () => {
+      debounce(
+        () => formik.submitForm(),
+        debounceMs,
+      );
+    },
     [debounceMs, formik.submitForm],
   );
   useEffect(() => {
