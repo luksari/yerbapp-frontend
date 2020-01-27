@@ -28,7 +28,7 @@ const NoMatch: FC = () => {
         </TextMessage>
         <Link to="/">
           <Button themeType={ButtonType.Secondary} type="button" variant={ButtonVariant.Wide}>
-              Powrót do strony głównej\
+              Powrót do strony głównej
           </Button>
         </Link>
       </LeftSide>

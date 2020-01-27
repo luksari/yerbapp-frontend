@@ -19,6 +19,7 @@ export const YerbaTitle = styled.h4`
   color: ${({ theme }) => theme.colors.primaryText};
   font-size: ${({ theme }) => theme.metrics.fontSize.l};
   font-weight: 700;
+  padding: 0 10px;
   line-height: 35px;
   text-transform: uppercase;
   background: #ffffffaa;

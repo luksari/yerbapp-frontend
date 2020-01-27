@@ -7,7 +7,9 @@ import {
   GetProductsDocument, GetProductsQuery, GetProductsQueryVariables, useDeleteProductMutation,
 } from 'generated/graphql';
 import { usePagination } from 'hooks/usePagination';
-import React, { FC, memo } from 'react';
+import React, {
+  FC, memo, useState, useEffect,
+} from 'react';
 import { useQuery } from 'react-apollo';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -17,6 +19,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
 import { getAnyImportance } from 'utils/getAnyImportance';
 import { size } from 'lodash';
+import { previewImage } from 'antd/lib/upload/utils';
 import { DataGrid } from './components/DataGrid';
 import { FilterForm } from './components/FilterForm';
 
@@ -46,17 +49,18 @@ const Explore: FC<Props> = ({
   userId,
 }) => {
   const { offset, perPage, setPage } = usePagination(4, 1);
+  const [variables, setVariables] = useState<GetProductsQueryVariables>({
+    offset,
+    perPage,
+    personalizeForUser: userId || undefined,
+  });
 
   const {
     data, loading, refetch, networkStatus,
   } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
-      variables: {
-        offset,
-        perPage,
-        personalizeForUser: userId || undefined,
-      },
+      variables,
       fetchPolicy: 'no-cache',
       notifyOnNetworkStatusChange: true,
     },
@@ -70,10 +74,7 @@ const Explore: FC<Props> = ({
   const handleDelete = async (id: string) => {
     try {
       await deleteProduct({ variables: { productId: id } });
-      refetch({
-        offset,
-        perPage,
-      });
+      refetch(variables);
     } catch (err) {
       console.error(err);
     }
@@ -81,21 +82,25 @@ const Explore: FC<Props> = ({
 
   const handleSubmit = async (values: typeof formValues) => {
     const personalizeBy = getAnyImportance(values);
-
-    const vars = {
+    setVariables((prev) => ({
+      ...prev,
       searchByName: values.name,
-      offset,
-      perPage,
       personalizeForUser: userId && size(personalizeBy) === 0 ? userId : undefined,
       personalizeBy: size(personalizeBy) !== 0 ? personalizeBy : undefined,
-    };
-
-    try {
-      await refetch(vars);
-    } catch (err) {
-      console.error(err);
-    }
+    }));
   };
+
+  useEffect(() => {
+    try {
+      refetch({
+        ...variables,
+        offset,
+        perPage,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [variables, offset, perPage]);
 
   if (!data) {
     return <Loader fullscreen />;
