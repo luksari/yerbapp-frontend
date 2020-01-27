@@ -48,16 +48,17 @@ const Explore: FC<Props> = ({
   const { offset, perPage, setPage } = usePagination(4, 1);
 
   const {
-    data, loading, refetch,
+    data, loading, refetch, networkStatus,
   } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
       variables: {
         offset,
         perPage,
-        ...(userId && { personalizeForUser: userId }),
+        personalizeForUser: userId || undefined,
       },
       fetchPolicy: 'network-only',
+      notifyOnNetworkStatusChange: true,
     },
   );
 
@@ -85,12 +86,12 @@ const Explore: FC<Props> = ({
       searchByName: values.name,
       offset,
       perPage,
-      ...(userId && size(personalizeBy) !== 0 && { personalizeForUser: userId }),
-      ...(size(personalizeBy) !== 0 && { personalizeBy }),
+      personalizeForUser: userId && size(personalizeBy) === 0 ? userId : undefined,
+      personalizeBy: size(personalizeBy) !== 0 ? personalizeBy : undefined,
     };
 
     try {
-      await refetch({ ...vars });
+      await refetch(vars);
     } catch (err) {
       console.error(err);
     }
@@ -122,7 +123,7 @@ const Explore: FC<Props> = ({
       </ActionBar>
       <DataGrid
         data={data.products.items}
-        isLoading={loading || deleting}
+        isLoading={loading || deleting || networkStatus === 4}
         handleEdit={redirectEdit}
         handleDelete={handleDelete}
         handleRedirectDetails={redirectDetails}
@@ -145,4 +146,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  memo,
 )(Explore);

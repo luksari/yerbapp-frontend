@@ -16,19 +16,19 @@ export const LoaderWrapper = styled.div<{ fullscreen?: boolean }>`
 
 const pulse = keyframes`
     0% {
-     transform: scale(1);
+     transform: scale(0.85);
     }
     50% {
-     transform: scale(1.1);
+     transform: scale(1);
     }
     100% {
-    transform: scale(1);
+    transform: scale(0.85);
     }
 `;
 
 const pulseFade = keyframes`
     0% {
-      opacity: 1;
+      opacity: 0.65;
       transform: scale(1);
     }
     50% {
