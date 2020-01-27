@@ -57,7 +57,7 @@ const Explore: FC<Props> = ({
         perPage,
         personalizeForUser: userId || undefined,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       notifyOnNetworkStatusChange: true,
     },
   );

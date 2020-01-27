@@ -42,7 +42,6 @@ export const UploadImage: FC<Props> = memo(({ name, label }) => {
     isDragAccept,
     isDragReject,
   } = useDropzone({ onDrop, accept: ['image/*'], multiple: false });
-
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>

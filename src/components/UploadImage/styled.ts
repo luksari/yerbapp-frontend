@@ -37,8 +37,8 @@ export const Container = styled.div<{ state: Partial<DropzoneState> }>`
 
 export const ActionButtons = styled.div`
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   background: #ffffffaa;
   display: flex;
   transform: scale(0);
@@ -53,10 +53,14 @@ export const ActionButtons = styled.div`
 
 
 export const StyledThumb = styled.div`
+  margin-top: 25px;
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.disabledBackground};
   padding: 25px;
-  max-width: 250px;
-  max-height: 250px;
   :hover {
     ${ActionButtons} {
       transform: scale(1);
@@ -67,12 +71,9 @@ export const StyledThumb = styled.div`
   }
 `;
 
-export const ThumbInner = styled.div<{ src: string }>`
+export const ThumbInner = styled.img<{ src: string }>`
   overflow: hidden;
   border-radius: 10px;
-  width: 200px;
-  height: 200px;
-  ${({ src }) => css`
-    background: url(${src}) no-repeat center center;
-`}
+  width: 300px;
+  height: auto;
 `;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ButtonType, Button } from 'components/Button';
+import { ButtonType, Button, ButtonVariant } from 'components/Button';
 import { Link } from 'react-router-dom';
 import { Logo } from 'components/Logo/Logo';
 import Helmet from 'react-helmet';
@@ -27,8 +27,8 @@ const NoMatch: FC = () => {
           <pre>null | undefined</pre>
         </TextMessage>
         <Link to="/">
-          <Button themeType={ButtonType.Secondary} type="button">
-              Powrót do strony głównej
+          <Button themeType={ButtonType.Secondary} type="button" variant={ButtonVariant.Wide}>
+              Powrót do strony głównej\
           </Button>
         </Link>
       </LeftSide>
