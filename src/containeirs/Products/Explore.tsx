@@ -19,7 +19,6 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectIsAdmin, makeSelectUserId } from 'store/auth/slice';
 import { getAnyImportance } from 'utils/getAnyImportance';
 import { size } from 'lodash';
-import { previewImage } from 'antd/lib/upload/utils';
 import { DataGrid } from './components/DataGrid';
 import { FilterForm } from './components/FilterForm';
 

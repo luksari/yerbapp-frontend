@@ -4,7 +4,7 @@ import { Rating } from 'components/Rating';
 import { Button, ButtonType } from 'components/Button';
 import { Icon } from 'antd';
 import {
-  DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper, ScoreValue, MainDataWrapper, ImageWrapper,
+  DetailsWrapper, YerbaDetailsTitle, StyledImg, RatingWrapper, MainDataWrapper, ImageWrapper,
 } from '../../styled';
 import { DetailsDescription } from '../../components/Card/styled';
 import { CardValue } from '../../components/Card/CardValue';
@@ -18,7 +18,7 @@ export const DetailsView: FC<Props> = memo(({
   data,
   redirectBack,
 }) => {
-  const newPersonalizedScore = data.product.personalizedScore ? data.product.personalizedScore.toPrecision(2) : '😭';
+  // const newPersonalizedScore = data.product.personalizedScore ? data.product.personalizedScore.toPrecision(2) : '😭';
   const photo = data.product.photoUrl || '/assets/yerbapp.png';
   return (
     <DetailsWrapper>
@@ -31,9 +31,9 @@ export const DetailsView: FC<Props> = memo(({
         <DetailsDescription>{data.product.details}</DetailsDescription>
         <ImageWrapper>
           <StyledImg src={photo} alt={data.product.name} />
-          <ScoreValue>
+          {/* <ScoreValue>
             {newPersonalizedScore}
-          </ScoreValue>
+          </ScoreValue> */}
         </ImageWrapper>
       </MainDataWrapper>
       <RatingWrapper>

@@ -1,5 +1,5 @@
 import { DropzoneState } from 'react-dropzone';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ThemeInterface } from 'theme/theme';
 import { ButtonBox } from 'components/Button/styled';
 

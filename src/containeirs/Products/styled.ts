@@ -103,7 +103,7 @@ export const MainDataWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding: 25px;
+  padding: 25px 0;
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.shadow};
   margin-bottom: 25px;
