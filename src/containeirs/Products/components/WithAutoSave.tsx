@@ -11,12 +11,12 @@ export const WithAutoSave: FC<Props> = ({ debounceMs, children }) => {
   const formik = useFormikContext();
   const debouncedSubmit = useCallback(
     () => {
-      debounce(
+      return debounce(
         () => formik.submitForm(),
         debounceMs,
-      );
+      )();
     },
-    [debounceMs, formik.submitForm],
+    [debounceMs, formik.submitForm, formik.values],
   );
   useEffect(() => {
     debouncedSubmit();

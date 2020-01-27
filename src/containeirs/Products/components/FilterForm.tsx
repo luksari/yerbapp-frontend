@@ -73,7 +73,6 @@ export const FilterForm: FC<Props> = memo(({
                 icon={<Icon type="close" />}
                 onClick={() => {
                   resetForm({ values: { ...initialValues, name: values.name } });
-                  handleSubmit({ values: { ...initialValues, name: values.name } });
                 }}
               />
             )}

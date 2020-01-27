@@ -48,7 +48,7 @@ const Explore: FC<Props> = ({
   const { offset, perPage, setPage } = usePagination(4, 1);
 
   const {
-    data, loading, refetch, networkStatus,
+    data, loading, refetch,
   } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GetProductsDocument,
     {
@@ -57,8 +57,7 @@ const Explore: FC<Props> = ({
         perPage,
         ...(userId && { personalizeForUser: userId }),
       },
-      fetchPolicy: 'no-cache',
-      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'network-only',
     },
   );
 
@@ -89,9 +88,9 @@ const Explore: FC<Props> = ({
       ...(userId && size(personalizeBy) !== 0 && { personalizeForUser: userId }),
       ...(size(personalizeBy) !== 0 && { personalizeBy }),
     };
-    console.log('Run with variables', vars);
+
     try {
-      refetch(vars);
+      await refetch({ ...vars });
     } catch (err) {
       console.error(err);
     }
