@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { ReactNode, useMemo } from 'react';
 import {
   TableContainer, HeadCell, HeadRow, SortingIcon,
@@ -11,24 +10,37 @@ import {
 import { SortOrder } from './types';
 
 interface Props<T extends object> {
-  /**
-   * @memoize
-   * columns are set to not being sortable automatically, despite defaults of React-table
-  */
   columns: Column<T>[];
   data: T[];
-
   onSort?: (columnId: string, order: SortOrder) => void;
   autoSort?: boolean;
   isLoading?: boolean;
-
-  /**
-   * Don't use `subRows` attr for data (T) key
-   */
   renderSubRow?: (row: T) => ReactNode;
-
   className?: string;
 }
+
+/**
+ * Parse columns configs and set different defaults
+ */
+const parseColumns = (columns: Column<any>[]) => columns.map((c) => ({
+  ...c,
+  disableSortBy: c.disableSortBy === undefined ? true : c.disableSortBy,
+}));
+
+const sortColumn = (column: ColumnInstance<any>): SortOrder => {
+  if (!column.toggleSortBy) {
+    return SortOrder.NOT_SORTED;
+  }
+
+  if (column.isSortedDesc === true) {
+    column.toggleSortBy(false, false);
+    return SortOrder.ASC;
+  }
+
+  column.toggleSortBy(true, false);
+  return SortOrder.DESC;
+};
+
 
 export function Table<T extends object>({
   columns,
@@ -96,26 +108,3 @@ export function Table<T extends object>({
     </TableContainer>
   );
 }
-
-/** not sorted -> desc -> asc -> not sorted -> ... */
-const sortColumn = (column: ColumnInstance<any>): SortOrder => {
-  if (!column.toggleSortBy) {
-    return SortOrder.NOT_SORTED;
-  }
-
-  if (column.isSortedDesc === true) {
-    column.toggleSortBy(false, false);
-    return SortOrder.ASC;
-  }
-
-  column.toggleSortBy(true, false);
-  return SortOrder.DESC;
-};
-
-/**
- * Parse columns configs and set different defaults
- */
-const parseColumns = (columns: Column<any>[]) => columns.map((c) => ({
-  ...c,
-  disableSortBy: c.disableSortBy === undefined ? true : c.disableSortBy,
-}));
